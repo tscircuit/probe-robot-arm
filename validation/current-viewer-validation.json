@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": [
+    "R24 pass-through enclosures load",
+    "54 explosion boundaries/midpoints match the CAD path",
+    "NEMA17 Z and inverted NEMA14 radial",
+    "12T base at 6:1 about 60 mm pivot, 18T Z and flipped 14T radial drive rotations",
+    "four upward bottom-mount fasteners",
+    "CAD loads",
+    "axes animate",
+    "explode pauses motion",
+    "sliders update actual geometry",
+    "four tips contact a 2 mm square",
+    "four probes retract and translate together",
+    "tip close-up",
+    "downloads respond",
+    "mobile has no horizontal overflow",
+    "no browser errors"
+  ]
+}

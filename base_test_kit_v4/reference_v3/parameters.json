@@ -1,0 +1,19 @@
+{
+  "gear_module": 2,
+  "pinion_teeth": 12,
+  "ring_teeth": 72,
+  "pressure_angle": 25,
+  "tooth_preload": 0.1,
+  "bearing_seat_diameter": 32.2,
+  "spindle_diameter": 15.5,
+  "base_motor_depth": 48,
+  "stand_height": 80,
+  "stand_size": 200,
+  "stand_thickness": 8,
+  "stand_leg_pitch": 150,
+  "housing_outer_diameter": 48,
+  "inner_race_abutment_diameter": 18,
+  "outer_race_abutment_diameter": 29.2,
+  "base_tooth_slot_fraction": 0.25,
+  "inner_race_spacer_bore_diameter": 15.8
+}

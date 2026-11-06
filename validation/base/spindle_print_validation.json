@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "requested_diameter_mm": 15.25,
+  "top_chamfer_mm": 0.5,
+  "bearing_bore_mm": 15,
+  "nominal_diametral_interference_mm": 0.25,
+  "files": [
+    {
+      "file": "STL/05_fixed_spindle_15p25_chamfer0p5_qty1.stl",
+      "measured_mesh_diameter_mm": 15.250000610779326,
+      "top_diameter_mm": 14.25000062797324,
+      "chamfer_axial_mm": 0.5,
+      "chamfer_radial_mm": 0.4999999914030431,
+      "sha256": "f83f21560b1c663656c2d58cc6e58b28d4f5e9d345f6ef74dd4a5bbb44d1d21b"
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_15.25mm.stl",
+      "measured_mesh_diameter_mm": 15.25000044952707,
+      "top_diameter_mm": 14.25000062797324,
+      "chamfer_axial_mm": 0.5,
+      "chamfer_radial_mm": 0.4999999107769151,
+      "sha256": "cd8f2044b10f34f5734d7bf4341aa02a6f432437e1a811636caa32b9a67d546d"
+    },
+    {
+      "file": "STL/06_inner_race_spacer_15p8_bore_qty1.stl",
+      "measured_bore_mm": 15.799999424693139,
+      "sha256": "249d711ee06334f4333b6b3f4b6a6f113ebaffc6ca23173130ef7cc46cb6f160"
+    }
+  ]
+}

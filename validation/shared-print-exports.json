@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "main_part": "Module_base",
+      "base_file": "STL/01_flat_base_four_45deg_axles_qty1.stl",
+      "sha256": "53c391f57f3e58339c1f620cab87429ad2fd4ac918ceae7390c32b7f73d72257"
+    },
+    {
+      "main_part": "Fixed_spindle",
+      "base_file": "STL/05_fixed_spindle_15p25_chamfer0p5_qty1.stl",
+      "sha256": "f83f21560b1c663656c2d58cc6e58b28d4f5e9d345f6ef74dd4a5bbb44d1d21b"
+    },
+    {
+      "main_part": "Inner_race_spacer",
+      "base_file": "STL/06_inner_race_spacer_15p8_bore_qty1.stl",
+      "sha256": "249d711ee06334f4333b6b3f4b6a6f113ebaffc6ca23173130ef7cc46cb6f160"
+    },
+    {
+      "main_part": "Inner_race_top_washer",
+      "base_file": "STL/07_inner_race_top_washer_qty1.stl",
+      "sha256": "e13d34f84daa24f14105061648d2857a1bca08386fc8f658cc5db1ae33e8d059"
+    },
+    {
+      "main_part": "Bearing_housing",
+      "base_file": "STL/08_bearing_housing_32p2_qty1.stl",
+      "sha256": "c146760b30374730dd2544239bb92abf64539cd03a740a666ed77c7d9014d140"
+    },
+    {
+      "main_part": "Lower_bearing_retainer",
+      "base_file": "STL/09_lower_bearing_retainer_qty1.stl",
+      "sha256": "4452836bdc016d463844f10ffda7643bc948f6baae1ad8b74b82612d489ba5ac"
+    },
+    {
+      "main_part": "Rotating_deck",
+      "base_file": "STL/10_shared_rotating_deck_qty1.stl",
+      "sha256": "89e2c2aac198f45dafa6936a5d9da78b49568d2f37632fca9e7a34b2c5d98890"
+    },
+    {
+      "main_part": "Internal_72T_ring",
+      "base_file": "STL/11_ring_176mm_45deg_track_qty1.stl",
+      "sha256": "8cbba912191fbff761e65843f58b7ac4a0bad04af32ddae62c79a2ade7d9d9ff"
+    },
+    {
+      "main_part": "Compliant_12T_pinion",
+      "base_file": "STL/13_open_tip_12T_pinion_qty1.stl",
+      "sha256": "a0d771d39898fb13bd1a2d6a2b878932472383bbf15b886f3a8f009a6d46174b"
+    }
+  ]
+}

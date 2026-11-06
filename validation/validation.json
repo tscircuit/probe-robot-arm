@@ -1,0 +1,381 @@
+{
+  "status": "prototype",
+  "solid_validity": true,
+  "part_count": 259,
+  "layout": {
+    "base_motor_x": 60.0,
+    "base_gear_ratio": 6.0,
+    "mounts": [
+      [
+        250.0,
+        0,
+        180
+      ],
+      [
+        0,
+        250.0,
+        -90
+      ],
+      [
+        -250.0,
+        0,
+        0
+      ],
+      [
+        0,
+        -250.0,
+        90
+      ]
+    ],
+    "rmin": 195,
+    "rmax": 315,
+    "radial_stroke": 120,
+    "required_stroke": 114.138126514911,
+    "h_origin": 0,
+    "horizontal_pad": 200.5,
+    "zpad": 232.9,
+    "board_top": 194.8,
+    "tip_radius": 255.0,
+    "probe_extension": 54.5,
+    "horizontal_origin_y": 4,
+    "horizontal_z": 275.8,
+    "probe_mount_z": 254.8,
+    "radial_mount_face_z": 250.9,
+    "z_drive_y": 25.5,
+    "z_pitch_radius": 18.0,
+    "r_drive_y": 0.0,
+    "r_pitch_radius": 14.0,
+    "actuator_enclosure": "pass-through",
+    "rack_source_revision": 24,
+    "minimum_z_origin": 145.4,
+    "z_case_bottom": 77.4,
+    "z_rack_lowest": 60.400000000000006,
+    "deck_top_z": 54.2,
+    "base_clamp_top_z": 58.4,
+    "z_deck_mounts": [
+      [
+        -42,
+        -54
+      ],
+      [
+        -8,
+        -54
+      ],
+      [
+        24,
+        -54
+      ],
+      [
+        42,
+        -28
+      ],
+      [
+        42,
+        8
+      ],
+      [
+        42,
+        44
+      ]
+    ],
+    "base_revision": "shared-rounded-blocks",
+    "z_actuator": {
+      "CASE_LEFT": -68.0,
+      "CASE_RIGHT": 57.0,
+      "CASE_LENGTH": 125.0,
+      "CASE_YMIN": -26.9,
+      "CASE_YMAX": 63.9,
+      "CASE_BOTTOM": -52.0,
+      "CASE_TOP": 24.9,
+      "CASE_MOUNTS": [
+        [
+          -60.5,
+          -42.0
+        ],
+        [
+          -60.5,
+          -4.0
+        ],
+        [
+          49.5,
+          -42.0
+        ],
+        [
+          49.5,
+          -4.0
+        ]
+      ],
+      "CASE_CORNERS": [
+        [
+          -60.5,
+          -19.4
+        ],
+        [
+          -60.5,
+          56.4
+        ],
+        [
+          49.5,
+          -19.4
+        ],
+        [
+          49.5,
+          56.4
+        ]
+      ],
+      "OUTPUT_MOUNTS": [
+        [
+          83.0,
+          24.0
+        ],
+        [
+          83.0,
+          33.0
+        ],
+        [
+          92.0,
+          24.0
+        ],
+        [
+          92.0,
+          33.0
+        ]
+      ],
+      "OUTPUT_PAD_Y": 28.5,
+      "OUTPUT_PAD_TOP": 21.0,
+      "OUTPUT_PAD_SIZE": 18.0,
+      "left": -65.0,
+      "right": 78.5,
+      "REAR_OPENING_YZ": [
+        15.0,
+        41,
+        -10,
+        22
+      ],
+      "MOTOR_Y": 0.0,
+      "RP": 18.0,
+      "MOTOR_SIZE": 42.0,
+      "MOTOR_PITCH": 31.0,
+      "MOTOR_DEPTH": 48.0,
+      "N": 18,
+      "output_mount": "through"
+    },
+    "r_actuator": {
+      "CASE_LEFT": -68.0,
+      "CASE_RIGHT": 130,
+      "CASE_LENGTH": 198.0,
+      "CASE_YMIN": -20.9,
+      "CASE_YMAX": 63.9,
+      "CASE_BOTTOM": -38.0,
+      "CASE_TOP": 24.9,
+      "CASE_MOUNTS": [
+        [
+          -60.5,
+          -28.0
+        ],
+        [
+          -60.5,
+          -4.0
+        ],
+        [
+          122.5,
+          -28.0
+        ],
+        [
+          122.5,
+          -4.0
+        ]
+      ],
+      "CASE_CORNERS": [
+        [
+          -60.5,
+          -13.399999999999999
+        ],
+        [
+          -60.5,
+          56.4
+        ],
+        [
+          122.5,
+          -13.399999999999999
+        ],
+        [
+          122.5,
+          56.4
+        ]
+      ],
+      "OUTPUT_MOUNTS": [
+        [
+          196.0,
+          24.0
+        ],
+        [
+          196.0,
+          33.0
+        ],
+        [
+          205.0,
+          24.0
+        ],
+        [
+          205.0,
+          33.0
+        ]
+      ],
+      "OUTPUT_PAD_Y": 28.5,
+      "OUTPUT_PAD_TOP": 21.0,
+      "OUTPUT_PAD_SIZE": 18.0,
+      "left": -105.0,
+      "right": 191.5,
+      "REAR_OPENING_YZ": [
+        15.0,
+        41,
+        -10,
+        22
+      ],
+      "MOTOR_Y": 4.0,
+      "RP": 14.0,
+      "MOTOR_SIZE": 35.2,
+      "MOTOR_PITCH": 26.0,
+      "MOTOR_DEPTH": 34.0,
+      "N": 14,
+      "output_mount": "inserts"
+    },
+    "yaw_required": 14.036243467926479
+  },
+  "collisions": [],
+  "nominal_base_mesh": [
+    {
+      "ring_angle_deg": 0.0,
+      "overlap_mm3": 0.0
+    },
+    {
+      "ring_angle_deg": 0.4166666666666667,
+      "overlap_mm3": 1.0693837919049142e-05
+    },
+    {
+      "ring_angle_deg": 0.8333333333333334,
+      "overlap_mm3": 1.7981839294390324e-05
+    },
+    {
+      "ring_angle_deg": 1.25,
+      "overlap_mm3": 1.7262006930635653e-05
+    },
+    {
+      "ring_angle_deg": 1.6666666666666667,
+      "overlap_mm3": 4.8068996615829916e-05
+    },
+    {
+      "ring_angle_deg": 2.0833333333333335,
+      "overlap_mm3": 8.091921585819774e-06
+    },
+    {
+      "ring_angle_deg": 2.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "ring_angle_deg": 2.9166666666666665,
+      "overlap_mm3": 8.091921481637434e-06
+    },
+    {
+      "ring_angle_deg": 3.3333333333333335,
+      "overlap_mm3": 4.806899666300552e-05
+    },
+    {
+      "ring_angle_deg": 3.75,
+      "overlap_mm3": 1.7262006987045428e-05
+    },
+    {
+      "ring_angle_deg": 4.166666666666667,
+      "overlap_mm3": 1.7981839219227127e-05
+    },
+    {
+      "ring_angle_deg": 4.583333333333333,
+      "overlap_mm3": 1.0693837960788666e-05
+    },
+    {
+      "ring_angle_deg": 5.0,
+      "overlap_mm3": 0.0
+    }
+  ],
+  "travel_samples": [
+    {
+      "z_mm": -20,
+      "r_mm": -60.0,
+      "collisions": []
+    },
+    {
+      "z_mm": -20,
+      "r_mm": 0,
+      "collisions": []
+    },
+    {
+      "z_mm": -20,
+      "r_mm": 60.0,
+      "collisions": []
+    },
+    {
+      "z_mm": 0,
+      "r_mm": -60.0,
+      "collisions": []
+    },
+    {
+      "z_mm": 0,
+      "r_mm": 0,
+      "collisions": []
+    },
+    {
+      "z_mm": 0,
+      "r_mm": 60.0,
+      "collisions": []
+    },
+    {
+      "z_mm": 20,
+      "r_mm": -60.0,
+      "collisions": []
+    },
+    {
+      "z_mm": 20,
+      "r_mm": 0,
+      "collisions": []
+    },
+    {
+      "z_mm": 20,
+      "r_mm": 60.0,
+      "collisions": []
+    }
+  ],
+  "limits": [
+    "Geometry prototype. No physical accuracy, stiffness, fatigue, holding torque or contact force certification.",
+    "R24 pass-through rack and housing, 120 mm custom stroke within upstream limits; stiffness remains untested.",
+    "Shared rotary base includes retainers, direct motor mounting and four single blocks with integral tilted axles. Hardware envelopes are references; homing remains unfinished.",
+    "Simultaneous four-tip cluster checks are in platform-validation.json; they are sampled geometric checks, not physical accuracy tests.",
+    "Sampled collision checks are not a continuous swept-volume proof."
+  ],
+  "printed_solid_counts": {
+    "Module_base": 1,
+    "Fixed_spindle": 1,
+    "Inner_race_spacer": 1,
+    "Inner_race_top_washer": 1,
+    "Bearing_housing": 1,
+    "Lower_bearing_retainer": 1,
+    "Rotating_deck": 1,
+    "Internal_72T_ring": 1,
+    "Compliant_12T_pinion": 1,
+    "Z_support": 1,
+    "Z_03_Involute_pinion_18T": 1,
+    "Z_04_Beveled_compliant_rack": 1,
+    "Z_01_Integral_spring_chassis": 1,
+    "Z_05_Mounting_enclosure_tray": 1,
+    "Z_06_Removable_enclosure_cover": 1,
+    "Z_to_radial_carrier": 1,
+    "R_03_Involute_pinion_14T": 1,
+    "R_04_Beveled_compliant_rack": 1,
+    "R_01_Integral_spring_chassis": 1,
+    "R_05_Mounting_enclosure_tray": 1,
+    "R_06_Removable_enclosure_cover": 1,
+    "Triangular_probe_outrigger": 1
+  },
+  "unchanged_gear_mesh_reused": true,
+  "geometry_checks_passed": true
+}

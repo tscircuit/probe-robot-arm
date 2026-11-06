@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/tscircuit/rack-actuator",
+  "commit": "a0ccaf201d6f6f5f988ca64dc1a9f5e7aba931b5",
+  "revision": 24,
+  "model_sha256": "cc6783c6c265bdcc6ce50a8d82c1f30bf3a480537382b9af4725236fcda37269",
+  "options": {
+    "enclosure": "pass-through",
+    "z": {
+      "motor": "nema17",
+      "motor_depth": 48,
+      "stroke": 40
+    },
+    "radial": {
+      "motor": "nema14",
+      "motor_depth": 34,
+      "stroke": 120,
+      "assembly_rotation_about_travel_axis_degrees": 180
+    }
+  },
+  "source_changes": "None; only construction section executed by integration loader."
+}

@@ -1,0 +1,219 @@
+{
+  "passed": true,
+  "spindle_print_fit": {
+    "spacer_bore_mm": 15.8,
+    "spacer_radial_clearance_mm": 0.2749999999999998,
+    "shaft_diameter_mm": 15.25,
+    "bearing_bore_mm": 15,
+    "diametral_interference_mm": 0.25,
+    "radial_interference_mm": 0.125,
+    "measured_cad_diameter_mm": [
+      15.25,
+      15.25
+    ],
+    "bearing_contacts": [
+      {
+        "part": "6002_bearing_18",
+        "nominal_overlap_mm3": 53.456162496238825
+      },
+      {
+        "part": "6002_bearing_43",
+        "nominal_overlap_mm3": 48.480746943424684
+      }
+    ],
+    "top_chamfer_mm": 0.5,
+    "physical_fit_verified": false,
+    "note": "15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm."
+  },
+  "roller_print_fit": {
+    "axle_diameter_mm": 5.1,
+    "bearing_bore_mm": 5,
+    "diametral_interference_mm": 0.09999999999999964,
+    "top_chamfer_mm": 0.3,
+    "contacts": [
+      {
+        "bearing": "625ZZ_support_roller_0",
+        "nominal_overlap_mm3": 3.966260725157106
+      },
+      {
+        "bearing": "625ZZ_support_roller_1",
+        "nominal_overlap_mm3": 3.966260725157106
+      },
+      {
+        "bearing": "625ZZ_support_roller_2",
+        "nominal_overlap_mm3": 3.966260725157106
+      },
+      {
+        "bearing": "625ZZ_support_roller_3",
+        "nominal_overlap_mm3": 3.966260725157106
+      }
+    ],
+    "physical_fit_verified": false
+  },
+  "part_instances": 72,
+  "solid_validity": true,
+  "collision_pair_checks": 35571,
+  "rotation_samples_deg": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    75,
+    90,
+    105,
+    120,
+    135,
+    150,
+    165,
+    180,
+    195,
+    210,
+    225,
+    240,
+    255,
+    270,
+    285,
+    300,
+    315,
+    330,
+    345,
+    360
+  ],
+  "collisions": [],
+  "fastener_land_coverage_fractions": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "bearing_insertion": [
+    {
+      "end": "lower",
+      "bottom_z": 7,
+      "overlap_mm3": 0.0
+    },
+    {
+      "end": "lower",
+      "bottom_z": 10,
+      "overlap_mm3": 0.0
+    },
+    {
+      "end": "lower",
+      "bottom_z": 14,
+      "overlap_mm3": 0.0
+    },
+    {
+      "end": "lower",
+      "bottom_z": 18,
+      "overlap_mm3": 0.0
+    },
+    {
+      "end": "upper",
+      "bottom_z": 64,
+      "overlap_mm3": 0.0
+    },
+    {
+      "end": "upper",
+      "bottom_z": 56,
+      "overlap_mm3": 0.0
+    },
+    {
+      "end": "upper",
+      "bottom_z": 48,
+      "overlap_mm3": 0.0
+    },
+    {
+      "end": "upper",
+      "bottom_z": 43,
+      "overlap_mm3": 0.0
+    }
+  ],
+  "bearing_dimensions_mm": [
+    15,
+    32,
+    9
+  ],
+  "bearing_center_spacing_mm": 25,
+  "bearing_seat_diameter_mm": 32.2,
+  "shaft_diameter_mm": 15.25,
+  "axial_retainer_clearance_per_end_mm": 0.2,
+  "controller_lowest_z_mm": -67.6,
+  "controller_to_stand_top_clearance_mm": 12.400000000000006,
+  "intentional_interferences": [
+    "Elastic open-tip pinion/ring mesh",
+    "M3 tapped pinion pilot",
+    "Oversized printed spindle / 6002 bore fit; physical fit or finishing required"
+  ],
+  "limits": [
+    "Sampled rigid geometry, not continuous swept-volume proof.",
+    "Bearing and thread fits require printing and measuring; no load/stiffness/fatigue certification.",
+    "Only base rotation is tested. No complete arm load or stability rating.",
+    "Motor/controller are packaging references; motor mounting screw engagement must match the selected motor."
+  ],
+  "parameters": {
+    "gear_module": 2,
+    "pinion_teeth": 12,
+    "ring_teeth": 72,
+    "pressure_angle": 25,
+    "tooth_preload": 0.1,
+    "bearing_seat_diameter": 32.2,
+    "spindle_diameter": 15.25,
+    "base_motor_depth": 48,
+    "stand_height": 80,
+    "stand_size": 200,
+    "stand_thickness": 8,
+    "stand_leg_pitch": 150,
+    "housing_outer_diameter": 48,
+    "inner_race_abutment_diameter": 18,
+    "outer_race_abutment_diameter": 29.2,
+    "base_tooth_slot_fraction": 0.25,
+    "inner_race_spacer_bore_diameter": 15.8,
+    "rotor_drop_mm": 4,
+    "roller_count": 4,
+    "roller_angles_deg": [
+      45,
+      135,
+      225,
+      315
+    ],
+    "z_deck_mounts": [
+      [
+        -42,
+        -54
+      ],
+      [
+        -8,
+        -54
+      ],
+      [
+        24,
+        -54
+      ],
+      [
+        42,
+        -28
+      ],
+      [
+        42,
+        8
+      ],
+      [
+        42,
+        44
+      ]
+    ],
+    "roller_block_profile": "single 8 mm block with tapered shoulders and R6 crown; integral press-fit axle",
+    "base_plate_thickness_mm": 11,
+    "spindle_top_chamfer_mm": 0.5,
+    "ring_outer_radius_mm": 88,
+    "ring_track_chamfer_mm": 6,
+    "roller_tilt_deg": 45,
+    "roller_axle_diameter_mm": 5.1,
+    "roller_axle_chamfer_mm": 0.3
+  }
+}

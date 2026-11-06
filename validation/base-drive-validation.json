@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "pinion_teeth": 12,
+  "ring_teeth": 72,
+  "total_ratio": 6.0,
+  "unshifted_minimum_teeth": 12,
+  "undercut_formula": "ceil(2/sin(pressure_angle)^2)",
+  "formula_source": "https://sdp-si.com/D805/D805_PDFS/sections/technical.pdf, equation 4-3",
+  "motor_offset_mm": 60.0,
+  "previous_offset_mm": 52,
+  "pitch_diameter_mm": 24.0,
+  "tip_diameter_mm": 28.0,
+  "slot_half_angle_fraction": 0.25,
+  "tangential_tip_wall_mm": 0.417676923334939,
+  "tangential_tip_slot_mm": 0.2784512822232927,
+  "conservative_core_to_bore_wall_mm": 5.148130115575354,
+  "nominal_transverse_contact_ratio": 1.551903306736801,
+  "tip_motion_per_1_16_microstep_mm": {
+    "195": 0.06381360077604267,
+    "250": 0.08181230868723419,
+    "315": 0.10308350894591507
+  },
+  "limits": [
+    "Tangential wall figures are profile dimensions, not a printer qualification. Inspect sliced toolpaths and open slots.",
+    "Narrower slots change tooth stiffness; no load, fatigue, backlash or absolute accuracy qualification.",
+    "Nominal gear collision samples are recorded separately in validation.json."
+  ],
+  "source_sha256": {
+    "model.py": "94389abae65f1b19a137baf8f465fa5e1009645f18637dbf011e3f166fc93908",
+    "parameters.json": "2f4c3afcc65f20cd4781d5467a3894b05647803871eee69397a6ac2681820316",
+    "rotary_base/core.py": "e90f0ebe3bcc13ef2601998f97e075a37a26fc9882b8b684461acda0c987ee1b",
+    "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
+    "rotary_base/parameters.json": "e9f10f4287db08818c8544bb2ca2f52ff18f73b7b745ecc4881a43d2097f854c",
+    "check_base_drive.py": "9248001c8290a63784d122bf3d9ba492beee00b6fc2c8e1b0eb2e8d86df78954"
+  }
+}

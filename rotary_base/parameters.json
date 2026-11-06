@@ -1,0 +1,61 @@
+{
+  "gear_module": 2,
+  "pinion_teeth": 12,
+  "ring_teeth": 72,
+  "pressure_angle": 25,
+  "tooth_preload": 0.1,
+  "bearing_seat_diameter": 32.2,
+  "spindle_diameter": 15.25,
+  "base_motor_depth": 48,
+  "stand_height": 80,
+  "stand_size": 200,
+  "stand_thickness": 8,
+  "stand_leg_pitch": 150,
+  "housing_outer_diameter": 48,
+  "inner_race_abutment_diameter": 18,
+  "outer_race_abutment_diameter": 29.2,
+  "base_tooth_slot_fraction": 0.25,
+  "inner_race_spacer_bore_diameter": 15.8,
+  "rotor_drop_mm": 4,
+  "roller_count": 4,
+  "roller_angles_deg": [
+    45,
+    135,
+    225,
+    315
+  ],
+  "z_deck_mounts": [
+    [
+      -42,
+      -54
+    ],
+    [
+      -8,
+      -54
+    ],
+    [
+      24,
+      -54
+    ],
+    [
+      42,
+      -28
+    ],
+    [
+      42,
+      8
+    ],
+    [
+      42,
+      44
+    ]
+  ],
+  "roller_block_profile": "single 8 mm block with tapered shoulders and R6 crown; integral press-fit axle",
+  "base_plate_thickness_mm": 11,
+  "spindle_top_chamfer_mm": 0.5,
+  "ring_outer_radius_mm": 88,
+  "ring_track_chamfer_mm": 6,
+  "roller_tilt_deg": 45,
+  "roller_axle_diameter_mm": 5.1,
+  "roller_axle_chamfer_mm": 0.3
+}

@@ -1,0 +1,182 @@
+{
+  "passed": true,
+  "print_count": 22,
+  "files": [
+    {
+      "part": "Module_base",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "53c391f57f3e58339c1f620cab87429ad2fd4ac918ceae7390c32b7f73d72257"
+    },
+    {
+      "part": "Fixed_spindle",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "f83f21560b1c663656c2d58cc6e58b28d4f5e9d345f6ef74dd4a5bbb44d1d21b"
+    },
+    {
+      "part": "Inner_race_spacer",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "249d711ee06334f4333b6b3f4b6a6f113ebaffc6ca23173130ef7cc46cb6f160"
+    },
+    {
+      "part": "Inner_race_top_washer",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "e13d34f84daa24f14105061648d2857a1bca08386fc8f658cc5db1ae33e8d059"
+    },
+    {
+      "part": "Bearing_housing",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "c146760b30374730dd2544239bb92abf64539cd03a740a666ed77c7d9014d140"
+    },
+    {
+      "part": "Lower_bearing_retainer",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "4452836bdc016d463844f10ffda7643bc948f6baae1ad8b74b82612d489ba5ac"
+    },
+    {
+      "part": "Rotating_deck",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "89e2c2aac198f45dafa6936a5d9da78b49568d2f37632fca9e7a34b2c5d98890"
+    },
+    {
+      "part": "Internal_72T_ring",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "8cbba912191fbff761e65843f58b7ac4a0bad04af32ddae62c79a2ade7d9d9ff"
+    },
+    {
+      "part": "Compliant_12T_pinion",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "a0d771d39898fb13bd1a2d6a2b878932472383bbf15b886f3a8f009a6d46174b"
+    },
+    {
+      "part": "Z_support",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "b6ec1c4ea61fad1c4040e10f76fcb4e8053eb5e9fc004deca9df9a80451329a3"
+    },
+    {
+      "part": "Z_03_Involute_pinion_18T",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "79a556bbd26d10a3f681d1a4ba4ce009f4b4712efc64f5457289fe53ee07167b"
+    },
+    {
+      "part": "Z_04_Beveled_compliant_rack",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "8ae746b61e85090ce983ea919e586a5349e689682bb8678574dde72d4484dde0"
+    },
+    {
+      "part": "Z_01_Integral_spring_chassis",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "f000cfd85f4d592d75ec47d1d4af1d0abd2457e852737e4f4231c9089c7d3a08"
+    },
+    {
+      "part": "Z_05_Mounting_enclosure_tray",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "0eab95d1aa140ff3a4fb2f08da5f9cf15afc5953e4037a02d647e28b96575ef8"
+    },
+    {
+      "part": "Z_06_Removable_enclosure_cover",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "c7555b0cf0913745dfd364449a7620cb95e4c82d30776b58f29ba82531a9e44b"
+    },
+    {
+      "part": "Z_to_radial_carrier",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "38896b3c84313998d0886b974925e5a819b09838bb14110212eaccc00c8f4a75"
+    },
+    {
+      "part": "R_03_Involute_pinion_14T",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "5a801d141ca436483d7d092e53c9d34356344f523fec7361687b3d7fa16fdf01"
+    },
+    {
+      "part": "R_04_Beveled_compliant_rack",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "d6dd0d6d4db9f7cde9aacd9957e7b81e1e1774d05969945b59ca7f3a5923cde5"
+    },
+    {
+      "part": "R_01_Integral_spring_chassis",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "106eb41be23b13735334068cc234cf66863ee738fd51966cf8348167773dee80"
+    },
+    {
+      "part": "R_05_Mounting_enclosure_tray",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "9e3efc56da5547bbbecfafeff66c9d42b4e23fd4ab646ec640871169fc89c1b7"
+    },
+    {
+      "part": "R_06_Removable_enclosure_cover",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "652925b4679cd4acd49e27faa73d2ef23462d7fc1bcb1f8c86d5146cfb21b931"
+    },
+    {
+      "part": "Triangular_probe_outrigger",
+      "watertight": true,
+      "consistent_winding": true,
+      "solid_shells": 1,
+      "positive_volume": true,
+      "sha256": "1098be1e62ce65a18f121f2f697c8f650e32a41ee0a1abfb35b6968b76e4bea1"
+    }
+  ]
+}

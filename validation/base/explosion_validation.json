@@ -1,0 +1,962 @@
+{
+  "passed": true,
+  "method": "Continuous linear-translation intervals certified by swept bounding boxes or midpoint minimum-distance bounds; recursively subdivided. Unresolved intervals fail.",
+  "tolerance_mm": 1e-07,
+  "collision_volume_tolerance_mm3": 0.001,
+  "stages": [
+    {
+      "index": 0,
+      "label": "Withdraw stand screws",
+      "travel_mm": 120.0,
+      "candidate_pairs": 20,
+      "distance_queries": 1488,
+      "seconds": 39.22
+    },
+    {
+      "index": 1,
+      "label": "Lower the stand",
+      "travel_mm": 180.0,
+      "candidate_pairs": 16,
+      "distance_queries": 40,
+      "seconds": 3.78
+    },
+    {
+      "index": 2,
+      "label": "Set stand aside",
+      "travel_mm": 240.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 3,
+      "label": "Unplug USB cable",
+      "travel_mm": 90.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 4,
+      "label": "Park cable clear of motor",
+      "travel_mm": 130.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 5,
+      "label": "Withdraw centre bolt",
+      "travel_mm": 120.0,
+      "candidate_pairs": 11,
+      "distance_queries": 666,
+      "seconds": 12.65
+    },
+    {
+      "index": 6,
+      "label": "Lift inner-race clamp",
+      "travel_mm": 180.0,
+      "candidate_pairs": 5,
+      "distance_queries": 18,
+      "seconds": 7.38
+    },
+    {
+      "index": 7,
+      "label": "Lift bearing cartridge off spindle",
+      "travel_mm": 120.0,
+      "candidate_pairs": 34,
+      "distance_queries": 292,
+      "seconds": 54.97
+    },
+    {
+      "index": 8,
+      "label": "Move cartridge clear of base",
+      "travel_mm": 220.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 9,
+      "label": "Remove ring nuts and washers",
+      "travel_mm": 120.0,
+      "candidate_pairs": 6,
+      "distance_queries": 438,
+      "seconds": 5.37
+    },
+    {
+      "index": 10,
+      "label": "Withdraw ring bolts",
+      "travel_mm": 100.0,
+      "candidate_pairs": 6,
+      "distance_queries": 354,
+      "seconds": 10.83
+    },
+    {
+      "index": 11,
+      "label": "Set ring bolts aside",
+      "travel_mm": 140.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 12,
+      "label": "Lower ring and integral spacers",
+      "travel_mm": 60.0,
+      "candidate_pairs": 10,
+      "distance_queries": 11,
+      "seconds": 69.52
+    },
+    {
+      "index": 13,
+      "label": "Set ring aside",
+      "travel_mm": 140.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 14,
+      "label": "Remove housing nuts",
+      "travel_mm": 120.0,
+      "candidate_pairs": 4,
+      "distance_queries": 112,
+      "seconds": 6.88
+    },
+    {
+      "index": 15,
+      "label": "Withdraw housing bolts",
+      "travel_mm": 100.0,
+      "candidate_pairs": 20,
+      "distance_queries": 2212,
+      "seconds": 33.48
+    },
+    {
+      "index": 16,
+      "label": "Set housing bolts aside",
+      "travel_mm": 100.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 17,
+      "label": "Lift upper bearing retainer and deck",
+      "travel_mm": 70.0,
+      "candidate_pairs": 2,
+      "distance_queries": 3,
+      "seconds": 1.25
+    },
+    {
+      "index": 18,
+      "label": "Lift upper bearing out of seat",
+      "travel_mm": 40.0,
+      "candidate_pairs": 1,
+      "distance_queries": 121,
+      "seconds": 3.61
+    },
+    {
+      "index": 19,
+      "label": "Lift inner spacer clear",
+      "travel_mm": 35.0,
+      "candidate_pairs": 1,
+      "distance_queries": 6,
+      "seconds": 1.36
+    },
+    {
+      "index": 20,
+      "label": "Lower bottom retainer",
+      "travel_mm": 30.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 21,
+      "label": "Lower bottom bearing out of seat",
+      "travel_mm": 20.0,
+      "candidate_pairs": 1,
+      "distance_queries": 120,
+      "seconds": 3.39
+    },
+    {
+      "index": 22,
+      "label": "Release pinion set screw",
+      "travel_mm": 6.0,
+      "candidate_pairs": 1,
+      "distance_queries": 1,
+      "seconds": 0.03
+    },
+    {
+      "index": 23,
+      "label": "Lift pinion off shaft",
+      "travel_mm": 180.0,
+      "candidate_pairs": 3,
+      "distance_queries": 87,
+      "seconds": 5.68
+    },
+    {
+      "index": 24,
+      "label": "Set pinion aside",
+      "travel_mm": 130.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 25,
+      "label": "Withdraw motor face screws",
+      "travel_mm": 110.0,
+      "candidate_pairs": 4,
+      "distance_queries": 632,
+      "seconds": 4.49
+    },
+    {
+      "index": 26,
+      "label": "Lower motor out of fixed plate",
+      "travel_mm": 110.0,
+      "candidate_pairs": 2,
+      "distance_queries": 21,
+      "seconds": 0.46
+    },
+    {
+      "index": 27,
+      "label": "Set motor unit aside",
+      "travel_mm": 140.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 28,
+      "label": "Withdraw spindle screws",
+      "travel_mm": 60.0,
+      "candidate_pairs": 4,
+      "distance_queries": 362,
+      "seconds": 4.01
+    },
+    {
+      "index": 29,
+      "label": "Lift stationary spindle",
+      "travel_mm": 100.0,
+      "candidate_pairs": 3,
+      "distance_queries": 18,
+      "seconds": 2.2
+    },
+    {
+      "index": 30,
+      "label": "Pull roller 1 off printed axle",
+      "travel_mm": 60.00000000000001,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 31,
+      "label": "Pull roller 2 off printed axle",
+      "travel_mm": 60.00000000000001,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 32,
+      "label": "Pull roller 3 off printed axle",
+      "travel_mm": 60.00000000000001,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 33,
+      "label": "Pull roller 4 off printed axle",
+      "travel_mm": 60.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    }
+  ],
+  "distance_queries": 7002,
+  "bounding_box_prunes": 9153,
+  "certified_distance_intervals": 3432,
+  "certified_bevel_withdrawals": [
+    {
+      "stage": 7,
+      "ring": "Internal_72T_ring",
+      "bearing": "625ZZ_support_roller_0",
+      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+    },
+    {
+      "stage": 7,
+      "ring": "Internal_72T_ring",
+      "bearing": "625ZZ_support_roller_1",
+      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+    },
+    {
+      "stage": 7,
+      "ring": "Internal_72T_ring",
+      "bearing": "625ZZ_support_roller_2",
+      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+    },
+    {
+      "stage": 7,
+      "ring": "Internal_72T_ring",
+      "bearing": "625ZZ_support_roller_3",
+      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+    }
+  ],
+  "certified_button_withdrawals": [
+    {
+      "stage": 10,
+      "screw": "M3x30_ring_0",
+      "ring": "Internal_72T_ring",
+      "proof": "Head remains below the flat seating plane; the translated shank stays inside the straight bore"
+    },
+    {
+      "stage": 10,
+      "screw": "M3x30_ring_1",
+      "ring": "Internal_72T_ring",
+      "proof": "Head remains below the flat seating plane; the translated shank stays inside the straight bore"
+    },
+    {
+      "stage": 10,
+      "screw": "M3x30_ring_2",
+      "ring": "Internal_72T_ring",
+      "proof": "Head remains below the flat seating plane; the translated shank stays inside the straight bore"
+    },
+    {
+      "stage": 10,
+      "screw": "M3x30_ring_3",
+      "ring": "Internal_72T_ring",
+      "proof": "Head remains below the flat seating plane; the translated shank stays inside the straight bore"
+    },
+    {
+      "stage": 10,
+      "screw": "M3x30_ring_4",
+      "ring": "Internal_72T_ring",
+      "proof": "Head remains below the flat seating plane; the translated shank stays inside the straight bore"
+    },
+    {
+      "stage": 10,
+      "screw": "M3x30_ring_5",
+      "ring": "Internal_72T_ring",
+      "proof": "Head remains below the flat seating plane; the translated shank stays inside the straight bore"
+    }
+  ],
+  "collisions": [],
+  "unresolved_intervals": [],
+  "exceptions": [
+    {
+      "parts": [
+        "Compliant_12T_pinion",
+        "Internal_72T_ring"
+      ],
+      "reason": "Designed elastic tooth preload during axial disengagement"
+    },
+    {
+      "parts": [
+        "Compliant_12T_pinion",
+        "M3x4_pinion_set_screw"
+      ],
+      "reason": "Tapped pilot / thread contact; screw is released before pinion lifts"
+    },
+    {
+      "parts": [
+        "Controller_component_KEEPOUT",
+        "USB_cable_KEEPOUT"
+      ],
+      "reason": "Overlapping nonphysical keepout volumes"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_0",
+        "M5x25_upper_stand_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_1",
+        "M5x25_upper_stand_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_2",
+        "M5x25_upper_stand_2"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_3",
+        "M5x25_upper_stand_3"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_spindle_nut_0",
+        "M3x12_spindle_flange_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_spindle_nut_1",
+        "M3x12_spindle_flange_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_0",
+        "M3x45_housing_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_1",
+        "M3x45_housing_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_2",
+        "M3x45_housing_2"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_3",
+        "M3x45_housing_3"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_0",
+        "M3x30_ring_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_1",
+        "M3x30_ring_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_2",
+        "M3x30_ring_2"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_3",
+        "M3x30_ring_3"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_4",
+        "M3x30_ring_4"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_5",
+        "M3x30_ring_5"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M6_axle_nut",
+        "M6x60_axle_bolt"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_0",
+        "Fixed_base_plate"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_1",
+        "Fixed_base_plate"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_2",
+        "Fixed_base_plate"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_3",
+        "Fixed_base_plate"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "M3x16_motor_face_0",
+        "NEMA17_motor_REFERENCE"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "M3x16_motor_face_1",
+        "NEMA17_motor_REFERENCE"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "M3x16_motor_face_2",
+        "NEMA17_motor_REFERENCE"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "M3x16_motor_face_3",
+        "NEMA17_motor_REFERENCE"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "6002_bearing_18",
+        "Fixed_spindle"
+      ],
+      "reason": "User-selected 15.25 mm printed shaft in nominal 15 mm bore: 0.125 mm radial interference, with 0.5 mm top chamfer. Motion assumes actual print fit or finishing; rigid bore clearance is not certified."
+    },
+    {
+      "parts": [
+        "6002_bearing_43",
+        "Fixed_spindle"
+      ],
+      "reason": "User-selected 15.25 mm printed shaft in nominal 15 mm bore: 0.125 mm radial interference, with 0.5 mm top chamfer. Motion assumes actual print fit or finishing; rigid bore clearance is not certified."
+    }
+  ],
+  "final_offsets_mm": {
+    "Integrated_stand": [
+      -240.0,
+      0.0,
+      -180.0
+    ],
+    "Fixed_base_plate": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Fixed_spindle": [
+      0.0,
+      0.0,
+      100.0
+    ],
+    "Inner_race_spacer": [
+      0.0,
+      -220.0,
+      155.0
+    ],
+    "Inner_race_top_washer": [
+      0.0,
+      0.0,
+      180.0
+    ],
+    "Bearing_housing": [
+      0.0,
+      -220.0,
+      120.0
+    ],
+    "Lower_bearing_retainer": [
+      0.0,
+      -220.0,
+      90.0
+    ],
+    "Rotating_test_deck": [
+      0.0,
+      -220.0,
+      190.0
+    ],
+    "Internal_72T_ring": [
+      140.0,
+      -220.0,
+      60.0
+    ],
+    "Compliant_12T_pinion": [
+      130.0,
+      0.0,
+      180.0
+    ],
+    "6002_bearing_18": [
+      0.0,
+      -220.0,
+      100.0
+    ],
+    "6002_bearing_43": [
+      0.0,
+      -220.0,
+      160.0
+    ],
+    "NEMA17_motor_REFERENCE": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "Motor_D_shaft_REFERENCE": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "Rear_controller_PCB_REFERENCE": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "Controller_spacer_0": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "Controller_spacer_1": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "Controller_spacer_2": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "Controller_spacer_3": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "Controller_component_KEEPOUT": [
+      140.0,
+      0.0,
+      -110.0
+    ],
+    "USB_cable_KEEPOUT": [
+      0.0,
+      130.0,
+      -90.0
+    ],
+    "M5x25_upper_stand_0": [
+      0.0,
+      0.0,
+      120.0
+    ],
+    "M5_stand_nut_0": [
+      -240.0,
+      0.0,
+      -180.0
+    ],
+    "M5x25_upper_stand_1": [
+      0.0,
+      0.0,
+      120.0
+    ],
+    "M5_stand_nut_1": [
+      -240.0,
+      0.0,
+      -180.0
+    ],
+    "M5x25_upper_stand_2": [
+      0.0,
+      0.0,
+      120.0
+    ],
+    "M5_stand_nut_2": [
+      -240.0,
+      0.0,
+      -180.0
+    ],
+    "M5x25_upper_stand_3": [
+      0.0,
+      0.0,
+      120.0
+    ],
+    "M5_stand_nut_3": [
+      -240.0,
+      0.0,
+      -180.0
+    ],
+    "M3x16_motor_face_0": [
+      0.0,
+      0.0,
+      110.0
+    ],
+    "M3x16_motor_face_1": [
+      0.0,
+      0.0,
+      110.0
+    ],
+    "M3x16_motor_face_2": [
+      0.0,
+      0.0,
+      110.0
+    ],
+    "M3x16_motor_face_3": [
+      0.0,
+      0.0,
+      110.0
+    ],
+    "M3x12_spindle_flange_0": [
+      0.0,
+      0.0,
+      -60.0
+    ],
+    "M3_spindle_nut_0": [
+      0.0,
+      0.0,
+      100.0
+    ],
+    "M3x12_spindle_flange_1": [
+      0.0,
+      0.0,
+      -60.0
+    ],
+    "M3_spindle_nut_1": [
+      0.0,
+      0.0,
+      100.0
+    ],
+    "M3x45_housing_0": [
+      -100.0,
+      -220.0,
+      20.0
+    ],
+    "M3_housing_nut_0": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x45_housing_1": [
+      -100.0,
+      -220.0,
+      20.0
+    ],
+    "M3_housing_nut_1": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x45_housing_2": [
+      -100.0,
+      -220.0,
+      20.0
+    ],
+    "M3_housing_nut_2": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x45_housing_3": [
+      -100.0,
+      -220.0,
+      20.0
+    ],
+    "M3_housing_nut_3": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x30_ring_0": [
+      140.0,
+      -220.0,
+      20.0
+    ],
+    "M3_ring_washer_0": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3_ring_nut_0": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x30_ring_1": [
+      140.0,
+      -220.0,
+      20.0
+    ],
+    "M3_ring_washer_1": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3_ring_nut_1": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x30_ring_2": [
+      140.0,
+      -220.0,
+      20.0
+    ],
+    "M3_ring_washer_2": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3_ring_nut_2": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x30_ring_3": [
+      140.0,
+      -220.0,
+      20.0
+    ],
+    "M3_ring_washer_3": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3_ring_nut_3": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x30_ring_4": [
+      140.0,
+      -220.0,
+      20.0
+    ],
+    "M3_ring_washer_4": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3_ring_nut_4": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3x30_ring_5": [
+      140.0,
+      -220.0,
+      20.0
+    ],
+    "M3_ring_washer_5": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M3_ring_nut_5": [
+      0.0,
+      -220.0,
+      240.0
+    ],
+    "M6x60_axle_bolt": [
+      0.0,
+      0.0,
+      -120.0
+    ],
+    "M6_washer_-1.6": [
+      0.0,
+      0.0,
+      -120.0
+    ],
+    "M6_washer_50": [
+      0.0,
+      0.0,
+      180.0
+    ],
+    "M6_axle_nut": [
+      0.0,
+      0.0,
+      180.0
+    ],
+    "M3x4_pinion_set_screw": [
+      130.0,
+      -6.0,
+      180.0
+    ],
+    "625ZZ_support_roller_0": [
+      30.000000000000004,
+      30.0,
+      42.42640687119285
+    ],
+    "625ZZ_support_roller_1": [
+      -30.0,
+      30.000000000000004,
+      42.42640687119285
+    ],
+    "625ZZ_support_roller_2": [
+      -30.000000000000007,
+      -30.0,
+      42.42640687119285
+    ],
+    "625ZZ_support_roller_3": [
+      29.999999999999993,
+      -30.000000000000007,
+      42.42640687119285
+    ]
+  },
+  "limits": [
+    "Ideal rigid CAD surfaces and reference hardware envelopes; actual print fit not certified.",
+    "Threads are not modeled. Fasteners must be unthreaded before the depicted withdrawal.",
+    "Designed compliant tooth interference is intentional and excluded; other rigid pairs are checked.",
+    "Explosion is checked at the zero-angle assembled pose; rotation is disabled during explosion."
+  ],
+  "spindle_print_fit": {
+    "spacer_bore_mm": 15.8,
+    "spacer_radial_clearance_mm": 0.2749999999999998,
+    "shaft_diameter_mm": 15.25,
+    "bearing_bore_mm": 15,
+    "diametral_interference_mm": 0.25,
+    "radial_interference_mm": 0.125,
+    "measured_cad_diameter_mm": [
+      15.25,
+      15.25
+    ],
+    "bearing_contacts": [
+      {
+        "part": "6002_bearing_18",
+        "nominal_overlap_mm3": 53.456162496238825
+      },
+      {
+        "part": "6002_bearing_43",
+        "nominal_overlap_mm3": 48.480746943424684
+      }
+    ],
+    "top_chamfer_mm": 0.5,
+    "physical_fit_verified": false,
+    "note": "15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm."
+  },
+  "source_sha256": {
+    "build.py": "bf64826fdc708377f3a03d846ddb4786b346c6297c86c24a4a7ddf999e4d0cf4",
+    "rotary_base/core.py": "e90f0ebe3bcc13ef2601998f97e075a37a26fc9882b8b684461acda0c987ee1b",
+    "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
+    "explosion.py": "4a602cd23a005985e988073e5b0bdb829ff3afdbf33f79a1bfd3820663f7a60e",
+    "parameters.json": "e9f10f4287db08818c8544bb2ca2f52ff18f73b7b745ecc4881a43d2097f854c",
+    "check_explosion.py": "46681c6b56692b703877bc20d184ea9fd0e00349d2b6c124a4d663e8781e9ca8"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": [
+    "blank-space context menu",
+    "accessible checkbox and keyboard toggle",
+    "depth-tested dashed occluded edges",
+    "overlays follow parent motion, explosion and visibility",
+    "source geometry untouched",
+    "no duplicate overlays",
+    "preference persists across reload and both pages",
+    "mobile menu stays in viewport",
+    "offline viewer toggle",
+    "no browser errors"
+  ]
+}

@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+cache/
+output/
+node_modules/
+.site-tmp/
+*.tar.gz
+site/.openai/
+site/dist/*.json
+site/dist/base-test.html
+site/dist/downloads/
+base_test_kit_v4/viewer.bundle.js

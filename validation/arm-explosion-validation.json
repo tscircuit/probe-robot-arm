@@ -1,0 +1,2132 @@
+{
+  "passed": true,
+  "method": "Continuous linear-translation intervals certified by swept bounding boxes or midpoint minimum-distance bounds; recursively subdivided. Unresolved intervals fail.",
+  "tolerance_mm": 1e-07,
+  "collision_volume_tolerance_mm3": 0.001,
+  "stages": [
+    {
+      "index": 0,
+      "label": "Remove Z output nuts",
+      "travel_mm": 12.0,
+      "candidate_pairs": 4,
+      "distance_queries": 184,
+      "seconds": 1.84
+    },
+    {
+      "index": 1,
+      "label": "Park Z output nuts",
+      "travel_mm": 120.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 2,
+      "label": "Withdraw Z through-bolts and front washers",
+      "travel_mm": 40.0,
+      "candidate_pairs": 12,
+      "distance_queries": 1756,
+      "seconds": 14.26
+    },
+    {
+      "index": 3,
+      "label": "Park Z through-bolts and front washers",
+      "travel_mm": 100.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 4,
+      "label": "Remove Z rear washers",
+      "travel_mm": 12.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 5,
+      "label": "Park Z rear washers",
+      "travel_mm": 100.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 6,
+      "label": "Lift U carrier off Z output pad",
+      "travel_mm": 60.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.03
+    },
+    {
+      "index": 7,
+      "label": "Separate horizontal assembly from Z output",
+      "travel_mm": 100.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.04
+    },
+    {
+      "index": 8,
+      "label": "Lift horizontal assembly clear",
+      "travel_mm": 120.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.03
+    },
+    {
+      "index": 9,
+      "label": "Move horizontal assembly to service position",
+      "travel_mm": 250.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.03
+    },
+    {
+      "index": 10,
+      "label": "Release horizontal enclosure screws",
+      "travel_mm": 20.0,
+      "candidate_pairs": 16,
+      "distance_queries": 528,
+      "seconds": 4.17
+    },
+    {
+      "index": 11,
+      "label": "Park horizontal enclosure screws",
+      "travel_mm": 150.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 12,
+      "label": "Separate horizontal enclosure from carrier",
+      "travel_mm": 140.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.03
+    },
+    {
+      "index": 13,
+      "label": "R \u2014 release lid screws",
+      "travel_mm": 35.0,
+      "candidate_pairs": 14,
+      "distance_queries": 885,
+      "seconds": 14.4
+    },
+    {
+      "index": 14,
+      "label": "R \u2014 park lid screws",
+      "travel_mm": 180.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 15,
+      "label": "R \u2014 open enclosure lid",
+      "travel_mm": 70.0,
+      "candidate_pairs": 22,
+      "distance_queries": 172,
+      "seconds": 16.53
+    },
+    {
+      "index": 16,
+      "label": "Release Z top-face screws",
+      "travel_mm": 20.0,
+      "candidate_pairs": 16,
+      "distance_queries": 524,
+      "seconds": 4.04
+    },
+    {
+      "index": 17,
+      "label": "Park Z top-face screws",
+      "travel_mm": 160.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 18,
+      "label": "Release vertical enclosure screws",
+      "travel_mm": 20.0,
+      "candidate_pairs": 13,
+      "distance_queries": 493,
+      "seconds": 4.09
+    },
+    {
+      "index": 19,
+      "label": "Park vertical enclosure screws",
+      "travel_mm": 80.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 20,
+      "label": "Separate vertical enclosure from both cradle faces",
+      "travel_mm": 134.5362404707371,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.03
+    },
+    {
+      "index": 21,
+      "label": "Unbolt cradle flanges from deck inserts",
+      "travel_mm": 30.0,
+      "candidate_pairs": 18,
+      "distance_queries": 1728,
+      "seconds": 14.84
+    },
+    {
+      "index": 22,
+      "label": "Park cradle flange screws",
+      "travel_mm": 150.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 23,
+      "label": "Lift flanged cradle off rotating deck",
+      "travel_mm": 60.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 24,
+      "label": "Z \u2014 release lid screws",
+      "travel_mm": 35.0,
+      "candidate_pairs": 14,
+      "distance_queries": 885,
+      "seconds": 14.31
+    },
+    {
+      "index": 25,
+      "label": "Z \u2014 park lid screws",
+      "travel_mm": 180.0,
+      "candidate_pairs": 0,
+      "distance_queries": 0,
+      "seconds": 0.0
+    },
+    {
+      "index": 26,
+      "label": "Z \u2014 open enclosure lid",
+      "travel_mm": 70.0,
+      "candidate_pairs": 22,
+      "distance_queries": 172,
+      "seconds": 13.49
+    }
+  ],
+  "distance_queries": 7327,
+  "bounding_box_prunes": 107297,
+  "certified_distance_intervals": 3583,
+  "collisions": [],
+  "unresolved_intervals": [],
+  "exceptions": [
+    {
+      "parts": [
+        "Compliant_12T_pinion",
+        "Internal_72T_ring"
+      ],
+      "reason": "Designed tooth preload; drive stays assembled"
+    },
+    {
+      "parts": [
+        "Compliant_12T_pinion",
+        "M3x4_pinion_set_screw"
+      ],
+      "reason": "Tapped pilot / thread contact; screw is released before pinion lifts"
+    },
+    {
+      "parts": [
+        "Controller_USB_cable_clearance",
+        "Controller_component_clearance"
+      ],
+      "reason": "Overlapping nonphysical keepout volumes"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_0",
+        "M5x25_upper_stand_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_1",
+        "M5x25_upper_stand_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_2",
+        "M5x25_upper_stand_2"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M5_stand_nut_3",
+        "M5x25_upper_stand_3"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_spindle_nut_0",
+        "M3x12_spindle_flange_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_spindle_nut_1",
+        "M3x12_spindle_flange_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_0",
+        "M3x45_housing_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_1",
+        "M3x45_housing_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_2",
+        "M3x45_housing_2"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_housing_nut_3",
+        "M3x45_housing_3"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_0",
+        "M3x30_ring_0"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_1",
+        "M3x30_ring_1"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_2",
+        "M3x30_ring_2"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_3",
+        "M3x30_ring_3"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_4",
+        "M3x30_ring_4"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M3_ring_nut_5",
+        "M3x30_ring_5"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "M6_axle_nut",
+        "M6x60_axle_bolt"
+      ],
+      "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_0",
+        "Module_base"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_1",
+        "Module_base"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_2",
+        "Module_base"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_3",
+        "Module_base"
+      ],
+      "reason": "Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing."
+    },
+    {
+      "parts": [
+        "Base_NEMA17_48mm_reference",
+        "M3x16_motor_face_0"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "Base_NEMA17_48mm_reference",
+        "M3x16_motor_face_1"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "Base_NEMA17_48mm_reference",
+        "M3x16_motor_face_2"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "Base_NEMA17_48mm_reference",
+        "M3x16_motor_face_3"
+      ],
+      "reason": "Tapped motor-face thread; screw unthreaded before axial withdrawal"
+    },
+    {
+      "parts": [
+        "6002_bearing_18",
+        "Fixed_spindle"
+      ],
+      "reason": "User-selected 15.25 mm printed shaft in nominal 15 mm bore: 0.125 mm radial interference, with 0.5 mm top chamfer. Motion assumes actual print fit or finishing; rigid bore clearance is not certified."
+    },
+    {
+      "parts": [
+        "6002_bearing_43",
+        "Fixed_spindle"
+      ],
+      "reason": "User-selected 15.25 mm printed shaft in nominal 15 mm bore: 0.125 mm radial interference, with 0.5 mm top chamfer. Motion assumes actual print fit or finishing; rigid bore clearance is not certified."
+    },
+    {
+      "parts": [
+        "M4_deck_insert_0",
+        "Rotating_deck"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "M4_deck_insert_1",
+        "Rotating_deck"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "M4_deck_insert_2",
+        "Rotating_deck"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "M4_deck_insert_3",
+        "Rotating_deck"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "M4_deck_insert_4",
+        "Rotating_deck"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "M4_deck_insert_5",
+        "Rotating_deck"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_chassis_-39_-13"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_chassis_39_-13"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_rear_chassis_-39_54"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_rear_chassis_27_54"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_top_mount_-60.5_-19.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_top_mount_-60.5_56.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_top_mount_49.5_-19.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_top_mount_49.5_56.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_lid_-60.5_-9.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_lid_-60.5_46.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_lid_49.5_-9.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_lid_2_46.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_side_mount_-60.5_-42"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_side_mount_-60.5_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_side_mount_49.5_-42"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_side_mount_49.5_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_front_mount_-17.9_-42"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_front_mount_-17.9_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_front_mount_54.9_-42"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_05_Mounting_enclosure_tray",
+        "Z_M3_heat-set_insert_front_mount_54.9_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_04_Beveled_compliant_rack",
+        "R_M3_heat-set_insert_output_196_24"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_04_Beveled_compliant_rack",
+        "R_M3_heat-set_insert_output_196_33"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_04_Beveled_compliant_rack",
+        "R_M3_heat-set_insert_output_205_24"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_04_Beveled_compliant_rack",
+        "R_M3_heat-set_insert_output_205_33"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_chassis_-39_-13"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_chassis_30_-13"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_chassis_110_-13"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_rear_chassis_-39_54"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_rear_chassis_30_54"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_rear_chassis_100_54"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_top_mount_-60.5_-13.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_top_mount_-60.5_56.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_top_mount_122.5_-13.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_top_mount_122.5_56.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_lid_-60.5_-3.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_lid_-60.5_46.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_lid_122.5_-3.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_lid_75_46.4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_side_mount_-60.5_-28"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_side_mount_-60.5_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_side_mount_122.5_-28"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_side_mount_122.5_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_front_mount_-11.9_-28"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_front_mount_-11.9_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_front_mount_54.9_-28"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "R_05_Mounting_enclosure_tray",
+        "R_M3_heat-set_insert_front_mount_54.9_-4"
+      ],
+      "reason": "Intentional heat-set knurl/pilot interference; insert remains in host"
+    },
+    {
+      "parts": [
+        "Z_03_Involute_pinion_18T",
+        "Z_04_Beveled_compliant_rack"
+      ],
+      "reason": "Designed tooth preload; drive stays assembled"
+    },
+    {
+      "parts": [
+        "R_03_Involute_pinion_14T",
+        "R_04_Beveled_compliant_rack"
+      ],
+      "reason": "Designed tooth preload; drive stays assembled"
+    }
+  ],
+  "final_offsets_mm": {
+    "Module_base": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Fixed_spindle": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Inner_race_spacer": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Inner_race_top_washer": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Bearing_housing": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Lower_bearing_retainer": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Rotating_deck": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Internal_72T_ring": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Compliant_12T_pinion": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "6002_bearing_18": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "6002_bearing_43": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Base_NEMA17_48mm_reference": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Base_motor_D_shaft": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Controller_RP2040_PCB_envelope": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Controller_spacer_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Controller_spacer_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Controller_spacer_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Controller_spacer_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Controller_component_clearance": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Controller_USB_cable_clearance": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x16_motor_face_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x16_motor_face_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x16_motor_face_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x16_motor_face_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x12_spindle_flange_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_spindle_nut_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x12_spindle_flange_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_spindle_nut_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x45_housing_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_housing_nut_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x45_housing_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_housing_nut_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x45_housing_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_housing_nut_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x45_housing_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_housing_nut_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x30_ring_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_washer_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_nut_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x30_ring_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_washer_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_nut_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x30_ring_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_washer_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_nut_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x30_ring_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_washer_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_nut_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x30_ring_4": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_washer_4": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_nut_4": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x30_ring_5": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_washer_5": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3_ring_nut_5": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M6x60_axle_bolt": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M6_washer_-1.6": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M6_washer_50": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M6_axle_nut": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M3x4_pinion_set_screw": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "625ZZ_support_roller_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "625ZZ_support_roller_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "625ZZ_support_roller_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "625ZZ_support_roller_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_bolt_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_washer_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_nut_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_bolt_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_washer_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_nut_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_bolt_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_washer_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_nut_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_bolt_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_washer_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M5_platform_nut_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "M4_deck_insert_0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Z_cradle_deck_screw_0": [
+      150.0,
+      0.0,
+      30.0
+    ],
+    "M4_deck_insert_1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Z_cradle_deck_screw_1": [
+      150.0,
+      0.0,
+      30.0
+    ],
+    "M4_deck_insert_2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Z_cradle_deck_screw_2": [
+      150.0,
+      0.0,
+      30.0
+    ],
+    "M4_deck_insert_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Z_cradle_deck_screw_3": [
+      150.0,
+      0.0,
+      30.0
+    ],
+    "M4_deck_insert_4": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Z_cradle_deck_screw_4": [
+      150.0,
+      0.0,
+      30.0
+    ],
+    "M4_deck_insert_5": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "Z_cradle_deck_screw_5": [
+      150.0,
+      0.0,
+      30.0
+    ],
+    "Z_support": [
+      0.0,
+      0.0,
+      60.0
+    ],
+    "Z_NEMA17_reference": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_NEMA17_D_shaft": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_motor_screw_-15.5_-15.5": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_motor_screw_-15.5_15.5": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_motor_screw_15.5_-15.5": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_motor_screw_15.5_15.5": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_03_Involute_pinion_18T": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x4_flat-point_pinion_set_screw": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_04_Beveled_compliant_rack": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_625ZZ_angled_front_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_upper_washer_front_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5x16_angled_axle_front_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_angled_nut_front_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_625ZZ_angled_front_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_upper_washer_front_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5x16_angled_axle_front_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_angled_nut_front_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_625ZZ_angled_rear_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_upper_washer_rear_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5x16_angled_axle_rear_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_angled_nut_rear_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_625ZZ_angled_rear_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_upper_washer_rear_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5x16_angled_axle_rear_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_angled_nut_rear_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_625ZZ_lower_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_lower_washer_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5x25_lower_axle_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_lower_nut_-32.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_625ZZ_lower_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_lower_washer_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5x25_lower_axle_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M5_lower_nut_44.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_01_Integral_spring_chassis": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_chassis_-39_-13": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x10_chassis_screw_-39.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_chassis_39_-13": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x10_chassis_screw_39.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_rear_chassis_-39_54": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x16_rear_chassis_screw_-39.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_rear_chassis_27_54": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x16_rear_chassis_screw_27.0": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_top_mount_-60.5_-19.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_top_mount_-60.5_56.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_top_mount_49.5_-19.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_top_mount_49.5_56.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_lid_-60.5_-9.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x20_recessed_lid_screw_-60.5_-9.4": [
+      -55.0,
+      280.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_lid_-60.5_46.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x20_recessed_lid_screw_-60.5_46.4": [
+      -55.0,
+      280.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_lid_49.5_-9.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x20_recessed_lid_screw_49.5_-9.4": [
+      -55.0,
+      280.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_lid_2_46.4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3x20_recessed_lid_screw_2_46.4": [
+      -55.0,
+      280.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_side_mount_-60.5_-42": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_side_mount_-60.5_-4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_side_mount_49.5_-42": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_side_mount_49.5_-4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_front_mount_-17.9_-42": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_front_mount_-17.9_-4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_front_mount_54.9_-42": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_M3_heat-set_insert_front_mount_54.9_-4": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_05_Mounting_enclosure_tray": [
+      -90.0,
+      100.0,
+      0.0
+    ],
+    "Z_06_Removable_enclosure_cover": [
+      -20.0,
+      100.0,
+      0.0
+    ],
+    "Z_enclosure_mount_screw_0": [
+      -80.0,
+      -20.0,
+      0.0
+    ],
+    "Z_enclosure_mount_screw_1": [
+      -80.0,
+      -20.0,
+      0.0
+    ],
+    "Z_enclosure_mount_screw_2": [
+      -80.0,
+      -20.0,
+      0.0
+    ],
+    "Z_enclosure_mount_screw_3": [
+      -80.0,
+      -20.0,
+      0.0
+    ],
+    "Z_top_mount_screw_0": [
+      20.0,
+      160.0,
+      0.0
+    ],
+    "Z_top_mount_screw_1": [
+      20.0,
+      160.0,
+      0.0
+    ],
+    "Z_top_mount_screw_2": [
+      20.0,
+      160.0,
+      0.0
+    ],
+    "Z_top_mount_screw_3": [
+      20.0,
+      160.0,
+      0.0
+    ],
+    "Z_to_radial_carrier": [
+      350.0,
+      0.0,
+      180.0
+    ],
+    "Z_output_mount_screw_0": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_front_washer_0": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_rear_washer_0": [
+      -12.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_nut_0": [
+      -12.0,
+      -120.0,
+      0.0
+    ],
+    "Z_output_mount_screw_1": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_front_washer_1": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_rear_washer_1": [
+      -12.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_nut_1": [
+      -12.0,
+      -120.0,
+      0.0
+    ],
+    "Z_output_mount_screw_2": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_front_washer_2": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_rear_washer_2": [
+      -12.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_nut_2": [
+      -12.0,
+      -120.0,
+      0.0
+    ],
+    "Z_output_mount_screw_3": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_front_washer_3": [
+      40.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_rear_washer_3": [
+      -12.0,
+      -100.0,
+      0.0
+    ],
+    "Z_output_nut_3": [
+      -12.0,
+      -120.0,
+      0.0
+    ],
+    "R_NEMA14_reference": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_NEMA14_D_shaft": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_motor_screw_-13.0_-9.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_motor_screw_-13.0_17.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_motor_screw_13.0_-9.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_motor_screw_13.0_17.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_03_Involute_pinion_14T": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x4_flat-point_pinion_set_screw": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_04_Beveled_compliant_rack": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_output_196_24": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_output_196_33": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_output_205_24": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_output_205_33": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_625ZZ_angled_front_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_upper_washer_front_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5x16_angled_axle_front_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_angled_nut_front_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_625ZZ_angled_front_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_upper_washer_front_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5x16_angled_axle_front_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_angled_nut_front_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_625ZZ_angled_rear_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_upper_washer_rear_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5x16_angled_axle_rear_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_angled_nut_rear_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_625ZZ_angled_rear_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_upper_washer_rear_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5x16_angled_axle_rear_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_angled_nut_rear_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_625ZZ_lower_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_lower_washer_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5x25_lower_axle_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_lower_nut_-32.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_625ZZ_lower_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_lower_washer_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5x25_lower_axle_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M5_lower_nut_117": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_01_Integral_spring_chassis": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_chassis_-39_-13": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x10_chassis_screw_-39.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_chassis_30_-13": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x10_chassis_screw_30.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_chassis_110_-13": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x10_chassis_screw_110": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_rear_chassis_-39_54": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x16_rear_chassis_screw_-39.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_rear_chassis_30_54": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x16_rear_chassis_screw_30.0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_rear_chassis_100_54": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x16_rear_chassis_screw_100": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_top_mount_-60.5_-13.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_top_mount_-60.5_56.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_top_mount_122.5_-13.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_top_mount_122.5_56.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_lid_-60.5_-3.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x20_recessed_lid_screw_-60.5_-3.4": [
+      350.0,
+      180.0,
+      285.0
+    ],
+    "R_M3_heat-set_insert_lid_-60.5_46.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x20_recessed_lid_screw_-60.5_46.4": [
+      350.0,
+      180.0,
+      285.0
+    ],
+    "R_M3_heat-set_insert_lid_122.5_-3.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x20_recessed_lid_screw_122.5_-3.4": [
+      350.0,
+      180.0,
+      285.0
+    ],
+    "R_M3_heat-set_insert_lid_75_46.4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3x20_recessed_lid_screw_75_46.4": [
+      350.0,
+      180.0,
+      285.0
+    ],
+    "R_M3_heat-set_insert_side_mount_-60.5_-28": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_side_mount_-60.5_-4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_side_mount_122.5_-28": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_side_mount_122.5_-4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_front_mount_-11.9_-28": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_front_mount_-11.9_-4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_front_mount_54.9_-28": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_M3_heat-set_insert_front_mount_54.9_-4": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_05_Mounting_enclosure_tray": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "R_06_Removable_enclosure_cover": [
+      350.0,
+      0.0,
+      250.0
+    ],
+    "R_enclosure_mount_screw_0": [
+      350.0,
+      -150.0,
+      160.0
+    ],
+    "R_enclosure_mount_screw_1": [
+      350.0,
+      -150.0,
+      160.0
+    ],
+    "R_enclosure_mount_screw_2": [
+      350.0,
+      -150.0,
+      160.0
+    ],
+    "R_enclosure_mount_screw_3": [
+      350.0,
+      -150.0,
+      160.0
+    ],
+    "Triangular_probe_outrigger": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "Probe_output_mount_screw_0": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "Probe_output_mount_screw_1": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "Probe_output_mount_screw_2": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "Probe_output_mount_screw_3": [
+      350.0,
+      0.0,
+      320.0
+    ],
+    "Spring_probe_reference": [
+      350.0,
+      0.0,
+      320.0
+    ]
+  },
+  "limits": [
+    "Ideal rigid CAD surfaces and reference hardware envelopes; actual print fit not certified.",
+    "Threads are not modeled. Fasteners must be unthreaded before the depicted withdrawal.",
+    "Designed compliant tooth interference is intentional and excluded; other rigid pairs are checked.",
+    "Explosion is checked at the zero-angle assembled pose; rotation is disabled during explosion."
+  ],
+  "source_sha256": {
+    "model.py": "94389abae65f1b19a137baf8f465fa5e1009645f18637dbf011e3f166fc93908",
+    "parameters.json": "2f4c3afcc65f20cd4781d5467a3894b05647803871eee69397a6ac2681820316",
+    "rotary_base/core.py": "e90f0ebe3bcc13ef2601998f97e075a37a26fc9882b8b684461acda0c987ee1b",
+    "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
+    "rotary_base/parameters.json": "e9f10f4287db08818c8544bb2ca2f52ff18f73b7b745ecc4881a43d2097f854c",
+    "arm_explosion.py": "8989f8fb730206840704f76f40894462cbbaf6f83f4a87fba502357894aadbfa",
+    "check_arm_explosion.py": "38b260236607ab36e875429b80fd59a31ec874d6669e1b6639b05e1996860f2c"
+  },
+  "scope": "One arm, module-level separation and enclosure lid removal. Internal actuator drives and rotary base stay assembled."
+}

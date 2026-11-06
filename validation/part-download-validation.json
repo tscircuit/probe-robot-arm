@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "main_print_files": 22,
+  "base_print_files": 10,
+  "checks": [
+    "right-click selects actual visible meshes",
+    "STL bytes match original print files",
+    "current cradle, deck, U carrier and through-bolt rack downloads",
+    "explosion-independent downloads",
+    "reference binary STL",
+    "platform parts selectable",
+    "both directions of top page navigation",
+    "Escape closes menu",
+    "mobile width",
+    "no browser errors"
+  ]
+}

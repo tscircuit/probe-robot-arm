@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "spindle_print_fit": {
+    "spacer_bore_mm": 15.8,
+    "spacer_radial_clearance_mm": 0.2749999999999998,
+    "shaft_diameter_mm": 15.25,
+    "bearing_bore_mm": 15,
+    "diametral_interference_mm": 0.25,
+    "radial_interference_mm": 0.125,
+    "measured_cad_diameter_mm": [
+      15.25,
+      15.25
+    ],
+    "bearing_contacts": [
+      {
+        "part": "6002_bearing_18",
+        "nominal_overlap_mm3": 53.456162496238825
+      },
+      {
+        "part": "6002_bearing_43",
+        "nominal_overlap_mm3": 48.480746943424684
+      }
+    ],
+    "top_chamfer_mm": 0.5,
+    "physical_fit_verified": false,
+    "note": "15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm."
+  },
+  "checked_pairs": 2526,
+  "maximum_unintended_overlap_mm3": 0.0,
+  "worst_pair": null,
+  "volume_tolerance_mm3": 1e-06,
+  "failures": [],
+  "exceptions": "Same named contact exceptions as explosion_validation.json"
+}

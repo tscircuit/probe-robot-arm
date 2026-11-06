@@ -1,0 +1,16 @@
+Item,Quantity,Use
+"6002 bearings, 15 × 32 × 9 mm",2,Central cartridge
+"625ZZ bearings, 5 × 16 × 5 mm",4,Tilted outer-track rollers on printed axles
+"Full-depth NEMA17, reference 42.3 mm square × 48 mm body, 5 mm D shaft",1,Direct underside mount
+M5×25 socket-cap screws,4,Plate to integrated stand
+"M5 hex nuts, 8 mm AF × 4 mm thick",4,Captive in stand
+M3×16 socket-cap screws,4,Motor face: 11 mm plate plus nominal 5 mm engagement
+M3×12 socket-cap screws,2,Spindle flange through recessed plate floor
+M3×45 socket-cap screws,4,"Lower retainer, housing and deck"
+"M3×30 button-head screws, head ≤5.7 mm OD × 1.65 mm high",6,Flat seats underneath ring; no countersinks
+"M3 hex nuts, 5.5 mm AF × 2.4 mm",12,2 spindle + 4 housing + 6 ring
+"M3 flat washers, approximately 0.5 mm thick",6,Above deck under ring nuts
+M3×4 flat-point grub screw,1,Pinion clamp; tap its 2.5 mm pilot M3
+M6×60 bolt,1,Centre inner-race stack
+M6 hex nut,1,Centre clamp
+"M6 washers, approximately 12 mm OD × 1.6 mm",2,Below flat plate and above printed washer

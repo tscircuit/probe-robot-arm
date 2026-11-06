@@ -1,0 +1,6 @@
+-r requirements.txt
+numpy
+matplotlib
+trimesh==5.2.0
+networkx
+Markdown

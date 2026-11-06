@@ -1,0 +1,412 @@
+{
+  "passed": true,
+  "shared_components": [
+    {
+      "part": "Fixed_base_plate",
+      "main_name": "Module_base",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Fixed_spindle",
+      "main_name": "Fixed_spindle",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Inner_race_spacer",
+      "main_name": "Inner_race_spacer",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Inner_race_top_washer",
+      "main_name": "Inner_race_top_washer",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Bearing_housing",
+      "main_name": "Bearing_housing",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Lower_bearing_retainer",
+      "main_name": "Lower_bearing_retainer",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Rotating_test_deck",
+      "main_name": "Rotating_deck",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Internal_72T_ring",
+      "main_name": "Internal_72T_ring",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "Compliant_12T_pinion",
+      "main_name": "Compliant_12T_pinion",
+      "printed": true,
+      "matched": true
+    },
+    {
+      "part": "6002_bearing_18",
+      "main_name": "6002_bearing_18",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "6002_bearing_43",
+      "main_name": "6002_bearing_43",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "NEMA17_motor_REFERENCE",
+      "main_name": "Base_NEMA17_48mm_reference",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "Motor_D_shaft_REFERENCE",
+      "main_name": "Base_motor_D_shaft",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "Rear_controller_PCB_REFERENCE",
+      "main_name": "Controller_RP2040_PCB_envelope",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "Controller_spacer_0",
+      "main_name": "Controller_spacer_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "Controller_spacer_1",
+      "main_name": "Controller_spacer_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "Controller_spacer_2",
+      "main_name": "Controller_spacer_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "Controller_spacer_3",
+      "main_name": "Controller_spacer_3",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "Controller_component_KEEPOUT",
+      "main_name": "Controller_component_clearance",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "USB_cable_KEEPOUT",
+      "main_name": "Controller_USB_cable_clearance",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x16_motor_face_0",
+      "main_name": "M3x16_motor_face_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x16_motor_face_1",
+      "main_name": "M3x16_motor_face_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x16_motor_face_2",
+      "main_name": "M3x16_motor_face_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x16_motor_face_3",
+      "main_name": "M3x16_motor_face_3",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x12_spindle_flange_0",
+      "main_name": "M3x12_spindle_flange_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_spindle_nut_0",
+      "main_name": "M3_spindle_nut_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x12_spindle_flange_1",
+      "main_name": "M3x12_spindle_flange_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_spindle_nut_1",
+      "main_name": "M3_spindle_nut_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x45_housing_0",
+      "main_name": "M3x45_housing_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_housing_nut_0",
+      "main_name": "M3_housing_nut_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x45_housing_1",
+      "main_name": "M3x45_housing_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_housing_nut_1",
+      "main_name": "M3_housing_nut_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x45_housing_2",
+      "main_name": "M3x45_housing_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_housing_nut_2",
+      "main_name": "M3_housing_nut_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x45_housing_3",
+      "main_name": "M3x45_housing_3",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_housing_nut_3",
+      "main_name": "M3_housing_nut_3",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x30_ring_0",
+      "main_name": "M3x30_ring_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_washer_0",
+      "main_name": "M3_ring_washer_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_nut_0",
+      "main_name": "M3_ring_nut_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x30_ring_1",
+      "main_name": "M3x30_ring_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_washer_1",
+      "main_name": "M3_ring_washer_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_nut_1",
+      "main_name": "M3_ring_nut_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x30_ring_2",
+      "main_name": "M3x30_ring_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_washer_2",
+      "main_name": "M3_ring_washer_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_nut_2",
+      "main_name": "M3_ring_nut_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x30_ring_3",
+      "main_name": "M3x30_ring_3",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_washer_3",
+      "main_name": "M3_ring_washer_3",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_nut_3",
+      "main_name": "M3_ring_nut_3",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x30_ring_4",
+      "main_name": "M3x30_ring_4",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_washer_4",
+      "main_name": "M3_ring_washer_4",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_nut_4",
+      "main_name": "M3_ring_nut_4",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x30_ring_5",
+      "main_name": "M3x30_ring_5",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_washer_5",
+      "main_name": "M3_ring_washer_5",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3_ring_nut_5",
+      "main_name": "M3_ring_nut_5",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M6x60_axle_bolt",
+      "main_name": "M6x60_axle_bolt",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M6_washer_-1.6",
+      "main_name": "M6_washer_-1.6",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M6_washer_50",
+      "main_name": "M6_washer_50",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M6_axle_nut",
+      "main_name": "M6_axle_nut",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "M3x4_pinion_set_screw",
+      "main_name": "M3x4_pinion_set_screw",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "625ZZ_support_roller_0",
+      "main_name": "625ZZ_support_roller_0",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "625ZZ_support_roller_1",
+      "main_name": "625ZZ_support_roller_1",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "625ZZ_support_roller_2",
+      "main_name": "625ZZ_support_roller_2",
+      "printed": false,
+      "matched": true
+    },
+    {
+      "part": "625ZZ_support_roller_3",
+      "main_name": "625ZZ_support_roller_3",
+      "printed": false,
+      "matched": true
+    }
+  ],
+  "shared_source": "rotary_base/core.py",
+  "shared_parameters": "rotary_base/parameters.json",
+  "roller_block": {
+    "count": 4,
+    "blocks_per_bearing": 1,
+    "tilt_deg": 45,
+    "crown_radius_mm": 6,
+    "base_width_mm": 16,
+    "integral_axle_diameter_mm": 5.1,
+    "fasteners": 0
+  },
+  "motor_face_z_mm": 0,
+  "ring_bottom_z_mm": 28,
+  "deck_top_z_mm": 54.2,
+  "z_origin_mm": 145.4,
+  "z_lowest_mm": 60.400000000000006,
+  "clamp_top_mm": 58.4,
+  "fixture_differences": [
+    "Bench stand versus main platform and its bolts",
+    "Main Z-cradle inserts and actuators attach to the shared deck"
+  ],
+  "source_sha256": {
+    "model.py": "94389abae65f1b19a137baf8f465fa5e1009645f18637dbf011e3f166fc93908",
+    "parameters.json": "2f4c3afcc65f20cd4781d5467a3894b05647803871eee69397a6ac2681820316",
+    "rotary_base/core.py": "e90f0ebe3bcc13ef2601998f97e075a37a26fc9882b8b684461acda0c987ee1b",
+    "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
+    "rotary_base/parameters.json": "e9f10f4287db08818c8544bb2ca2f52ff18f73b7b745ecc4881a43d2097f854c",
+    "check_base_sync.py": "1cf5abec6a5911e5aa438c188b27a0f196635d929b82c6519538e3d164c52cc2"
+  }
+}

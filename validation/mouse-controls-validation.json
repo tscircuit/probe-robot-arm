@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "pages": 2,
+  "checks": [
+    "middle drag pans without zoom",
+    "right drag does not pan",
+    "wheel zoom remains enabled"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checked_viewer_states": 69,
+  "checks": [
+    "viewer path matches CAD-checked path",
+    "actual mesh positions at all stage boundaries and midpoints",
+    "rotation disabled and reset during explosion",
+    "assembled axis animation",
+    "hardware toggle",
+    "mobile width",
+    "no browser errors"
+  ]
+}

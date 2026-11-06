@@ -1,0 +1,467 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "file": "OPTIONAL_fit_tests/625_axle_coupon_4.9mm_45deg.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        21.767292022705078,
+        15.356854438781738,
+        17.984745025634762
+      ],
+      "bed_z_mm": 3.552713678800501e-15,
+      "triangles": 2948
+    },
+    {
+      "file": "OPTIONAL_fit_tests/625_axle_coupon_5.0mm_45deg.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        21.767292022705078,
+        15.356854438781738,
+        18.020101547241207
+      ],
+      "bed_z_mm": 3.552713678800501e-15,
+      "triangles": 2948
+    },
+    {
+      "file": "OPTIONAL_fit_tests/625_axle_coupon_5.1mm_45deg.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        21.767292022705078,
+        15.356854438781738,
+        18.05545616149902
+      ],
+      "bed_z_mm": 3.552713678800501e-15,
+      "triangles": 2948
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_housing_seat_32.0mm_USE_INSTEAD_OF_08.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        48.0,
+        47.98508071899414,
+        34.400001525878906
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 4048
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_housing_seat_32.1mm_USE_INSTEAD_OF_08.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        48.0,
+        47.98508071899414,
+        34.400001525878906
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 4048
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_housing_seat_32.3mm_USE_INSTEAD_OF_08.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        48.0,
+        47.98508071899414,
+        34.400001525878906
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 4048
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_14.7mm_USE_INSTEAD_OF_05.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        38.0,
+        37.988189697265625,
+        43.599998474121094
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 3350
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_14.8mm_USE_INSTEAD_OF_05.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        38.0,
+        37.988189697265625,
+        43.599998474121094
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 3350
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_14.9mm_USE_INSTEAD_OF_05.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        38.0,
+        37.988189697265625,
+        43.599998474121094
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 3350
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_15.1mm_USE_INSTEAD_OF_05.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        38.0,
+        37.988189697265625,
+        43.599998474121094
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 3350
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_15.5mm_USE_INSTEAD_OF_05.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        38.0,
+        37.988189697265625,
+        43.599998474121094
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 3350
+    },
+    {
+      "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_15mm_USE_INSTEAD_OF_05.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        38.0,
+        37.988189697265625,
+        43.599998474121094
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 3350
+    },
+    {
+      "file": "OPTIONAL_fit_tests/bearing_seat_coupon_32.0mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        40.0,
+        39.98756790161133,
+        11.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 1512
+    },
+    {
+      "file": "OPTIONAL_fit_tests/bearing_seat_coupon_32.1mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        40.0,
+        39.98756790161133,
+        11.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 1512
+    },
+    {
+      "file": "OPTIONAL_fit_tests/bearing_seat_coupon_32.2mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        40.0,
+        39.98756790161133,
+        11.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 1512
+    },
+    {
+      "file": "OPTIONAL_fit_tests/bearing_seat_coupon_32.3mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        40.0,
+        39.98756790161133,
+        11.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 1512
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_14.7mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        22.0,
+        22.0,
+        12.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 768
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_14.8mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        22.0,
+        22.0,
+        12.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 768
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_14.9mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        22.0,
+        22.0,
+        12.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 768
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_15.1mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        22.0,
+        22.0,
+        12.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 768
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_15.25mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        22.0,
+        22.0,
+        12.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 768
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_15.5mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        22.0,
+        22.0,
+        12.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 768
+    },
+    {
+      "file": "OPTIONAL_fit_tests/spindle_coupon_15mm.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        22.0,
+        22.0,
+        12.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 768
+    },
+    {
+      "file": "STL/01_flat_base_four_45deg_axles_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        190.0,
+        190.0,
+        29.055456161499023
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 27012
+    },
+    {
+      "file": "STL/02_integrated_stand_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        200.0,
+        200.0,
+        88.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 14812
+    },
+    {
+      "file": "STL/05_fixed_spindle_15p25_chamfer0p5_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        38.0,
+        37.99574661254883,
+        43.599998474121094
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 5740
+    },
+    {
+      "file": "STL/06_inner_race_spacer_15p8_bore_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        18.0,
+        17.99798583984375,
+        16.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 1680
+    },
+    {
+      "file": "STL/07_inner_race_top_washer_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        18.0,
+        17.99798583984375,
+        2.0
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 1680
+    },
+    {
+      "file": "STL/08_bearing_housing_32p2_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        48.0,
+        47.99462890625,
+        34.400001525878906
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 6736
+    },
+    {
+      "file": "STL/09_lower_bearing_retainer_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        48.0,
+        47.99462890625,
+        3.9999999999999996
+      ],
+      "bed_z_mm": 6.138902519565472e-16,
+      "triangles": 8416
+    },
+    {
+      "file": "STL/10_shared_rotating_deck_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        164.0,
+        163.9816436767578,
+        10.000000000000004
+      ],
+      "bed_z_mm": -2.935552767936809e-15,
+      "triangles": 25336
+    },
+    {
+      "file": "STL/11_ring_176mm_45deg_track_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        176.0,
+        175.9803009033203,
+        20.200000762939453
+      ],
+      "bed_z_mm": 0.0,
+      "triangles": 25990
+    },
+    {
+      "file": "STL/13_open_tip_12T_pinion_qty1.stl",
+      "watertight": true,
+      "consistent_winding": true,
+      "positive_volume": true,
+      "connected_shells": 1,
+      "size_mm": [
+        27.97784996032715,
+        27.97784996032715,
+        23.0
+      ],
+      "bed_z_mm": -2.57496374838972e-16,
+      "triangles": 11280
+    }
+  ]
+}
