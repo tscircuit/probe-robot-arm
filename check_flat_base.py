@@ -15,7 +15,10 @@ assert abs(s.BoundingBox().zmin) < 1e-7
 bottom = [f for f in s.Faces() if f.geomType() == 'PLANE'
           and abs(f.Center().z) < 1e-7 and f.normalAt().z < -.999]
 area = sum(f.Area() for f in bottom)
-assert len(bottom) == 1 and area > .97 * 190 * 190
+assert len(bottom) == 1 and area > .5 * 190 * 190
+relief=json.loads((root/'output/base-cutouts-validation.json').read_text());assert relief['passed']
+expected_area=35364.87570440102-relief['removed_volume_mm3']/p['base_plate_thickness_mm']
+assert abs(area-expected_area)<1e-5
 # Test away from the three through-holes: 4 mm material, open recess above it.
 floor = cyl(2, 4, (0, 12, 0))
 above = cyl(2, 7, (0, 12, 4))
@@ -29,7 +32,7 @@ for path in files:
     assert len(mesh.split()) == 1 and abs(mesh.bounds[0, 2]) < 1e-6
     bed = np.all(np.abs(mesh.triangles[:, :, 2]) < 1e-6, axis=1)
     mesh_area = float(mesh.area_faces[bed].sum())
-    assert abs(mesh_area - area) < 1 and mesh_area > .97 * 190 * 190
+    assert abs(mesh_area - area) < 1 and mesh_area > .5 * 190 * 190
     rows.append(dict(file=str(path.relative_to(root)), bed_contact_area_mm2=mesh_area,
                      sha256=hashlib.sha256(path.read_bytes()).hexdigest()))
 assert rows[0]['sha256'] == rows[1]['sha256']

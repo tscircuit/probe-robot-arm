@@ -29,7 +29,7 @@ for a,exploded in [(ax,False),(bx,True)]:
     a.set_box_aspect((590,440,600) if exploded else (240,220,180))
 ax.set_title('ASSEMBLED · one independent rotary base',fontsize=14,pad=10)
 bx.set_title('CHECKED EXPLOSION · hardware omitted for clarity',fontsize=14,pad=10)
-fig.suptitle('FOUR 45° ROLLERS / INTEGRAL PRINTED AXLES',fontsize=21,y=.96)
+fig.suptitle('LIGHTWEIGHT BASE / FOUR 45° ROLLERS',fontsize=21,y=.96)
 fig.text(.5,.065,'200 × 200 mm stand  •  2 × 6002 + 4 × 625ZZ  •  Direct NEMA17 mount  •  12T / 72T drive',ha='center',fontsize=12)
 fig.text(.5,.035,'Actual CAD geometry. Unloaded prototype test; print fits and running clearance must be checked.',ha='center',fontsize=10,color='#52616d')
 fig.savefig(root/'ASSEMBLY_PREVIEW.png',dpi=150,bbox_inches='tight');print('Preview written')

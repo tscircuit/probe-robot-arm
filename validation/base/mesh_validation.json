@@ -324,7 +324,7 @@
       "triangles": 768
     },
     {
-      "file": "STL/01_flat_base_four_45deg_axles_qty1.stl",
+      "file": "STL/01_cutout_base_four_45deg_axles_qty1.stl",
       "watertight": true,
       "consistent_winding": true,
       "positive_volume": true,
@@ -335,7 +335,7 @@
         29.055456161499023
       ],
       "bed_z_mm": 0.0,
-      "triangles": 27012
+      "triangles": 31336
     },
     {
       "file": "STL/02_integrated_stand_qty1.stl",

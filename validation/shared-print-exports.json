@@ -3,8 +3,8 @@
   "files": [
     {
       "main_part": "Module_base",
-      "base_file": "STL/01_flat_base_four_45deg_axles_qty1.stl",
-      "sha256": "53c391f57f3e58339c1f620cab87429ad2fd4ac918ceae7390c32b7f73d72257"
+      "base_file": "STL/01_cutout_base_four_45deg_axles_qty1.stl",
+      "sha256": "69674a2cf6805ce424c24ac7f4fad4a9ed394fc30ea4010696bcb80bf09ac161"
     },
     {
       "main_part": "Fixed_spindle",

@@ -68,6 +68,17 @@ def roller_fit_checks(parts,p):
         rows.append(dict(bearing=f'625ZZ_support_roller_{i}',nominal_overlap_mm3=expected))
     return dict(axle_diameter_mm=2*r,bearing_bore_mm=5,diametral_interference_mm=max(0,2*r-5),top_chamfer_mm=p['roller_axle_chamfer_mm'],contacts=rows,physical_fit_verified=False)
 
+def base_relief_cutters(p):
+    # Three large trapezoids and two smaller windows beside the motor.
+    # Their boundaries leave a 10 mm rim and 20*sqrt(2) mm diagonal webs.
+    top=[(-65,85),(65,85),(15,35),(-15,35)]
+    outlines=[]
+    for angle in [0,90,180]:
+        c=math.cos(math.radians(angle));s=math.sin(math.radians(angle))
+        outlines.append([(c*x-s*y,s*x+c*y) for x,y in top])
+    for sign in [-1,1]:outlines.append([(49,sign*29),(85,sign*29),(85,sign*65)])
+    return [cq.Workplane('XY').polyline(pts).close().extrude(p['base_plate_thickness_mm']+2).edges('|Z').fillet(p['base_cutout_corner_radius_mm']).translate((0,0,-1)).val() for pts in outlines]
+
 def build(p):
     assert 32<=p['bearing_seat_diameter']<=32.4
     assert 14.6<=p['spindle_diameter']<=15.5
@@ -105,9 +116,10 @@ def build(p):
     # A 4 mm floor supports the spindle flange; the entire underside lies on Z0.
     platebase=platebase.cut(cyl(25,plate_t,(0,0,8-drop)))
     platebase=holes(platebase,[(-12,0),(12,0)],1.7,-1,plate_t+2).cut(cyl(3.3,plate_t+2,(0,0,-1)))
+    if p.get('base_cutouts',False):platebase=platebase.cut(*base_relief_cutters(p)).clean()
     # Four single blocks, each with an integral 45-degree press-fit axle.
     for angle in p['roller_angles_deg']:platebase=platebase.fuse(roller_block(p,angle))
-    add('Fixed_base_plate',platebase,print_id='01_flat_base_four_45deg_axles_qty1')
+    add('Fixed_base_plate',platebase,print_id='01_cutout_base_four_45deg_axles_qty1')
     add('Fixed_spindle',make_spindle(p),print_id='05_fixed_spindle_15p25_chamfer0p5_qty1',color='#b0b8c0')
     add('Inner_race_spacer',annulus(p['inner_race_abutment_diameter']/2,p['inner_race_spacer_bore_diameter']/2,16,27),print_id='06_inner_race_spacer_15p8_bore_qty1',color='#b0b8c0')
     add('Inner_race_top_washer',annulus(p['inner_race_abutment_diameter']/2,3.3,2,52),print_id='07_inner_race_top_washer_qty1',color='#b0b8c0')

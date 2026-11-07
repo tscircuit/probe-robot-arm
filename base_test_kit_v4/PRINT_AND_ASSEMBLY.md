@@ -1,8 +1,12 @@
-# Armature base — four angled press-fit rollers, v4.4
+# Armature base — four angled press-fit rollers, v4.5
 
 The main arm and this independent test fixture use the same rotary-base CAD. Four **625ZZ bearings** run on a continuous **45° outer track** on the 72T ring. Each bearing has **one integral block and printed axle**, tilted 45°. There are no roller bolts, nuts or separate spacers.
 
 ![Assembly and exploded view](ASSEMBLY_PREVIEW.png)
+
+## Lightweight plate update (v4.5)
+
+Reprint **part 01 only** when updating from v4.4. Five large through-cutouts with R6 corners remove approximately **37% of the base's solid CAD volume**. The remaining plate has a 10 mm perimeter and 28.3 mm diagonal webs, with the complete motor pad, spindle hub, mounting lands and bearing-block footprints retained. Plate thickness stays 11 mm, and all remaining lower faces lie on Z0 for printing. Slicer material saving depends on wall and infill settings; stiffness has not been physically measured.
 
 ## Changes to print
 
@@ -28,7 +32,7 @@ All STL files use millimetres. Import at 100% scale. The largest part is the 200
 
 | Prefix | Part | Quantity |
 |---|---|---:|
-| 01 | Flat module plate, four single blocks and integral 45° axles | 1 |
+| 01 | Flat module plate with five large cutouts, four single blocks and integral 45° axles | 1 |
 | 02 | Integrated 200 × 200 mm stand | 1 |
 | 05 | Ø15.25 spindle with 0.5 mm top chamfer | 1 |
 | 06 | 16 mm inner-race spacer, Ø15.8 bore | 1 |

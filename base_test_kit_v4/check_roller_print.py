@@ -5,7 +5,7 @@ import trimesh
 from rotary_base.core import roller_layout
 root=pathlib.Path(__file__).resolve().parent
 p=json.loads((root/'parameters.json').read_text());lay=roller_layout(p);out=root.parent/'output/armature-base-test-v4'
-file=out/'STL/01_flat_base_four_45deg_axles_qty1.stl';mesh=trimesh.load_mesh(file);v=mesh.vertices;q=math.sqrt(.5);rows=[]
+file=out/'STL/01_cutout_base_four_45deg_axles_qty1.stl';mesh=trimesh.load_mesh(file);v=mesh.vertices;q=math.sqrt(.5);rows=[]
 assert mesh.is_watertight and mesh.is_winding_consistent and len(mesh.split())==1
 for angle in p['roller_angles_deg']:
  a=math.radians(angle);x=v[:,0]*math.cos(a)+v[:,1]*math.sin(a)-lay['center_r'];y=-v[:,0]*math.sin(a)+v[:,1]*math.cos(a);z=v[:,2]-lay['center_z']

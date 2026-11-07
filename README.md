@@ -1,10 +1,14 @@
-# Modular flying probe — revision 12
+# Modular flying probe — revision 13
 
 Source: https://github.com/tscircuit/probe-robot-arm
 
 Parametric CadQuery assembly and public viewer: https://modular-flying-probe-arm.seveibar.chatgpt.site
 
 Four removable theta/Z/radial modules serve a 100 × 100 mm PCB, with simultaneous probe contacts on a 2 × 2 mm square. The NEMA17 Z stage and NEMA14 radial stage use the actual **R24 rear pass-through mounting enclosure** from [tscircuit/rack-actuator](https://github.com/tscircuit/rack-actuator/tree/a0ccaf201d6f6f5f988ca64dc1a9f5e7aba931b5). This is a geometry prototype; physical print fit, stiffness, accuracy and load capacity remain untested.
+
+## Lighter module base
+
+Five large through-cutouts with **R6 rounded corners** reduce the module base's solid CAD volume by approximately **37%**. A 10 mm perimeter and 28.3 mm diagonal webs retain the motor pad, spindle hub, all mounting lands and the four bearing-block footprints. The 11 mm thickness and flat printing underside are retained. **Only the module base needs reprinting** when updating from revision 12; the ring, spindle, deck, stand and hardware are unchanged. Volume reduction describes the CAD solid, not an exact slicer filament saving or a measured stiffness rating.
 
 ## Spindle fit update
 
@@ -126,7 +130,8 @@ Open http://localhost:8000. Generated downloads and CAD meshes are excluded from
 - `model.py`, `parameters.json`: arm integration and PCB configuration.
 - `rotary_base/`: shared rotary-base generator, gear geometry and configuration.
 - `check_base_sync.py`: common-component identity, four single blocks, integral tilted axles and clamp-height checks.
-- `check_flat_base.py`: broad planar underside, retained spindle floor, and matching flat STL exports on both pages.
+- `check_flat_base.py`: connected planar underside, retained spindle floor, and matching flat STL exports on both pages.
+- `check_base_cutouts.py`: volume reduction, five open windows, and retained mounting lands and structural connections.
 - `check_platform.py`: four-arm cluster and frame checks.
 - `check_z_mount.py`: low mounting and fastener-access checks.
 - `check_base_drive.py`: minimum tooth count, shaft web, slot dimensions and ratio checks.

@@ -214,6 +214,8 @@
     "ring_track_chamfer_mm": 6,
     "roller_tilt_deg": 45,
     "roller_axle_diameter_mm": 5.1,
-    "roller_axle_chamfer_mm": 0.3
+    "roller_axle_chamfer_mm": 0.3,
+    "base_cutouts": true,
+    "base_cutout_corner_radius_mm": 6
   }
 }

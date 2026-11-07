@@ -35,7 +35,7 @@ try{
  assert.equal(await page.locator('.page-nav [aria-current=page]').textContent(),'Base test');
  const baseParts=await page.evaluate(()=>window.baseViewer.parts.filter(p=>p.printFile).map(p=>p.printFile));assert.equal(baseParts.length,10);
  for(const file of baseParts)assert.equal((await page.request.get('http://127.0.0.1:4051/downloads/base-v4/'+file)).status(),200);
- await clickPart('Fixed_base_plate');const base=await download();assert.equal(base.name,'01_flat_base_four_45deg_axles_qty1.stl');assert.deepEqual(base.bytes,await fs.readFile('output/armature-base-test-v4/STL/01_flat_base_four_45deg_axles_qty1.stl'));
+ await clickPart('Fixed_base_plate');const base=await download();assert.equal(base.name,'01_cutout_base_four_45deg_axles_qty1.stl');assert.deepEqual(base.bytes,await fs.readFile('output/armature-base-test-v4/STL/01_cutout_base_four_45deg_axles_qty1.stl'));
  await clickPart('Integrated_stand');const stand=await download();assert.deepEqual(stand.bytes,await fs.readFile('output/armature-base-test-v4/STL/02_integrated_stand_qty1.stl'));
  await page.evaluate(()=>window.baseViewer.setProgress(1));await clickPart('6002_bearing_18');const bearing=await download();assert.equal(bearing.bytes.length,84+50*bearing.bytes.readUInt32LE(80));assert.ok(bearing.name.endsWith('_reference.stl'));
  await clickPart('Internal_72T_ring');const ring=await download();assert.equal(ring.name,'11_ring_176mm_45deg_track_qty1.stl');assert.deepEqual(ring.bytes,await fs.readFile('output/armature-base-test-v4/STL/11_ring_176mm_45deg_track_qty1.stl'));

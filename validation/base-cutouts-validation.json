@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "cutouts": 5,
+  "corner_radius_mm": 6,
+  "original_volume_mm3": 383542.2534042833,
+  "new_volume_mm3": 242402.35708137145,
+  "removed_volume_mm3": 141139.89632291187,
+  "volume_reduction_percent": 36.7990475808514,
+  "perimeter_width_mm": 10,
+  "diagonal_web_width_mm": 28.284271247461902,
+  "retained_regions": [
+    {
+      "region": "spindle hub",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "motor pad",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "platform mount -75,-75",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "platform mount -75,75",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "platform mount 75,-75",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "platform mount 75,75",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "inner mount -60,-60",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "inner mount -60,60",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "inner mount 60,-60",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "inner mount 60,60",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing block foot 45",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing block foot 135",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing block foot 225",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing block foot 315",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "diagonal web 45",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "diagonal web 135",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "10 mm perimeter",
+      "removed_material_mm3": 0
+    }
+  ],
+  "one_connected_solid": true,
+  "material_removal_only": true,
+  "limits": [
+    "Geometric support continuity and clearances checked; stiffness and load capacity are not measured."
+  ],
+  "source_sha256": {
+    "check_base_cutouts.py": "c966c38c2b87949a7b7b3269d7c2034e3964a69825979b74d7a28f9d81234ebd",
+    "rotary_base/core.py": "ec307e5cfef7bbdea3909dfa61c85b55cd9edbb061d8314614cee87a0ebca62d",
+    "rotary_base/parameters.json": "e3e647991d83ded52e68f9980041790bf0b83a98a3e22443f6f193f009812ef9"
+  }
+}
