@@ -1,37 +1,40 @@
 {
   "passed": true,
+  "track_normal_advance_mm": 0.4,
+  "bearing_center_radius_mm": 90.37401153701776,
+  "bearing_center_z_mm": 25.62598846298224,
   "blocks_per_bearing": 1,
   "roller_count": 4,
   "roller_fasteners": 0,
   "file": "STL/01_cutout_base_four_45deg_axles_qty1.stl",
-  "sha256": "69674a2cf6805ce424c24ac7f4fad4a9ed394fc30ea4010696bcb80bf09ac161",
+  "sha256": "b42e68420b18a5354073346e3ce144e2fb7af0a02efd89ce3f5271411d4e43a5",
   "axles": [
     {
       "angle_deg": 45,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.100008513787027,
-      "tip_diameter_mm": 4.500008834645635,
+      "axle_diameter_mm": 5.100008562082015,
+      "tip_diameter_mm": 4.5000068157827675,
       "chamfer_mm": 0.3
     },
     {
       "angle_deg": 135,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.100008513787027,
-      "tip_diameter_mm": 4.500008834645635,
+      "axle_diameter_mm": 5.100008562082015,
+      "tip_diameter_mm": 4.5000068157827675,
       "chamfer_mm": 0.3
     },
     {
       "angle_deg": 225,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.1000085137870474,
-      "tip_diameter_mm": 4.500008834645652,
+      "axle_diameter_mm": 5.100008562082026,
+      "tip_diameter_mm": 4.5000068157827675,
       "chamfer_mm": 0.3
     },
     {
       "angle_deg": 315,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.100008513787027,
-      "tip_diameter_mm": 4.500008834645663,
+      "axle_diameter_mm": 5.100008562082038,
+      "tip_diameter_mm": 4.500006815782768,
       "chamfer_mm": 0.3
     }
   ]

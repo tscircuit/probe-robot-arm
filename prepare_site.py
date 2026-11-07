@@ -64,7 +64,7 @@ for stem in ['single-arm','four-arm-platform']:
   z.write(root/'output'/(stem+'.step'),stem+'.step')
   z.write(root/'README.md','README.md')
 with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
- for name in ['model.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
+ for name in ['model.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_part_visibility.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
   z.write(root/name,name)
  for name in ['.qa/package.json','.qa/package-lock.json','site/dist/index.html','site/dist/app.js','site/dist/style.css','site/dist/part-downloads.js']:z.write(root/name,name)
  for directory in ['upstream','rotary_base','base_test_kit_v4','scripts','site/dist/vendor','output/prototype-parts']:

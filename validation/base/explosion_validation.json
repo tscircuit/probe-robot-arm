@@ -10,7 +10,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 20,
       "distance_queries": 1488,
-      "seconds": 59.33
+      "seconds": 50.55
     },
     {
       "index": 1,
@@ -18,7 +18,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 16,
       "distance_queries": 40,
-      "seconds": 6.01
+      "seconds": 4.64
     },
     {
       "index": 2,
@@ -50,7 +50,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 11,
       "distance_queries": 666,
-      "seconds": 19.0
+      "seconds": 13.59
     },
     {
       "index": 6,
@@ -58,15 +58,15 @@
       "travel_mm": 180.0,
       "candidate_pairs": 5,
       "distance_queries": 18,
-      "seconds": 10.48
+      "seconds": 8.27
     },
     {
       "index": 7,
       "label": "Lift bearing cartridge off spindle",
       "travel_mm": 120.0,
       "candidate_pairs": 34,
-      "distance_queries": 292,
-      "seconds": 63.57
+      "distance_queries": 293,
+      "seconds": 63.23
     },
     {
       "index": 8,
@@ -82,7 +82,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 6,
       "distance_queries": 438,
-      "seconds": 5.46
+      "seconds": 6.89
     },
     {
       "index": 10,
@@ -90,7 +90,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 6,
       "distance_queries": 354,
-      "seconds": 14.18
+      "seconds": 14.53
     },
     {
       "index": 11,
@@ -106,7 +106,7 @@
       "travel_mm": 60.0,
       "candidate_pairs": 10,
       "distance_queries": 11,
-      "seconds": 58.56
+      "seconds": 64.0
     },
     {
       "index": 13,
@@ -122,7 +122,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 4,
       "distance_queries": 112,
-      "seconds": 9.85
+      "seconds": 10.23
     },
     {
       "index": 15,
@@ -130,7 +130,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 20,
       "distance_queries": 2212,
-      "seconds": 37.54
+      "seconds": 44.7
     },
     {
       "index": 16,
@@ -146,7 +146,7 @@
       "travel_mm": 70.0,
       "candidate_pairs": 2,
       "distance_queries": 3,
-      "seconds": 1.7
+      "seconds": 1.54
     },
     {
       "index": 18,
@@ -154,7 +154,7 @@
       "travel_mm": 40.0,
       "candidate_pairs": 1,
       "distance_queries": 121,
-      "seconds": 4.12
+      "seconds": 4.1
     },
     {
       "index": 19,
@@ -162,7 +162,7 @@
       "travel_mm": 35.0,
       "candidate_pairs": 1,
       "distance_queries": 6,
-      "seconds": 1.66
+      "seconds": 1.55
     },
     {
       "index": 20,
@@ -178,7 +178,7 @@
       "travel_mm": 20.0,
       "candidate_pairs": 1,
       "distance_queries": 120,
-      "seconds": 4.08
+      "seconds": 3.9
     },
     {
       "index": 22,
@@ -186,7 +186,7 @@
       "travel_mm": 6.0,
       "candidate_pairs": 1,
       "distance_queries": 1,
-      "seconds": 0.06
+      "seconds": 0.05
     },
     {
       "index": 23,
@@ -194,7 +194,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 3,
       "distance_queries": 87,
-      "seconds": 7.45
+      "seconds": 7.17
     },
     {
       "index": 24,
@@ -210,7 +210,7 @@
       "travel_mm": 110.0,
       "candidate_pairs": 4,
       "distance_queries": 632,
-      "seconds": 6.47
+      "seconds": 6.22
     },
     {
       "index": 26,
@@ -218,7 +218,7 @@
       "travel_mm": 110.0,
       "candidate_pairs": 2,
       "distance_queries": 21,
-      "seconds": 0.58
+      "seconds": 0.56
     },
     {
       "index": 27,
@@ -234,7 +234,7 @@
       "travel_mm": 60.0,
       "candidate_pairs": 4,
       "distance_queries": 362,
-      "seconds": 4.8
+      "seconds": 4.69
     },
     {
       "index": 29,
@@ -242,7 +242,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 3,
       "distance_queries": 18,
-      "seconds": 2.52
+      "seconds": 2.49
     },
     {
       "index": 30,
@@ -277,33 +277,41 @@
       "seconds": 0.0
     }
   ],
-  "distance_queries": 7002,
-  "bounding_box_prunes": 9153,
+  "distance_queries": 7003,
+  "bounding_box_prunes": 9154,
   "certified_distance_intervals": 3432,
   "certified_bevel_withdrawals": [
     {
       "stage": 7,
       "ring": "Internal_72T_ring",
       "bearing": "625ZZ_support_roller_0",
-      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+      "proof": "Tangent-plane bounds limit initial track interference to the configured depth; upward withdrawal monotonically releases it",
+      "initial_normal_interference_mm": 0.4,
+      "release_travel_mm": 0.5656854249492381
     },
     {
       "stage": 7,
       "ring": "Internal_72T_ring",
       "bearing": "625ZZ_support_roller_1",
-      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+      "proof": "Tangent-plane bounds limit initial track interference to the configured depth; upward withdrawal monotonically releases it",
+      "initial_normal_interference_mm": 0.4,
+      "release_travel_mm": 0.5656854249492381
     },
     {
       "stage": 7,
       "ring": "Internal_72T_ring",
       "bearing": "625ZZ_support_roller_2",
-      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+      "proof": "Tangent-plane bounds limit initial track interference to the configured depth; upward withdrawal monotonically releases it",
+      "initial_normal_interference_mm": 0.4,
+      "release_travel_mm": 0.5656854249492381
     },
     {
       "stage": 7,
       "ring": "Internal_72T_ring",
       "bearing": "625ZZ_support_roller_3",
-      "proof": "Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement"
+      "proof": "Tangent-plane bounds limit initial track interference to the configured depth; upward withdrawal monotonically releases it",
+      "initial_normal_interference_mm": 0.4,
+      "release_travel_mm": 0.5656854249492381
     }
   ],
   "certified_button_withdrawals": [
@@ -486,6 +494,34 @@
         "M6x60_axle_bolt"
       ],
       "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_0",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_1",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_2",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_3",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
     },
     {
       "parts": [
@@ -953,10 +989,10 @@
   },
   "source_sha256": {
     "build.py": "bf64826fdc708377f3a03d846ddb4786b346c6297c86c24a4a7ddf999e4d0cf4",
-    "rotary_base/core.py": "dd062e979f00ae75ba2514b325360128fd33741ec31ac9db82d1c9a4bacb3fe4",
+    "rotary_base/core.py": "70f85e26ff8d264e27bf3f0da173cf81991da7143af856d65deb796b9f5d1719",
     "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
     "explosion.py": "4a602cd23a005985e988073e5b0bdb829ff3afdbf33f79a1bfd3820663f7a60e",
-    "parameters.json": "9e65e3a961281ab88bacc3b21442f1a3231b7e15299ee73ba9301ed9bf2b1d47",
-    "check_explosion.py": "46681c6b56692b703877bc20d184ea9fd0e00349d2b6c124a4d663e8781e9ca8"
+    "parameters.json": "4b61ac47e890bec0a4e2b2ae4b37457cac64f8dc306eb9b05f775508f2bac1c3",
+    "check_explosion.py": "dde4ba44e586e0d7912a21fe3b9e3111e6ee829950db2c6ffad9acc8b440ea86"
   }
 }

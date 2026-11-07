@@ -50,9 +50,34 @@
     ],
     "physical_fit_verified": false
   },
+  "roller_track_fit": {
+    "requested_normal_advance_mm": 0.4,
+    "radial_inward_mm": 0.28284271247461906,
+    "vertical_upward_mm": 0.28284271247461906,
+    "contacts": [
+      {
+        "bearing": "625ZZ_support_roller_0",
+        "normal_overlap_bound_mm": 0.3999999999999986
+      },
+      {
+        "bearing": "625ZZ_support_roller_1",
+        "normal_overlap_bound_mm": 0.3999999999999986
+      },
+      {
+        "bearing": "625ZZ_support_roller_2",
+        "normal_overlap_bound_mm": 0.3999999999999959
+      },
+      {
+        "bearing": "625ZZ_support_roller_3",
+        "normal_overlap_bound_mm": 0.4000000000000057
+      }
+    ],
+    "physical_fit_verified": false,
+    "note": "Intentional nominal overlap at the outer 45-degree track; actual preload, free rotation and print deflection require testing."
+  },
   "part_instances": 72,
   "solid_validity": true,
-  "collision_pair_checks": 35571,
+  "collision_pair_checks": 35471,
   "rotation_samples_deg": [
     0,
     15,
@@ -147,7 +172,8 @@
   "intentional_interferences": [
     "Elastic open-tip pinion/ring mesh",
     "M3 tapped pinion pilot",
-    "Oversized printed spindle / 6002 bore fit; physical fit or finishing required"
+    "Oversized printed spindle / 6002 bore fit; physical fit or finishing required",
+    "Requested 0.4 mm normal roller/track interference"
   ],
   "limits": [
     "Sampled rigid geometry, not continuous swept-volume proof.",
@@ -221,6 +247,7 @@
     "deck_cutout_rim_mm": 10,
     "deck_cutout_hub_radius_mm": 28,
     "deck_cutout_spoke_width_mm": 14,
-    "deck_cutout_corner_radius_mm": 3
+    "deck_cutout_corner_radius_mm": 3,
+    "roller_track_overlap_mm": 0.4
   }
 }

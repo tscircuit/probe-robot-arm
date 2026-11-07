@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "checks": [
+    "isolate one selected instance",
+    "hide selected and last remaining part",
+    "Show All works on empty canvas and restores current view",
+    "visibility persists during axis animation and explosion",
+    "four-arm and platform instance visibility",
+    "hardware and clearance toggles respect isolation; Show All resets them",
+    "hidden edges respect hidden parents",
+    "keyboard menu recovery",
+    "mobile menu fits viewport",
+    "hosted and offline base viewers",
+    "no browser errors"
+  ]
+}

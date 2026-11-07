@@ -40,7 +40,9 @@ def roller_layout(p):
     q=math.sqrt(.5)
     contact_r=p['ring_outer_radius_mm']-p['ring_track_chamfer_mm']/2
     contact_z=32-p['rotor_drop_mm']+p['ring_track_chamfer_mm']/2
-    return dict(contact_radius=contact_r,contact_z=contact_z,center_r=contact_r+8*q,center_z=contact_z-8*q,axis=(q,0,q))
+    advance=p.get('roller_track_overlap_mm',0)
+    assert 0<=advance<=.5
+    return dict(contact_radius=contact_r,contact_z=contact_z,center_r=contact_r+(8-advance)*q,center_z=contact_z-(8-advance)*q,axis=(q,0,q),track_overlap_mm=advance)
 
 def roller_transform(shape,p,angle=0):
     lay=roller_layout(p)
@@ -67,6 +69,26 @@ def roller_fit_checks(parts,p):
             assert actual.cut(roller_transform(shell,p,angle)).Volume()<1e-6,'Unexpected block/bearing contact outside printed axle fit'
         rows.append(dict(bearing=f'625ZZ_support_roller_{i}',nominal_overlap_mm3=expected))
     return dict(axle_diameter_mm=2*r,bearing_bore_mm=5,diametral_interference_mm=max(0,2*r-5),top_chamfer_mm=p['roller_axle_chamfer_mm'],contacts=rows,physical_fit_verified=False)
+
+def roller_track_fit_checks(parts,p):
+    """Bound the requested interference by the actual ring's tangent planes."""
+    from OCP.Bnd import Bnd_Box
+    from OCP.BRepBndLib import BRepBndLib
+    by={a['name']:a['shape'] for a in parts};lay=roller_layout(p);rows=[]
+    depth=lay['track_overlap_mm']
+    for i,angle in enumerate(p['roller_angles_deg']):
+        def bounds(shape):
+            local=shape.rotate((0,0,0),(0,0,1),-angle).translate((-lay['center_r'],0,-lay['center_z'])).rotate((0,0,0),(0,1,0),45)
+            b=Bnd_Box();BRepBndLib.AddOptimal_s(local.wrapped,b,False,False);return b.Get()
+        ring=bounds(by['Internal_72T_ring']);wheel=bounds(by[f'625ZZ_support_roller_{i}'])
+        assert abs(ring[2]-(8-depth))<1e-6 and abs(wheel[5]-8)<1e-6
+        if depth:
+            # A point halfway through the allowed contact cap is inside both solids.
+            q=math.sqrt(.5);r=lay['center_r']-(8-depth/2)*q;z=lay['center_z']+(8-depth/2)*q
+            x,y=polar(r,math.radians(angle));point=V(x,y,z)
+            assert by['Internal_72T_ring'].isInside(point,1e-7) and by[f'625ZZ_support_roller_{i}'].isInside(point,1e-7)
+        rows.append(dict(bearing=f'625ZZ_support_roller_{i}',normal_overlap_bound_mm=wheel[5]-ring[2]))
+    return dict(requested_normal_advance_mm=depth,radial_inward_mm=depth*math.sqrt(.5),vertical_upward_mm=depth*math.sqrt(.5),contacts=rows,physical_fit_verified=False,note='Intentional nominal overlap at the outer 45-degree track; actual preload, free rotation and print deflection require testing.')
 
 def base_relief_cutters(p):
     # Three large trapezoids and two smaller windows beside the motor.
@@ -244,7 +266,8 @@ def validate(parts,p):
     failures=[];checks=0;cached=set();min_gap=1e9
     allowed=[{'Compliant_12T_pinion','Internal_72T_ring'}, {'Compliant_12T_pinion','M3x4_pinion_set_screw'},
              {'Controller_component_KEEPOUT','USB_cable_KEEPOUT'}]
-    fit=spindle_fit_checks(parts,p);roller_fit=roller_fit_checks(parts,p)
+    fit=spindle_fit_checks(parts,p);roller_fit=roller_fit_checks(parts,p);track_fit=roller_track_fit_checks(parts,p)
+    if p.get('roller_track_overlap_mm',0)>0:allowed.extend([{'Internal_72T_ring',f'625ZZ_support_roller_{i}'} for i in range(p['roller_count'])])
     if p['roller_axle_diameter_mm']>5:allowed.extend([{'Fixed_base_plate',f'625ZZ_support_roller_{i}'} for i in range(p['roller_count'])])
     if p['spindle_diameter']>15:allowed.extend([{'Fixed_spindle',f'6002_bearing_{z}'} for z in [18,43]])
     for angle in range(0,361,15):
@@ -278,13 +301,13 @@ def validate(parts,p):
         sample=annulus(2.75,1.7,.05,15.8-p['rotor_drop_mm']).translate((x,y,0))
         lands.append(overlap(sample,cap)/sample.Volume())
     assert min(lands)>.999,lands
-    return dict(passed=not failures,spindle_print_fit=fit,roller_print_fit=roller_fit,part_instances=len(parts),solid_validity=all(q['shape'].isValid() for q in parts),
+    return dict(passed=not failures,spindle_print_fit=fit,roller_print_fit=roller_fit,roller_track_fit=track_fit,part_instances=len(parts),solid_validity=all(q['shape'].isValid() for q in parts),
                 collision_pair_checks=checks,rotation_samples_deg=list(range(0,361,15)),collisions=failures,
                 fastener_land_coverage_fractions=lands,bearing_insertion=insert,bearing_dimensions_mm=[15,32,9],bearing_center_spacing_mm=25,
                 bearing_seat_diameter_mm=p['bearing_seat_diameter'],shaft_diameter_mm=p['spindle_diameter'],
                 axial_retainer_clearance_per_end_mm=.2,controller_lowest_z_mm=-p['base_motor_depth']-6-1.6-12,
                 controller_to_stand_top_clearance_mm=(-p['base_motor_depth']-6-1.6-12)+p['stand_height'],
-                intentional_interferences=['Elastic open-tip pinion/ring mesh','M3 tapped pinion pilot','Oversized printed spindle / 6002 bore fit; physical fit or finishing required'],
+                intentional_interferences=['Elastic open-tip pinion/ring mesh','M3 tapped pinion pilot','Oversized printed spindle / 6002 bore fit; physical fit or finishing required',f"Requested {p.get('roller_track_overlap_mm',0):g} mm normal roller/track interference"],
                 limits=['Sampled rigid geometry, not continuous swept-volume proof.', 'Bearing and thread fits require printing and measuring; no load/stiffness/fatigue certification.',
                         'Only base rotation is tested. No complete arm load or stability rating.', 'Motor/controller are packaging references; motor mounting screw engagement must match the selected motor.'])
 
@@ -302,6 +325,9 @@ def contact_exceptions(parts,p):
         for i in range(n):pairs[frozenset([a+str(i),b+str(i)])]='Thread interface; fastener assumed unthreaded before withdrawal'
     pairs[frozenset(['M6x60_axle_bolt','M6_axle_nut'])]='Thread interface; fastener assumed unthreaded before withdrawal'
     roller_fit_checks(parts,p)
+    roller_track_fit_checks(parts,p)
+    if p.get('roller_track_overlap_mm',0)>0:
+        for i in range(p['roller_count']):pairs[frozenset(['Internal_72T_ring',f'625ZZ_support_roller_{i}'])]=f"User-requested {p['roller_track_overlap_mm']:g} mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
     if p['roller_axle_diameter_mm']>5:
         for i in range(p['roller_count']):pairs[frozenset(['Fixed_base_plate',f'625ZZ_support_roller_{i}'])]='Only verified 5.1 mm printed axle / 5 mm bearing-bore shell; insertion/removal assumes physical press fit or finishing.'
     for i in range(4):pairs[frozenset([f'M3x16_motor_face_{i}','NEMA17_motor_REFERENCE'])]='Tapped motor-face thread; screw unthreaded before axial withdrawal'

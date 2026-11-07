@@ -33,8 +33,8 @@ def bevel_withdrawal(a,b,delta,offsets,shapes):
         s=s.rotate((0,0,0),(0,0,1),-angle).translate((-lay['center_r'],0,-lay['center_z'])).rotate((0,0,0),(0,1,0),45)
         box=Bnd_Box();BRepBndLib.AddOptimal_s(s.wrapped,box,False,False);return box.Get()
     ring=bounds(shapes[a]);bearing=bounds(shapes[b])
-    assert ring[2]>=8-1e-6 and bearing[5]<=8+1e-6,(ring,bearing)
-    # In this axle frame the track's tangent plane is Z=8. Raising the ring
+    assert ring[2]>=8-lay['track_overlap_mm']-1e-6 and bearing[5]<=8+1e-6,(ring,bearing)
+    # In this axle frame the track's tangent plane is Z=8 minus the requested overlap. Raising the ring
     # increases its minimum local Z by dz/sqrt(2), so contact opens monotonically.
     return True
 
@@ -60,12 +60,12 @@ def check(parts,stages):
         stage_queries=0;candidates=0
         for a in sorted(movers):
             for b in sorted(shapes.keys()-movers):
-                if frozenset([a,b]) in allowed:continue
+                if frozenset([a,b]) in allowed and not ('Internal_72T_ring' in [a,b] and any(n.startswith('625ZZ_support_roller_') for n in [a,b])):continue
                 if button_withdrawal(a,b,delta,offsets,shapes):
                     button_proofs.append(dict(stage=si,screw=a,ring=b,proof='Head remains below the flat seating plane; the translated shank stays inside the straight bore'))
                     continue
                 if bevel_withdrawal(a,b,delta,offsets,shapes):
-                    bevel_proofs.append(dict(stage=si,ring=a,bearing=b,proof='Exact tangent-plane bounds separate the ring and tilted bearing for every upward displacement'))
+                    bevel_proofs.append(dict(stage=si,ring=a,bearing=b,proof='Tangent-plane bounds limit initial track interference to the configured depth; upward withdrawal monotonically releases it',initial_normal_interference_mm=json.loads((ROOT/'parameters.json').read_text()).get('roller_track_overlap_mm',0),release_travel_mm=math.sqrt(2)*json.loads((ROOT/'parameters.json').read_text()).get('roller_track_overlap_mm',0)))
                     continue
                 rel=[offsets[a][k]-offsets[b][k] for k in range(3)]
                 end=[rel[k]+delta[k] for k in range(3)]

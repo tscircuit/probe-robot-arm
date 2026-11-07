@@ -2,10 +2,10 @@
   "passed": true,
   "cutouts": 5,
   "corner_radius_mm": 6,
-  "original_volume_mm3": 383542.2534042833,
-  "new_volume_mm3": 242402.35708137145,
-  "removed_volume_mm3": 141139.89632291187,
-  "volume_reduction_percent": 36.7990475808514,
+  "original_volume_mm3": 383729.093138677,
+  "new_volume_mm3": 242589.19681576494,
+  "removed_volume_mm3": 141139.89632291207,
+  "volume_reduction_percent": 36.781129929052604,
   "perimeter_width_mm": 10,
   "diagonal_web_width_mm": 28.284271247461902,
   "retained_regions": [
@@ -85,7 +85,7 @@
   ],
   "source_sha256": {
     "check_base_cutouts.py": "c966c38c2b87949a7b7b3269d7c2034e3964a69825979b74d7a28f9d81234ebd",
-    "rotary_base/core.py": "dd062e979f00ae75ba2514b325360128fd33741ec31ac9db82d1c9a4bacb3fe4",
-    "rotary_base/parameters.json": "9e65e3a961281ab88bacc3b21442f1a3231b7e15299ee73ba9301ed9bf2b1d47"
+    "rotary_base/core.py": "70f85e26ff8d264e27bf3f0da173cf81991da7143af856d65deb796b9f5d1719",
+    "rotary_base/parameters.json": "4b61ac47e890bec0a4e2b2ae4b37457cac64f8dc306eb9b05f775508f2bac1c3"
   }
 }

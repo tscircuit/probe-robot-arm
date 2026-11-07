@@ -34,6 +34,6 @@ if args.site:
  shutil.copyfile(root/'output/deck-cutouts-validation.json',bench/'deck-cutouts-validation.json')
  py('prepare_base_v4.py','--publish-assets')
  run('node','test_viewer.mjs',report='output/current-viewer-validation.json')
- run('node','test_part_downloads.mjs');run('node','test_hidden_edges.mjs');run('node','test_mouse_controls.mjs')
+ run('node','test_part_downloads.mjs');run('node','test_part_visibility.mjs');run('node','test_hidden_edges.mjs');run('node','test_mouse_controls.mjs')
  print('Local site ready: python -m http.server 8000 --directory site/dist')
 else:print('CAD and checks complete. Use --site to build and test the local website.')

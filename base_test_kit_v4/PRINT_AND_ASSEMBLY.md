@@ -1,8 +1,14 @@
-# Armature base — four angled press-fit rollers, v4.6
+# Armature base — four angled press-fit rollers, v4.7
 
 The main arm and this independent test fixture use the same rotary-base CAD. Four **625ZZ bearings** run on a continuous **45° outer track** on the 72T ring. Each bearing has **one integral block and printed axle**, tilted 45°. There are no roller bolts, nuts or separate spacers.
 
 ![Assembly and exploded view](ASSEMBLY_PREVIEW.png)
+
+## Roller track fit update (v4.7)
+
+Reprint **part 01 only** when updating from v4.6. All four bearings and their integral axle blocks move **0.4 mm perpendicular to the 45° track** (0.282843 mm inward and upward), creating the requested nominal overlap. The ring, deck and hardware are unchanged. This is a print-fit adjustment, not a measured preload force. Verify seating and free rotation on the printed assembly before powering the motor.
+
+The viewer now offers **Isolate**, **Hide part** and **Show All** on right-click. Show All works on empty space and restores hardware and clearance envelopes too.
 
 ## Lightweight deck update (v4.6)
 
@@ -20,7 +26,7 @@ The spindle journal is **Ø15.25 mm**, with a **0.5 mm × 45° top chamfer** and
 
 The ring outer radius grows from 82 to **88 mm (176 mm OD)**. Its lower outer edge has a **6 × 6 mm, 45° bevel**, from radius 82 at Z28 to radius 88 at Z34. The contact line is centered at radius 85, Z31. The involute teeth, six bolt locations and integral deck spacers remain unchanged.
 
-Use **M3×30 button-head screws with flat bearing faces**, maximum head diameter 5.7 mm and height 1.65 mm, through the six straight ring holes. Do not countersink them. Their heads sit under the ring at radius 78 and never form part of the rolling track. The modeled bearing bodies stay at least 2.38 mm radially outside every head throughout rotation.
+Use **M3×30 button-head screws with flat bearing faces**, maximum head diameter 5.7 mm and height 1.65 mm, through the six straight ring holes. Do not countersink them. Their heads sit under the ring at radius 78 and never form part of the rolling track. The modeled bearing bodies stay more than 2 mm radially outside every head throughout rotation.
 
 ## Four roller supports
 
@@ -28,7 +34,7 @@ Use **4 × 625ZZ, 5 mm bore × 16 mm OD × 5 mm wide**. Axles are placed at 45°
 
 The axle is **Ø5.1 mm**, with a **0.3 mm × 45° lead-in** at its free end. A 1 mm-long, 8 mm OD shoulder supports only the inner race. The cylindrical bearing engagement is 5 mm; the axle tip projects 0.5 mm past the bearing. No bolt, nut, clip or second block is used. The outer race and shields must turn freely after installation.
 
-The axles are fixed rather than slotted. Seat the 6002 cartridge first, then confirm all four rollers touch the bevel without forcing or lifting the cartridge. Check free rotation through a full turn. Four printed contacts require accurate printing; the model does not establish preload, stiffness, axle strength, creep or wear. Use the optional 4.9, 5.0 and 5.1 mm axle coupons printed at the same 45° orientation to check your bearing fit before printing the plate.
+The axles are fixed rather than slotted. Seat the 6002 cartridge first, then check how the nominal 0.4 mm track interference fits the actual print. Do not power a binding assembly. Check free rotation through a full turn. Four printed contacts require accurate printing; the model does not establish preload, stiffness, axle strength, creep or wear. Use the optional 4.9, 5.0 and 5.1 mm axle coupons printed at the same 45° orientation to check your bearing fit before printing the plate.
 
 ## Print list and orientation
 

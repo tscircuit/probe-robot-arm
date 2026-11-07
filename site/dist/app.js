@@ -19,7 +19,7 @@ let config, explosionPath, ready=false, four=false, exploding=0, playing=!matchM
 let values={theta:0,z:0,r:0};
 const referenceGroup=new THREE.Group();scene.add(referenceGroup);referenceGroup.visible=false;
 const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
-const viewMenu=installPartDownloads({THREE,canvas:renderer.domElement,camera,scene,getMeshes:()=>pickables,getPart:mesh=>({name:mesh.userData.name,printed:mesh.userData.printed,keepout:mesh.userData.keepout,url:mesh.userData.printed?'downloads/parts/'+encodeURIComponent(mesh.userData.name)+'.stl':null}),onSelect:()=>{playing=false;setPlay();}});
+const viewMenu=installPartDownloads({THREE,canvas:renderer.domElement,camera,scene,getMeshes:()=>pickables,getPart:mesh=>({name:mesh.userData.name,printed:mesh.userData.printed,keepout:mesh.userData.keepout,url:mesh.userData.printed?'downloads/parts/'+encodeURIComponent(mesh.userData.name)+'.stl':null}),onSelect:()=>{playing=false;setPlay();},onShowAll:()=>requestAnimationFrame(fit)});
 function explosionVector(p,e){
   const v=[0,0,0],t=e*explosionPath.length;
   for(let i=0;i<explosionPath.length;i++){
@@ -64,8 +64,8 @@ function update(){
 function fit(){
   scene.updateMatrixWorld(true);
   const bounds=new THREE.Box3();
-  modules.filter(m=>m.root.visible).forEach(m=>bounds.union(new THREE.Box3().setFromObject(m.root)));
-  if(four)bounds.union(new THREE.Box3().setFromObject(referenceGroup));
+  for(const mesh of pickables.filter(viewMenu.isVisible))bounds.expandByObject(mesh);
+  if(bounds.isEmpty())return;
   const size=bounds.getSize(new THREE.Vector3());bounds.getCenter(controls.target);
   const fov=Math.min(camera.fov*Math.PI/180,2*Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect));
   const distance=size.length()/2/Math.sin(fov/2)*1.07;
@@ -113,7 +113,7 @@ new ResizeObserver(()=>{const w=viewport.clientWidth,h=viewport.clientHeight;ren
 renderer.domElement.addEventListener('pointermove',event=>{
   if(event.buttons||!ready)return;const b=renderer.domElement.getBoundingClientRect();
   pointer.set((event.clientX-b.left)/b.width*2-1,-(event.clientY-b.top)/b.height*2+1);raycaster.setFromCamera(pointer,camera);
-  const hit=raycaster.intersectObjects(pickables,false).find(h=>h.object.userData.module===undefined?four:h.object.parent.parent.visible&&(four||h.object.userData.module===0));
+  const hit=raycaster.intersectObjects(pickables.filter(viewMenu.isVisible),false).find(h=>h.object.userData.module===undefined?four:h.object.parent.parent.visible&&(four||h.object.userData.module===0));
   $('part-name').textContent=hit?hit.object.userData.name.replaceAll('_',' '):'';
 });
 renderer.domElement.addEventListener('pointerleave',()=>{$('part-name').textContent='';});

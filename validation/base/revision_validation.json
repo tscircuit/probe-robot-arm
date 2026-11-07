@@ -54,7 +54,32 @@
     ],
     "physical_fit_verified": false
   },
-  "minimum_radial_head_to_bearing_gap_mm": 2.382233047033637,
+  "roller_track_fit": {
+    "requested_normal_advance_mm": 0.4,
+    "radial_inward_mm": 0.28284271247461906,
+    "vertical_upward_mm": 0.28284271247461906,
+    "contacts": [
+      {
+        "bearing": "625ZZ_support_roller_0",
+        "normal_overlap_bound_mm": 0.3999999999999986
+      },
+      {
+        "bearing": "625ZZ_support_roller_1",
+        "normal_overlap_bound_mm": 0.3999999999999986
+      },
+      {
+        "bearing": "625ZZ_support_roller_2",
+        "normal_overlap_bound_mm": 0.3999999999999959
+      },
+      {
+        "bearing": "625ZZ_support_roller_3",
+        "normal_overlap_bound_mm": 0.4000000000000057
+      }
+    ],
+    "physical_fit_verified": false,
+    "note": "Intentional nominal overlap at the outer 45-degree track; actual preload, free rotation and print deflection require testing."
+  },
+  "minimum_radial_head_to_bearing_gap_mm": 2.0993903345590184,
   "roller_supports": [
     {
       "index": 0,
@@ -102,16 +127,16 @@
   "motor_mount_screw": "4 x M3x16; nominal 5 mm motor engagement",
   "pinion_shaft_engagement_mm": 7,
   "controller_envelope_to_stand_clearance_mm": 12.4,
-  "roller_rotation_clearance": "All angles: conical ring envelope is inside bearing tangent planes; every button head is at least 2.38 mm radially inside the rollers",
+  "roller_rotation_clearance": "All angles: axisymmetric outer track has the requested 0.4 mm normal interference; button heads remain more than 2 mm radially inside the rollers",
   "limits": [
     "Four fixed printed axles require checking all contacts and free rotation after printing.",
     "Rigid envelopes only; four supports do not establish stiffness, print creep, wear or probing accuracy."
   ],
   "source_sha256": {
     "build.py": "bf64826fdc708377f3a03d846ddb4786b346c6297c86c24a4a7ddf999e4d0cf4",
-    "rotary_base/core.py": "dd062e979f00ae75ba2514b325360128fd33741ec31ac9db82d1c9a4bacb3fe4",
+    "rotary_base/core.py": "70f85e26ff8d264e27bf3f0da173cf81991da7143af856d65deb796b9f5d1719",
     "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
-    "parameters.json": "9e65e3a961281ab88bacc3b21442f1a3231b7e15299ee73ba9301ed9bf2b1d47",
-    "check_revision.py": "df926f77dd96dddcbc9c5da37e2b8f976ceca412ba41e094e95d269d376de6f2"
+    "parameters.json": "4b61ac47e890bec0a4e2b2ae4b37457cac64f8dc306eb9b05f775508f2bac1c3",
+    "check_revision.py": "d1992b6799d7b7b547a703841ef62a64b59314ba0f19c8a7e8a86e96919445a8"
   }
 }

@@ -10,7 +10,7 @@
       "travel_mm": 12.0,
       "candidate_pairs": 4,
       "distance_queries": 184,
-      "seconds": 2.42
+      "seconds": 2.08
     },
     {
       "index": 1,
@@ -26,7 +26,7 @@
       "travel_mm": 40.0,
       "candidate_pairs": 12,
       "distance_queries": 1756,
-      "seconds": 19.46
+      "seconds": 17.92
     },
     {
       "index": 3,
@@ -34,7 +34,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 0,
       "distance_queries": 0,
-      "seconds": 0.01
+      "seconds": 0.0
     },
     {
       "index": 4,
@@ -74,7 +74,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 0,
       "distance_queries": 0,
-      "seconds": 0.04
+      "seconds": 0.05
     },
     {
       "index": 9,
@@ -90,7 +90,7 @@
       "travel_mm": 20.0,
       "candidate_pairs": 16,
       "distance_queries": 528,
-      "seconds": 5.78
+      "seconds": 5.01
     },
     {
       "index": 11,
@@ -106,7 +106,7 @@
       "travel_mm": 140.0,
       "candidate_pairs": 0,
       "distance_queries": 0,
-      "seconds": 0.06
+      "seconds": 0.04
     },
     {
       "index": 13,
@@ -114,7 +114,7 @@
       "travel_mm": 35.0,
       "candidate_pairs": 14,
       "distance_queries": 885,
-      "seconds": 22.92
+      "seconds": 17.63
     },
     {
       "index": 14,
@@ -130,7 +130,7 @@
       "travel_mm": 70.0,
       "candidate_pairs": 22,
       "distance_queries": 172,
-      "seconds": 25.65
+      "seconds": 18.3
     },
     {
       "index": 16,
@@ -138,7 +138,7 @@
       "travel_mm": 20.0,
       "candidate_pairs": 16,
       "distance_queries": 524,
-      "seconds": 5.13
+      "seconds": 4.37
     },
     {
       "index": 17,
@@ -154,7 +154,7 @@
       "travel_mm": 20.0,
       "candidate_pairs": 13,
       "distance_queries": 493,
-      "seconds": 5.49
+      "seconds": 4.39
     },
     {
       "index": 19,
@@ -170,7 +170,7 @@
       "travel_mm": 134.5362404707371,
       "candidate_pairs": 0,
       "distance_queries": 0,
-      "seconds": 0.05
+      "seconds": 0.03
     },
     {
       "index": 21,
@@ -178,7 +178,7 @@
       "travel_mm": 30.0,
       "candidate_pairs": 18,
       "distance_queries": 1728,
-      "seconds": 18.71
+      "seconds": 16.22
     },
     {
       "index": 22,
@@ -202,7 +202,7 @@
       "travel_mm": 35.0,
       "candidate_pairs": 14,
       "distance_queries": 885,
-      "seconds": 16.08
+      "seconds": 15.0
     },
     {
       "index": 25,
@@ -218,7 +218,7 @@
       "travel_mm": 70.0,
       "candidate_pairs": 22,
       "distance_queries": 172,
-      "seconds": 14.65
+      "seconds": 14.57
     }
   ],
   "distance_queries": 7327,
@@ -366,6 +366,34 @@
         "M6x60_axle_bolt"
       ],
       "reason": "Thread interface; fastener assumed unthreaded before withdrawal"
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_0",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_1",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_2",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
+    },
+    {
+      "parts": [
+        "625ZZ_support_roller_3",
+        "Internal_72T_ring"
+      ],
+      "reason": "User-requested 0.4 mm normal interference at the 45-degree track, bounded by verified tangent planes. Physical preload and free rotation untested."
     },
     {
       "parts": [
@@ -2122,9 +2150,9 @@
   "source_sha256": {
     "model.py": "94389abae65f1b19a137baf8f465fa5e1009645f18637dbf011e3f166fc93908",
     "parameters.json": "2f4c3afcc65f20cd4781d5467a3894b05647803871eee69397a6ac2681820316",
-    "rotary_base/core.py": "dd062e979f00ae75ba2514b325360128fd33741ec31ac9db82d1c9a4bacb3fe4",
+    "rotary_base/core.py": "70f85e26ff8d264e27bf3f0da173cf81991da7143af856d65deb796b9f5d1719",
     "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
-    "rotary_base/parameters.json": "9e65e3a961281ab88bacc3b21442f1a3231b7e15299ee73ba9301ed9bf2b1d47",
+    "rotary_base/parameters.json": "4b61ac47e890bec0a4e2b2ae4b37457cac64f8dc306eb9b05f775508f2bac1c3",
     "arm_explosion.py": "8989f8fb730206840704f76f40894462cbbaf6f83f4a87fba502357894aadbfa",
     "check_arm_explosion.py": "38b260236607ab36e875429b80fd59a31ec874d6669e1b6639b05e1996860f2c"
   },

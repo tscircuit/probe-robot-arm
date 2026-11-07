@@ -1,4 +1,4 @@
-# Modular flying probe — revision 14
+# Modular flying probe — revision 15
 
 Source: https://github.com/tscircuit/probe-robot-arm
 
@@ -6,7 +6,11 @@ Parametric CadQuery assembly and public viewer: https://modular-flying-probe-arm
 
 Four removable theta/Z/radial modules serve a 100 × 100 mm PCB, with simultaneous probe contacts on a 2 × 2 mm square. The NEMA17 Z stage and NEMA14 radial stage use the actual **R24 rear pass-through mounting enclosure** from [tscircuit/rack-actuator](https://github.com/tscircuit/rack-actuator/tree/a0ccaf201d6f6f5f988ca64dc1a9f5e7aba931b5). This is a geometry prototype; physical print fit, stiffness, accuracy and load capacity remain untested.
 
-## Lighter rotating deck
+## Roller track fit (revision 15)
+
+All four 625ZZ bearings and their integral blocks/axles move **0.4 mm toward the 45° track along its normal**: **0.282843 mm radially inward and 0.282843 mm upward**. This creates the requested nominal 0.4 mm overlap. The CAD checks identify and bound this intentional interference separately from unwanted collisions. It is not a verified preload force or free-running fit. The ring, deck, spindle and hardware are unchanged; **reprint part 01 (module base) only** when updating from revision 14.
+
+## Lighter rotating deck (revision 14)
 
 Five rounded through-windows remove **25.2% of the rotating deck's solid CAD volume**. The deck retains its 6 mm plate thickness, 10 mm continuous outer rim, 28 mm-radius bearing hub, six 14 mm-wide radial ribs, all six Z-insert seats and the full Z-cradle flange footprints. Corners are R3. The original top face remains the flat printing face. **Only part 10 (rotating deck) needs reprinting when upgrading from revision 13**; the other parts and hardware are unchanged. The main arm and standalone fixture use the same shared deck. CAD volume reduction does not establish physical stiffness or exact filament savings.
 
@@ -24,7 +28,7 @@ The main arm and bench fixture now call **the same generator and configuration**
 
 The base has **four 625ZZ rollers**, at 45°, 135°, 225° and 315° around the base. Each bearing tilts 45° and presses onto an **integral Ø5.1 mm printed axle** on **one block**, with an R6 rounded crown. A 0.3 mm lead-in chamfer guides the bearing; an 8 mm OD shoulder supports its inner race. No roller bolts, nuts or separate spacers are used.
 
-The 72T ring is now **176 mm OD** (88 mm outer radius). Its lower outer edge has a **6 × 6 mm, 45° continuous track**. The bearing contact line is centered at radius 85, Z31. Six **M3×30 button-head screws with flat seats** retain the ring; no countersinks are present. The bearings stay at least 2.38 mm radially outside every head, so no screw head is part of the rolling track. The teeth, bolt positions and deck spacers are retained.
+The 72T ring is now **176 mm OD** (88 mm outer radius). Its lower outer edge has a **6 × 6 mm, 45° continuous track**. The bearing contact line is centered at radius 85, Z31. Six **M3×30 button-head screws with flat seats** retain the ring; no countersinks are present. The bearings stay at least 2.10 mm radially outside every head, so no screw head is part of the rolling track. The teeth, bolt positions and deck spacers are retained.
 
 The plate is 11 mm thick with a broad flat underside at Z0; its recessed spindle seat retains a 4 mm floor. The NEMA17 mounts directly below it at Z0. The ring bottom stays at Z28, 17 mm above the plate. The Ø15.25 spindle, 0.5 mm top chamfer, Ø15.8 spacer and two 6002 bearings are shared. Reprint the **module plate, ring and spindle** when upgrading from the published flat-base version. The integrated stand and structural deck remain unchanged.
 
@@ -85,7 +89,7 @@ The neutral radial rotation axis is Z=275.8 mm; its downward mounting face is Z=
 
 ## Kinematics and viewer
 
-The top navigation links to the Assembly and Base test pages. Left drag orbits, middle drag pans, and the scroll wheel zooms. Right drag does not pan. Right-click anywhere in the 3D view to toggle **Show hidden edges**. Occluded edges appear dashed; the preference is remembered across the Assembly and Base test pages. Right-click a visible part to download its STL. Printable parts use the saved print files (including the relaxed flexure chassis); hardware and clearance envelopes download as reference meshes. Downloads are independent of axis position and explosion offsets.
+The top navigation links to the Assembly and Base test pages. Left drag orbits, middle drag pans, and the scroll wheel zooms. Right drag does not pan. Right-click anywhere in the 3D view to toggle **Show hidden edges**. Occluded edges appear dashed; the preference is remembered across the Assembly and Base test pages. Right-click a visible part to **Isolate**, **Hide part**, or download its STL. **Show All** is always available, including on empty space, and restores all parts in the current view. In the base viewer it also enables hardware and clearance envelopes. Visibility persists during animation and explosion. Printable parts use the saved print files (including the relaxed flexure chassis); hardware and clearance envelopes download as reference meshes. Downloads are independent of axis position and explosion offsets.
 
 Reach is **195–315 mm** from each pivot, with 120 mm radial stroke and 40 mm vertical stroke. Stroke is calculated from the farthest PCB corner with 5 mm end margins and rounded upward to 10 mm. Required nominal yaw is approximately ±14.04°. Four-arm target-center controls run from −49 to +49 mm, keeping the complete 2 × 2 mm cluster on the 100 mm board.
 

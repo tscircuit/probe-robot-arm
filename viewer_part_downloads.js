@@ -1,5 +1,5 @@
 /** View options and per-part STL downloads. Exports use neutral source geometry. */
-export function installPartDownloads({THREE,canvas,camera,scene,getMeshes,getPart,onSelect}) {
+export function installPartDownloads({THREE,canvas,camera,scene,getMeshes,getPart,onSelect,isEnabled=()=>true,onShowAll}) {
   const style=document.createElement('style');
   style.textContent='.part-menu{position:fixed;z-index:1000;max-width:min(330px,calc(100vw - 20px));padding:12px;background:#fff;color:#293843;border:1px solid #d4dde3;border-radius:8px;box-shadow:0 8px 28px #182b4020;font:13px system-ui,sans-serif}.part-menu[hidden],.part-menu [hidden]{display:none}.part-menu strong{display:block;overflow-wrap:anywhere;font-weight:550}.part-menu small{display:block;margin:5px 0 10px;color:#70808c}.part-menu button{display:block;width:100%;text-align:left;padding:9px 12px;border:1px solid #d4dde3;border-radius:5px;background:#f3f5f6;color:inherit;font:inherit;cursor:pointer}.part-menu button+button{margin-top:7px}.part-menu button[aria-checked="true"]::before{content:"✓ ";font-weight:700}.part-menu button:hover{background:#e6edf1}.part-menu button:focus-visible{outline:2px solid #517e99;outline-offset:2px}';
   document.head.append(style);
@@ -7,7 +7,16 @@ export function installPartDownloads({THREE,canvas,camera,scene,getMeshes,getPar
   const title=document.createElement('strong'),note=document.createElement('small'),button=document.createElement('button');
   button.type='button';button.textContent='Download STL';button.setAttribute('role','menuitem');button.dataset.action='download';
   const edgeButton=document.createElement('button');edgeButton.type='button';edgeButton.textContent='Show hidden edges';edgeButton.setAttribute('role','menuitemcheckbox');
-  menu.append(title,note,button,edgeButton);document.body.append(menu);
+  const visibilityButton=(label,action)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.action=action;b.setAttribute('role','menuitem');return b;};
+  const isolateButton=visibilityButton('Isolate','isolate'),hideButton=visibilityButton('Hide part','hide'),showAllButton=visibilityButton('Show All','show-all');
+  menu.append(title,note,button,isolateButton,hideButton,showAllButton,edgeButton);document.body.append(menu);
+  const hiddenParts=new Set();let isolatedPart=null;
+  function refreshVisibility(){for(const mesh of getMeshes())mesh.visible=isEnabled(mesh)&&!hiddenParts.has(mesh)&&(!isolatedPart||isolatedPart===mesh);}
+  function showAll(){hiddenParts.clear();isolatedPart=null;onShowAll?.();refreshVisibility();}
+  function finishVisibility(){close();canvas.focus({preventScroll:true});}
+  isolateButton.onclick=()=>{if(selection){isolatedPart=selection.mesh;hiddenParts.delete(isolatedPart);refreshVisibility();}finishVisibility();};
+  hideButton.onclick=()=>{if(selection){hiddenParts.add(selection.mesh);refreshVisibility();}finishVisibility();};
+  showAllButton.onclick=()=>{showAll();finishVisibility();};
   const preferenceKey='probe-viewer-hidden-edges';let hiddenEdges=false;
   try{hiddenEdges=localStorage.getItem(preferenceKey)==='true';}catch{}
   const edgeGeometry=new WeakMap(),overlays=new Map();
@@ -33,6 +42,7 @@ export function installPartDownloads({THREE,canvas,camera,scene,getMeshes,getPar
       if(group)group.visible=hiddenEdges;
     }
     edgeButton.setAttribute('aria-checked',String(hiddenEdges));
+    refreshVisibility();
   }
   edgeButton.onclick=()=>{hiddenEdges=!hiddenEdges;refresh();try{localStorage.setItem(preferenceKey,String(hiddenEdges));}catch{}close();canvas.focus({preventScroll:true});};
   refresh();
@@ -45,7 +55,7 @@ export function installPartDownloads({THREE,canvas,camera,scene,getMeshes,getPar
     e.preventDefault();const mesh=pick(e);
     if(mesh)onSelect?.(mesh);selection=mesh?{mesh,...getPart(mesh)}:null;
     title.textContent=selection?selection.name.replaceAll('_',' '):'3D view';
-    button.hidden=note.hidden=!selection;
+    button.hidden=note.hidden=isolateButton.hidden=hideButton.hidden=!selection;
     note.textContent=selection?(selection.note||(selection.keepout?'Clearance envelope · mm':selection.printed?'Prototype part · mm':'Reference part · mm')):'';
     menu.hidden=false;menu.style.left='0px';menu.style.top='0px';
     const box=menu.getBoundingClientRect();menu.style.left=Math.max(10,Math.min(e.clientX,innerWidth-box.width-10))+'px';menu.style.top=Math.max(10,Math.min(e.clientY,innerHeight-box.height-10))+'px';(selection?button:edgeButton).focus({preventScroll:true});
@@ -60,14 +70,14 @@ export function installPartDownloads({THREE,canvas,camera,scene,getMeshes,getPar
   document.addEventListener('pointerdown',e=>{if(!menu.contains(e.target))close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){close();canvas.focus({preventScroll:true});}});
   menu.addEventListener('keydown',e=>{
-    const items=[button,edgeButton].filter(item=>!item.hidden),index=items.indexOf(document.activeElement);
+    const items=[button,isolateButton,hideButton,showAllButton,edgeButton].filter(item=>!item.hidden),index=items.indexOf(document.activeElement);
     if(['ArrowDown','ArrowUp','Home','End'].includes(e.key)){
       e.preventDefault();items[e.key==='Home'?0:e.key==='End'?items.length-1:(index+(e.key==='ArrowDown'?1:items.length-1))%items.length].focus();
     }
   });
   addEventListener('resize',close);addEventListener('scroll',close,true);
   canvas.tabIndex=0;
-  return {close,refresh,get hiddenEdges(){return hiddenEdges;}};
+  return {close,refresh,refreshVisibility,showAll,isVisible:visible,get hiddenEdges(){return hiddenEdges;}};
 }
 
 function binarySTL(THREE,geometry,name){

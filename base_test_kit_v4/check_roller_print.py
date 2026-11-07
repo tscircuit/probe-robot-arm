@@ -16,5 +16,5 @@ for angle in p['roller_angles_deg']:
  diameter=2*max(journal);tip_diameter=2*max(tip)
  assert abs(diameter-5.1)<1e-4 and abs(tip_diameter-4.5)<1e-4,(angle,diameter,tip_diameter)
  rows.append(dict(angle_deg=angle,tilt_deg=45,axle_diameter_mm=float(diameter),tip_diameter_mm=float(tip_diameter),chamfer_mm=.3))
-report=dict(passed=True,blocks_per_bearing=1,roller_count=4,roller_fasteners=0,file=str(file.relative_to(out)),sha256=hashlib.sha256(file.read_bytes()).hexdigest(),axles=rows)
+report=dict(passed=True,track_normal_advance_mm=p.get('roller_track_overlap_mm',0),bearing_center_radius_mm=lay['center_r'],bearing_center_z_mm=lay['center_z'],blocks_per_bearing=1,roller_count=4,roller_fasteners=0,file=str(file.relative_to(out)),sha256=hashlib.sha256(file.read_bytes()).hexdigest(),axles=rows)
 (out/'roller_print_validation.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

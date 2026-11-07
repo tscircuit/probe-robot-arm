@@ -10,17 +10,17 @@
     {
       "file": "output/prototype-parts/Module_base.stl",
       "bed_contact_area_mm2": 22534.13167338348,
-      "sha256": "69674a2cf6805ce424c24ac7f4fad4a9ed394fc30ea4010696bcb80bf09ac161"
+      "sha256": "b42e68420b18a5354073346e3ce144e2fb7af0a02efd89ce3f5271411d4e43a5"
     },
     {
       "file": "output/armature-base-test-v4/STL/01_cutout_base_four_45deg_axles_qty1.stl",
       "bed_contact_area_mm2": 22534.13167338348,
-      "sha256": "69674a2cf6805ce424c24ac7f4fad4a9ed394fc30ea4010696bcb80bf09ac161"
+      "sha256": "b42e68420b18a5354073346e3ce144e2fb7af0a02efd89ce3f5271411d4e43a5"
     }
   ],
   "source_sha256": {
     "check_flat_base.py": "13230d130ccd652d16e07326b7023fcdb61d46afed10db22c70a7218375afc57",
-    "rotary_base/core.py": "dd062e979f00ae75ba2514b325360128fd33741ec31ac9db82d1c9a4bacb3fe4",
-    "rotary_base/parameters.json": "9e65e3a961281ab88bacc3b21442f1a3231b7e15299ee73ba9301ed9bf2b1d47"
+    "rotary_base/core.py": "70f85e26ff8d264e27bf3f0da173cf81991da7143af856d65deb796b9f5d1719",
+    "rotary_base/parameters.json": "4b61ac47e890bec0a4e2b2ae4b37457cac64f8dc306eb9b05f775508f2bac1c3"
   }
 }

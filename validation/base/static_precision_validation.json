@@ -25,7 +25,7 @@
     "physical_fit_verified": false,
     "note": "15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm."
   },
-  "checked_pairs": 2526,
+  "checked_pairs": 2522,
   "maximum_unintended_overlap_mm3": 0.0,
   "worst_pair": null,
   "volume_tolerance_mm3": 1e-06,
