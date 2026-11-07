@@ -7,139 +7,39 @@
   "roller_count": 4,
   "roller_fasteners": 0,
   "file": "STL/01_cutout_base_four_45deg_axles_qty1.stl",
-  "sha256": "a08170a3c801e323c92c7f4c960d9d5389e4ee2084bec17dec50c1bffec21419",
+  "sha256": "b42e68420b18a5354073346e3ce144e2fb7af0a02efd89ce3f5271411d4e43a5",
   "axles": [
     {
+      "solid_unslotted_tip": true,
       "angle_deg": 45,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.100007777949474,
-      "tip_diameter_mm": 4.500006636499027,
-      "chamfer_mm": 0.3,
-      "relief_slots": [
-        {
-          "direction_deg": 0,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999985448649962,
-          "root_mm": 0.5000145513500378
-        },
-        {
-          "direction_deg": 90,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.999974913998841,
-          "root_mm": 0.5000250860011592
-        },
-        {
-          "direction_deg": 180,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999988506187765,
-          "root_mm": 0.5000114938122351
-        },
-        {
-          "direction_deg": 270,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.9999987923089755,
-          "root_mm": 0.5000012076910241
-        }
-      ]
+      "axle_diameter_mm": 5.100008562082015,
+      "tip_diameter_mm": 4.5000068157827675,
+      "chamfer_mm": 0.3
     },
     {
+      "solid_unslotted_tip": true,
       "angle_deg": 135,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.100007777949474,
-      "tip_diameter_mm": 4.500006636499027,
-      "chamfer_mm": 0.3,
-      "relief_slots": [
-        {
-          "direction_deg": 0,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999985448649962,
-          "root_mm": 0.5000145513500378
-        },
-        {
-          "direction_deg": 90,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.999974913998841,
-          "root_mm": 0.5000250860011592
-        },
-        {
-          "direction_deg": 180,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999988506187765,
-          "root_mm": 0.5000114938122351
-        },
-        {
-          "direction_deg": 270,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.9999987923089755,
-          "root_mm": 0.5000012076910241
-        }
-      ]
+      "axle_diameter_mm": 5.100008562082015,
+      "tip_diameter_mm": 4.5000068157827675,
+      "chamfer_mm": 0.3
     },
     {
+      "solid_unslotted_tip": true,
       "angle_deg": 225,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.10000777794949,
-      "tip_diameter_mm": 4.500006636499028,
-      "chamfer_mm": 0.3,
-      "relief_slots": [
-        {
-          "direction_deg": 0,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999985448649962,
-          "root_mm": 0.5000145513500378
-        },
-        {
-          "direction_deg": 90,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.99997491399883,
-          "root_mm": 0.5000250860011692
-        },
-        {
-          "direction_deg": 180,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999988506187765,
-          "root_mm": 0.5000114938122351
-        },
-        {
-          "direction_deg": 270,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.9999987923089755,
-          "root_mm": 0.5000012076910241
-        }
-      ]
+      "axle_diameter_mm": 5.100008562082026,
+      "tip_diameter_mm": 4.5000068157827675,
+      "chamfer_mm": 0.3
     },
     {
+      "solid_unslotted_tip": true,
       "angle_deg": 315,
       "tilt_deg": 45,
-      "axle_diameter_mm": 5.100007777949504,
-      "tip_diameter_mm": 4.500006636499029,
-      "chamfer_mm": 0.3,
-      "relief_slots": [
-        {
-          "direction_deg": 0,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999985448649962,
-          "root_mm": 0.5000145513500378
-        },
-        {
-          "direction_deg": 90,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.999974913998841,
-          "root_mm": 0.5000250860011592
-        },
-        {
-          "direction_deg": 180,
-          "width_mm": 0.5000002696759496,
-          "length_mm": 4.999988506187765,
-          "root_mm": 0.5000114938122351
-        },
-        {
-          "direction_deg": 270,
-          "width_mm": 0.5000005393519018,
-          "length_mm": 4.9999987923089755,
-          "root_mm": 0.5000012076910241
-        }
-      ]
+      "axle_diameter_mm": 5.100008562082038,
+      "tip_diameter_mm": 4.500006815782768,
+      "chamfer_mm": 0.3
     }
   ]
 }

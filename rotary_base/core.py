@@ -28,12 +28,26 @@ def chamfered_shaft(radius,height,z,chamfer):
     if not chamfer:return cyl(radius,height,(0,0,z))
     return cyl(radius,height-chamfer,(0,0,z)).fuse(cq.Solid.makeCone(radius,radius-chamfer,chamfer,V(0,0,z+height-chamfer),V(0,0,1))).clean()
 
+def spindle_relief_cutters(p,diameter=None,height=33.6,z=18):
+    """Four longitudinal radial slots from the central bore to the journal OD."""
+    width=p.get('spindle_slot_width_mm',0)
+    if not width:return []
+    root=p['spindle_slot_root_mm'];radius=(diameter or p['spindle_diameter'])/2
+    assert 0<width<=1 and .25<=root<height-width/2
+    bottom=z+root;top=z+height+1
+    slot=(cq.Workplane('YZ').moveTo(-width/2,top).lineTo(-width/2,bottom+width/2)
+          .threePointArc((0,bottom),(width/2,bottom+width/2)).lineTo(width/2,top)
+          .close().extrude(radius+1).val())
+    return [slot.rotate((0,0,0),(0,0,1),a) for a in [0,90,180,270]]
+
 def make_spindle(p,diameter=None):
     d=diameter or p['spindle_diameter'];ab=p['inner_race_abutment_diameter']/2
     s=union([cyl(19,4,(0,0,8)),cyl(ab,6,(0,0,12)),chamfered_shaft(d/2,33.6,18,p['spindle_top_chamfer_mm'])])
     s=s.cut(cyl(3.3,46,(0,0,7)))
     s=holes(s,[(-12,0),(12,0)],1.7,7,7)
     for x in [-12,12]:s=s.cut(hexagon(5.8,2.5,x,0,9.6))
+    cuts=spindle_relief_cutters(p,d)
+    if cuts:s=s.cut(*cuts)
     return s.clean()
 
 def roller_layout(p):
@@ -48,46 +62,27 @@ def roller_transform(shape,p,angle=0):
     lay=roller_layout(p)
     return shape.rotate((0,0,0),(0,1,0),-45).translate((lay['center_r'],0,lay['center_z'])).rotate((0,0,0),(0,0,1),angle)
 
-def roller_axle_relief_cutters(p):
-    """Four radial slots in the local X-axis journal, open at its free end."""
-    width=p.get('roller_axle_slot_width_mm',0)
-    if not width:return []
-    root=p['roller_axle_slot_root_mm'];length=5.5-root
-    assert 0<width<=1 and .25<=root<5.5-width/2
-    bottom=3-length;radius=p['roller_axle_diameter_mm']/2
-    # A semicircular closed end avoids a sharp slot root; the shoulder stays intact.
-    slot=(cq.Workplane('YZ').moveTo(-width/2,4).lineTo(-width/2,bottom+width/2)
-          .threePointArc((0,bottom),(width/2,bottom+width/2)).lineTo(width/2,4)
-          .close().extrude(radius+1).val())
-    return [slot.rotate((0,0,0),(0,0,1),a).rotate((0,0,0),(0,1,0),90) for a in [0,90,180,270]]
-
 def roller_block(p,angle=0):
     # One tilted block. Local X is the axle, local Z points toward the track.
     profile=[(-8,-20),(8,-20),(6,0)]
     block=cq.Workplane('YZ').polyline(profile).threePointArc((0,6),(-6,0)).close().extrude(8).translate((-11.5,0,0)).val()
     shoulder=cyl(4,1.1,(-3.6,0,0),(1,0,0))
     axle=chamfered_shaft(p['roller_axle_diameter_mm']/2,5.5,-2.5,p['roller_axle_chamfer_mm']).rotate((0,0,0),(0,1,0),90)
-    cuts=roller_axle_relief_cutters(p)
-    if cuts:axle=axle.cut(*cuts).clean()
     block=roller_transform(block.fuse(shoulder,axle).clean(),p,angle)
     # The block's broad foot joins the flat plate without protruding beneath it.
     return block.intersect(box(400,400,100,(0,0,p['base_plate_thickness_mm']+50))).clean()
 
 def roller_fit_checks(parts,p):
     by={a['name']:a['shape'] for a in parts};base=by['Fixed_base_plate'];r=p['roller_axle_diameter_mm']/2;rows=[]
-    expected=0;shell=None
-    if r>2.5:
-        shell=annulus(r,2.5,5,-2.5).rotate((0,0,0),(0,1,0),90)
-        cuts=roller_axle_relief_cutters(p)
-        if cuts:shell=shell.cut(*cuts).clean()
-        expected=shell.Volume()
     for i,angle in enumerate(p['roller_angles_deg']):
         bearing=by[f'625ZZ_support_roller_{i}'];actual=base.intersect(bearing)
+        expected=math.pi*max(0,r*r-2.5**2)*5
         assert abs(max(0,actual.Volume())-expected)<1e-5,(i,actual.Volume(),expected)
         if r>2.5:
+            shell=annulus(r,2.5,5,-2.5).rotate((0,0,0),(0,1,0),90)
             assert actual.cut(roller_transform(shell,p,angle)).Volume()<1e-6,'Unexpected block/bearing contact outside printed axle fit'
         rows.append(dict(bearing=f'625ZZ_support_roller_{i}',nominal_overlap_mm3=expected))
-    return dict(axle_diameter_mm=2*r,bearing_bore_mm=5,diametral_interference_mm=max(0,2*r-5),top_chamfer_mm=p['roller_axle_chamfer_mm'],slot_count=4 if p.get('roller_axle_slot_width_mm',0) else 0,slot_width_mm=p.get('roller_axle_slot_width_mm',0),contacts=rows,physical_fit_verified=False)
+    return dict(axle_diameter_mm=2*r,bearing_bore_mm=5,diametral_interference_mm=max(0,2*r-5),top_chamfer_mm=p['roller_axle_chamfer_mm'],contacts=rows,physical_fit_verified=False)
 
 def roller_track_fit_checks(parts,p):
     """Bound the requested interference by the actual ring's tangent planes."""
@@ -259,26 +254,25 @@ def posed(part,angle,p):
 def spindle_fit_checks(parts,p):
     byname={a['name']:a['shape'] for a in parts}
     shaft=byname['Fixed_spindle'];radius=p['spindle_diameter']/2;drop=p['rotor_drop_mm']
-    section=shaft.intersect(cyl(12,1,(0,0,30))).BoundingBox()
+    # Measure along uncut diagonals; cardinal-axis slots remove the OD extrema.
+    section=shaft.intersect(cyl(12,1,(0,0,30))).rotate((0,0,0),(0,0,1),45).BoundingBox()
     assert abs(section.xlen-p['spindle_diameter'])<1e-6 and abs(section.ylen-p['spindle_diameter'])<1e-6
+    fit_shell=None
+    if radius>7.5:
+        fit_shell=chamfered_shaft(radius,33.6,18,p['spindle_top_chamfer_mm']).cut(cyl(7.5,35,(0,0,17.5)))
+        cuts=spindle_relief_cutters(p)
+        if cuts:fit_shell=fit_shell.cut(*cuts).clean()
     rows=[]
     for z in [18,43]:
         bearing=byname[f'6002_bearing_{z}'];actual=shaft.intersect(bearing)
-        height=min(z+9,51.6)-max(z,18)
-        chamfer=p['spindle_top_chamfer_mm'];start=51.6-chamfer
-        straight=max(0,min(z+9,start)-max(z,18))
-        # Integrate the positive annular interference through the 45-degree lead-in.
-        lo=max(0,z-start);hi=min(chamfer,z+9-start,max(0,radius-7.5))
-        taper=0 if hi<=lo else ((radius**2-7.5**2)*(hi-lo)-radius*(hi**2-lo**2)+(hi**3-lo**3)/3)
-        expected=math.pi*(max(0,radius**2-7.5**2)*straight+taper)
+        shell=fit_shell.intersect(cyl(radius+1,9,(0,0,z))) if fit_shell else None
+        expected=shell.Volume() if shell else 0
         assert abs(max(0,actual.Volume())-expected)<1e-5
-        if radius>7.5:
-            shell=annulus(radius,7.5,height,max(z,18)-drop)
-            assert actual.cut(shell).Volume()<1e-6, 'Unexpected contact outside bearing-fit shell'
+        if shell:assert actual.cut(shell.translate((0,0,-drop))).Volume()<1e-6, 'Unexpected contact outside slotted bearing-fit shell'
         rows.append(dict(part=f'6002_bearing_{z}',nominal_overlap_mm3=expected))
     spacer_gap=shaft.distance(byname['Inner_race_spacer'])
     assert abs(spacer_gap-(p['inner_race_spacer_bore_diameter']-p['spindle_diameter'])/2)<1e-6
-    return dict(spacer_bore_mm=p['inner_race_spacer_bore_diameter'],spacer_radial_clearance_mm=spacer_gap,shaft_diameter_mm=p['spindle_diameter'],bearing_bore_mm=15,diametral_interference_mm=max(0,p['spindle_diameter']-15),radial_interference_mm=max(0,radius-7.5),measured_cad_diameter_mm=[section.xlen,section.ylen],bearing_contacts=rows,top_chamfer_mm=p['spindle_top_chamfer_mm'],physical_fit_verified=False,note='15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm.')
+    return dict(spacer_bore_mm=p['inner_race_spacer_bore_diameter'],spacer_radial_clearance_mm=spacer_gap,shaft_diameter_mm=p['spindle_diameter'],bearing_bore_mm=15,diametral_interference_mm=max(0,p['spindle_diameter']-15),radial_interference_mm=max(0,radius-7.5),measured_cad_diameter_mm=[section.xlen,section.ylen],bearing_contacts=rows,top_chamfer_mm=p['spindle_top_chamfer_mm'],slot_count=4 if p.get('spindle_slot_width_mm',0) else 0,slot_width_mm=p.get('spindle_slot_width_mm',0),physical_fit_verified=False,note='15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm.')
 
 def validate(parts,p):
     center=base_drive_center(p)

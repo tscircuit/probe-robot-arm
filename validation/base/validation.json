@@ -14,14 +14,16 @@
     "bearing_contacts": [
       {
         "part": "6002_bearing_18",
-        "nominal_overlap_mm3": 53.456162496238825
+        "nominal_overlap_mm3": 51.344193262652766
       },
       {
         "part": "6002_bearing_43",
-        "nominal_overlap_mm3": 48.480746943424684
+        "nominal_overlap_mm3": 46.43975004624605
       }
     ],
     "top_chamfer_mm": 0.5,
+    "slot_count": 4,
+    "slot_width_mm": 0.5,
     "physical_fit_verified": false,
     "note": "15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm."
   },
@@ -30,24 +32,22 @@
     "bearing_bore_mm": 5,
     "diametral_interference_mm": 0.09999999999999964,
     "top_chamfer_mm": 0.3,
-    "slot_count": 4,
-    "slot_width_mm": 0.5,
     "contacts": [
       {
         "bearing": "625ZZ_support_roller_0",
-        "nominal_overlap_mm3": 3.5209057990124677
+        "nominal_overlap_mm3": 3.966260725157106
       },
       {
         "bearing": "625ZZ_support_roller_1",
-        "nominal_overlap_mm3": 3.5209057990124677
+        "nominal_overlap_mm3": 3.966260725157106
       },
       {
         "bearing": "625ZZ_support_roller_2",
-        "nominal_overlap_mm3": 3.5209057990124677
+        "nominal_overlap_mm3": 3.966260725157106
       },
       {
         "bearing": "625ZZ_support_roller_3",
-        "nominal_overlap_mm3": 3.5209057990124677
+        "nominal_overlap_mm3": 3.966260725157106
       }
     ],
     "physical_fit_verified": false
@@ -251,7 +251,7 @@
     "deck_cutout_spoke_width_mm": 14,
     "deck_cutout_corner_radius_mm": 3,
     "roller_track_overlap_mm": 0.4,
-    "roller_axle_slot_width_mm": 0.5,
-    "roller_axle_slot_root_mm": 0.5
+    "spindle_slot_width_mm": 0.5,
+    "spindle_slot_root_mm": 0.5
   }
 }

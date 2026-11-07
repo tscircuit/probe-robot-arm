@@ -31,7 +31,9 @@ def main():
         if abs(d-p['bearing_seat_diameter'])>.001:
             cq.exporters.export(print_shape(dict(shape=make_housing(p,d),flip=False)),str(fits/f'ALTERNATE_housing_seat_{d:.1f}mm_USE_INSTEAD_OF_08.stl'))
     for d in [14.7,14.8,14.9,15.0,15.1,15.25,15.5]:
-        coupon=box(22,22,2,(0,0,1)).fuse(chamfered_shaft(d/2,10,2,p['spindle_top_chamfer_mm']))
+        coupon=box(22,22,2,(0,0,1)).fuse(chamfered_shaft(d/2,10,2,p['spindle_top_chamfer_mm'])).cut(cyl(3.3,14,(0,0,-1)))
+        cuts=spindle_relief_cutters(p,d,height=10,z=2)
+        if cuts:coupon=coupon.cut(*cuts).clean()
         cq.exporters.export(coupon,str(fits/f'spindle_coupon_{d:g}mm.stl'))
         if abs(d-p['spindle_diameter'])>.001:
             cq.exporters.export(print_shape(dict(shape=make_spindle(p,d),flip=False)),str(fits/f'ALTERNATE_spindle_{d:g}mm_USE_INSTEAD_OF_05.stl'))

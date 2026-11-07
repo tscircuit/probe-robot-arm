@@ -10,10 +10,10 @@
       "size_mm": [
         22.050134658813477,
         15.436854362487793,
-        18.258544921875
+        18.267587661743164
       ],
       "bed_z_mm": 1.7763568394002505e-15,
-      "triangles": 4320
+      "triangles": 2948
     },
     {
       "file": "OPTIONAL_fit_tests/625_axle_coupon_5.0mm_45deg.stl",
@@ -24,10 +24,10 @@
       "size_mm": [
         22.050134658813477,
         15.436854362487793,
-        18.294082641601562
+        18.30294418334961
       ],
       "bed_z_mm": 1.7763568394002505e-15,
-      "triangles": 4312
+      "triangles": 2948
     },
     {
       "file": "OPTIONAL_fit_tests/625_axle_coupon_5.1mm_45deg.stl",
@@ -38,10 +38,10 @@
       "size_mm": [
         22.050134658813477,
         15.436854362487793,
-        18.329612731933594
+        18.338298797607422
       ],
       "bed_z_mm": 1.7763568394002505e-15,
-      "triangles": 4312
+      "triangles": 2948
     },
     {
       "file": "OPTIONAL_fit_tests/ALTERNATE_housing_seat_32.0mm_USE_INSTEAD_OF_08.stl",
@@ -94,10 +94,10 @@
       "size_mm": [
         38.0,
         37.988189697265625,
-        43.599998474121094
+        43.59999837412109
       ],
-      "bed_z_mm": 0.0,
-      "triangles": 3350
+      "bed_z_mm": 1.0000000116860974e-07,
+      "triangles": 4274
     },
     {
       "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_14.8mm_USE_INSTEAD_OF_05.stl",
@@ -108,10 +108,10 @@
       "size_mm": [
         38.0,
         37.988189697265625,
-        43.599998474121094
+        43.59999837412109
       ],
-      "bed_z_mm": 0.0,
-      "triangles": 3350
+      "bed_z_mm": 1.0000000116860974e-07,
+      "triangles": 4274
     },
     {
       "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_14.9mm_USE_INSTEAD_OF_05.stl",
@@ -122,10 +122,10 @@
       "size_mm": [
         38.0,
         37.988189697265625,
-        43.599998474121094
+        43.59999837412109
       ],
-      "bed_z_mm": 0.0,
-      "triangles": 3350
+      "bed_z_mm": 1.0000000116860974e-07,
+      "triangles": 4274
     },
     {
       "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_15.1mm_USE_INSTEAD_OF_05.stl",
@@ -136,10 +136,10 @@
       "size_mm": [
         38.0,
         37.988189697265625,
-        43.599998474121094
+        43.59999837412109
       ],
-      "bed_z_mm": 0.0,
-      "triangles": 3350
+      "bed_z_mm": 1.0000000116860974e-07,
+      "triangles": 4274
     },
     {
       "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_15.5mm_USE_INSTEAD_OF_05.stl",
@@ -150,10 +150,10 @@
       "size_mm": [
         38.0,
         37.988189697265625,
-        43.599998474121094
+        43.59999837412109
       ],
-      "bed_z_mm": 0.0,
-      "triangles": 3350
+      "bed_z_mm": 1.0000000116860974e-07,
+      "triangles": 4282
     },
     {
       "file": "OPTIONAL_fit_tests/ALTERNATE_spindle_15mm_USE_INSTEAD_OF_05.stl",
@@ -164,10 +164,10 @@
       "size_mm": [
         38.0,
         37.988189697265625,
-        43.599998474121094
+        43.59999837412109
       ],
-      "bed_z_mm": 0.0,
-      "triangles": 3350
+      "bed_z_mm": 1.0000000116860974e-07,
+      "triangles": 4274
     },
     {
       "file": "OPTIONAL_fit_tests/bearing_seat_coupon_32.0mm.stl",
@@ -237,7 +237,7 @@
         12.0
       ],
       "bed_z_mm": 0.0,
-      "triangles": 768
+      "triangles": 2200
     },
     {
       "file": "OPTIONAL_fit_tests/spindle_coupon_14.8mm.stl",
@@ -251,7 +251,7 @@
         12.0
       ],
       "bed_z_mm": 0.0,
-      "triangles": 768
+      "triangles": 2200
     },
     {
       "file": "OPTIONAL_fit_tests/spindle_coupon_14.9mm.stl",
@@ -265,7 +265,7 @@
         12.0
       ],
       "bed_z_mm": 0.0,
-      "triangles": 768
+      "triangles": 2200
     },
     {
       "file": "OPTIONAL_fit_tests/spindle_coupon_15.1mm.stl",
@@ -279,7 +279,7 @@
         12.0
       ],
       "bed_z_mm": 0.0,
-      "triangles": 768
+      "triangles": 2200
     },
     {
       "file": "OPTIONAL_fit_tests/spindle_coupon_15.25mm.stl",
@@ -293,7 +293,7 @@
         12.0
       ],
       "bed_z_mm": 0.0,
-      "triangles": 768
+      "triangles": 2208
     },
     {
       "file": "OPTIONAL_fit_tests/spindle_coupon_15.5mm.stl",
@@ -307,7 +307,7 @@
         12.0
       ],
       "bed_z_mm": 0.0,
-      "triangles": 768
+      "triangles": 2208
     },
     {
       "file": "OPTIONAL_fit_tests/spindle_coupon_15mm.stl",
@@ -321,7 +321,7 @@
         12.0
       ],
       "bed_z_mm": 0.0,
-      "triangles": 768
+      "triangles": 2200
     },
     {
       "file": "STL/01_cutout_base_four_45deg_axles_qty1.stl",
@@ -332,10 +332,10 @@
       "size_mm": [
         190.0,
         190.0,
-        29.329612731933594
+        29.338298797607422
       ],
       "bed_z_mm": 0.0,
-      "triangles": 36824
+      "triangles": 31336
     },
     {
       "file": "STL/02_integrated_stand_qty1.stl",
@@ -360,10 +360,10 @@
       "size_mm": [
         38.0,
         37.99574661254883,
-        43.599998474121094
+        43.59999837412109
       ],
-      "bed_z_mm": 0.0,
-      "triangles": 5740
+      "bed_z_mm": 1.0000000116860974e-07,
+      "triangles": 7590
     },
     {
       "file": "STL/06_inner_race_spacer_15p8_bore_qty1.stl",

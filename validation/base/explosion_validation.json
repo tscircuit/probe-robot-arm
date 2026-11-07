@@ -10,7 +10,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 20,
       "distance_queries": 1488,
-      "seconds": 44.54
+      "seconds": 46.55
     },
     {
       "index": 1,
@@ -18,7 +18,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 16,
       "distance_queries": 40,
-      "seconds": 3.86
+      "seconds": 4.17
     },
     {
       "index": 2,
@@ -50,7 +50,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 11,
       "distance_queries": 666,
-      "seconds": 12.58
+      "seconds": 23.62
     },
     {
       "index": 6,
@@ -58,7 +58,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 5,
       "distance_queries": 18,
-      "seconds": 7.74
+      "seconds": 9.46
     },
     {
       "index": 7,
@@ -66,7 +66,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 34,
       "distance_queries": 293,
-      "seconds": 70.94
+      "seconds": 105.87
     },
     {
       "index": 8,
@@ -82,7 +82,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 6,
       "distance_queries": 438,
-      "seconds": 5.14
+      "seconds": 8.04
     },
     {
       "index": 10,
@@ -90,7 +90,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 6,
       "distance_queries": 354,
-      "seconds": 13.08
+      "seconds": 15.26
     },
     {
       "index": 11,
@@ -106,7 +106,7 @@
       "travel_mm": 60.0,
       "candidate_pairs": 10,
       "distance_queries": 11,
-      "seconds": 50.19
+      "seconds": 60.73
     },
     {
       "index": 13,
@@ -122,7 +122,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 4,
       "distance_queries": 112,
-      "seconds": 8.98
+      "seconds": 13.25
     },
     {
       "index": 15,
@@ -130,7 +130,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 20,
       "distance_queries": 2212,
-      "seconds": 34.55
+      "seconds": 50.58
     },
     {
       "index": 16,
@@ -146,7 +146,7 @@
       "travel_mm": 70.0,
       "candidate_pairs": 2,
       "distance_queries": 3,
-      "seconds": 1.42
+      "seconds": 1.49
     },
     {
       "index": 18,
@@ -154,7 +154,7 @@
       "travel_mm": 40.0,
       "candidate_pairs": 1,
       "distance_queries": 121,
-      "seconds": 3.74
+      "seconds": 5.18
     },
     {
       "index": 19,
@@ -162,7 +162,7 @@
       "travel_mm": 35.0,
       "candidate_pairs": 1,
       "distance_queries": 6,
-      "seconds": 1.42
+      "seconds": 1.88
     },
     {
       "index": 20,
@@ -178,7 +178,7 @@
       "travel_mm": 20.0,
       "candidate_pairs": 1,
       "distance_queries": 120,
-      "seconds": 3.49
+      "seconds": 4.73
     },
     {
       "index": 22,
@@ -194,7 +194,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 3,
       "distance_queries": 87,
-      "seconds": 6.54
+      "seconds": 8.1
     },
     {
       "index": 24,
@@ -210,7 +210,7 @@
       "travel_mm": 110.0,
       "candidate_pairs": 4,
       "distance_queries": 632,
-      "seconds": 6.53
+      "seconds": 6.59
     },
     {
       "index": 26,
@@ -218,7 +218,7 @@
       "travel_mm": 110.0,
       "candidate_pairs": 2,
       "distance_queries": 21,
-      "seconds": 0.56
+      "seconds": 0.57
     },
     {
       "index": 27,
@@ -234,7 +234,7 @@
       "travel_mm": 60.0,
       "candidate_pairs": 4,
       "distance_queries": 362,
-      "seconds": 4.65
+      "seconds": 5.12
     },
     {
       "index": 29,
@@ -242,7 +242,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 3,
       "distance_queries": 18,
-      "seconds": 2.41
+      "seconds": 3.09
     },
     {
       "index": 30,
@@ -976,23 +976,25 @@
     "bearing_contacts": [
       {
         "part": "6002_bearing_18",
-        "nominal_overlap_mm3": 53.456162496238825
+        "nominal_overlap_mm3": 51.344193262652766
       },
       {
         "part": "6002_bearing_43",
-        "nominal_overlap_mm3": 48.480746943424684
+        "nominal_overlap_mm3": 46.43975004624605
       }
     ],
     "top_chamfer_mm": 0.5,
+    "slot_count": 4,
+    "slot_width_mm": 0.5,
     "physical_fit_verified": false,
     "note": "15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm."
   },
   "source_sha256": {
-    "build.py": "bf64826fdc708377f3a03d846ddb4786b346c6297c86c24a4a7ddf999e4d0cf4",
-    "rotary_base/core.py": "49be766d8325e105d3a9e3a270d44cd69a41bfc3adf6ec390a6c223463efeb3d",
+    "build.py": "555dc98a8bbc517c5115677dcd353ec443e3ce28a65a6dcc11e3e097f6f36df5",
+    "rotary_base/core.py": "b5d895e0a9117a1daa81efbaa9f1311b7efd302076699a8db316590564fdaa89",
     "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
     "explosion.py": "4a602cd23a005985e988073e5b0bdb829ff3afdbf33f79a1bfd3820663f7a60e",
-    "parameters.json": "818e84e673e0ed78642616cbb9524e3e97f75247106417322744df9e778a7215",
+    "parameters.json": "99050f6bb7efe3fd3d52989578bb5d208bdee8c40c7a3d6e0e305b1aab00a921",
     "check_explosion.py": "dde4ba44e586e0d7912a21fe3b9e3111e6ee829950db2c6ffad9acc8b440ea86"
   }
 }

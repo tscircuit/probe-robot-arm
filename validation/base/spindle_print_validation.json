@@ -6,20 +6,72 @@
   "nominal_diametral_interference_mm": 0.25,
   "files": [
     {
+      "relief_slots": [
+        {
+          "direction_deg": 0,
+          "width_mm": 0.5,
+          "length_mm": 33.099998474121094,
+          "connected_root_mm": 0.5
+        },
+        {
+          "direction_deg": 90,
+          "width_mm": 0.5,
+          "length_mm": 33.09999656677246,
+          "connected_root_mm": 0.5000019073486328
+        },
+        {
+          "direction_deg": 180,
+          "width_mm": 0.5,
+          "length_mm": 33.09998893737793,
+          "connected_root_mm": 0.5000095367431641
+        },
+        {
+          "direction_deg": 270,
+          "width_mm": 0.5,
+          "length_mm": 33.09999465942383,
+          "connected_root_mm": 0.5000038146972656
+        }
+      ],
       "file": "STL/05_fixed_spindle_15p25_chamfer0p5_qty1.stl",
-      "measured_mesh_diameter_mm": 15.250000610779326,
-      "top_diameter_mm": 14.25000062797324,
+      "measured_mesh_diameter_mm": 15.25000046636328,
+      "top_diameter_mm": 14.250000426457886,
       "chamfer_axial_mm": 0.5,
-      "chamfer_radial_mm": 0.4999999914030431,
-      "sha256": "f83f21560b1c663656c2d58cc6e58b28d4f5e9d345f6ef74dd4a5bbb44d1d21b"
+      "chamfer_radial_mm": 0.5000000199526973,
+      "sha256": "c043ab12d604c1f5eadec8d0232f43bbd9e321528eb925958ccf4177ee673e08"
     },
     {
+      "relief_slots": [
+        {
+          "direction_deg": 0,
+          "width_mm": 0.5,
+          "length_mm": 9.5,
+          "connected_root_mm": 0.5
+        },
+        {
+          "direction_deg": 90,
+          "width_mm": 0.5,
+          "length_mm": 9.499995946884155,
+          "connected_root_mm": 0.5000040531158447
+        },
+        {
+          "direction_deg": 180,
+          "width_mm": 0.5,
+          "length_mm": 9.499995231628418,
+          "connected_root_mm": 0.500004768371582
+        },
+        {
+          "direction_deg": 270,
+          "width_mm": 0.5,
+          "length_mm": 9.499995946884155,
+          "connected_root_mm": 0.5000040531158447
+        }
+      ],
       "file": "OPTIONAL_fit_tests/spindle_coupon_15.25mm.stl",
-      "measured_mesh_diameter_mm": 15.25000044952707,
-      "top_diameter_mm": 14.25000062797324,
+      "measured_mesh_diameter_mm": 15.250000462623372,
+      "top_diameter_mm": 14.250000434835506,
       "chamfer_axial_mm": 0.5,
-      "chamfer_radial_mm": 0.4999999107769151,
-      "sha256": "cd8f2044b10f34f5734d7bf4341aa02a6f432437e1a811636caa32b9a67d546d"
+      "chamfer_radial_mm": 0.5000000138939331,
+      "sha256": "e45b3234ce8b7889714a86d68171f14b24b3afc233da44a52db5e8ac627a86ca"
     },
     {
       "file": "STL/06_inner_race_spacer_15p8_bore_qty1.stl",

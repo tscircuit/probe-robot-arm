@@ -66,6 +66,6 @@
   "deck_cutout_spoke_width_mm": 14,
   "deck_cutout_corner_radius_mm": 3,
   "roller_track_overlap_mm": 0.4,
-  "roller_axle_slot_width_mm": 0.5,
-  "roller_axle_slot_root_mm": 0.5
+  "spindle_slot_width_mm": 0.5,
+  "spindle_slot_root_mm": 0.5
 }

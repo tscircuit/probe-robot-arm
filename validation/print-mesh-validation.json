@@ -8,7 +8,7 @@
       "consistent_winding": true,
       "solid_shells": 1,
       "positive_volume": true,
-      "sha256": "a08170a3c801e323c92c7f4c960d9d5389e4ee2084bec17dec50c1bffec21419"
+      "sha256": "b42e68420b18a5354073346e3ce144e2fb7af0a02efd89ce3f5271411d4e43a5"
     },
     {
       "part": "Fixed_spindle",
@@ -16,7 +16,7 @@
       "consistent_winding": true,
       "solid_shells": 1,
       "positive_volume": true,
-      "sha256": "f83f21560b1c663656c2d58cc6e58b28d4f5e9d345f6ef74dd4a5bbb44d1d21b"
+      "sha256": "c043ab12d604c1f5eadec8d0232f43bbd9e321528eb925958ccf4177ee673e08"
     },
     {
       "part": "Inner_race_spacer",

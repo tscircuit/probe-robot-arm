@@ -14,14 +14,16 @@
     "bearing_contacts": [
       {
         "part": "6002_bearing_18",
-        "nominal_overlap_mm3": 53.456162496238825
+        "nominal_overlap_mm3": 51.344193262652766
       },
       {
         "part": "6002_bearing_43",
-        "nominal_overlap_mm3": 48.480746943424684
+        "nominal_overlap_mm3": 46.43975004624605
       }
     ],
     "top_chamfer_mm": 0.5,
+    "slot_count": 4,
+    "slot_width_mm": 0.5,
     "physical_fit_verified": false,
     "note": "15.25 mm print-fit target with a 0.5 mm top chamfer, reduced from the too-tight 15.5 mm print. Bearing insertion/removal assumes actual print fit or finishing; nominal radial interference is 0.125 mm."
   },

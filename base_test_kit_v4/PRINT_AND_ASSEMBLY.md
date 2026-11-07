@@ -1,12 +1,14 @@
-# Armature base — four angled press-fit rollers, v4.8
+# Armature base — four angled press-fit rollers, v4.9
 
 The main arm and this independent test fixture use the same rotary-base CAD. Four **625ZZ bearings** run on a continuous **45° outer track** on the 72T ring. Each bearing has **one integral block and printed axle**, tilted 45°. There are no roller bolts, nuts or separate spacers.
 
 ![Assembly and exploded view](ASSEMBLY_PREVIEW.png)
 
-## Slotted axle update (v4.8)
+## Central spindle relief slots (v4.9)
 
-Reprint **part 01 only** when updating from v4.7. Each of its four integral bearing axles has **four 0.5 mm-wide relief slots at 90° spacing**, extending **5 mm from the tip**. R0.25 rounded ends and a **0.5 mm solid root** keep all four segments attached to the shoulder. The 5.1 mm diameter, 0.3 mm tip chamfer and 0.4 mm normal track overlap are unchanged. The fit coupons also contain these slots. Confirm the printed slots remain open and test a coupon before installing the bearings; flexibility and fatigue have not been physically measured.
+Reprint **part 05 (central spindle)**. The four relief cuts belong on the **Ø15.25 mm spindle for the larger 6002 bearings**. Each slot is **0.5 mm wide**, spaced 90° apart, and runs **33.1 mm from the tip** to an R0.25 rounded end. A **0.5 mm uncut journal root** connects the four segments above the full shoulder. The diameter, flange, Ø6.6 mm centre bolt bore, height and 0.5 mm top chamfer are unchanged.
+
+The four small Ø5.1 mm roller axles are solid again. If you printed v4.8's slotted base, replace **part 01** with this corrected version too; a v4.7 solid-axle base is already compatible. The 0.4 mm normal track overlap is retained. Central spindle alternatives and short fit coupons also have slots. Check that printed slots remain open. The short coupons establish fit only, not the full spindle's flexibility; stiffness and fatigue remain unmeasured.
 
 ## Roller track fit update (v4.7)
 
@@ -48,7 +50,7 @@ All STL files use millimetres. Import at 100% scale. The largest part is the 200
 |---|---|---:|
 | 01 | Flat module plate with five large cutouts, four single blocks and integral 45° axles | 1 |
 | 02 | Integrated 200 × 200 mm stand | 1 |
-| 05 | Ø15.25 spindle with 0.5 mm top chamfer | 1 |
+| 05 | Ø15.25 spindle with four relief slots and 0.5 mm top chamfer | 1 |
 | 06 | 16 mm inner-race spacer, Ø15.8 bore | 1 |
 | 07 | Inner-race top washer | 1 |
 | 08 | Housing with two Ø32.2 bearing seats | 1 |
@@ -59,7 +61,7 @@ All STL files use millimetres. Import at 100% scale. The largest part is the 200
 
 Print the **plate flat underside down**, with the blocks and axles upward. Its plate is 11 mm thick and the recessed spindle seat keeps a 4 mm floor. No support is needed beneath the broad underside. Inspect the 45° axles and layer adhesion in the slicer; keep their bearing surfaces clean. Five walls and 40–50% infill are starting settings for a fit prototype, not a load qualification.
 
-Print the ring with its broad lower face on the bed and spacer posts up; the outer track grows upward at 45°. The stand prints platform-down and the pinion with its broad gear face down. The lower retainer and deck are supplied flipped. The deck's flat upper face goes on the bed, with its insert bosses upward. The spindle and race spacer should be solid.
+Print the ring with its broad lower face on the bed and spacer posts up; the outer track grows upward at 45°. The stand prints platform-down and the pinion with its broad gear face down. The lower retainer and deck are supplied flipped. The deck's flat upper face goes on the bed, with its insert bosses upward. Use solid infill for the spindle and race spacer; keep the modeled spindle relief slots open.
 
 Optional fit files include housing seat coupons and replacements for 32.0–32.3 mm seats, spindle coupons/replacements for 14.7, 14.8, 14.9, 15.0, 15.1, 15.25 and 15.5 mm journals, and three tilted 625 axle coupons. Fit alternatives replace their corresponding main part. Do not scale the whole assembly to adjust a fit.
 

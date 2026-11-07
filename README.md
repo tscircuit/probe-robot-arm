@@ -1,4 +1,4 @@
-# Modular flying probe — revision 16
+# Modular flying probe — revision 17
 
 Source: https://github.com/tscircuit/probe-robot-arm
 
@@ -6,9 +6,11 @@ Parametric CadQuery assembly and public viewer: https://modular-flying-probe-arm
 
 Four removable theta/Z/radial modules serve a 100 × 100 mm PCB, with simultaneous probe contacts on a 2 × 2 mm square. The NEMA17 Z stage and NEMA14 radial stage use the actual **R24 rear pass-through mounting enclosure** from [tscircuit/rack-actuator](https://github.com/tscircuit/rack-actuator/tree/a0ccaf201d6f6f5f988ca64dc1a9f5e7aba931b5). This is a geometry prototype; physical print fit, stiffness, accuracy and load capacity remain untested.
 
-## Axle relief slots (revision 16)
+## Central spindle relief slots (revision 17)
 
-Each integral 625ZZ axle now has **four 0.5 mm-wide radial relief slots**, spaced 90° apart and running **5 mm back from the free end**. Their R0.25 closed ends stop above a **0.5 mm unslotted root**, preserving the full shoulder and a single connected printed part. The outside diameter remains 5.1 mm with its 0.3 mm lead-in chamfer; the 0.4 mm normal track overlap is retained. Only **part 01 (module base)** needs reprinting from revision 15. The optional axle fit coupons include the same slots. Spring force, fatigue and actual press fit remain unmeasured.
+The central **Ø15.25 mm spindle for the two 6002 bearings** now has **four 0.5 mm-wide radial relief slots**, spaced 90° apart. They run **33.1 mm from the free end** to rounded R0.25 ends, retaining a **0.5 mm connected journal root** above the full shoulder. The flange, Ø6.6 mm bolt bore, height and 0.5 mm top chamfer remain unchanged. The small Ø5.1 mm 625ZZ roller axles are restored to solid pins.
+
+Reprint **part 05 (central spindle)**. If you printed revision 16's slotted roller base, replace **part 01** too; revision 15's solid-axle base remains compatible. Optional central spindle replacements and short fit coupons include the slots. Short coupons check fit but do not reproduce the full spindle's flexibility. Actual press fit, spring force and fatigue remain unmeasured.
 
 ## Roller track fit (revision 15)
 
