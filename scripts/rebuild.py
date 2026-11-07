@@ -21,7 +21,7 @@ refs={p['name']:p for p in json.loads((bench/'preview_mesh.json').read_text())}
 for p in json.loads((root/'output/arm-mesh.json').read_text()):
  if p.get('base_name') and p['printed']:
   shutil.copyfile(bench/refs[p['base_name']]['printFile'],root/'output/prototype-parts'/(p['name']+'.stl'))
-py('check_base_cutouts.py');py('check_flat_base.py');py('verify_main_prints.py')
+py('check_deck_cutouts.py');py('check_base_cutouts.py');py('check_flat_base.py');py('verify_main_prints.py')
 if args.site:
  run(str(root/'.qa/node_modules/.bin/esbuild'),'base_test_kit_v4/viewer.js','--bundle','--format=iife','--minify','--alias:three=./base_test_kit_v4/vendor/three.module.js','--outfile=base_test_kit_v4/viewer.bundle.js')
  py('prepare_base_v4.py')
@@ -31,6 +31,7 @@ if args.site:
  py('prepare_site.py')
  shutil.copyfile(root/'output/flat-base-validation.json',bench/'flat-base-validation.json')
  shutil.copyfile(root/'output/base-cutouts-validation.json',bench/'base-cutouts-validation.json')
+ shutil.copyfile(root/'output/deck-cutouts-validation.json',bench/'deck-cutouts-validation.json')
  py('prepare_base_v4.py','--publish-assets')
  run('node','test_viewer.mjs',report='output/current-viewer-validation.json')
  run('node','test_part_downloads.mjs');run('node','test_hidden_edges.mjs');run('node','test_mouse_controls.mjs')

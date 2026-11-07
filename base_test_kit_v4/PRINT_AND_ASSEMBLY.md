@@ -1,16 +1,20 @@
-# Armature base — four angled press-fit rollers, v4.5
+# Armature base — four angled press-fit rollers, v4.6
 
 The main arm and this independent test fixture use the same rotary-base CAD. Four **625ZZ bearings** run on a continuous **45° outer track** on the 72T ring. Each bearing has **one integral block and printed axle**, tilted 45°. There are no roller bolts, nuts or separate spacers.
 
 ![Assembly and exploded view](ASSEMBLY_PREVIEW.png)
 
+## Lightweight deck update (v4.6)
+
+Reprint **part 10 only** when updating from v4.5. Five R3-cornered windows reduce the rotating deck's solid CAD volume by **25.2%**. The 6 mm plate retains its 10 mm outer rim, 28 mm-radius hub, six 14 mm radial ribs, all fastener seats and complete Z-cradle flange footprints. Print with the original top face against the bed, as oriented in the supplied STL. The main assembly and test fixture share this exact deck. Other parts and hardware are unchanged. Physical stiffness remains unmeasured.
+
 ## Lightweight plate update (v4.5)
 
-Reprint **part 01 only** when updating from v4.4. Five large through-cutouts with R6 corners remove approximately **37% of the base's solid CAD volume**. The remaining plate has a 10 mm perimeter and 28.3 mm diagonal webs, with the complete motor pad, spindle hub, mounting lands and bearing-block footprints retained. Plate thickness stays 11 mm, and all remaining lower faces lie on Z0 for printing. Slicer material saving depends on wall and infill settings; stiffness has not been physically measured.
+The v4.5 update changed **part 01** from v4.4. Five large through-cutouts with R6 corners remove approximately **37% of the base's solid CAD volume**. The remaining plate has a 10 mm perimeter and 28.3 mm diagonal webs, with the complete motor pad, spindle hub, mounting lands and bearing-block footprints retained. Plate thickness stays 11 mm, and all remaining lower faces lie on Z0 for printing. Slicer material saving depends on wall and infill settings; stiffness has not been physically measured.
 
 ## Changes to print
 
-When updating from the flat-base kit (v4.2), reprint **01 base plate, 05 spindle and 11 ring**. The integrated stand, central bearing housing, spacer, top washer, lower retainer, rotating deck and 12T pinion retain their printable geometry. The plate underside remains flat; the plate, motor and deck mounting heights are unchanged.
+When updating from the flat-base kit (v4.2), reprint **01 base plate, 05 spindle, 10 rotating deck and 11 ring**. The integrated stand, central bearing housing, spacer, top washer, lower retainer and 12T pinion retain their printable geometry. The plate underside remains flat; the plate, motor and deck mounting heights are unchanged.
 
 The spindle journal is **Ø15.25 mm**, with a **0.5 mm × 45° top chamfer** and Ø14.25 mm lead-in. The flange, centre bolt bore and total height are unchanged. Keep the Ø15.8 spacer. The nominal 6002 bore is 15 mm, so the selected print-fit allowance is 0.25 mm diametrically. Check a coupon or finish the printed fit as needed.
 
@@ -39,7 +43,7 @@ All STL files use millimetres. Import at 100% scale. The largest part is the 200
 | 07 | Inner-race top washer | 1 |
 | 08 | Housing with two Ø32.2 bearing seats | 1 |
 | 09 | Lower outer-race retainer | 1 |
-| 10 | Shared structural deck with six Z-cradle insert seats | 1 |
+| 10 | Shared deck with five rounded windows and six Z-cradle insert seats | 1 |
 | 11 | 72T ring, integral spacers and continuous outer bevel | 1 |
 | 13 | Open-tip compliant 12T pinion | 1 |
 

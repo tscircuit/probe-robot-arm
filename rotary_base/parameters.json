@@ -59,5 +59,10 @@
   "roller_axle_diameter_mm": 5.1,
   "roller_axle_chamfer_mm": 0.3,
   "base_cutouts": true,
-  "base_cutout_corner_radius_mm": 6
+  "base_cutout_corner_radius_mm": 6,
+  "deck_cutouts": true,
+  "deck_cutout_rim_mm": 10,
+  "deck_cutout_hub_radius_mm": 28,
+  "deck_cutout_spoke_width_mm": 14,
+  "deck_cutout_corner_radius_mm": 3
 }

@@ -46,6 +46,8 @@ for p in main_parts:
 (root/'output/shared-print-exports.json').write_text(json.dumps(dict(passed=True,files=shared_exports),indent=2))
 relief=json.loads((root/'output/base-cutouts-validation.json').read_text());assert relief['passed']
 for name,digest in relief['source_sha256'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
+deck_relief=json.loads((root/'output/deck-cutouts-validation.json').read_text());assert deck_relief['passed']
+for name,digest in deck_relief['source_sha256'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
 flat=json.loads((root/'output/flat-base-validation.json').read_text());assert flat['passed']
 for name,digest in flat['source_sha256'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
 for row in flat['files']:assert hashlib.sha256((root/row['file']).read_bytes()).hexdigest()==row['sha256']
@@ -62,7 +64,7 @@ for stem in ['single-arm','four-arm-platform']:
   z.write(root/'output'/(stem+'.step'),stem+'.step')
   z.write(root/'README.md','README.md')
 with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
- for name in ['model.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
+ for name in ['model.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
   z.write(root/name,name)
  for name in ['.qa/package.json','.qa/package-lock.json','site/dist/index.html','site/dist/app.js','site/dist/style.css','site/dist/part-downloads.js']:z.write(root/name,name)
  for directory in ['upstream','rotary_base','base_test_kit_v4','scripts','site/dist/vendor','output/prototype-parts']:
@@ -78,6 +80,7 @@ with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compressleve
  z.write(root/'output/z-mount-validation.json','z-mount-validation.json')
  z.write(root/'output/base-drive-validation.json','base-drive-validation.json')
  z.write(root/'output/base-cutouts-validation.json','base-cutouts-validation.json')
+ z.write(root/'output/deck-cutouts-validation.json','deck-cutouts-validation.json')
 shutil.copyfile(root/'output/validation.json',download/'validation.json')
 shutil.copyfile(root/'output/platform-validation.json',download/'platform-validation.json')
 shutil.copyfile(root/'output/arm-explosion-validation.json',download/'arm-explosion-validation.json')
@@ -90,6 +93,7 @@ for name,digest in sync['source_sha256'].items():assert hashlib.sha256((root/nam
 shutil.copyfile(root/'output/base-sync-validation.json',download/'base-sync-validation.json')
 shutil.copyfile(root/'output/flat-base-validation.json',download/'flat-base-validation.json')
 shutil.copyfile(root/'output/base-cutouts-validation.json',download/'base-cutouts-validation.json')
+shutil.copyfile(root/'output/deck-cutouts-validation.json',download/'deck-cutouts-validation.json')
 for p in dist.rglob('*'):
  if p.is_file() and p.stat().st_size>24*1024*1024:raise ValueError(f'Asset exceeds hosting limit: {p}')
 print('Packaged:',{p.name:p.stat().st_size for p in download.iterdir()})

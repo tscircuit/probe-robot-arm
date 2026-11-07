@@ -1,4 +1,4 @@
-# Modular flying probe — revision 13
+# Modular flying probe — revision 14
 
 Source: https://github.com/tscircuit/probe-robot-arm
 
@@ -6,9 +6,13 @@ Parametric CadQuery assembly and public viewer: https://modular-flying-probe-arm
 
 Four removable theta/Z/radial modules serve a 100 × 100 mm PCB, with simultaneous probe contacts on a 2 × 2 mm square. The NEMA17 Z stage and NEMA14 radial stage use the actual **R24 rear pass-through mounting enclosure** from [tscircuit/rack-actuator](https://github.com/tscircuit/rack-actuator/tree/a0ccaf201d6f6f5f988ca64dc1a9f5e7aba931b5). This is a geometry prototype; physical print fit, stiffness, accuracy and load capacity remain untested.
 
-## Lighter module base
+## Lighter rotating deck
 
-Five large through-cutouts with **R6 rounded corners** reduce the module base's solid CAD volume by approximately **37%**. A 10 mm perimeter and 28.3 mm diagonal webs retain the motor pad, spindle hub, all mounting lands and the four bearing-block footprints. The 11 mm thickness and flat printing underside are retained. **Only the module base needs reprinting** when updating from revision 12; the ring, spindle, deck, stand and hardware are unchanged. Volume reduction describes the CAD solid, not an exact slicer filament saving or a measured stiffness rating.
+Five rounded through-windows remove **25.2% of the rotating deck's solid CAD volume**. The deck retains its 6 mm plate thickness, 10 mm continuous outer rim, 28 mm-radius bearing hub, six 14 mm-wide radial ribs, all six Z-insert seats and the full Z-cradle flange footprints. Corners are R3. The original top face remains the flat printing face. **Only part 10 (rotating deck) needs reprinting when upgrading from revision 13**; the other parts and hardware are unchanged. The main arm and standalone fixture use the same shared deck. CAD volume reduction does not establish physical stiffness or exact filament savings.
+
+## Lighter module base (revision 13)
+
+Five large through-cutouts with **R6 rounded corners** reduce the module base's solid CAD volume by approximately **37%**. A 10 mm perimeter and 28.3 mm diagonal webs retain the motor pad, spindle hub, all mounting lands and the four bearing-block footprints. The 11 mm thickness and flat printing underside are retained. Revision 13 changed only the module base; revision 14 also lightens the rotating deck. Volume reduction describes the CAD solid, not an exact slicer filament saving or a measured stiffness rating.
 
 ## Spindle fit update
 
@@ -131,6 +135,7 @@ Open http://localhost:8000. Generated downloads and CAD meshes are excluded from
 - `rotary_base/`: shared rotary-base generator, gear geometry and configuration.
 - `check_base_sync.py`: common-component identity, four single blocks, integral tilted axles and clamp-height checks.
 - `check_flat_base.py`: connected planar underside, retained spindle floor, and matching flat STL exports on both pages.
+- `check_deck_cutouts.py`: deck volume reduction, open windows, full cradle footprint, retained mounting lands and flat printing face.
 - `check_base_cutouts.py`: volume reduction, five open windows, and retained mounting lands and structural connections.
 - `check_platform.py`: four-arm cluster and frame checks.
 - `check_z_mount.py`: low mounting and fastener-access checks.

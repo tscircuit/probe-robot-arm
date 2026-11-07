@@ -79,6 +79,19 @@ def base_relief_cutters(p):
     for sign in [-1,1]:outlines.append([(49,sign*29),(85,sign*29),(85,sign*65)])
     return [cq.Workplane('XY').polyline(pts).close().extrude(p['base_plate_thickness_mm']+2).edges('|Z').fillet(p['base_cutout_corner_radius_mm']).translate((0,0,-1)).val() for pts in outlines]
 
+def deck_relief_cutters(p):
+    # Leave the bearing hub, a continuous outer rim and six radial load paths.
+    windows=annulus(82-p['deck_cutout_rim_mm'],p['deck_cutout_hub_radius_mm'],12,47.2)
+    for angle in [30,90,150]:
+        windows=windows.cut(box(180,p['deck_cutout_spoke_width_mm'],14,(0,0,53.2)).rotate((0,0,0),(0,0,1),angle))
+    # Full cradle flange footprints plus 3 mm; reinforce the hub/front-flange junction.
+    windows=windows.cut(box(94,29.6,14,(-13,-50.2,53.2)),
+                        box(33.1,110,14,(38.45,2,53.2)),
+                        box(20,60,14,(17,0,53.2))).clean()
+    # Omit small residual pockets; keep only useful through-windows.
+    return [cq.Workplane('XY').newObject([s]).edges('|Z').fillet(p['deck_cutout_corner_radius_mm']).val()
+            for s in windows.Solids() if s.Volume()/12>=300]
+
 def build(p):
     assert 32<=p['bearing_seat_diameter']<=32.4
     assert 14.6<=p['spindle_diameter']<=15.5
@@ -135,6 +148,7 @@ def build(p):
         deck=deck.cut(cyl(2.8,6.8,(x,y,51.5))).cut(cyl(3.1,.5,(x,y,57.9)))
     deck=holes(deck,rotor_bolts()+ring_bolts,1.7,47,13)
     for x,y in rotor_bolts():deck=deck.cut(hexagon(5.8,2.5,x,y,55.8))
+    if p.get('deck_cutouts',False):deck=deck.cut(*deck_relief_cutters(p)).clean()
     add('Rotating_test_deck',deck,'rotor',print_id='10_shared_rotating_deck_qty1',flip=True)
     # Add a continuous outer raceway; preserve the teeth and six bolt positions.
     outer=p['ring_outer_radius_mm'];ch=p['ring_track_chamfer_mm']

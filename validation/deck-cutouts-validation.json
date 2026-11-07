@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "cutouts": 5,
+  "original_volume_mm3": 124683.54752162115,
+  "new_volume_mm3": 93285.95843385282,
+  "removed_volume_mm3": 31397.589087768327,
+  "volume_reduction_percent": 25.181822070248465,
+  "corner_radius_mm": 3,
+  "rim_width_mm": 10,
+  "hub_radius_mm": 28,
+  "radial_rib_width_mm": 14,
+  "one_connected_solid": true,
+  "material_removal_only": true,
+  "full_cradle_footprint_supported": true,
+  "print_bed_face_count": 1,
+  "print_bed_area_mm2": 14869.32377071806,
+  "retained_regions": [
+    {
+      "region": "central bearing hub",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "continuous outer rim",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "Z insert seat 0",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "Z insert seat 1",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "Z insert seat 2",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "Z insert seat 3",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "Z insert seat 4",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "Z insert seat 5",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing housing fastener 0",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing housing fastener 1",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing housing fastener 2",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "bearing housing fastener 3",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "radial ribs 30/210",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "radial ribs 90/270",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "radial ribs 150/330",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "ring fastener seat 0",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "ring fastener seat 1",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "ring fastener seat 2",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "ring fastener seat 3",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "ring fastener seat 4",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "ring fastener seat 5",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "full side flange footprint",
+      "removed_material_mm3": 0
+    },
+    {
+      "region": "full front flange footprint",
+      "removed_material_mm3": 0
+    }
+  ],
+  "limits": [
+    "CAD material reduction is not a measured stiffness rating or an exact slicer filament saving."
+  ],
+  "source_sha256": {
+    "check_deck_cutouts.py": "bcfb0105e4444cfb4e9e0ad9ddaf3f1bd4b64548e04e3f4f102d468e5d964790",
+    "model.py": "94389abae65f1b19a137baf8f465fa5e1009645f18637dbf011e3f166fc93908",
+    "parameters.json": "2f4c3afcc65f20cd4781d5467a3894b05647803871eee69397a6ac2681820316",
+    "rotary_base/core.py": "dd062e979f00ae75ba2514b325360128fd33741ec31ac9db82d1c9a4bacb3fe4",
+    "rotary_base/parameters.json": "9e65e3a961281ab88bacc3b21442f1a3231b7e15299ee73ba9301ed9bf2b1d47"
+  }
+}
