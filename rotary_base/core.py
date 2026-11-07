@@ -48,27 +48,46 @@ def roller_transform(shape,p,angle=0):
     lay=roller_layout(p)
     return shape.rotate((0,0,0),(0,1,0),-45).translate((lay['center_r'],0,lay['center_z'])).rotate((0,0,0),(0,0,1),angle)
 
+def roller_axle_relief_cutters(p):
+    """Four radial slots in the local X-axis journal, open at its free end."""
+    width=p.get('roller_axle_slot_width_mm',0)
+    if not width:return []
+    root=p['roller_axle_slot_root_mm'];length=5.5-root
+    assert 0<width<=1 and .25<=root<5.5-width/2
+    bottom=3-length;radius=p['roller_axle_diameter_mm']/2
+    # A semicircular closed end avoids a sharp slot root; the shoulder stays intact.
+    slot=(cq.Workplane('YZ').moveTo(-width/2,4).lineTo(-width/2,bottom+width/2)
+          .threePointArc((0,bottom),(width/2,bottom+width/2)).lineTo(width/2,4)
+          .close().extrude(radius+1).val())
+    return [slot.rotate((0,0,0),(0,0,1),a).rotate((0,0,0),(0,1,0),90) for a in [0,90,180,270]]
+
 def roller_block(p,angle=0):
     # One tilted block. Local X is the axle, local Z points toward the track.
     profile=[(-8,-20),(8,-20),(6,0)]
     block=cq.Workplane('YZ').polyline(profile).threePointArc((0,6),(-6,0)).close().extrude(8).translate((-11.5,0,0)).val()
     shoulder=cyl(4,1.1,(-3.6,0,0),(1,0,0))
     axle=chamfered_shaft(p['roller_axle_diameter_mm']/2,5.5,-2.5,p['roller_axle_chamfer_mm']).rotate((0,0,0),(0,1,0),90)
+    cuts=roller_axle_relief_cutters(p)
+    if cuts:axle=axle.cut(*cuts).clean()
     block=roller_transform(block.fuse(shoulder,axle).clean(),p,angle)
     # The block's broad foot joins the flat plate without protruding beneath it.
     return block.intersect(box(400,400,100,(0,0,p['base_plate_thickness_mm']+50))).clean()
 
 def roller_fit_checks(parts,p):
     by={a['name']:a['shape'] for a in parts};base=by['Fixed_base_plate'];r=p['roller_axle_diameter_mm']/2;rows=[]
+    expected=0;shell=None
+    if r>2.5:
+        shell=annulus(r,2.5,5,-2.5).rotate((0,0,0),(0,1,0),90)
+        cuts=roller_axle_relief_cutters(p)
+        if cuts:shell=shell.cut(*cuts).clean()
+        expected=shell.Volume()
     for i,angle in enumerate(p['roller_angles_deg']):
         bearing=by[f'625ZZ_support_roller_{i}'];actual=base.intersect(bearing)
-        expected=math.pi*max(0,r*r-2.5**2)*5
         assert abs(max(0,actual.Volume())-expected)<1e-5,(i,actual.Volume(),expected)
         if r>2.5:
-            shell=annulus(r,2.5,5,-2.5).rotate((0,0,0),(0,1,0),90)
             assert actual.cut(roller_transform(shell,p,angle)).Volume()<1e-6,'Unexpected block/bearing contact outside printed axle fit'
         rows.append(dict(bearing=f'625ZZ_support_roller_{i}',nominal_overlap_mm3=expected))
-    return dict(axle_diameter_mm=2*r,bearing_bore_mm=5,diametral_interference_mm=max(0,2*r-5),top_chamfer_mm=p['roller_axle_chamfer_mm'],contacts=rows,physical_fit_verified=False)
+    return dict(axle_diameter_mm=2*r,bearing_bore_mm=5,diametral_interference_mm=max(0,2*r-5),top_chamfer_mm=p['roller_axle_chamfer_mm'],slot_count=4 if p.get('roller_axle_slot_width_mm',0) else 0,slot_width_mm=p.get('roller_axle_slot_width_mm',0),contacts=rows,physical_fit_verified=False)
 
 def roller_track_fit_checks(parts,p):
     """Bound the requested interference by the actual ring's tangent planes."""

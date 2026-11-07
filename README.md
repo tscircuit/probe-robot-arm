@@ -1,10 +1,14 @@
-# Modular flying probe — revision 15
+# Modular flying probe — revision 16
 
 Source: https://github.com/tscircuit/probe-robot-arm
 
 Parametric CadQuery assembly and public viewer: https://modular-flying-probe-arm.seveibar.chatgpt.site
 
 Four removable theta/Z/radial modules serve a 100 × 100 mm PCB, with simultaneous probe contacts on a 2 × 2 mm square. The NEMA17 Z stage and NEMA14 radial stage use the actual **R24 rear pass-through mounting enclosure** from [tscircuit/rack-actuator](https://github.com/tscircuit/rack-actuator/tree/a0ccaf201d6f6f5f988ca64dc1a9f5e7aba931b5). This is a geometry prototype; physical print fit, stiffness, accuracy and load capacity remain untested.
+
+## Axle relief slots (revision 16)
+
+Each integral 625ZZ axle now has **four 0.5 mm-wide radial relief slots**, spaced 90° apart and running **5 mm back from the free end**. Their R0.25 closed ends stop above a **0.5 mm unslotted root**, preserving the full shoulder and a single connected printed part. The outside diameter remains 5.1 mm with its 0.3 mm lead-in chamfer; the 0.4 mm normal track overlap is retained. Only **part 01 (module base)** needs reprinting from revision 15. The optional axle fit coupons include the same slots. Spring force, fatigue and actual press fit remain unmeasured.
 
 ## Roller track fit (revision 15)
 

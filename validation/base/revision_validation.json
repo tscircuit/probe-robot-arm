@@ -34,22 +34,24 @@
     "bearing_bore_mm": 5,
     "diametral_interference_mm": 0.09999999999999964,
     "top_chamfer_mm": 0.3,
+    "slot_count": 4,
+    "slot_width_mm": 0.5,
     "contacts": [
       {
         "bearing": "625ZZ_support_roller_0",
-        "nominal_overlap_mm3": 3.966260725157106
+        "nominal_overlap_mm3": 3.5209057990124677
       },
       {
         "bearing": "625ZZ_support_roller_1",
-        "nominal_overlap_mm3": 3.966260725157106
+        "nominal_overlap_mm3": 3.5209057990124677
       },
       {
         "bearing": "625ZZ_support_roller_2",
-        "nominal_overlap_mm3": 3.966260725157106
+        "nominal_overlap_mm3": 3.5209057990124677
       },
       {
         "bearing": "625ZZ_support_roller_3",
-        "nominal_overlap_mm3": 3.966260725157106
+        "nominal_overlap_mm3": 3.5209057990124677
       }
     ],
     "physical_fit_verified": false
@@ -134,9 +136,9 @@
   ],
   "source_sha256": {
     "build.py": "bf64826fdc708377f3a03d846ddb4786b346c6297c86c24a4a7ddf999e4d0cf4",
-    "rotary_base/core.py": "70f85e26ff8d264e27bf3f0da173cf81991da7143af856d65deb796b9f5d1719",
+    "rotary_base/core.py": "49be766d8325e105d3a9e3a270d44cd69a41bfc3adf6ec390a6c223463efeb3d",
     "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
-    "parameters.json": "4b61ac47e890bec0a4e2b2ae4b37457cac64f8dc306eb9b05f775508f2bac1c3",
+    "parameters.json": "818e84e673e0ed78642616cbb9524e3e97f75247106417322744df9e778a7215",
     "check_revision.py": "d1992b6799d7b7b547a703841ef62a64b59314ba0f19c8a7e8a86e96919445a8"
   }
 }

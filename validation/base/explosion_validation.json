@@ -10,7 +10,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 20,
       "distance_queries": 1488,
-      "seconds": 50.55
+      "seconds": 44.54
     },
     {
       "index": 1,
@@ -18,7 +18,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 16,
       "distance_queries": 40,
-      "seconds": 4.64
+      "seconds": 3.86
     },
     {
       "index": 2,
@@ -50,7 +50,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 11,
       "distance_queries": 666,
-      "seconds": 13.59
+      "seconds": 12.58
     },
     {
       "index": 6,
@@ -58,7 +58,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 5,
       "distance_queries": 18,
-      "seconds": 8.27
+      "seconds": 7.74
     },
     {
       "index": 7,
@@ -66,7 +66,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 34,
       "distance_queries": 293,
-      "seconds": 63.23
+      "seconds": 70.94
     },
     {
       "index": 8,
@@ -82,7 +82,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 6,
       "distance_queries": 438,
-      "seconds": 6.89
+      "seconds": 5.14
     },
     {
       "index": 10,
@@ -90,7 +90,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 6,
       "distance_queries": 354,
-      "seconds": 14.53
+      "seconds": 13.08
     },
     {
       "index": 11,
@@ -106,7 +106,7 @@
       "travel_mm": 60.0,
       "candidate_pairs": 10,
       "distance_queries": 11,
-      "seconds": 64.0
+      "seconds": 50.19
     },
     {
       "index": 13,
@@ -122,7 +122,7 @@
       "travel_mm": 120.0,
       "candidate_pairs": 4,
       "distance_queries": 112,
-      "seconds": 10.23
+      "seconds": 8.98
     },
     {
       "index": 15,
@@ -130,7 +130,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 20,
       "distance_queries": 2212,
-      "seconds": 44.7
+      "seconds": 34.55
     },
     {
       "index": 16,
@@ -146,7 +146,7 @@
       "travel_mm": 70.0,
       "candidate_pairs": 2,
       "distance_queries": 3,
-      "seconds": 1.54
+      "seconds": 1.42
     },
     {
       "index": 18,
@@ -154,7 +154,7 @@
       "travel_mm": 40.0,
       "candidate_pairs": 1,
       "distance_queries": 121,
-      "seconds": 4.1
+      "seconds": 3.74
     },
     {
       "index": 19,
@@ -162,7 +162,7 @@
       "travel_mm": 35.0,
       "candidate_pairs": 1,
       "distance_queries": 6,
-      "seconds": 1.55
+      "seconds": 1.42
     },
     {
       "index": 20,
@@ -178,7 +178,7 @@
       "travel_mm": 20.0,
       "candidate_pairs": 1,
       "distance_queries": 120,
-      "seconds": 3.9
+      "seconds": 3.49
     },
     {
       "index": 22,
@@ -194,7 +194,7 @@
       "travel_mm": 180.0,
       "candidate_pairs": 3,
       "distance_queries": 87,
-      "seconds": 7.17
+      "seconds": 6.54
     },
     {
       "index": 24,
@@ -210,7 +210,7 @@
       "travel_mm": 110.0,
       "candidate_pairs": 4,
       "distance_queries": 632,
-      "seconds": 6.22
+      "seconds": 6.53
     },
     {
       "index": 26,
@@ -234,7 +234,7 @@
       "travel_mm": 60.0,
       "candidate_pairs": 4,
       "distance_queries": 362,
-      "seconds": 4.69
+      "seconds": 4.65
     },
     {
       "index": 29,
@@ -242,7 +242,7 @@
       "travel_mm": 100.0,
       "candidate_pairs": 3,
       "distance_queries": 18,
-      "seconds": 2.49
+      "seconds": 2.41
     },
     {
       "index": 30,
@@ -989,10 +989,10 @@
   },
   "source_sha256": {
     "build.py": "bf64826fdc708377f3a03d846ddb4786b346c6297c86c24a4a7ddf999e4d0cf4",
-    "rotary_base/core.py": "70f85e26ff8d264e27bf3f0da173cf81991da7143af856d65deb796b9f5d1719",
+    "rotary_base/core.py": "49be766d8325e105d3a9e3a270d44cd69a41bfc3adf6ec390a6c223463efeb3d",
     "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
     "explosion.py": "4a602cd23a005985e988073e5b0bdb829ff3afdbf33f79a1bfd3820663f7a60e",
-    "parameters.json": "4b61ac47e890bec0a4e2b2ae4b37457cac64f8dc306eb9b05f775508f2bac1c3",
+    "parameters.json": "818e84e673e0ed78642616cbb9524e3e97f75247106417322744df9e778a7215",
     "check_explosion.py": "dde4ba44e586e0d7912a21fe3b9e3111e6ee829950db2c6ffad9acc8b440ea86"
   }
 }

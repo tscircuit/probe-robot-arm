@@ -33,7 +33,9 @@ for angle in p['roller_angles_deg']:
  assert base.isInside(point(-7.5,0,5.5),1e-6)
  assert not base.isInside(point(-7.5,5,5.5),1e-6),'Rectangular cap remains'
  assert base.isInside(point(-7.5,6,-8),1e-6),'Missing widened foot'
- assert base.isInside(point(0,0,0),1e-6),'Missing integral axle'
+ assert base.isInside(point(0,1,1),1e-6),'Missing integral axle finger'
+ assert base.isInside(point(-2.25,0,0),1e-6),'Missing connected axle root'
+ if p.get('roller_axle_slot_width_mm',0):assert not base.isInside(point(0,0,0),1e-6),'Missing axle relief slots'
  assert not base.isInside(point(7.5,0,0),1e-6),'Second bearing block remains'
 assert abs(top_z(main_by['M6x60_axle_bolt']['shape'])-lay['base_clamp_top_z'])<1e-6
 assert abs(top_z(main_by['Rotating_test_deck']['shape'])-lay['deck_top_z'])<1e-6

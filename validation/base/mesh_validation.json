@@ -10,10 +10,10 @@
       "size_mm": [
         22.050134658813477,
         15.436854362487793,
-        18.267587661743164
+        18.258544921875
       ],
       "bed_z_mm": 1.7763568394002505e-15,
-      "triangles": 2948
+      "triangles": 4320
     },
     {
       "file": "OPTIONAL_fit_tests/625_axle_coupon_5.0mm_45deg.stl",
@@ -24,10 +24,10 @@
       "size_mm": [
         22.050134658813477,
         15.436854362487793,
-        18.30294418334961
+        18.294082641601562
       ],
       "bed_z_mm": 1.7763568394002505e-15,
-      "triangles": 2948
+      "triangles": 4312
     },
     {
       "file": "OPTIONAL_fit_tests/625_axle_coupon_5.1mm_45deg.stl",
@@ -38,10 +38,10 @@
       "size_mm": [
         22.050134658813477,
         15.436854362487793,
-        18.338298797607422
+        18.329612731933594
       ],
       "bed_z_mm": 1.7763568394002505e-15,
-      "triangles": 2948
+      "triangles": 4312
     },
     {
       "file": "OPTIONAL_fit_tests/ALTERNATE_housing_seat_32.0mm_USE_INSTEAD_OF_08.stl",
@@ -332,10 +332,10 @@
       "size_mm": [
         190.0,
         190.0,
-        29.338298797607422
+        29.329612731933594
       ],
       "bed_z_mm": 0.0,
-      "triangles": 31336
+      "triangles": 36824
     },
     {
       "file": "STL/02_integrated_stand_qty1.stl",

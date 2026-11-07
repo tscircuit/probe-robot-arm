@@ -1,8 +1,12 @@
-# Armature base — four angled press-fit rollers, v4.7
+# Armature base — four angled press-fit rollers, v4.8
 
 The main arm and this independent test fixture use the same rotary-base CAD. Four **625ZZ bearings** run on a continuous **45° outer track** on the 72T ring. Each bearing has **one integral block and printed axle**, tilted 45°. There are no roller bolts, nuts or separate spacers.
 
 ![Assembly and exploded view](ASSEMBLY_PREVIEW.png)
+
+## Slotted axle update (v4.8)
+
+Reprint **part 01 only** when updating from v4.7. Each of its four integral bearing axles has **four 0.5 mm-wide relief slots at 90° spacing**, extending **5 mm from the tip**. R0.25 rounded ends and a **0.5 mm solid root** keep all four segments attached to the shoulder. The 5.1 mm diameter, 0.3 mm tip chamfer and 0.4 mm normal track overlap are unchanged. The fit coupons also contain these slots. Confirm the printed slots remain open and test a coupon before installing the bearings; flexibility and fatigue have not been physically measured.
 
 ## Roller track fit update (v4.7)
 
