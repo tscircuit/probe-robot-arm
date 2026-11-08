@@ -9,7 +9,7 @@ assert len(support.Solids())==len(carrier.Solids())==1
 assert abs(support.BoundingBox().ymin+62)<1e-6
 bed=[f for f in support.Faces() if f.geomType()=='PLANE' and abs(f.Center().y+62)<1e-6 and f.normalAt().y<-.999]
 assert sum(f.Area() for f in bed)>15000
-for x,z in [(0,zo+56),(-40,dt+40),(76,dt+40),(0,zo+132)]:
+for x,z in [(0,zo+56),(0,dt+40),(-76,dt+40),(76,dt+40),(0,zo+132)]:
  assert overlap(cyl(3,24,(x,-64,z),(0,1,0)),support)<1e-6,'Relief window obstructed'
 assert not any(a['name'].startswith(('Z_top_mount_','Z_enclosure_mount_')) for a in parts)
 assert overlap(support,box(500,200,500,(0,58.001,dt+288.001)))<1e-6,'Support extends past the base mounting plane above the corner gusset'
@@ -31,7 +31,7 @@ for x in [-78.5,-36.5,-15.5,15.5,36.5,78.5]:
  for y in [-15.5,15.5]:seat=seat.cut(cyl(1.71,4,(x,y,zp-1)))
 assert seat.cut(carrier).Volume()<1e-6
 assert carrier.isInside(V(0,0,zp+7),1e-6)
-for y in [-46,46]:assert box(200,7,15,(100,y,zp+20)).cut(carrier).Volume()<1e-6
+for y in [-46,46]:assert box(160,7,15,(0,y,zp+20)).cut(carrier).Volume()<1e-6
 for a in parts:
  if a['name'].startswith('Z_base_mount_'):
   assert overlap(a['shape'],support)<1e-6,(a['name'],'support')
@@ -50,8 +50,17 @@ motor=by['Z_NEMA17_full-depth_reference']['shape'];gap=motor.distance(by['M6x60_
 assert support.isInside(V(30,-35,dt+24),1e-6)
 seat=cyl(4,1,(42,-28,dt+18)).cut(cyl(2.21,1,(42,-28,dt+18)))
 assert seat.cut(support).Volume()<1e-6
-bolt=by['Z_cradle_deck_screw_3']['shape'];assert abs(bolt.BoundingBox().zmax-(dt+23))<1e-6
-assert overlap(bolt,support)<1e-6
+for i,sign in [(3,1),(6,-1)]:
+ bolt=by[f'Z_cradle_deck_screw_{i}']['shape'];assert abs(bolt.BoundingBox().zmax-(dt+23))<1e-6
+ assert overlap(bolt,support)<1e-6
+ assert support.isInside(V(sign*30,-35,dt+24),1e-6)
+ for y in [-28,8,44]:
+  assert [sign*42,y] in lay['z_deck_mounts']
+  assert overlap(cyl(2.19,40,(sign*42,y,dt)),support)<1e-6
+assert len([a for a in parts if a['name'].startswith('Z_cradle_deck_screw_')])==9
+right=support.intersect(box(26,96,45,(39,6,dt+22.5)))
+left=support.intersect(box(26,96,45,(-39,6,dt+22.5))).mirror('YZ')
+assert right.cut(left).Volume()+left.cut(right).Volume()<1e-6,'Braces must be mirror-symmetric'
 controller=[a for a in parts if a['name'].startswith(('Z_Rear_controller','Z_Controller_','Z_USB_'))]
 assert len(controller)==7
 assert abs(min(a['shape'].BoundingBox().zmin for a in controller)-lay['z_controller_lowest_z_mm'])<1e-6
@@ -64,5 +73,6 @@ for a in controller:
    if b.get('base_name') or b['name']=='Z_support':assert overlap(free,b['shape'])<1e-6,(a['name'],b['name'],'controller clearance')
 
 r=dict(passed=True,z_width=p['z_width'],patterns=records,z_mount_faces=['base only'],z_base_fasteners='4 x M5x30 with washers and nuts',radial_orientation='upright, base underneath',radial_base_fasteners='4 x M5x20 into side-loaded captive nuts',carrier=dict(direction=[1,0,0],z_flange_long_axis=[1,0,0],direct_seat_mm=[168,42,2],plate_thickness_mm=10,edge_ribs_mm=[8,16],output_screw_heads_recessed_mm=.2,physical_stiffness_verified=False),motor_to_clamp_mm=gap,z_controller_bottom_margin_mm=lay['z_controller_lowest_z_mm']-lay['base_clamp_top_z'],corner_gusset_mm=[26,28,28],corner_bolt='M4x25 through 45 degree gusset, flat recessed head seat',source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','leadscrew_actuator.py','check_z_mount.py','rotary_base/core.py','rotary_base/parameters.json',str(pathlib.Path(args.config).resolve().relative_to(root))]})
-r['support_printability']=dict(outer_bed_plane_y_mm=-62,outer_planar_area_mm2=sum(f.Area() for f in bed),volume_mm3=support.Volume(),rounded_through_windows=4,window_corner_radius_mm=4,reinforcement='inward only',stl_orientation='outer face down, minimum Z=0')
+r['symmetric_braces']=dict(count=2,holes_per_brace=3,x_positions_mm=[-42,42],y_hole_positions_mm=[-28,8,44],corner_bolts='2 x M4x25',other_deck_bolts='7 x M4x16')
+r['support_printability']=dict(outer_bed_plane_y_mm=-62,outer_planar_area_mm2=sum(f.Area() for f in bed),volume_mm3=support.Volume(),rounded_through_windows=5,window_corner_radius_mm=4,reinforcement='inward only',stl_orientation='outer face down, minimum Z=0')
 (out/'z-mount-validation.json').write_text(json.dumps(r,indent=2));(out/'mounting-patterns.json').write_text(json.dumps(records,indent=2));print('Single-face mounting and aligned carrier passed',p['z_width'],flush=True)

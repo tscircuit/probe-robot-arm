@@ -44,7 +44,7 @@ def layout(p):
     needed=far+p['radial_margin']-rmin;stroke=p['radial_stroke'] or math.ceil(needed/10)*10
     assert stroke>=needed and stroke>=40
     width=p.get('z_width',4);assert width in [1,2,4]
-    zm=linear.metadata(40,width,p['z_motor'],p['z_motor_depth']);rm=linear.metadata(stroke,1,p['radial_motor'],p['radial_motor_depth'],p['radial_setback_mm'])
+    zm=linear.metadata(40,width,p['z_motor'],p['z_motor_depth']);rm=linear.metadata(stroke,1,p['radial_motor'],p['radial_motor_depth'],p['radial_body_extension_mm'])
     dt=58.2-p['rotor_drop_mm'];clamp=58.4
     controller_depth=p['controller_spacer']+1.6+max(p['controller_component_height'],12)
     minimum=clamp+p['z_motor_depth']+controller_depth+p['z_controller_clearance_mm']
@@ -152,13 +152,13 @@ def build(p, lay):
         insert=cyl(3,6,(x,y,dt-6.3)).cut(cyl(2,6,(x,y,dt-6.3)))
         add(f'M4_deck_insert_{i}',insert,'theta','#d4a54a',reference=True)
         parts[-1]['embedded_host']='Rotating_deck'
-        seat=19 if i==3 else 10
+        seat=19 if i in [3,6] else 10
         screw=cyl(1.95,seat+6,(x,y,dt-6)).fuse(cyl(3.5,4,(x,y,dt+seat)))
         add(f'Z_cradle_deck_screw_{i}',screw,'theta','#a5b5c1',reference=True)
     # One mounting plane against the actuator's underside/base; no lid or side arms.
     zo=p['z_origin'];zm=lay['z_actuator'];rm=lay['r_actuator'];top=zo+155;wide=103
-    side_foot=box(88,23.6,10,(-13,-50.2,dt+5));front_foot=box(26,104,10,(39,2,dt+5))
-    flanges=side_foot.fuse(front_foot).intersect(cyl(80,10,(0,0,dt)))
+    side_foot=box(114,23.6,10,(0,-50.2,dt+5));feet=[box(26,104,10,(x,2,dt+5)) for x in [-39,39]]
+    flanges=side_foot.fuse(*feet).intersect(cyl(80,10,(0,0,dt)))
     # All outer lands share Y=-62: lay this face on the bed. Reinforcement
     # projects inward only, retaining the actuator mounting datum at Y=-42.
     height=top-dt-10;mid=(top+dt+10)/2
@@ -166,29 +166,29 @@ def build(p, lay):
     ribs=[box(14,10,height,(x,-47,mid)) for x in [-96,96]]
     ribs += [box(206,10,12,(0,-47,zo+z)) for z in [-3,115,149]]
     ribs += [box(206,10,14,(0,-47,dt+17))]
-    ribs += [box(26,10,28,(39,-47,dt+24))] # Solid backing for the entire corner root.
+    ribs += [box(26,10,28,(x,-47,dt+24)) for x in [-39,39]] # Solid backing for the entire corner root.
     # 28 mm x 28 mm internal 45-degree chamfer reinforces the loaded corner.
     corner=cq.Workplane('YZ',origin=(26,0,0)).polyline([(-42,dt+10),(-14,dt+10),(-42,dt+38)]).close().extrude(26).val()
-    support=union([flanges,back,corner,*ribs])
+    corners=[corner,corner.mirror('YZ')];support=union([flanges,back,*corners,*ribs])
     # Rounded through-windows leave broad edge rails and every mounting row.
     # The lower right opening stays clear of the solid corner reinforcement.
-    windows=[(-89,89,zo+9,zo+103),(-89,14,dt+24,zo-15),
-             (64,89,dt+24,zo-15),(-89,89,zo+127,zo+137)]
+    windows=[(-89,89,zo+9,zo+103),(-89,-64,dt+24,zo-15),
+             (-14,14,dt+24,zo-15),(64,89,dt+24,zo-15),(-89,89,zo+127,zo+137)]
     for x0,x1,z0,z1 in windows:
         cutter=cq.Workplane('XY').box(x1-x0,24,z1-z0).edges('|Y').fillet(4).translate(((x0+x1)/2,-52,(z0+z1)/2)).val()
         support=support.cut(cutter)
     support=holes(support,upright_mounts,2.2,dt-1,40)
     # Keep flange screw heads and their initial withdrawal corridors open.
-    for i,(x,y) in enumerate(upright_mounts):support=support.cut(cyl(4.1,60,(x,y,dt+(19 if i==3 else 10))))
-    # Rear bolt 2 exits through the back wall after its 40 mm withdrawal.
-    # Other rear bolts exit through the large lower window.
-    access=cq.Workplane('XY').box(8.2,12,26).edges('|Y').fillet(2).translate((24,-58,dt+45)).val()
-    support=support.cut(access)
+    for i,(x,y) in enumerate(upright_mounts):support=support.cut(cyl(4.1,60,(x,y,dt+(19 if i in [3,6] else 10))))
+    # Rear bolts exit through the flat back wall after 40 mm withdrawal.
+    for x,y in upright_mounts[:3]:
+        access=cq.Workplane('XY').box(8.2,12,26).edges('|Y').fillet(2).translate((x,-58,dt+45)).val()
+        support=support.cut(access)
     patterns=actuator_mount_patterns('Z',lay)
     for x,y in set(tuple(q) for pat in patterns for q in pat['base']):
         support=support.cut(cyl(2.75,24,(y,-65,zo+x),(0,1,0)),cyl(5.4,13,(y,-65,zo+x),(0,1,0)))
     add('Z_support',support.clean(),'theta','#6d849c',True)
-    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,front_foot,back,corner,*ribs]]]
+    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,*feet,back,*corners,*ribs]]]
     def add_actuator(axis):
         meta=zm if axis=='Z' else rm
         data,_=linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth'],meta.get('extension_mm',0))

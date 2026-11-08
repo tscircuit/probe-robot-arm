@@ -48,6 +48,18 @@
     [
       42,
       44
+    ],
+    [
+      -42,
+      -28
+    ],
+    [
+      -42,
+      8
+    ],
+    [
+      -42,
+      44
     ]
   ],
   "roller_block_profile": "single 8 mm block with tapered shoulders and R6 crown; integral press-fit axle",

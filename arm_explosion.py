@@ -17,6 +17,7 @@ def timeline(parts):
     bolts=select('Z_base_mount_screw_');add('Withdraw Z base bolts through mounting wells',bolts,[0,100,0]);add('Park Z base bolts',bolts,[300,0,0])
     add('Separate Z actuator from its base mounting face',[p['name'] for p in parts if p.get('actuator')=='Z'],[0,100,0])
     bolts=select('Z_cradle_deck_screw_');add('Unbolt support from rotating deck',bolts,[0,0,40])
-    add('Park rear deck screws',[n for n in bolts if int(n.rsplit('_',1)[1])<3],[0,-100,0]);add('Park front deck screws',[n for n in bolts if int(n.rsplit('_',1)[1])>=3],[180,0,0])
+    add('Park rear deck screws',[n for n in bolts if int(n.rsplit('_',1)[1])<3],[0,-100,0]);add('Park right deck screws',[n for n in bolts if 3<=int(n.rsplit('_',1)[1])<6],[180,0,0])
+    add('Park left deck screws',[n for n in bolts if int(n.rsplit('_',1)[1])>=6],[-180,0,0])
     add('Lift single-face support from deck',['Z_support'],[0,0,80])
     return stages

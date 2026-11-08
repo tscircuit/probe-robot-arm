@@ -1,8 +1,12 @@
-# Armature base — four angled press-fit rollers, v4.9
+# Armature base — four angled press-fit rollers, v4.10
 
 The main arm and this independent test fixture use the same rotary-base CAD. Four **625ZZ bearings** run on a continuous **45° outer track** on the 72T ring. Each bearing has **one integral block and printed axle**, tilted 45°. There are no roller bolts, nuts or separate spacers.
 
 ![Assembly and exploded view](ASSEMBLY_PREVIEW.png)
+
+## Symmetric brace deck (v4.10)
+
+Reprint **part 10 only** when updating from v4.9 for the main arm's two mirrored three-hole Z-support braces. The shared deck now has nine Z-support insert seats: the original six plus three at X=−42 mm, Y=−28/8/44 mm. Four rounded relief windows leave solid lands beneath both braces. The ring, bearings, spindle, fixed base and standalone stand retain their geometry. The main arm uses two M4×25 corner bolts and seven M4×16 bolts into these inserts; they are not required for independent rotary-base testing.
 
 ## Central spindle relief slots (v4.9)
 
@@ -55,7 +59,7 @@ All STL files use millimetres. Import at 100% scale. The largest part is the 200
 | 07 | Inner-race top washer | 1 |
 | 08 | Housing with two Ø32.2 bearing seats | 1 |
 | 09 | Lower outer-race retainer | 1 |
-| 10 | Shared deck with five rounded windows and six Z-cradle insert seats | 1 |
+| 10 | Shared deck with four rounded windows and nine Z-support insert seats | 1 |
 | 11 | 72T ring, integral spacers and continuous outer bevel | 1 |
 | 13 | Open-tip compliant 12T pinion | 1 |
 

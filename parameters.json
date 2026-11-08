@@ -3,7 +3,7 @@
   "pcb_depth": 100,
   "z_stroke": 40,
   "radial_stroke": null,
-  "edge_to_pivot": 300,
+  "edge_to_pivot": 195,
   "radial_margin": 5,
   "z_origin": null,
   "z_position": 0,
@@ -25,6 +25,7 @@
   "radial_inverted": false,
   "z_rack_deck_clearance": 2,
   "z_width": 4,
-  "radial_setback_mm": 140,
-  "z_controller_clearance_mm": 10
+  "radial_setback_mm": 105,
+  "z_controller_clearance_mm": 10,
+  "radial_body_extension_mm": 0
 }

@@ -1,4 +1,4 @@
-# Modular flying probe — revision 21
+# Modular flying probe — revision 22
 
 Parametric theta / Z / radial arm with four modules covering a **100 × 100 mm PCB** and a **2 × 2 mm simultaneous probe cluster**. [Interactive assembly and downloads](https://modular-flying-probe-arm.seveibar.chatgpt.site) · [Source](https://github.com/tscircuit/probe-robot-arm).
 
@@ -8,26 +8,26 @@ The actuator geometry is pinned to [FLEX printed-leadscrew Site version 61](http
 
 - **Z:** selectable 1× / 2× / 4× printed-screw actuator, default 4× (206 mm base width, 168 mm output flange), 40 mm travel, full-depth NEMA17 reference (48 mm body).
 - **Radial:** 1× printed-screw actuator, 80 mm base width, upright with its bottom/base seated on the carrier. Full-depth NEMA14 reference (34 mm body) with a 26 mm motor bolt pitch.
-- **Radial travel:** 120 mm, extended from the upstream 40 mm design. The radial motor moves 140 mm behind the Z axis. The actuator body and screw gain 140 mm of length while stroke stays 120 mm: native bearing stations are X=143/357 mm, the home output face is X=375 mm and working screw length is 342 mm. Both threaded bands remain fully engaged and both bearing stations remain on the guide throughout travel.
-- Both printed screws have an 8 mm lead. The radial motor stays centered laterally, with its body center at X=−140 mm relative to Z to counter the forward structure. The world-space probe reach remains 295–415 mm.
+- **Radial travel:** 120 mm, extended from the upstream 40 mm design. The radial motor body center is 105 mm behind Z. The extra 140 mm body extension from revision 21 is removed while stroke stays 120 mm: native bearing stations are X=143/217 mm, the home output face is X=235 mm and working screw length is 202 mm. Both threaded bands remain fully engaged and both bearing stations remain on the guide throughout travel.
+- Both printed screws have an 8 mm lead. The radial motor stays centered laterally, with its body center at X=−105 mm relative to Z to counter the forward structure. The world-space probe reach remains 190–310 mm.
 
-The larger mechanism moves the arm pivots to **(±350, 0) and (0, ±350) mm**, requiring a **900 × 900 mm platform**. This preserves 120 mm radial travel and room for the narrow triangular probe extension. The base ring, spindle, stand and rotating deck remain shared with the standalone test fixture. The rearward carrier extends 230 mm behind each pivot; at neutral yaw, upper parts reach about 580 mm from platform center (a 1160 mm envelope), beyond the 900 mm frame.
+The compact layout places the arm pivots at **(±245, 0) and (0, ±245) mm**, requiring a **690 × 690 mm platform**. This preserves 120 mm radial travel and room for the narrow triangular probe extension. The base ring, spindle, stand and rotating deck remain shared with the standalone test fixture. The carrier extends 195 mm behind each pivot; at neutral yaw, upper parts reach about 440 mm from platform center (an 880 mm envelope), beyond the 690 mm frame.
 
-The Z module is turned 90° about its vertical travel axis so the **long dimension of its output flange runs parallel to radial travel**. A 168 × 42 × 2 mm direct seat supports a 482 × 100 × 10 mm carrier plate. Two 8 × 16 mm raised edge ribs and a rear cross-rib reinforce it. The plate extends rearward to X=−230 mm and forward to X=252 mm. There is no narrow connecting stem. The common carrier accepts all three Z widths; 4× and 2× use eight output screws, 1× uses four. Increased stiffness is a design intent, not a measured result.
+The Z module is turned 90° about its vertical travel axis so the **long dimension of its output flange runs parallel to radial travel**. A 168 × 42 × 2 mm direct seat supports a 342 × 100 × 10 mm carrier plate. Two 8 × 16 mm raised edge ribs and a rear cross-rib reinforce it. The plate extends rearward to X=−195 mm and forward to X=147 mm. There is no narrow connecting stem. The common carrier accepts all three Z widths; 4× and 2× use eight output screws, 1× uses four. Increased stiffness is a design intent, not a measured result.
 
 ## Balance, controller and support corner
 
-The 140 mm rearward motor offset is parameterized by `radial_setback_mm`. Extending the radial body, guide and screw preserves the original probe location and PCB coverage. The near bearing station now sits at world X=20 mm, close to Z; the front station stays at X=234 mm.
+The rearward motor offset is parameterized by `radial_setback_mm` (105 mm), independently of `radial_body_extension_mm` (0 mm). The fixed radial housing end is now X=147 mm from Z, **105 mm closer than revision 21's X=252 mm**. Its motor moves from X=−140 to −105 mm. The near bearing station is X=55 mm and the far station X=129 mm. Moving the arm pivots 105 mm inward preserves the short 43 mm triangular probe extension, 120 mm radial travel and the 100 × 100 mm PCB working area.
 
-`check_balance.py` compares the upper assembly with the previous zero-setback layout. It varies assumed motor mass (140–250 g), effective printed density (0.2–0.65 g/cm³) and radial position. For the default 4× Z width, in the nominal 180 g motor / 0.45 g/cm³ case at mid-travel, estimated forward center of gravity falls from 77 mm to 23 mm and gravity moment from 0.80 N·m to 0.28 N·m. The longer printed parts add mass; that added mass is included in the comparison. These are sensitivity estimates, not measured masses or a physical balance qualification. Weigh the actual motor and sliced/printed parts to refine them.
+`check_balance.py` compares the previous revision 21 long actuator layout with the compact layout. It varies assumed motor mass (140–250 g), effective printed density (0.2–0.65 g/cm³) and radial position. At the default 4× Z width, with a nominal 180 g motor and 0.45 g/cm³ effective print density, estimated moving mass falls from 1276 g to 1051 g. Mid-travel center of gravity changes from 22.7 mm forward of Z to 0.4 mm behind it; the new estimate ranges from 5.8 mm behind to 5.0 mm forward over full radial travel. These are sensitivity estimates, not measured masses or a physical balance qualification. Wiring and actual slicer toolpaths are not modeled.
 
 Z is raised **27.6 mm** to provide rear controller space. The assembly includes a 42.3 × 42.32 × 1.6 mm PCB reference, 6 mm spacers, a 10 mm component envelope and a USB cable envelope extending 12 mm below the PCB. The lowest envelope is Z=68.4 mm, **10 mm above the central clamp**, with the space directly beneath it checked. The Z motor face is now Z=136 mm. Controller components and cable shape remain packaging allowances.
 
-The front support/deck junction has a **26 mm-wide, 28 × 28 mm, 45° internal chamfer/gusset**. Its deck bolt passes vertically through the reinforcement, with a flat recessed head seat. Use **one M4×25** at deck coordinates (42, −28), retaining **five M4×16** screws at the other positions and the existing deck inserts. The support still attaches only to the Z actuator's base face. Print orientation, layer bonding and load testing remain important; geometric reinforcement is not a strength certification.
+The support has **two mirrored three-hole braces**, with bolt rows at X=±42 mm and Y=−28, 8 and 44 mm. Each brace has a 26 mm-wide, 28 × 28 mm, 45° internal corner gusset and solid backing. Use **two M4×25 corner bolts** at (±42, −28) through flat recessed head seats, and **seven M4×16 bolts** at the remaining brace/rear mounting positions. Three original rear mounting points are retained, for nine deck inserts in total. The shared rotating deck gains the left-hand inserts and full bearing lands beneath both braces; its relief windows are adjusted around these lands.
 
 ## Mounting compatibility
 
-The Z support mounts **only the actuator base face**. Its 206 mm-wide frame has a completely coplanar outer print face at Y=−62 mm, with reinforcement directed inward. Four rounded through-cutouts (R4 corners) reduce CAD solid volume from 524.9 to 413.7 cm³, a 21.2% reduction versus revision 20. The largest opening is 178 × 94 mm. Full mounting rows, 14 mm edge rails, the reinforced corner and the existing six deck bolts/inserts are retained. It does not attach to the actuator lid or sides. Four M5×30 through-bolts, washers and nuts secure the active Z base pattern. Rear clearance pockets retain washer/nut access for all widths, and a small rear access window clears the deck bolt during withdrawal. The downloadable Z-support STL is already rotated with the large flat outer face on Z=0; keep that face against the print bed. The oriented support fits a 206 × 236.8 mm footprint and is 116 mm tall. Assembly STEP files retain assembly coordinates. Filament savings depend on the slicer settings; stiffness has not been physically tested.
+The Z support mounts **only the actuator base face**. Its 206 mm-wide frame retains a coplanar outer print face at Y=−62 mm, inward reinforcement, five rounded relief windows (R4 corners), and small rear bolt withdrawal openings. The largest opening is 178 × 94 mm. Both braces are mirror-symmetric and retain all three mounting holes. Four M5×30 through-bolts, washers and nuts secure the selected Z base pattern. The downloadable support STL is oriented with its large flat outer face on Z=0, with a 206 × 236.8 mm footprint and 116 mm height. Assembly STEP files retain assembly coordinates. Print fit and stiffness remain unmeasured.
 
 Coordinates below are in the actuator's native frame: X along travel, Y across the actuator, Z up from its base. Motor face is X=0 and screw axis is Y=0, Z=42 mm. All adapter M5 clearance holes are Ø5.5 mm.
 
@@ -50,8 +50,6 @@ The upright radial actuator uses four M5×20 bolts through its base into **side-
 | T8, stock 40 mm | −3, 115 | ±34 |
 | Printed, extended 120 mm | −3, 229 | ±34 |
 | T8, inferred extended 120 mm | −3, 195 | ±34 |
-| Printed, installed 120 mm + 140 mm body extension | −3, 369 | ±34 |
-| T8, inferred 120 mm + 140 mm body extension | −3, 335 | ±34 |
 
 Compatibility means matching mounting holes and datums. A stock 40 mm radial actuator cannot cover the full PCB with this layout. The extended T8 pattern does not specify a purchased screw or establish stiffness. `downloads/mounting-patterns.json` contains the complete coordinates and inference labels.
 
@@ -59,11 +57,11 @@ Fit the Z-to-carrier M3×16 screws first. Their heads are recessed 0.2 mm below 
 
 ## Rotary base and existing prints
 
-The unchanged base has a 12T compliant pinion / 72T internal ring for **6:1 reduction**, direct full-depth NEMA17 mounting and rear RP2040-controller clearance envelopes. Four 625ZZ rollers tilt at 45° on one rounded integral block each. Their solid Ø5.1 mm printed axles use no bolts. The ring's 176 mm OD has a continuous 45° track, clear of its flat-seated M3 button heads. Bearings retain the requested 0.4 mm nominal normal overlap with the track.
+The rotary base retains a 12T compliant pinion / 72T internal ring for **6:1 reduction**, direct full-depth NEMA17 mounting and rear RP2040-controller clearance envelopes. Four 625ZZ rollers tilt at 45° on one rounded integral block each. Their solid Ø5.1 mm printed axles use no bolts. The ring's 176 mm OD has a continuous 45° track, clear of its flat-seated M3 button heads. Bearings retain the requested 0.4 mm nominal normal overlap with the track.
 
-Two 6002 bearings sit on the **Ø15.25 mm central spindle** with a 0.5 mm top chamfer. Its four 0.5 mm-wide relief cuts run 33.1 mm from the tip, leaving a 0.5 mm connected root. The module base and rotating deck retain their large rounded cutouts and flat print faces. The main assembly and base-test page use the same rotary-base source and canonical STL exports.
+Two 6002 bearings sit on the **Ø15.25 mm central spindle** with a 0.5 mm top chamfer. Its four 0.5 mm-wide relief cuts run 33.1 mm from the tip, leaving a 0.5 mm connected root. The module base retains its five rounded cutouts. The revised deck has four rounded windows around the two brace mounting lands. Both retain flat print faces. The main assembly and base-test page use the same rotary-base source and canonical STL exports.
 
-Revision 21 changes only the Z-support print; existing actuator, carrier, rotary-base and stand parts remain compatible. The existing base/stand print package remains usable. For the actuator change, replace the **Z support, Z-to-radial carrier, probe outrigger and both actuator assemblies**. The standalone fixture guide remains in `base_test_kit_v4/PRINT_AND_ASSEMBLY.md`.
+For revision 22, replace the **Z support, rotating deck, all five radial actuator printed parts (body, lid, screw, carriage and shared lower bearing carrier), Z-to-radial carrier and main platform**. The probe outrigger, Z actuator, fixed rotary base, ring, spindle and standalone stand retain their geometry. The standalone test fixture shares the revised deck; its updated guide is `base_test_kit_v4/PRINT_AND_ASSEMBLY.md`.
 
 ## Viewer
 
@@ -71,7 +69,7 @@ Left drag orbits; middle drag pans; the wheel zooms. Right-click offers Download
 
 The bottom **Z actuator width** dropdown selects 1×, 2× or 4×, loading actual width-specific CAD, fasteners, checks, STEP assemblies and STL downloads. The radial stage remains 1×. The choice is retained in the `?width=` URL.
 
-The 17-stage explosion withdraws radial base bolts, lifts the radial actuator, removes Z output screws, and separates the carrier and Z module from the single-face support. Captive radial nuts stay in the carrier. Internal drives stay assembled and threaded. Axis animation pauses at the neutral pose during explosion; assembled screw rotation follows the 8 mm lead. The four-arm view coordinates the probe cluster across the board.
+The 18-stage explosion withdraws radial base bolts, lifts the radial actuator, removes Z output screws, and separates the carrier and Z module from the single-face support. Captive radial nuts stay in the carrier. Internal drives stay assembled and threaded. Axis animation pauses at the neutral pose during explosion; assembled screw rotation follows the 8 mm lead. The four-arm view coordinates the probe cluster across the board.
 
 ## Build and checks
 
@@ -99,4 +97,4 @@ The adapter caches exact BREP geometry using source and configuration hashes. Up
 
 Validation covers ideal CAD geometry and reference hardware. Printed screw friction, wear, backlash, axial motor loading, stiffness, creep, homing and probing accuracy still require physical testing. Microstepping is commanded resolution, not measured positioning accuracy. At 200 steps/revolution and 1/16 microstepping, the 8 mm-lead linear axes command 0.0025 mm per microstep.
 
-The unchanged 6:1 base drive commands 0.01875° per 1/16 microstep. With the new 350 mm board-center reach, that corresponds to about 0.115 mm tangential tip motion (about 0.136 mm at the 415 mm reach limit). The linear screw resolution does not remove this rotary-axis limitation.
+The unchanged 6:1 base drive commands 0.01875° per 1/16 microstep. At the 245 mm board-center reach, that corresponds to about 0.080 mm tangential tip motion (about 0.101 mm at the 310 mm reach limit). The linear screw resolution does not remove this rotary-axis limitation.

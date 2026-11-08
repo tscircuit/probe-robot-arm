@@ -121,9 +121,9 @@ def deck_relief_cutters(p):
     for angle in [30,90,150]:
         windows=windows.cut(box(180,p['deck_cutout_spoke_width_mm'],14,(0,0,53.2)).rotate((0,0,0),(0,0,1),angle))
     # Full cradle flange footprints plus 3 mm; reinforce the hub/front-flange junction.
-    windows=windows.cut(box(94,29.6,14,(-13,-50.2,53.2)),
-                        box(33.1,110,14,(38.45,2,53.2)),
-                        box(20,60,14,(17,0,53.2))).clean()
+    windows=windows.cut(box(120,29.6,14,(0,-50.2,53.2)),
+                        *[box(33.1,110,14,(x,2,53.2)) for x in [-38.45,38.45]],
+                        *[box(20,60,14,(x,0,53.2)) for x in [-17,17]]).clean()
     # Omit small residual pockets; keep only useful through-windows.
     return [cq.Workplane('XY').newObject([s]).edges('|Z').fillet(p['deck_cutout_corner_radius_mm']).val()
             for s in windows.Solids() if s.Volume()/12>=300]
@@ -177,7 +177,7 @@ def build(p):
     for x,y in rotor_bolts():lower=lower.cut(cyl(3.2,2,(x,y,13.8)))
     add('Lower_bearing_retainer',lower,'rotor',print_id='09_lower_bearing_retainer_qty1',flip=True)
     gear,ring,nominal,ring_bolts=drive_gears(p)
-    # Shared structural deck: central bearing retainer plus the six Z-cradle insert seats.
+    # Shared structural deck: central bearing retainer plus the nine Z-cradle insert seats.
     deck=annulus(82,p['outer_race_abutment_diameter']/2,6,52.2)
     for x,y in p['z_deck_mounts']:
         deck=deck.fuse(cyl(7,10,(x,y,48.2)))

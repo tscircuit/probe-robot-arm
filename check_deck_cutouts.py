@@ -17,7 +17,7 @@ for name in by:
  if name!='Rotating_test_deck':
   assert abs(by[name].Volume()-old[name].Volume())<1e-6,name
 windows=[q.translate((0,0,-p['rotor_drop_mm'])) for q in deck_relief_cutters(p)]
-assert len(windows)==5
+assert len(windows)==4
 for q in windows:assert q.intersect(s).Volume()<1e-6, 'Window not fully open'
 top=58.2-p['rotor_drop_mm'];z=top-12
 regions=[('central bearing hub',cyl(28,14,(0,0,z))),('continuous outer rim',annulus(82,72,14,z))]
@@ -32,14 +32,14 @@ main_p=json.loads((root/'parameters.json').read_text());lay=layout(main_p);main,
 support=next(q['shape'] for q in main if q['name']=='Z_support')
 footprint=support.intersect(box(200,200,1,(0,0,top+.5))).translate((0,0,-1))
 assert before.intersect(footprint).cut(s).Volume()<1e-6, 'Relief removes cradle flange support'
-regions.append(('full side flange footprint',box(88,23.6,14,(-13,-50.2,z+7))))
+regions.append(('full side flange footprint',box(114,23.6,14,(0,-50.2,z+7))))
 front=lay['z_actuator']['CASE_TOP']
-regions.append(('full front flange footprint',box(52-front,104,14,((52+front)/2,2,z+7))))
+for sign in [-1,1]:regions.append((f'front flange footprint {sign}',box(52-front,104,14,(sign*(52+front)/2,2,z+7))))
 rows=[]
 for name,region in regions:
  lost=before.intersect(region).cut(s).Volume();assert lost<1e-5,(name,lost)
  rows.append(dict(region=name,removed_material_mm3=max(0,lost)))
-removed=before.Volume()-s.Volume();fraction=removed/before.Volume();assert fraction>.2
+removed=before.Volume()-s.Volume();fraction=removed/before.Volume();assert fraction>.1
 assert abs(removed-sum(w.intersect(before).Volume() for w in windows))<1e-4
 # The flipped deck prints on its original continuous top face.
 part=next(q for q in parts if q['name']=='Rotating_test_deck');printed=rotary_base.core.print_shape(part)
