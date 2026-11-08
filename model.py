@@ -159,21 +159,36 @@ def build(p, lay):
     zo=p['z_origin'];zm=lay['z_actuator'];rm=lay['r_actuator'];top=zo+155;wide=103
     side_foot=box(88,23.6,10,(-13,-50.2,dt+5));front_foot=box(26,104,10,(39,2,dt+5))
     flanges=side_foot.fuse(front_foot).intersect(cyl(80,10,(0,0,dt)))
-    back=box(206,10,top-dt-10,(0,-47,(top+dt+10)/2))
-    # Rear gussets join the back plate to the existing deck lands.
-    gussets=[]
-    for x in [-30,15]:
-        gussets.append(cq.Workplane('YZ',origin=(x-4,0,0)).polyline([(-60,dt+10),(-52,dt+10),(-52,zo+55)]).close().extrude(8).val())
+    # All outer lands share Y=-62: lay this face on the bed. Reinforcement
+    # projects inward only, retaining the actuator mounting datum at Y=-42.
+    height=top-dt-10;mid=(top+dt+10)/2
+    back=box(206,10,height,(0,-57,mid))
+    ribs=[box(14,10,height,(x,-47,mid)) for x in [-96,96]]
+    ribs += [box(206,10,12,(0,-47,zo+z)) for z in [-3,115,149]]
+    ribs += [box(206,10,14,(0,-47,dt+17))]
+    ribs += [box(26,10,28,(39,-47,dt+24))] # Solid backing for the entire corner root.
     # 28 mm x 28 mm internal 45-degree chamfer reinforces the loaded corner.
     corner=cq.Workplane('YZ',origin=(26,0,0)).polyline([(-42,dt+10),(-14,dt+10),(-42,dt+38)]).close().extrude(26).val()
-    support=union([flanges,back,corner,*gussets]);support=holes(support,upright_mounts,2.2,dt-1,40)
+    support=union([flanges,back,corner,*ribs])
+    # Rounded through-windows leave broad edge rails and every mounting row.
+    # The lower right opening stays clear of the solid corner reinforcement.
+    windows=[(-89,89,zo+9,zo+103),(-89,14,dt+24,zo-15),
+             (64,89,dt+24,zo-15),(-89,89,zo+127,zo+137)]
+    for x0,x1,z0,z1 in windows:
+        cutter=cq.Workplane('XY').box(x1-x0,24,z1-z0).edges('|Y').fillet(4).translate(((x0+x1)/2,-52,(z0+z1)/2)).val()
+        support=support.cut(cutter)
+    support=holes(support,upright_mounts,2.2,dt-1,40)
     # Keep flange screw heads and their initial withdrawal corridors open.
     for i,(x,y) in enumerate(upright_mounts):support=support.cut(cyl(4.1,60,(x,y,dt+(19 if i==3 else 10))))
+    # Rear bolt 2 exits through the back wall after its 40 mm withdrawal.
+    # Other rear bolts exit through the large lower window.
+    access=cq.Workplane('XY').box(8.2,12,26).edges('|Y').fillet(2).translate((24,-58,dt+45)).val()
+    support=support.cut(access)
     patterns=actuator_mount_patterns('Z',lay)
     for x,y in set(tuple(q) for pat in patterns for q in pat['base']):
         support=support.cut(cyl(2.75,24,(y,-65,zo+x),(0,1,0)),cyl(5.4,13,(y,-65,zo+x),(0,1,0)))
     add('Z_support',support.clean(),'theta','#6d849c',True)
-    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,front_foot,back,corner,*gussets]]]
+    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,front_foot,back,corner,*ribs]]]
     def add_actuator(axis):
         meta=zm if axis=='Z' else rm
         data,_=linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth'],meta.get('extension_mm',0))
@@ -382,6 +397,9 @@ def main():
     for a in parts:
         if a["printed"] and not a["name"].startswith(("Z_0","R_0")):
             shape=rotary_base.print_shape(dict(shape=a['shape'],flip=a.get('print_flip',False))) if a.get('base_name') else a['shape']
+            if a['name']=='Z_support':
+                shape=shape.rotate((0,0,0),(1,0,0),90)
+                b=shape.BoundingBox();shape=shape.translate((0,-(b.ymin+b.ymax)/2,-b.zmin))
             cq.exporters.export(shape,str(custom/(a['name']+'.stl')),tolerance=.025 if a.get('base_name') else .05,angularTolerance=.06 if a.get('base_name') else .12)
     for label,meta in [('Z',lay['z_actuator']),('R',lay['r_actuator'])]:
         for part in linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth'],meta.get('extension_mm',0))[0]:

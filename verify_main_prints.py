@@ -9,6 +9,9 @@ for p in parts:
  path=out/'prototype-parts'/(p['name']+'.stl');m=trimesh.load_mesh(path)
  row=dict(part=p['name'],watertight=bool(m.is_watertight),consistent_winding=bool(m.is_winding_consistent),solid_shells=len(m.split(only_watertight=False)),positive_volume=bool(m.volume>0),sha256=hashlib.sha256(path.read_bytes()).hexdigest())
  assert row['watertight'] and row['consistent_winding'] and row['solid_shells']==1 and row['positive_volume'],row
- if p.get('base_name'):assert abs(m.bounds[0,2])<1e-5,p['name']
+ if p.get('base_name') or p['name']=='Z_support':assert abs(m.bounds[0,2])<1e-5,p['name']
+ if p['name']=='Z_support':
+  bed=(abs(m.triangles[:,:,2]).max(axis=1)<1e-5)&(m.face_normals[:,2]<-.999)
+  row['flat_bed_area_mm2']=float(m.area_faces[bed].sum());assert row['flat_bed_area_mm2']>15000
  rows.append(row)
 (out/'print-mesh-validation.json').write_text(json.dumps(dict(passed=True,print_count=len(rows),files=rows),indent=2));print('Verified',len(rows),'main-arm STL meshes.')

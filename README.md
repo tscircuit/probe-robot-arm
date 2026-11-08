@@ -1,4 +1,4 @@
-# Modular flying probe — revision 20
+# Modular flying probe — revision 21
 
 Parametric theta / Z / radial arm with four modules covering a **100 × 100 mm PCB** and a **2 × 2 mm simultaneous probe cluster**. [Interactive assembly and downloads](https://modular-flying-probe-arm.seveibar.chatgpt.site) · [Source](https://github.com/tscircuit/probe-robot-arm).
 
@@ -27,7 +27,7 @@ The front support/deck junction has a **26 mm-wide, 28 × 28 mm, 45° internal c
 
 ## Mounting compatibility
 
-The Z support mounts **only the actuator base face**. Its single 206 mm-wide plate has rear gussets and retains the existing six deck bolts and deck inserts. It does not attach to the actuator lid or sides. Four M5×30 through-bolts, washers and nuts secure the active Z base pattern. Rear clearance pockets keep the 1× hardware clear of the gussets.
+The Z support mounts **only the actuator base face**. Its 206 mm-wide frame has a completely coplanar outer print face at Y=−62 mm, with reinforcement directed inward. Four rounded through-cutouts (R4 corners) reduce CAD solid volume from 524.9 to 413.7 cm³, a 21.2% reduction versus revision 20. The largest opening is 178 × 94 mm. Full mounting rows, 14 mm edge rails, the reinforced corner and the existing six deck bolts/inserts are retained. It does not attach to the actuator lid or sides. Four M5×30 through-bolts, washers and nuts secure the active Z base pattern. Rear clearance pockets retain washer/nut access for all widths, and a small rear access window clears the deck bolt during withdrawal. The downloadable Z-support STL is already rotated with the large flat outer face on Z=0; keep that face against the print bed. The oriented support fits a 206 × 236.8 mm footprint and is 116 mm tall. Assembly STEP files retain assembly coordinates. Filament savings depend on the slicer settings; stiffness has not been physically tested.
 
 Coordinates below are in the actuator's native frame: X along travel, Y across the actuator, Z up from its base. Motor face is X=0 and screw axis is Y=0, Z=42 mm. All adapter M5 clearance holes are Ø5.5 mm.
 
@@ -63,7 +63,7 @@ The unchanged base has a 12T compliant pinion / 72T internal ring for **6:1 redu
 
 Two 6002 bearings sit on the **Ø15.25 mm central spindle** with a 0.5 mm top chamfer. Its four 0.5 mm-wide relief cuts run 33.1 mm from the tip, leaving a 0.5 mm connected root. The module base and rotating deck retain their large rounded cutouts and flat print faces. The main assembly and base-test page use the same rotary-base source and canonical STL exports.
 
-The existing base/stand print package remains usable. For the actuator change, replace the **Z support, Z-to-radial carrier, probe outrigger and both actuator assemblies**. The standalone fixture guide remains in `base_test_kit_v4/PRINT_AND_ASSEMBLY.md`.
+Revision 21 changes only the Z-support print; existing actuator, carrier, rotary-base and stand parts remain compatible. The existing base/stand print package remains usable. For the actuator change, replace the **Z support, Z-to-radial carrier, probe outrigger and both actuator assemblies**. The standalone fixture guide remains in `base_test_kit_v4/PRINT_AND_ASSEMBLY.md`.
 
 ## Viewer
 

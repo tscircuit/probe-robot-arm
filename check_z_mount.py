@@ -5,6 +5,12 @@ root=pathlib.Path(__file__).resolve().parent
 ap=argparse.ArgumentParser();ap.add_argument('--config',default=str(root/'parameters.json'));ap.add_argument('--out',default=str(root/'output'));args=ap.parse_args();out=pathlib.Path(args.out)
 p=json.loads(pathlib.Path(args.config).read_text());lay=layout(p);parts,_=build(p,lay);by={a['name']:a for a in parts};support=by['Z_support']['shape'];carrier=by['Z_to_radial_carrier']['shape'];zo=p['z_origin'];dt=lay['deck_top_z'];zp=lay['zpad'];hx=lay['h_origin']
 assert len(support.Solids())==len(carrier.Solids())==1
+# A single bed plane contains all outer lands, with no rear-facing ribs.
+assert abs(support.BoundingBox().ymin+62)<1e-6
+bed=[f for f in support.Faces() if f.geomType()=='PLANE' and abs(f.Center().y+62)<1e-6 and f.normalAt().y<-.999]
+assert sum(f.Area() for f in bed)>15000
+for x,z in [(0,zo+56),(-40,dt+40),(76,dt+40),(0,zo+132)]:
+ assert overlap(cyl(3,24,(x,-64,z),(0,1,0)),support)<1e-6,'Relief window obstructed'
 assert not any(a['name'].startswith(('Z_top_mount_','Z_enclosure_mount_')) for a in parts)
 assert overlap(support,box(500,200,500,(0,58.001,dt+288.001)))<1e-6,'Support extends past the base mounting plane above the corner gusset'
 records=[]
@@ -58,4 +64,5 @@ for a in controller:
    if b.get('base_name') or b['name']=='Z_support':assert overlap(free,b['shape'])<1e-6,(a['name'],b['name'],'controller clearance')
 
 r=dict(passed=True,z_width=p['z_width'],patterns=records,z_mount_faces=['base only'],z_base_fasteners='4 x M5x30 with washers and nuts',radial_orientation='upright, base underneath',radial_base_fasteners='4 x M5x20 into side-loaded captive nuts',carrier=dict(direction=[1,0,0],z_flange_long_axis=[1,0,0],direct_seat_mm=[168,42,2],plate_thickness_mm=10,edge_ribs_mm=[8,16],output_screw_heads_recessed_mm=.2,physical_stiffness_verified=False),motor_to_clamp_mm=gap,z_controller_bottom_margin_mm=lay['z_controller_lowest_z_mm']-lay['base_clamp_top_z'],corner_gusset_mm=[26,28,28],corner_bolt='M4x25 through 45 degree gusset, flat recessed head seat',source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','leadscrew_actuator.py','check_z_mount.py','rotary_base/core.py','rotary_base/parameters.json',str(pathlib.Path(args.config).resolve().relative_to(root))]})
+r['support_printability']=dict(outer_bed_plane_y_mm=-62,outer_planar_area_mm2=sum(f.Area() for f in bed),volume_mm3=support.Volume(),rounded_through_windows=4,window_corner_radius_mm=4,reinforcement='inward only',stl_orientation='outer face down, minimum Z=0')
 (out/'z-mount-validation.json').write_text(json.dumps(r,indent=2));(out/'mounting-patterns.json').write_text(json.dumps(records,indent=2));print('Single-face mounting and aligned carrier passed',p['z_width'],flush=True)
