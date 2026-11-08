@@ -1,8 +1,9 @@
 """Check simultaneous four-probe clusters against all arm/frame solids."""
-import itertools,json,pathlib,math
+import itertools,json,pathlib,math,argparse
 import cadquery as cq
 from model import build,layout,pose,overlap,platform_parts,cluster_targets,target_pose
-p=json.loads(pathlib.Path('parameters.json').read_text());lay=layout(p)
+ap=argparse.ArgumentParser();ap.add_argument('--config',default='parameters.json');ap.add_argument('--out',default='output');args=ap.parse_args()
+p=json.loads(pathlib.Path(args.config).read_text());lay=layout(p)
 parts,_=build(p,lay)
 frame=[(a['name'],a['shape'],a['shape'].BoundingBox()) for a in platform_parts(p,lay)]
 def disjoint(a,b):
@@ -51,6 +52,6 @@ for cx,cy,z in samples:
  all_fail.extend(fail);print('Cluster',cx,cy,'clearance',z+20,'collisions',len(fail),fail[:3],flush=True)
 rear=-p['base_motor_depth'];component_bottom=rear-p['controller_spacer']-1.6-p['controller_component_height']
 report={'cluster_pitch_mm':p['probe_cluster_pitch'],'samples':reports,'minimum_probe_solid_gap_mm':minimum_probe_gap,'collisions':all_fail,'motor_reference_depths_mm':{'base_NEMA17':p['base_motor_depth'],'Z_NEMA17':p['z_motor_depth'],'radial_NEMA14':p['radial_motor_depth']},'horizontal_motor_center_xy_mm':[lay['h_origin'],lay['r_drive_y']],'controller_component_clearance_above_ground_mm':component_bottom-p['platform_ground_z'],'passed':not all_fail and max(r['maximum_tip_error_mm'] for r in reports)<1e-6,'limits':['Sampled rigid geometry; no continuous swept-volume, compliance, wire motion, print-fit or force validation.','PCB envelope is dimensioned from the linked controller; component height, spacer and cable allowances are engineering assumptions.','Angled spring probes require a selected part and contact-force/scrub testing.']}
-pathlib.Path('output/platform-validation.json').write_text(json.dumps(report,indent=2))
+(pathlib.Path(args.out)/'platform-validation.json').write_text(json.dumps(report,indent=2))
 print('Passed:',report['passed'],'minimum probe gap:',minimum_probe_gap,flush=True)
 assert report['passed']

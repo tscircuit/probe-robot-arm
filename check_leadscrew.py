@@ -20,16 +20,10 @@ for axis,meta in [('Z',lay['z_actuator']),('R',lay['r_actuator'])]:
 for a in parts:
  if not a.get('thread_host'):continue
  name=a['name'];i=int(name.rsplit('_',1)[1]);zo=p['z_origin'];zp=lay['zpad'];hz=lay['horizontal_z'];hx=lay['h_origin'];face=lay['radial_mount_face_z']
- if name.startswith('Z_top_'):
-  x,y=lay['z_actuator']['lid'][i];mask=cyl(2.7,9,(17,-y,zo+x),(1,0,0))
- elif name.startswith('Z_enclosure_'):
-  x,z=lay['z_actuator']['side'][i];mask=cyl(2.7,9,(z-42,-103,zo+x),(0,1,0))
- elif name.startswith('R_enclosure_'):
-  x,y=lay['r_actuator']['lid'][i];mask=cyl(2.7,9,(hx+x,-y,face))
- elif name.startswith('Z_output_'):
-  y,z=lay['z_actuator']['output_holes'][i];mask=cyl(1.7,8,(z-42,-y,zp-8))
+ if name.startswith('Z_output_'):
+  y,z=lay['z_actuator']['output_holes'][i];mask=cyl(1.7,8,(y,z-42,zp-8))
  else:
-  y,z=lay['r_actuator']['output_holes'][i];end=hx+lay['r_actuator']['end']+lay['radial_stroke']/2;mask=cyl(1.7,8,(end-8,-y,hz-z),(1,0,0))
+  y,z=lay['r_actuator']['output_holes'][i];end=hx+lay['r_actuator']['end']+lay['radial_stroke']/2;mask=cyl(1.7,8,(end-8,y,hz+z),(1,0,0))
  extra=a['shape'].intersect(by[a['thread_host']]['shape']).cut(mask).Volume();assert extra<1e-6,(name,extra)
  contacts.append(dict(bolt=name,host=a['thread_host'],outside_pilot_mm3=max(0,extra)))
 r=dict(passed=True,samples=rows,contacts=contacts,lead_mm=8,full_thread_and_bearing_engagement=True,source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','parameters.json','leadscrew_actuator.py','check_leadscrew.py','upstream/leadscrew-r16/experiments/t8-leadscrew/model.py']})

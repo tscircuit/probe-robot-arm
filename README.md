@@ -1,4 +1,4 @@
-# Modular flying probe — revision 18
+# Modular flying probe — revision 19
 
 Parametric theta / Z / radial arm with four modules covering a **100 × 100 mm PCB** and a **2 × 2 mm simultaneous probe cluster**. [Interactive assembly and downloads](https://modular-flying-probe-arm.seveibar.chatgpt.site) · [Source](https://github.com/tscircuit/probe-robot-arm).
 
@@ -6,40 +6,44 @@ Parametric theta / Z / radial arm with four modules covering a **100 × 100 mm P
 
 The actuator geometry is pinned to [FLEX printed-leadscrew Site version 61](https://flex17-compliant-linear-actuator.seveibar.chatgpt.site/experiments/printed-leadscrew/?width=1), source commit `417da079fe5da0ac1bed3edbbaef6dc2782e65f4`. The [rack-actuator GitHub repository](https://github.com/tscircuit/rack-actuator) did not yet contain these experiments when imported. A separate pinned copy lives in `upstream/leadscrew-r16`; the arm adapter is `leadscrew_actuator.py`.
 
-- **Z:** 4× printed-screw actuator, 206 mm base width, 168 mm output flange, 40 mm travel, full-depth NEMA17 reference (48 mm body).
-- **Radial:** 1× printed-screw actuator, 80 mm base width, inverted and mounted from below through its structural lid. Full-depth NEMA14 reference (34 mm body) with a 26 mm motor bolt pitch.
+- **Z:** selectable 1× / 2× / 4× printed-screw actuator, default 4× (206 mm base width, 168 mm output flange), 40 mm travel, full-depth NEMA17 reference (48 mm body).
+- **Radial:** 1× printed-screw actuator, 80 mm base width, upright with its bottom/base seated on the carrier. Full-depth NEMA14 reference (34 mm body) with a 26 mm motor bolt pitch.
 - **Radial travel:** 120 mm, extended from the upstream 40 mm design. Both bearing stations move forward by 80 mm, to X=143/217 mm. The output face moves to X=235 mm at home; working screw length grows to 202 mm. Both threaded bands remain fully engaged and both bearing stations remain on the guide throughout travel.
 - Both printed screws have an 8 mm lead. Motor position is centered laterally; the radial motor body center is at X=0 above the vertical stage.
 
 The larger mechanism moves the arm pivots to **(±350, 0) and (0, ±350) mm**, requiring a **900 × 900 mm platform**. This preserves 120 mm radial travel and room for the narrow triangular probe extension. The base ring, spindle, stand and rotating deck remain shared with the standalone test fixture.
 
-The new output face replaces the old rack-pad U clamp with a broad carrier using **eight M3 screws** on the 4× flange. The carrier also has the 2× output pattern. The radial probe holder now bolts to the vertical output flange and narrows to the probe tip.
+The Z module is turned 90° about its vertical travel axis so the **long dimension of its output flange runs parallel to radial travel**. A 168 × 42 × 2 mm direct seat supports a 342 × 100 × 10 mm carrier plate. Two 8 × 16 mm raised edge ribs and a rear cross-rib reinforce it. There is no narrow connecting stem. The common carrier accepts all three Z widths; 4× and 2× use eight output screws, 1× uses four. Increased stiffness is a design intent, not a measured result.
 
 ## Mounting compatibility
 
+The Z support mounts **only the actuator base face**. Its single 206 mm-wide plate has rear gussets and retains the existing six deck bolts and deck inserts. It does not attach to the actuator lid or sides. Four M5×30 through-bolts, washers and nuts secure the active Z base pattern. Rear clearance pockets keep the 1× hardware clear of the gussets.
+
 Coordinates below are in the actuator's native frame: X along travel, Y across the actuator, Z up from its base. Motor face is X=0 and screw axis is Y=0, Z=42 mm. All adapter M5 clearance holes are Ø5.5 mm.
 
-| Z variant, 40 mm stroke | Base holes: X rows; Y columns | Lid holes: X rows; Y columns | Status |
+| Z variant, 40 mm stroke | Base X rows | Base Y columns | Status |
 |---|---|---|---|
-| Printed 2× | −3, 149; ±55 | 36, 96; ±48 | Published geometry |
-| Printed 4× | −3, 149; ±97 | 36, 96; ±90 | Published geometry; installed |
-| T8 2× | −3, 115; ±55 | 36, 79; ±48 | Inferred |
-| T8 4× | −3, 115; ±97 | 36, 79; ±90 | Inferred |
+| Printed 1× | −3, 149 | ±34 | Published geometry |
+| Printed 2× | −3, 149 | ±55 | Published geometry |
+| Printed 4× | −3, 149 | ±97 | Published geometry; default |
+| T8 1× | −3, 115 | ±34 | Published geometry |
+| T8 2× | −3, 115 | ±55 | Inferred |
+| T8 4× | −3, 115 | ±97 | Inferred |
 
-T8 2×/4× patterns are engineering projections of the published 1× T8 longitudinal positions using the printed family's **21 mm outward offset per multiplier step**. They are not released T8 designs. Confirm them against future T8 models before drilling or relying on a drop-in fit. Z side-face holes include the union of printed and T8 longitudinal positions. The centered base/lid mounting planes remain common across widths; the narrower 2× actuator does not contact the 4× side face.
+T8 2×/4× patterns project the published 1× T8 longitudinal positions using the printed family's 21 mm outward offset per multiplier step. They are not released T8 designs; confirm against future models before relying on fit. All base patterns are present in the common support.
 
-The radial carrier accepts the **1× lid patterns for both printed and T8 designs**, at stock 40 mm stroke and the custom 120 mm length:
+The upright radial actuator uses four M5×20 bolts through its base into **side-loaded captive M5 nuts** in the carrier. The carrier accepts these 1× base patterns:
 
 | Radial pattern | X rows | Y columns |
 |---|---|---|
-| Printed, stock 40 mm | 36, 96 | ±27 |
-| T8, stock 40 mm | 36, 79 | ±27 |
-| Printed, extended 120 mm | 36, 176 | ±27 |
-| T8, inferred extended 120 mm | 36, 159 | ±27 |
+| Printed, stock 40 mm | −3, 149 | ±34 |
+| T8, stock 40 mm | −3, 115 | ±34 |
+| Printed, extended 120 mm | −3, 229 | ±34 |
+| T8, inferred extended 120 mm | −3, 195 | ±34 |
 
-Compatibility here means matching mounting holes and datums. A stock 40 mm radial actuator cannot cover the full PCB with this arm layout. The extended T8 pattern does not specify a purchased screw or establish its stiffness. `downloads/mounting-patterns.json` contains the complete machine-readable coordinates and inference labels.
+Compatibility means matching mounting holes and datums. A stock 40 mm radial actuator cannot cover the full PCB with this layout. The extended T8 pattern does not specify a purchased screw or establish stiffness. `downloads/mounting-patterns.json` contains the complete coordinates and inference labels.
 
-The installed Z uses four lid-face and six side-face M5 screws. The radial actuator uses four underside M5 screws. Lid interfaces have 6 mm adapter walls with M5×14 screws (8 mm entry); the Z side wall is 8 mm with M5×16 screws (8 mm entry). Receiving pilots are 9 mm deep; do not bottom screws out. Output adapters use M3×12 screws through 6 mm material into the original M3 forming pilots. These are three-ridge printed pilots, not inserts or modeled machine threads. Physical installation and load capacity remain untested.
+Fit the Z-to-carrier M3×16 screws first. Their heads are recessed 0.2 mm below the carrier mounting surface, clear of the radial base. They enter the original three-ridge printed pilots, not inserts or modeled machine threads. Then slide the four M5 nuts into the carrier's side pockets, seat the radial actuator bottom-down and install its four base bolts. The probe outrigger retains its M3×12 mounting screws. Physical installation and load capacity remain untested.
 
 ## Rotary base and existing prints
 
@@ -53,7 +57,9 @@ The existing base/stand print package remains usable. For the actuator change, r
 
 Left drag orbits; middle drag pans; the wheel zooms. Right-click offers Download, Isolate, Hide part, Show All and Show hidden edges. Show All works on empty space. The page links switch between the main assembly and the synchronized base test.
 
-The explosion separates the radial carrier, both actuator modules and Z cradle. The screw drives stay assembled and threaded. Z output screws are first loosened 6 mm and retained in the carrier; remove them fully after separating the radial actuator. Axis animation pauses and returns to its neutral pose during explosion. In assembled mode, screw rotation follows the 8 mm lead. The four-arm view coordinates the probe cluster across the board.
+The bottom **Z actuator width** dropdown selects 1×, 2× or 4×, loading actual width-specific CAD, fasteners, checks, STEP assemblies and STL downloads. The radial stage remains 1×. The choice is retained in the `?width=` URL.
+
+The 17-stage explosion withdraws radial base bolts, lifts the radial actuator, removes Z output screws, and separates the carrier and Z module from the single-face support. Captive radial nuts stay in the carrier. Internal drives stay assembled and threaded. Axis animation pauses at the neutral pose during explosion; assembled screw rotation follows the 8 mm lead. The four-arm view coordinates the probe cluster across the board.
 
 ## Build and checks
 
@@ -68,6 +74,12 @@ python check_platform.py
 python check_base_sync.py
 python check_base_drive.py
 python check_deck_cutouts.py
+# Repeat the CAD, mounting, explosion and platform checks for each alternative:
+python model.py --config configs/z-1x.json --out output/widths/z-1x --check
+python model.py --config configs/z-2x.json --out output/widths/z-2x --check
+# check_z_mount.py, check_arm_explosion.py and check_platform.py accept the same flags.
+python prepare_site.py
+python prepare_width_variants.py
 ```
 
 The adapter caches exact BREP geometry using source and configuration hashes. Upstream source is retained unchanged; the integration applies full-depth motor envelopes, NEMA14 mounting and the radial extension locally. The STL downloads preserve the upstream free-state insert pilots. Rotation and travel checks distinguish intended fastener/pilot contact and bearing print-fit interference from unintended solid overlap.

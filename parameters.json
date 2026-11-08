@@ -22,6 +22,7 @@
   "z_motor_depth": 48,
   "radial_motor": "nema14",
   "radial_motor_depth": 34,
-  "radial_inverted": true,
-  "z_rack_deck_clearance": 2
+  "radial_inverted": false,
+  "z_rack_deck_clearance": 2,
+  "z_width": 4
 }

@@ -43,23 +43,24 @@ def layout(p):
     far=max(math.hypot(w+edge,d/2),math.hypot(d+edge,w/2));rmin=edge-p['radial_margin']
     needed=far+p['radial_margin']-rmin;stroke=p['radial_stroke'] or math.ceil(needed/10)*10
     assert stroke>=needed and stroke>=40
-    zm=linear.metadata(40,4,p['z_motor'],p['z_motor_depth']);rm=linear.metadata(stroke,1,p['radial_motor'],p['radial_motor_depth'])
+    width=p.get('z_width',4);assert width in [1,2,4]
+    zm=linear.metadata(40,width,p['z_motor'],p['z_motor_depth']);rm=linear.metadata(stroke,1,p['radial_motor'],p['radial_motor_depth'])
     dt=58.2-p['rotor_drop_mm'];clamp=58.4
     minimum=clamp+p['z_motor_depth']+p['z_rack_deck_clearance']
     if p['z_origin'] is None:p['z_origin']=minimum
     if p['z_origin']<minimum:raise ValueError('Z motor must clear the deck and centre clamp')
-    zo=p['z_origin'];zp=zo+zm['end']+20;face=zp+16;hz=face+68;hx=p['radial_motor_depth']/2
+    zo=p['z_origin'];zp=zo+zm['end']+20;face=zp+12;hz=face;hx=p['radial_motor_depth']/2
     pad=hx+rm['end']+stroke/2;tip=rmin+stroke/2
     assert tip-pad>=35,'Increase edge_to_pivot to leave a tapered probe extension'
     zm['CASE_TOP']=26 # Shared unchanged deck flange footprint.
     return dict(base_motor_x=base_drive_center(p),base_gear_ratio=p['ring_teeth']/p['pinion_teeth'],mounts=[(w/2+edge,0,180),(0,d/2+edge,-90),(-w/2-edge,0,0),(0,-d/2-edge,90)],
-      rmin=rmin,rmax=rmin+stroke,radial_stroke=stroke,required_stroke=needed,h_origin=hx,horizontal_pad=pad-hx,zpad=zp,board_top=hz-63-p['probe_drop']-20,tip_radius=tip,probe_extension=tip-pad,
-      horizontal_origin_y=0,horizontal_z=hz,probe_mount_z=hz-63,radial_mount_face_z=face,z_drive_y=0,r_drive_y=0,z_drive_x=0,r_drive_z=hz-42,lead_mm=8,
+      rmin=rmin,rmax=rmin+stroke,radial_stroke=stroke,required_stroke=needed,h_origin=hx,horizontal_pad=pad-hx,zpad=zp,board_top=hz+21-p['probe_drop']-20,tip_radius=tip,probe_extension=tip-pad,
+      horizontal_origin_y=0,horizontal_z=hz,probe_mount_z=hz+21,radial_mount_face_z=face,z_drive_y=0,r_drive_y=0,z_drive_x=0,r_drive_z=hz+42,lead_mm=8,
       actuator_enclosure='printed-leadscrew',rack_source_revision=16,minimum_z_origin=minimum,z_case_bottom=zo-36,z_rack_lowest=zo+10,deck_top_z=dt,base_clamp_top_z=clamp,z_deck_mounts=p['z_deck_mounts'],
       base_revision='shared-rounded-blocks',z_actuator=zm,r_actuator=rm,yaw_required=math.degrees(math.atan2(max(w,d)/2,edge)))
 
 def actuator_mount_patterns(axis,lay):
-    widths=[2,4] if axis=='Z' else [1]
+    widths=[1,2,4] if axis=='Z' else [1]
     strokes=[40] if axis=='Z' else sorted(set([40,lay['radial_stroke']]))
     return [linear.patterns(w,stroke,variant)|dict(stroke=stroke) for stroke in strokes for w in widths for variant in ['printed','t8']]
 
@@ -150,65 +151,79 @@ def build(p, lay):
         parts[-1]['embedded_host']='Rotating_deck'
         screw=cyl(1.95,16,(x,y,dt-6)).fuse(cyl(3.5,4,(x,y,dt+10)))
         add(f'Z_cradle_deck_screw_{i}',screw,'theta','#a5b5c1',reference=True)
-    # A continuous C cradle connects the broad lid, side and base mounting faces.
-    zo=p['z_origin'];zm=lay['z_actuator'];rm=lay['r_actuator'];top=zo+zm['end'];wide=zm['body_width']/2
+    # One mounting plane against the actuator's underside/base; no lid or side arms.
+    zo=p['z_origin'];zm=lay['z_actuator'];rm=lay['r_actuator'];top=zo+155;wide=103
     side_foot=box(88,23.6,10,(-13,-50.2,dt+5));front_foot=box(26,104,10,(39,2,dt+5))
     flanges=side_foot.fuse(front_foot).intersect(cyl(80,10,(0,0,dt)))
-    top_face=box(6,2*wide+8,top-dt-10,(29,-4,(top+dt+10)/2))
-    side=box(82,8,top-dt-10,(-9,-wide-4,(top+dt+10)/2))
-    back=box(8,2*wide+8,top-(zo-8),(-46,-4,(top+zo-8)/2))
-    support=union([flanges,top_face,side,back]);support=holes(support,upright_mounts,2.2,dt-1,12)
-    support=support.cut(cyl(4.1,40,(24,-54,dt+10)))
+    back=box(206,10,top-dt-10,(0,-47,(top+dt+10)/2))
+    # Rear gussets join the back plate to the existing deck lands.
+    gussets=[]
+    for x in [-30,15]:
+        gussets.append(cq.Workplane('YZ',origin=(x-4,0,0)).polyline([(-60,dt+10),(-52,dt+10),(-52,zo+55)]).close().extrude(8).val())
+    support=union([flanges,back,*gussets]);support=holes(support,upright_mounts,2.2,dt-1,12)
+    # Keep flange screw heads and their initial withdrawal corridors open.
+    for x,y in upright_mounts:support=support.cut(cyl(4.1,40,(x,y,dt+10)))
     patterns=actuator_mount_patterns('Z',lay)
-    for x,y in set(tuple(q) for pat in patterns for q in pat['base']):support=support.cut(cyl(2.75,10,(-51,-y,zo+x),(1,0,0)))
-    for x,y in set(tuple(q) for pat in patterns for q in pat['lid']):support=support.cut(cyl(2.75,8,(25,-y,zo+x),(1,0,0)))
-    for x,z in set(tuple(q) for pat in patterns for q in pat['side']):support=support.cut(cyl(2.75,10,(z-42,-wide-9,zo+x),(0,1,0)))
+    for x,y in set(tuple(q) for pat in patterns for q in pat['base']):
+        support=support.cut(cyl(2.75,24,(y,-65,zo+x),(0,1,0)),cyl(5.4,13,(y,-65,zo+x),(0,1,0)))
     add('Z_support',support.clean(),'theta','#6d849c',True)
-    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,front_foot,top_face,side,back]]]
+    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,front_foot,back,*gussets]]]
     def add_actuator(axis):
         meta=zm if axis=='Z' else rm
         data,_=linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth'])
         for a in data:
             s=linear.home_shape(a,meta)
-            if axis=='Z':s=s.rotate((0,0,0),(1,0,1),180).translate((-42,0,zo))
-            else:s=s.rotate((0,0,0),(1,0,0),180).translate((lay['h_origin'],0,lay['horizontal_z']))
+            if axis=='Z':s=s.rotate((0,0,0),(1,0,1),180).translate((-42,0,zo)).rotate((0,0,0),(0,0,1),90)
+            else:s=s.translate((lay['h_origin'],0,lay['horizontal_z']))
             group=('z_rack' if axis=='Z' else 'r_rack') if a['group']=='carriage' else ('z_drive' if axis=='Z' else 'r_drive') if a['group']=='rotor' else ('theta' if axis=='Z' else 'z_rack')
             add(axis+'_'+a['name'].replace(' ','_'),s,group,a['color'],a['printed'],not a['printed'])
             parts[-1].update(actuator=axis,actuator_group=a['group'],explodeKind=a.get('explodeKind'))
     add_actuator('Z')
-    for i,(x,y) in enumerate(zm['lid']):
-        screw=cyl(2.45,14, (18,-y,zo+x),(1,0,0)).fuse(cyl(4.25,5,(32,-y,zo+x),(1,0,0)))
-        add(f'Z_top_mount_screw_{i}',screw,'theta','#a5b5c1',reference=True);parts[-1]['thread_host']='Z_Structural_mounting_lid'
-    for i,(x,z) in enumerate(zm['side']):
-        screw=cyl(2.45,16,(z-42,-wide-8,zo+x),(0,1,0)).fuse(cyl(4.25,5,(z-42,-wide-13,zo+x),(0,1,0)))
-        add(f'Z_enclosure_mount_screw_{i}',screw,'theta','#a5b5c1',reference=True);parts[-1]['thread_host']='Z_Adjustable_six-bearing_base'
-    hx=lay['h_origin'];hz=lay['horizontal_z'];zp=lay['zpad'];face=lay['radial_mount_face_z'];end=rm['end']
-    # New broad output flange: eight active bolts, with the 2x holes retained.
-    plate=box(42,168,6,(0,0,zp+3));stem=box(10,16,10,(0,0,zp+11));beam=box(35,16,6,(12.5,0,face-3))
-    shelf=box(end-9-6.3,80,6,(hx+(end-9+6.3)/2,0,face-3))
-    carrier=union([plate,stem,beam,shelf])
-    output_patterns=[(x,y) for x in [-15.5,15.5] for y in [-78.5,-36.5,-15.5,15.5,36.5,78.5]]
-    for x,y in output_patterns:carrier=carrier.cut(cyl(1.7,8,(x,y,zp-1)))
-    for x,y in set(tuple(q) for pat in actuator_mount_patterns('R',lay) for q in pat['lid']):carrier=carrier.cut(cyl(2.75,8,(hx+x,-y,face-7)))
+    for i,(x,y) in enumerate(zm['base']):
+        screw=cyl(2.45,30,(y,-62,zo+x),(0,1,0)).fuse(cyl(4.25,5,(y,-32,zo+x),(0,1,0)))
+        add(f'Z_base_mount_screw_{i}',screw,'theta','#a5b5c1',reference=True)
+        washer=cyl(5,2,(y,-54,zo+x),(0,1,0)).cut(cyl(2.65,2,(y,-54,zo+x),(0,1,0)))
+        add(f'Z_base_mount_washer_{i}',washer,'theta','#a5b5c1',reference=True)
+        nut=rotary_base.core.hexagon(8,4,0,0,0).cut(cyl(2.5,4)).rotate((0,0,0),(1,0,0),-90).translate((y,-58,zo+x))
+        add(f'Z_base_mount_nut_{i}',nut,'theta','#a5b5c1',reference=True)
+    hx=lay['h_origin'];hz=lay['horizontal_z'];zp=lay['zpad'];face=lay['radial_mount_face_z'];end=rm['end'];right=hx+end
+    # Broad direct seat parallel to the Z flange's 168 mm dimension, with edge ribs.
+    foot=box(168,42,2,(0,0,zp+1))
+    plate=box(right+90,100,10,((right-90)/2,0,zp+7))
+    ribs=[box(right+90,8,16,((right-90)/2,y,zp+20)) for y in [-46,46]]
+    cross=box(8,84,16,(-62,0,zp+20))
+    carrier=union([foot,plate,cross,*ribs])
+    output_patterns=[(x,y) for x in [-78.5,-36.5,-15.5,15.5,36.5,78.5] for y in [-15.5,15.5]]
+    for x,y in output_patterns:
+        carrier=carrier.cut(cyl(1.7,15,(x,y,zp-1)),cyl(3.2,3.2,(x,y,zp+8.8)))
+    for x,y in set(tuple(q) for pat in actuator_mount_patterns('R',lay) for q in pat['base']):
+        x+=hx
+        carrier=carrier.cut(cyl(2.75,12,(x,y,zp+1)))
+        pocket=rotary_base.core.hexagon(8.3,4.2,x,y,zp+4)
+        lo,hi=sorted([y,51 if y>0 else -51])
+        entry=box(9.7,hi-lo,4.2,(x,(hi+lo)/2,zp+6.1))
+        carrier=carrier.cut(pocket,entry)
     add('Z_to_radial_carrier',carrier.clean(),'z_rack','#8a789e',True)
     for i,(y,z) in enumerate(zm['output_holes']):
-        x=z-42;y=-y
-        screw=cyl(1.45,12,(x,y,zp-6)).fuse(cyl(2.75,3,(x,y,zp+6)))
+        x=y;y=z-42
+        screw=cyl(1.45,16,(x,y,zp-7.2)).fuse(cyl(2.75,3,(x,y,zp+8.8)))
         add(f'Z_output_mount_screw_{i}',screw,'z_rack','#a5b5c1',reference=True);parts[-1]['thread_host']='Z_Hollow_triangular_carriage'
     add_actuator('R')
-    for i,(x,y) in enumerate(rm['lid']):
-        screw=cyl(2.45,14,(hx+x,-y,face-6)).fuse(cyl(4.25,5,(hx+x,-y,face-11)))
-        add(f'R_enclosure_mount_screw_{i}',screw,'z_rack','#a5b5c1',reference=True);parts[-1]['thread_host']='R_Structural_mounting_lid'
+    for i,(x,y) in enumerate(rm['base']):
+        screw=cyl(2.45,20,(hx+x,y,zp+2)).fuse(cyl(4.25,5,(hx+x,y,zp+22)))
+        add(f'R_enclosure_mount_screw_{i}',screw,'z_rack','#a5b5c1',reference=True)
+        nut=rotary_base.core.hexagon(8,4,hx+x,y,zp+4.1).cut(cyl(2.5,4,(hx+x,y,zp+4.1)))
+        add(f'R_base_captive_nut_{i}',nut,'z_rack','#a5b5c1',reference=True)
     padx=hx+end+lay['radial_stroke']/2;mountz=lay['probe_mount_z'];tipx=lay['tip_radius'];anchorx=tipx-p['probe_inward_lean']
     outline=[(padx,-21),(padx+6,-21),(anchorx+3,-3),(anchorx+3,3),(padx+6,21),(padx,21)]
     holder=cq.Workplane('XY').polyline(outline).close().extrude(6).translate((0,0,mountz-6)).val()
-    holder=holder.fuse(box(6,42,42,(padx+3,0,hz-42))).clean()
-    for y,z in rm['output_holes']:holder=holder.cut(cyl(1.7,8,(padx-1,-y,hz-z),(1,0,0)))
+    holder=holder.fuse(box(6,42,42,(padx+3,0,hz+42))).clean()
+    for y,z in rm['output_holes']:holder=holder.cut(cyl(1.7,8,(padx-1,y,hz+z),(1,0,0)))
     tip=V(tipx,0,mountz-p['probe_drop']);axis=V(-p['probe_inward_lean'],0,p['probe_drop']).normalized()
     holder=holder.cut(cq.Solid.makeCylinder(1.05,55,tip,axis)).cut(cyl(.8,4,(anchorx,-4,mountz-3),(0,1,0))).clean()
     add('Triangular_probe_outrigger',holder,'r_rack','#8a789e',True)
     for i,(y,z) in enumerate(rm['output_holes']):
-        screw=cyl(1.45,12,(padx-6,-y,hz-z),(1,0,0)).fuse(cyl(2.75,3,(padx+6,-y,hz-z),(1,0,0)))
+        screw=cyl(1.45,12,(padx-6,y,hz+z),(1,0,0)).fuse(cyl(2.75,3,(padx+6,y,hz+z),(1,0,0)))
         add(f'Probe_output_mount_screw_{i}',screw,'r_rack','#a5b5c1',reference=True);parts[-1]['thread_host']='R_Hollow_triangular_carriage'
     probe=cq.Solid.makeCone(0,.2,1.5,tip,axis).fuse(cq.Solid.makeCylinder(.2,6.5,tip+axis*1.5,axis),cq.Solid.makeCylinder(1,40,tip+axis*8,axis)).clean()
     add('Spring_probe_reference',probe,'r_rack','#ead286',reference=True)
@@ -269,7 +284,7 @@ def validate(parts,p,lay,nominal):
     report={"status":"prototype", "solid_validity":all(a["shape"].isValid() for a in parts),
             "part_count":len(parts),"layout":lay,"collisions":[],"nominal_base_mesh":[],"travel_samples":[],
             "limits":["Geometry prototype. No physical accuracy, stiffness, fatigue, holding torque or contact force certification.",
-                      "Printed leadscrew: 4x Z, 1x radial with custom 120 mm stroke and NEMA14 mount. Inferred T8 width patterns require checking against future variants.",
+                      "Printed leadscrew: selectable Z width, upright 1x radial with custom 120 mm stroke and NEMA14 mount. Inferred T8 width patterns require checking against future variants.",
                       "Shared rotary base includes retainers, direct motor mounting and four single blocks with integral tilted axles. Hardware envelopes are references; homing remains unfinished.",
                       "Simultaneous four-tip cluster checks are in platform-validation.json; they are sampled geometric checks, not physical accuracy tests.",
                       "Sampled collision checks are not a continuous swept-volume proof."]}

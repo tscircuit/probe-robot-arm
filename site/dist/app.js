@@ -3,6 +3,10 @@ import { OrbitControls } from 'three/addons/OrbitControls.js';
 import {installPartDownloads} from './part-downloads.js';
 
 const $=id=>document.getElementById(id), viewport=$('viewport');
+const requestedWidth=Number(new URL(location.href).searchParams.get('width')||4),selectedWidth=[1,2,4].includes(requestedWidth)?requestedWidth:4;
+const assetPrefix=selectedWidth===4?'':'variants/z-'+selectedWidth+'x/',downloadPrefix=selectedWidth===4?'downloads/':'downloads/widths/z-'+selectedWidth+'x/';
+$('width').value=String(selectedWidth);$('width').onchange=()=>{const url=new URL(location.href);url.searchParams.set('width',$('width').value);location.assign(url);};
+for(const link of document.querySelectorAll('a[href^="downloads/"]')){const file=link.getAttribute('href').slice(10);if(['single-arm.zip','four-arm-platform.zip','validation.json','platform-validation.json','arm-explosion-validation.json','actuator-mounts.zip','z-mount-validation.json','mounting-patterns.json'].includes(file))link.href=downloadPrefix+file;}
 const scene=new THREE.Scene(); scene.background=new THREE.Color('#f3f5f6');
 const camera=new THREE.PerspectiveCamera(34,1,1,5000); camera.up.set(0,0,1);
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
@@ -19,7 +23,7 @@ let config, explosionPath, ready=false, four=false, exploding=0, playing=!matchM
 let values={theta:0,z:0,r:0};
 const referenceGroup=new THREE.Group();scene.add(referenceGroup);referenceGroup.visible=false;
 const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
-const viewMenu=installPartDownloads({THREE,canvas:renderer.domElement,camera,scene,getMeshes:()=>pickables,getPart:mesh=>({name:mesh.userData.name,printed:mesh.userData.printed,keepout:mesh.userData.keepout,url:mesh.userData.printed?'downloads/parts/'+encodeURIComponent(mesh.userData.name)+'.stl':null}),onSelect:()=>{playing=false;setPlay();},onShowAll:()=>requestAnimationFrame(fit)});
+const viewMenu=installPartDownloads({THREE,canvas:renderer.domElement,camera,scene,getMeshes:()=>pickables,getPart:mesh=>({name:mesh.userData.name,printed:mesh.userData.printed,keepout:mesh.userData.keepout,url:mesh.userData.printed?downloadPrefix+'parts/'+encodeURIComponent(mesh.userData.name)+'.stl':null}),onSelect:()=>{playing=false;setPlay();},onShowAll:()=>requestAnimationFrame(fit)});
 function explosionVector(p,e){
   const v=[0,0,0],t=e*explosionPath.length;
   for(let i=0;i<explosionPath.length;i++){
@@ -118,7 +122,7 @@ renderer.domElement.addEventListener('pointermove',event=>{
 });
 renderer.domElement.addEventListener('pointerleave',()=>{$('part-name').textContent='';});
 try{
-  const responses=await Promise.all([fetch('arm-mesh.json'),fetch('parameters-resolved.json'),fetch('platform-mesh.json'),fetch('arm-explosion-path.json')]);
+  const responses=await Promise.all([fetch(assetPrefix+'arm-mesh.json'),fetch(assetPrefix+'parameters-resolved.json'),fetch(assetPrefix+'platform-mesh.json'),fetch(assetPrefix+'arm-explosion-path.json')]);
   if(responses.some(r=>!r.ok))throw Error('Assembly files unavailable');
   const [data,p,platform,path]=await Promise.all(responses.map(r=>r.json()));config=p;explosionPath=path;
   $('r').max=config.radial_stroke;

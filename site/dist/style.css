@@ -3,3 +3,5 @@
 @media(max-width:440px){body #viewport{flex:none;height:430px;min-height:430px}}
 
 .page-nav{display:flex;gap:20px;padding:12px 32px 0;flex-wrap:wrap}.page-nav a{font-size:12px;text-decoration:none;color:#71808c;padding:4px 0;border-bottom:2px solid transparent}.page-nav a[aria-current=page]{color:#293843;border-color:#567889}.page-nav a:hover{color:#293843}@media(max-width:760px){.page-nav{padding:10px 18px 0}}
+
+.variant-row{display:flex;align-items:center;gap:12px;margin:10px 0}.variant-row label{font-size:12px;color:#4a5c68}.variant-row select{min-width:90px}

@@ -18,17 +18,17 @@ def bb(s):
 def disjoint(a,b,lo,hi):
     return any(a[1][i]+max(lo[i],hi[i])<=b[0][i]+EPS or b[1][i]<=a[0][i]+min(lo[i],hi[i])+EPS for i in range(3))
 
-def exceptions(parts):
+def exceptions(parts,lay):
     import rotary_base
     pairs=base_contacts(parts,rotary_base.parameters())
     for p in parts:
         if p.get('embedded_host'):
             pairs[frozenset([p['name'],p['embedded_host']])]='Intentional heat-set knurl/pilot interference; insert remains in host'
     pairs[frozenset([next(p['name'] for p in parts if p['name'].startswith('Compliant_') and p['group']=='base_drive'),'Internal_72T_ring'])]='Designed tooth preload; drive stays assembled'
-    config=json.loads((ROOT/'parameters.json').read_text());pairs.update(linear_contacts(parts,layout(config)))
+    pairs.update(linear_contacts(parts,lay))
     return pairs
 
-def check(parts,stages):
+def check(parts,stages,lay):
     shapes={p['name']:p['shape'] for p in parts};bounds={n:bb(s) for n,s in shapes.items()}
     subbounds={}
     for p in parts:
@@ -39,7 +39,7 @@ def check(parts,stages):
             subbounds[p['name']]=boxes
     def separated(a,b,lo,hi):
         return all(disjoint(aa,bb,lo,hi) for aa in subbounds.get(a,[bounds[a]]) for bb in subbounds.get(b,[bounds[b]]))
-    offsets={n:[0.,0.,0.] for n in shapes};allowed=exceptions(parts)
+    offsets={n:[0.,0.,0.] for n in shapes};allowed=exceptions(parts,lay)
     failures=[];unresolved=[];records=[];queries=0;pruned=0;proven=0
     for si,stage in enumerate(stages):
         start=time.time();movers=set(stage['parts']);delta=stage['delta'];length=math.sqrt(sum(d*d for d in delta))
@@ -74,12 +74,15 @@ def check(parts,stages):
     return dict(passed=not failures and not unresolved and len(records)==len(stages),method='Continuous linear-translation intervals certified by swept bounding boxes or midpoint minimum-distance bounds; recursively subdivided. Unresolved intervals fail.',tolerance_mm=EPS,collision_volume_tolerance_mm3=.001,stages=records,distance_queries=queries,bounding_box_prunes=pruned,certified_distance_intervals=proven,collisions=failures,unresolved_intervals=unresolved,exceptions=[dict(parts=sorted(k),reason=v) for k,v in allowed.items()],final_offsets_mm=offsets,limits=['Ideal rigid CAD surfaces and reference hardware envelopes; actual print fit not certified.','Fastener threads are represented by receiving pilots. Unscrew fasteners before the depicted withdrawal; actuator lead screws remain engaged and stationary.','Designed compliant tooth interference is intentional and excluded; other rigid pairs are checked.','Explosion is checked at the zero-angle assembled pose; rotation is disabled during explosion.'])
 
 if __name__=='__main__':
-    out=ROOT/'output'
-    p=json.loads((ROOT/'parameters.json').read_text());lay=layout(p)
+    ap=argparse.ArgumentParser();ap.add_argument('--config',default=str(ROOT/'parameters.json'));ap.add_argument('--out',default=str(ROOT/'output'));args=ap.parse_args()
+    out=pathlib.Path(args.out)
+    p=json.loads(pathlib.Path(args.config).read_text());lay=layout(p)
     parts,_=build(p,lay);stages=timeline(parts)
-    report=check(parts,stages)
+    report=check(parts,stages,lay)
     report['source_sha256']={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['model.py','parameters.json','rotary_base/core.py','rotary_base/gear_geometry.py','rotary_base/parameters.json','arm_explosion.py','check_arm_explosion.py','leadscrew_actuator.py']}
-    report['scope']='One arm, module-level separation and enclosure lid removal. Internal actuator drives and rotary base stay assembled.'
+    report['source_sha256'][str(pathlib.Path(args.config).resolve().relative_to(ROOT))]=hashlib.sha256(pathlib.Path(args.config).read_bytes()).hexdigest()
+    report['z_width']=p.get('z_width',4)
+    report['scope']='One arm, module-level separation from base mounting faces. Internal actuator drives and rotary base stay assembled.'
     (out/'arm-explosion-validation.json').write_text(json.dumps(report,indent=2))
     assert report['passed'],(report['collisions'],report['unresolved_intervals'])
     (out/'arm-explosion-path.json').write_text(json.dumps(stages,indent=2))
