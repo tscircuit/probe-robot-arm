@@ -11,7 +11,7 @@ def run(*args,report=None):
 def py(script,*args):run(sys.executable,script,*args)
 py('model.py','--check')
 py('base_test_kit_v4/build.py')
-for script in ['check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_platform.py','base_test_kit_v4/check_explosion.py','base_test_kit_v4/check_static_precision.py','base_test_kit_v4/check_revision.py']:
+for script in ['check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_platform.py','check_leadscrew.py','check_balance.py','base_test_kit_v4/check_explosion.py','base_test_kit_v4/check_static_precision.py','base_test_kit_v4/check_revision.py']:
  py(script)
 py('base_test_kit_v4/verify_prints.py','output/armature-base-test-v4')
 py('base_test_kit_v4/check_spindle_print.py')
@@ -22,6 +22,10 @@ for p in json.loads((root/'output/arm-mesh.json').read_text()):
  if p.get('base_name') and p['printed']:
   shutil.copyfile(bench/refs[p['base_name']]['printFile'],root/'output/prototype-parts'/(p['name']+'.stl'))
 py('check_deck_cutouts.py');py('check_base_cutouts.py');py('check_flat_base.py');py('verify_main_prints.py')
+for width in [1,2]:
+ flags=['--config',f'configs/z-{width}x.json','--out',f'output/widths/z-{width}x']
+ py('model.py',*flags,'--check')
+ for script in ['check_z_mount.py','check_arm_explosion.py','check_platform.py']:py(script,*flags)
 if args.site:
  run(str(root/'.qa/node_modules/.bin/esbuild'),'base_test_kit_v4/viewer.js','--bundle','--format=iife','--minify','--alias:three=./base_test_kit_v4/vendor/three.module.js','--outfile=base_test_kit_v4/viewer.bundle.js')
  py('prepare_base_v4.py')
@@ -29,11 +33,12 @@ if args.site:
  run('node','base_test_kit_v4/print_guide.mjs')
  run('node','test_base_v4_viewer.mjs')
  py('prepare_site.py')
+ py('prepare_width_variants.py')
  shutil.copyfile(root/'output/flat-base-validation.json',bench/'flat-base-validation.json')
  shutil.copyfile(root/'output/base-cutouts-validation.json',bench/'base-cutouts-validation.json')
  shutil.copyfile(root/'output/deck-cutouts-validation.json',bench/'deck-cutouts-validation.json')
  py('prepare_base_v4.py','--publish-assets')
  run('node','test_viewer.mjs',report='output/current-viewer-validation.json')
- run('node','test_part_downloads.mjs');run('node','test_part_visibility.mjs');run('node','test_hidden_edges.mjs');run('node','test_mouse_controls.mjs')
+ run('node','test_width_variants.mjs');run('node','test_part_downloads.mjs');run('node','test_part_visibility.mjs');run('node','test_hidden_edges.mjs');run('node','test_mouse_controls.mjs')
  print('Local site ready: python -m http.server 8000 --directory site/dist')
 else:print('CAD and checks complete. Use --site to build and test the local website.')

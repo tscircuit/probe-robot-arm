@@ -27,5 +27,6 @@
   "z_width": 1,
   "radial_setback_mm": 105,
   "z_controller_clearance_mm": 10,
-  "radial_body_extension_mm": 0
+  "radial_body_extension_mm": 0,
+  "z_inverted": true
 }

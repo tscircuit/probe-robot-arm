@@ -12,7 +12,6 @@ def measure(config):
   if a['group'] not in ['z_rack','r_rack','r_drive'] or a.get('keepout'):continue
   s=a['shape'];rows.append(dict(name=a['name'],group=a['group'],printed=a['printed'],volume_mm3=s.Volume(),center_x_mm=s.Center().x))
  return rows,lay
-before,old=measure(p|{'radial_setback_mm':140,'radial_body_extension_mm':140,'edge_to_pivot':300,'z_origin':None})
 after,new=measure(p.copy())
 def result(rows,motor,plastic,travel):
  mass=moment=0
@@ -23,15 +22,13 @@ def result(rows,motor,plastic,travel):
  return dict(mass_g=mass,com_x_mm=moment/mass,gravity_moment_nm=moment*9.80665e-6)
 assert p['radial_setback_mm']>0
 assert abs(new['h_origin']-(p['radial_motor_depth']/2-p['radial_setback_mm']))<1e-6
-assert old['h_origin']+old['r_actuator']['end']-(new['h_origin']+new['r_actuator']['end'])>=100
-assert abs((new['mounts'][0][0]-new['rmax'])-(old['mounts'][0][0]-old['rmax']))<1e-6
-assert new['radial_stroke']==old['radial_stroke']==120
+assert new['radial_stroke']==120
 rows=[]
 for motor,plastic,travel in itertools.product([140,180,250],[.2,.45,.65],[-60,0,60]):
- a=result(before,motor,plastic,travel);b=result(after,motor,plastic,travel)
- rows.append(dict(motor_mass_g=motor,effective_print_density_g_cm3=plastic,radial_displacement_mm=travel,before=a,after=b))
+ b=result(after,motor,plastic,travel)
+ rows.append(dict(motor_mass_g=motor,effective_print_density_g_cm3=plastic,radial_displacement_mm=travel,after=b))
 nominal=[r for r in rows if r['motor_mass_g']==180 and r['effective_print_density_g_cm3']==.45]
 assert abs(next(r for r in nominal if r['radial_displacement_mm']==0)['after']['com_x_mm'])<10
-report=dict(passed=True,comparison='Previous revision 21 long actuator versus compact centered actuator',radial_setback_mm=p['radial_setback_mm'],body_extension_mm=new['r_actuator']['extension_mm'],radial_travel_mm=new['radial_stroke'],tip_reach_mm=[new['rmin'],new['rmax']],nominal_sensitivity_case=nominal,sensitivity_samples=rows,limits=['Assumed motor masses 140/180/250 g, effective printed density 0.2/0.45/0.65 g/cm3, reference hardware approximated as steel at 7.85 g/cm3.','The full Z carriage is included in the lifted assembly. Wiring and actual infill/toolpaths are not modeled.','Reduced estimated gravity moment does not establish strength, stiffness or physical balance. Weigh printed parts and the selected motor to refine.'],source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','leadscrew_actuator.py','parameters.json','check_balance.py']})
+report=dict(passed=True,comparison='Current direct-lid upper stage; mass sensitivity only, not measured balance',radial_setback_mm=p['radial_setback_mm'],body_extension_mm=new['r_actuator']['extension_mm'],radial_travel_mm=new['radial_stroke'],tip_reach_mm=[new['rmin'],new['rmax']],nominal_sensitivity_case=nominal,sensitivity_samples=rows,limits=['Assumed motor masses 140/180/250 g, effective printed density 0.2/0.45/0.65 g/cm3, reference hardware approximated as steel at 7.85 g/cm3.','The full Z carriage is included in the lifted assembly. Wiring and actual infill/toolpaths are not modeled.','Reduced estimated gravity moment does not establish strength, stiffness or physical balance. Weigh printed parts and the selected motor to refine.'],source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','leadscrew_actuator.py','direct_mount.py','parameters.json','check_balance.py']})
 (root/'output/balance-validation.json').write_text(json.dumps(report,indent=2))
 print(json.dumps(dict(passed=True,nominal=nominal),indent=2))

@@ -5,7 +5,7 @@ dist=root/'site/dist'
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def checked(out,name,key='passed'):
  p=out/name;r=json.loads(p.read_text());assert r[key],name
- assert p.stat().st_mtime>=max((root/'model.py').stat().st_mtime,(root/'leadscrew_actuator.py').stat().st_mtime),('Stale CAD report',p)
+ assert p.stat().st_mtime>=max((root/'model.py').stat().st_mtime,(root/'leadscrew_actuator.py').stat().st_mtime,(root/'direct_mount.py').stat().st_mtime),('Stale CAD report',p)
  for n,h in r.get('source_sha256',{}).items():assert digest(root/n)==h,('stale',n)
  return r
 bench=root/'output/armature-base-test-v4'
@@ -44,7 +44,7 @@ for width in [1,2,4]:
   with zipfile.ZipFile(downloads/(stem+'.zip'),'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
    z.write(out/(stem+'.step'),stem+'.step');z.write(root/'README.md','README.md');z.write(out/'parameters-resolved.json','parameters-resolved.json')
  with zipfile.ZipFile(downloads/'actuator-mounts.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
-  for name in ['Z_support','Z_to_radial_carrier','Triangular_probe_outrigger']:z.write(out/'prototype-parts'/(name+'.stl'),name+'.stl')
+  for name in ['Z_support','R_Structural_mounting_lid','Z_Hollow_triangular_carriage','Triangular_probe_outrigger']:z.write(out/'prototype-parts'/(name+'.stl'),name+'.stl')
   z.write(out/'mounting-patterns.json','mounting-patterns.json');z.write(root/'README.md','README.md')
  rows.append(dict(width=width,passed=True,parts=len(parts),print_count=len(names),asset_path=str(assets.relative_to(dist)),download_path=str(downloads.relative_to(dist)),files={name:digest(out/name) for name in ['validation.json','arm-mesh.json','arm-explosion-validation.json','z-mount-validation.json','platform-validation.json','print-mesh-validation.json']}))
 report=dict(passed=True,variants=rows)

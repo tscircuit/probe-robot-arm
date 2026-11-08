@@ -69,7 +69,7 @@ for stem in ['single-arm','four-arm-platform']:
   z.write(root/'output'/(stem+'.step'),stem+'.step')
   z.write(root/'README.md','README.md')
 with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
- for name in ['model.py','leadscrew_actuator.py','check_leadscrew.py','check_balance.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_width_variants.py','test_width_variants.mjs','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_part_visibility.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
+ for name in ['model.py','direct_mount.py','leadscrew_actuator.py','check_leadscrew.py','check_balance.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_width_variants.py','test_width_variants.mjs','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_part_visibility.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
   z.write(root/name,name)
  for name in ['.qa/package.json','.qa/package-lock.json','site/dist/index.html','site/dist/app.js','site/dist/style.css','site/dist/part-downloads.js']:z.write(root/name,name)
  for directory in ['configs','upstream','rotary_base','base_test_kit_v4','scripts','site/dist/vendor','output/prototype-parts']:
@@ -104,7 +104,7 @@ shutil.copyfile(root/'output/flat-base-validation.json',download/'flat-base-vali
 shutil.copyfile(root/'output/base-cutouts-validation.json',download/'base-cutouts-validation.json')
 shutil.copyfile(root/'output/deck-cutouts-validation.json',download/'deck-cutouts-validation.json')
 with zipfile.ZipFile(download/'actuator-mounts.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
- for name in ['Z_support','Z_to_radial_carrier','Triangular_probe_outrigger']:z.write(root/'output/prototype-parts'/(name+'.stl'),name+'.stl')
+ for name in ['Z_support','R_Structural_mounting_lid','Z_Hollow_triangular_carriage','Triangular_probe_outrigger']:z.write(root/'output/prototype-parts'/(name+'.stl'),name+'.stl')
  z.write(root/'output/mounting-patterns.json','mounting-patterns.json');z.write(root/'README.md','README.md')
 for p in dist.rglob('*'):
  if p.is_file() and p.stat().st_size>24*1024*1024:raise ValueError(f'Asset exceeds hosting limit: {p}')

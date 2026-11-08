@@ -8,6 +8,7 @@ import argparse, contextlib, hashlib, io, itertools, json, math, pathlib, sys
 import cadquery as cq
 import rotary_base
 import leadscrew_actuator as linear
+import direct_mount
 from rotary_base import gear_geometry as base_gears
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -46,19 +47,21 @@ def layout(p):
     width=p.get('z_width',4);assert width in [1,2,4]
     zm=linear.metadata(40,width,p['z_motor'],p['z_motor_depth']);rm=linear.metadata(stroke,1,p['radial_motor'],p['radial_motor_depth'],p['radial_body_extension_mm'])
     dt=58.2-p['rotor_drop_mm'];clamp=58.4
-    controller_depth=p['controller_spacer']+1.6+max(p['controller_component_height'],12)
-    minimum=clamp+p['z_motor_depth']+controller_depth+p['z_controller_clearance_mm']
+    # At the lowest Z pose, the radial body clears the 28 mm support gussets by 6 mm.
+    hz=dt+38+20+6;zp=hz+direct_mount.LID_TOP
+    minimum=zp+zm['end']+20
     if p['z_origin'] is None:p['z_origin']=minimum
-    if p['z_origin']<minimum:raise ValueError('Z rear controller and cable envelope must clear the centre clamp by at least 10 mm')
-    zo=p['z_origin'];zp=zo+zm['end']+20;face=zp+12;hz=face;hx=p['radial_motor_depth']/2-p['radial_setback_mm']
+    if p['z_origin']<minimum:raise ValueError('Inverted Z must keep the radial stage above the support gussets')
+    zo=p['z_origin'];zp=zo-zm['end']-20;hz=zp-direct_mount.LID_TOP;face=zp
+    hx=p['radial_motor_depth']/2-p['radial_setback_mm']
     pad=hx+rm['end']+stroke/2;tip=rmin+stroke/2
     assert tip-pad>=35,'Increase edge_to_pivot to leave a tapered probe extension'
     zm['CASE_TOP']=26 # Shared unchanged deck flange footprint.
     return dict(base_motor_x=base_drive_center(p),base_gear_ratio=p['ring_teeth']/p['pinion_teeth'],mounts=[(w/2+edge,0,180),(0,d/2+edge,-90),(-w/2-edge,0,0),(0,-d/2-edge,90)],
       rmin=rmin,rmax=rmin+stroke,radial_stroke=stroke,required_stroke=needed,h_origin=hx,horizontal_pad=pad-hx,zpad=zp,board_top=hz+21-p['probe_drop']-20,tip_radius=tip,probe_extension=tip-pad,
       horizontal_origin_y=0,horizontal_z=hz,probe_mount_z=hz+21,radial_mount_face_z=face,z_drive_y=0,r_drive_y=0,z_drive_x=0,r_drive_z=hz+42,lead_mm=8,
-      actuator_enclosure='printed-leadscrew',rack_source_revision=16,minimum_z_origin=minimum,z_case_bottom=zo-36,z_rack_lowest=zo+10,deck_top_z=dt,base_clamp_top_z=clamp,z_deck_mounts=p['z_deck_mounts'],
-      radial_motor_center_x_mm=-p['radial_setback_mm'],carrier_rear_x_mm=-90-p['radial_setback_mm'],z_controller_lowest_z_mm=zo-p['z_motor_depth']-controller_depth,base_revision='shared-rounded-blocks',z_actuator=zm,r_actuator=rm,yaw_required=math.degrees(math.atan2(max(w,d)/2,edge)))
+      actuator_enclosure='printed-leadscrew',rack_source_revision=16,minimum_z_origin=minimum,z_case_bottom=zo-zm['end'],z_rack_lowest=zp-20,deck_top_z=dt,base_clamp_top_z=clamp,z_deck_mounts=p['z_deck_mounts'],
+      radial_motor_center_x_mm=-p['radial_setback_mm'],z_inverted=True,z_drive_rotation_sign=-1,z_controller_lowest_z_mm=zo+p['z_motor_depth'],base_revision='shared-rounded-blocks',z_actuator=zm,r_actuator=rm,yaw_required=math.degrees(math.atan2(max(w,d)/2,edge)))
 
 def actuator_mount_patterns(axis,lay):
     widths=[1,2,4] if axis=='Z' else [1]
@@ -72,7 +75,7 @@ def linear_contacts(parts,lay):
         for q in lay['z_actuator' if axis=='Z' else 'r_actuator']['thread_joints']:
             result[frozenset([axis+'_'+q['host'].replace(' ','_'),axis+'_'+q['bolt'].replace(' ','_')])]='Upstream three-ridge self-forming pilot / fastener engagement'
     for a in parts:
-        if a.get('thread_host'):result[frozenset([a['name'],a['thread_host']])]='External screw engages blind three-ridge receiving pilot'
+        if a.get('thread_host'):result[frozenset([a['name'],a['thread_host']])]='External screw engages modeled receiving thread / pilot'
     result[frozenset(['Z_Controller_component_KEEPOUT','Z_USB_cable_KEEPOUT'])]='Overlapping nonphysical controller keepout volumes'
     return result
 
@@ -156,7 +159,7 @@ def build(p, lay):
         screw=cyl(1.95,seat+6,(x,y,dt-6)).fuse(cyl(3.5,4,(x,y,dt+seat)))
         add(f'Z_cradle_deck_screw_{i}',screw,'theta','#a5b5c1',reference=True)
     # One mounting plane against the actuator's underside/base; no lid or side arms.
-    zo=p['z_origin'];zm=lay['z_actuator'];rm=lay['r_actuator'];top=zo+155;wide=103
+    zo=p['z_origin'];zm=lay['z_actuator'];rm=lay['r_actuator'];top=zo+9;wide=103
     side_foot=box(114,23.6,10,(0,-50.2,dt+5));feet=[box(26,104,10,(x,2,dt+5)) for x in [-39,39]]
     flanges=side_foot.fuse(*feet).intersect(cyl(80,10,(0,0,dt)))
     # All outer lands share Y=-62: lay this face on the bed. Reinforcement
@@ -164,16 +167,16 @@ def build(p, lay):
     height=top-dt-10;mid=(top+dt+10)/2
     back=box(206,10,height,(0,-57,mid))
     ribs=[box(14,10,height,(x,-47,mid)) for x in [-96,96]]
-    ribs += [box(206,10,12,(0,-47,zo+z)) for z in [-3,115,149]]
+    ribs += [box(206,10,12,(0,-47,zo+z)) for z in [3,-115,-149]]
     ribs += [box(206,10,14,(0,-47,dt+17))]
-    ribs += [box(26,10,28,(x,-47,dt+24)) for x in [-39,39]] # Solid backing for the entire corner root.
+    ribs += [box(26,10,zo-143-dt-10,(x,-47,(zo-143+dt+10)/2)) for x in [-39,39]] # Solid backing for the entire corner root.
     # 28 mm x 28 mm internal 45-degree chamfer reinforces the loaded corner.
     corner=cq.Workplane('YZ',origin=(26,0,0)).polyline([(-42,dt+10),(-14,dt+10),(-42,dt+38)]).close().extrude(26).val()
     corners=[corner,corner.mirror('YZ')];support=union([flanges,back,*corners,*ribs])
     # Rounded through-windows leave broad edge rails and every mounting row.
     # The lower right opening stays clear of the solid corner reinforcement.
-    windows=[(-89,89,zo+9,zo+103),(-89,-64,dt+24,zo-15),
-             (-14,14,dt+24,zo-15),(64,89,dt+24,zo-15),(-89,89,zo+127,zo+137)]
+    windows=[(-89,89,zo-103,zo-9),(-89,-64,dt+24,zo-161),
+             (-14,14,dt+24,zo-161),(64,89,dt+24,zo-161),(-89,89,zo-137,zo-127)]
     for x0,x1,z0,z1 in windows:
         cutter=cq.Workplane('XY').box(x1-x0,24,z1-z0).edges('|Y').fillet(4).translate(((x0+x1)/2,-52,(z0+z1)/2)).val()
         support=support.cut(cutter)
@@ -186,15 +189,15 @@ def build(p, lay):
         support=support.cut(access)
     patterns=actuator_mount_patterns('Z',lay)
     for x,y in set(tuple(q) for pat in patterns for q in pat['base']):
-        support=support.cut(cyl(2.75,24,(y,-65,zo+x),(0,1,0)),cyl(5.4,13,(y,-65,zo+x),(0,1,0)))
+        support=support.cut(cyl(2.75,24,(-y,-65,zo-x),(0,1,0)),cyl(5.4,13,(-y,-65,zo-x),(0,1,0)))
     add('Z_support',support.clean(),'theta','#6d849c',True)
     parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,*feet,back,*corners,*ribs]]]
     def add_actuator(axis):
         meta=zm if axis=='Z' else rm
-        data,_=linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth'],meta.get('extension_mm',0))
+        data=direct_mount.parts(axis,meta,lay['h_origin'])
         for a in data:
             s=linear.home_shape(a,meta)
-            if axis=='Z':s=s.rotate((0,0,0),(1,0,1),180).translate((-42,0,zo)).rotate((0,0,0),(0,0,1),90)
+            if axis=='Z':s=s.rotate((0,0,0),(1,0,1),180).translate((-42,0,0)).rotate((0,0,0),(0,0,1),90).rotate((0,0,0),(0,1,0),180).translate((0,0,zo))
             else:s=s.translate((lay['h_origin'],0,lay['horizontal_z']))
             group=('z_rack' if axis=='Z' else 'r_rack') if a['group']=='carriage' else ('z_drive' if axis=='Z' else 'r_drive') if a['group']=='rotor' else ('theta' if axis=='Z' else 'z_rack')
             add(axis+'_'+a['name'].replace(' ','_'),s,group,a['color'],a['printed'],not a['printed'])
@@ -203,6 +206,7 @@ def build(p, lay):
     # Rear Z controller matches the base controller's reference packaging dimensions.
     rear=zo-p['z_motor_depth'];pcb_top=rear-p['controller_spacer'];pcb_bottom=pcb_top-1.6
     def controller_part(name,shape,color,keepout=False):
+        shape=shape.rotate((0,0,zo),(0,1,zo),180)
         add('Z_'+name,shape,'theta',color,reference=True,keepout=keepout);parts[-1]['actuator']='Z'
     controller_part('Rear_controller_PCB_REFERENCE',holes(box(42.3,42.32,1.6,(0,0,pcb_bottom+.8)),list(itertools.product([-15.5,15.5],repeat=2)),1.65,pcb_bottom-1,3.6),'#267c60')
     for i,(x,y) in enumerate(itertools.product([-15.5,15.5],repeat=2)):
@@ -210,40 +214,19 @@ def build(p, lay):
     controller_part('Controller_component_KEEPOUT',box(42.3,42.32,p['controller_component_height'],(0,0,pcb_bottom-p['controller_component_height']/2)),'#70b598',True)
     controller_part('USB_cable_KEEPOUT',box(42.3,30,14,(0,36.16,pcb_bottom-5)),'#70b598',True)
     for i,(x,y) in enumerate(zm['base']):
-        screw=cyl(2.45,30,(y,-62,zo+x),(0,1,0)).fuse(cyl(4.25,5,(y,-32,zo+x),(0,1,0)))
+        screw=cyl(2.45,30,(-y,-62,zo-x),(0,1,0)).fuse(cyl(4.25,5,(-y,-32,zo-x),(0,1,0)))
         add(f'Z_base_mount_screw_{i}',screw,'theta','#a5b5c1',reference=True)
-        washer=cyl(5,2,(y,-54,zo+x),(0,1,0)).cut(cyl(2.65,2,(y,-54,zo+x),(0,1,0)))
+        washer=cyl(5,2,(-y,-54,zo-x),(0,1,0)).cut(cyl(2.65,2,(-y,-54,zo-x),(0,1,0)))
         add(f'Z_base_mount_washer_{i}',washer,'theta','#a5b5c1',reference=True)
-        nut=rotary_base.core.hexagon(8,4,0,0,0).cut(cyl(2.5,4)).rotate((0,0,0),(1,0,0),-90).translate((y,-58,zo+x))
+        nut=rotary_base.core.hexagon(8,4,0,0,0).cut(cyl(2.5,4)).rotate((0,0,0),(1,0,0),-90).translate((-y,-58,zo-x))
         add(f'Z_base_mount_nut_{i}',nut,'theta','#a5b5c1',reference=True)
-    hx=lay['h_origin'];hz=lay['horizontal_z'];zp=lay['zpad'];face=lay['radial_mount_face_z'];end=rm['end'];right=hx+end;left=lay['carrier_rear_x_mm']
-    # Broad direct seat parallel to the Z flange's 168 mm dimension, with edge ribs.
-    foot=box(168,42,2,(0,0,zp+1))
-    plate=box(right-left,100,10,((right+left)/2,0,zp+7))
-    ribs=[box(right-left,8,16,((right+left)/2,y,zp+20)) for y in [-46,46]]
-    cross=box(8,84,16,(left+28,0,zp+20))
-    carrier=union([foot,plate,cross,*ribs])
-    output_patterns=[(x,y) for x in [-78.5,-36.5,-15.5,15.5,36.5,78.5] for y in [-15.5,15.5]]
-    for x,y in output_patterns:
-        carrier=carrier.cut(cyl(1.7,15,(x,y,zp-1)),cyl(3.2,3.2,(x,y,zp+8.8)))
-    for x,y in set(tuple(q) for pat in actuator_mount_patterns('R',lay) for q in pat['base']):
-        x+=hx
-        carrier=carrier.cut(cyl(2.75,12,(x,y,zp+1)))
-        pocket=rotary_base.core.hexagon(8.3,4.2,x,y,zp+4)
-        lo,hi=sorted([y,51 if y>0 else -51])
-        entry=box(9.7,hi-lo,4.2,(x,(hi+lo)/2,zp+6.1))
-        carrier=carrier.cut(pocket,entry)
-    add('Z_to_radial_carrier',carrier.clean(),'z_rack','#8a789e',True)
+    hx=lay['h_origin'];hz=lay['horizontal_z'];zp=lay['zpad'];end=rm['end']
     for i,(y,z) in enumerate(zm['output_holes']):
-        x=y;y=z-42
-        screw=cyl(1.45,16,(x,y,zp-7.2)).fuse(cyl(2.75,3,(x,y,zp+8.8)))
-        add(f'Z_output_mount_screw_{i}',screw,'z_rack','#a5b5c1',reference=True);parts[-1]['thread_host']='Z_Hollow_triangular_carriage'
+        x=-y;y=z-42
+        screw=cyl(1.45,12,(x,y,zp-7.2)).fuse(cyl(2.75,3,(x,y,zp+4.8)))
+        add(f'Z_output_mount_screw_{i}',screw,'z_rack','#a5b5c1',reference=True)
+        parts[-1]['thread_host']='R_Structural_mounting_lid'
     add_actuator('R')
-    for i,(x,y) in enumerate(rm['base']):
-        screw=cyl(2.45,20,(hx+x,y,zp+2)).fuse(cyl(4.25,5,(hx+x,y,zp+22)))
-        add(f'R_enclosure_mount_screw_{i}',screw,'z_rack','#a5b5c1',reference=True)
-        nut=rotary_base.core.hexagon(8,4,hx+x,y,zp+4.1).cut(cyl(2.5,4,(hx+x,y,zp+4.1)))
-        add(f'R_base_captive_nut_{i}',nut,'z_rack','#a5b5c1',reference=True)
     padx=hx+end+lay['radial_stroke']/2;mountz=lay['probe_mount_z'];tipx=lay['tip_radius'];anchorx=tipx-p['probe_inward_lean']
     outline=[(padx,-21),(padx+6,-21),(anchorx+3,-3),(anchorx+3,3),(padx+6,21),(padx,21)]
     holder=cq.Workplane('XY').polyline(outline).close().extrude(6).translate((0,0,mountz-6)).val()
@@ -268,7 +251,7 @@ def pose(parts,p,lay,yaw=0,z=0,r=0):
             s=s.rotate((base_drive_center(p),0,0),(base_drive_center(p),0,1),yaw*p["ring_teeth"]/p["pinion_teeth"])
         else:
             if g=="z_drive":
-                s=s.rotate((0,0,p["z_origin"]),(0,0,p["z_origin"]+1),-z*360/lay["lead_mm"])
+                s=s.rotate((0,0,p["z_origin"]),(0,0,p["z_origin"]+1),z*360/lay["lead_mm"])
             if g=="r_drive":
                 s=s.rotate((lay['h_origin'],0,lay['r_drive_z']),(lay['h_origin']+1,0,lay['r_drive_z']),-r*360/lay['lead_mm'])
             if g=="r_rack": s=s.translate((r,0,0))
@@ -402,7 +385,7 @@ def main():
                 b=shape.BoundingBox();shape=shape.translate((0,-(b.ymin+b.ymax)/2,-b.zmin))
             cq.exporters.export(shape,str(custom/(a['name']+'.stl')),tolerance=.025 if a.get('base_name') else .05,angularTolerance=.06 if a.get('base_name') else .12)
     for label,meta in [('Z',lay['z_actuator']),('R',lay['r_actuator'])]:
-        for part in linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth'],meta.get('extension_mm',0))[0]:
+        for part in direct_mount.parts(label,meta,lay['h_origin']):
             if part['printed']:
                 shape=linear.home_shape(part,meta,printing=True)
                 shape=shape.translate((0,0,-shape.BoundingBox().zmin))
