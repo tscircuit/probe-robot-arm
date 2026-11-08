@@ -6,7 +6,7 @@ ap=argparse.ArgumentParser();ap.add_argument('--config',default=str(root/'parame
 p=json.loads(pathlib.Path(args.config).read_text());lay=layout(p);parts,_=build(p,lay);by={a['name']:a for a in parts};support=by['Z_support']['shape'];carrier=by['Z_to_radial_carrier']['shape'];zo=p['z_origin'];dt=lay['deck_top_z'];zp=lay['zpad'];hx=lay['h_origin']
 assert len(support.Solids())==len(carrier.Solids())==1
 assert not any(a['name'].startswith(('Z_top_mount_','Z_enclosure_mount_')) for a in parts)
-assert overlap(support,box(500,200,500,(0,58.001,dt+260.001)))<1e-6,'Support extends past the base mounting plane'
+assert overlap(support,box(500,200,500,(0,58.001,dt+288.001)))<1e-6,'Support extends past the base mounting plane above the corner gusset'
 records=[]
 for axis in ['Z','R']:
  for pat in actuator_mount_patterns(axis,lay):
@@ -39,6 +39,23 @@ for a in parts:
  if a['name'].startswith('Z_output_mount_screw_'):assert a['shape'].BoundingBox().zmax<lay['radial_mount_face_z']-.19
 # Body floor sits on the carrier, and the screw axis is above that floor.
 assert not p['radial_inverted'];assert lay['r_drive_z']-lay['radial_mount_face_z']==42
-motor=by['Z_NEMA17_full-depth_reference']['shape'];gap=motor.distance(by['M6x60_axle_bolt']['shape']);assert abs(gap-p['z_rack_deck_clearance'])<1e-6
-r=dict(passed=True,z_width=p['z_width'],patterns=records,z_mount_faces=['base only'],z_base_fasteners='4 x M5x30 with washers and nuts',radial_orientation='upright, base underneath',radial_base_fasteners='4 x M5x20 into side-loaded captive nuts',carrier=dict(direction=[1,0,0],z_flange_long_axis=[1,0,0],direct_seat_mm=[168,42,2],plate_thickness_mm=10,edge_ribs_mm=[8,16],output_screw_heads_recessed_mm=.2,physical_stiffness_verified=False),motor_to_clamp_mm=gap,source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','leadscrew_actuator.py','check_z_mount.py','rotary_base/core.py','rotary_base/parameters.json',str(pathlib.Path(args.config).resolve().relative_to(root))]})
+motor=by['Z_NEMA17_full-depth_reference']['shape'];gap=motor.distance(by['M6x60_axle_bolt']['shape'])
+# Flat seating land and a longer M4x25 bolt pass through the 45-degree reinforcement.
+assert support.isInside(V(30,-35,dt+24),1e-6)
+seat=cyl(4,1,(42,-28,dt+18)).cut(cyl(2.21,1,(42,-28,dt+18)))
+assert seat.cut(support).Volume()<1e-6
+bolt=by['Z_cradle_deck_screw_3']['shape'];assert abs(bolt.BoundingBox().zmax-(dt+23))<1e-6
+assert overlap(bolt,support)<1e-6
+controller=[a for a in parts if a['name'].startswith(('Z_Rear_controller','Z_Controller_','Z_USB_'))]
+assert len(controller)==7
+assert abs(min(a['shape'].BoundingBox().zmin for a in controller)-lay['z_controller_lowest_z_mm'])<1e-6
+assert lay['z_controller_lowest_z_mm']-lay['base_clamp_top_z']>=10-1e-6
+for a in controller:
+ # The full downward 10 mm clearance prism must remain free of the support and rotary assembly.
+ swept=a['shape'].BoundingBox();free=box(swept.xlen,swept.ylen,10,((swept.xmin+swept.xmax)/2,(swept.ymin+swept.ymax)/2,swept.zmin-5))
+ if a['keepout']:
+  for b in parts:
+   if b.get('base_name') or b['name']=='Z_support':assert overlap(free,b['shape'])<1e-6,(a['name'],b['name'],'controller clearance')
+
+r=dict(passed=True,z_width=p['z_width'],patterns=records,z_mount_faces=['base only'],z_base_fasteners='4 x M5x30 with washers and nuts',radial_orientation='upright, base underneath',radial_base_fasteners='4 x M5x20 into side-loaded captive nuts',carrier=dict(direction=[1,0,0],z_flange_long_axis=[1,0,0],direct_seat_mm=[168,42,2],plate_thickness_mm=10,edge_ribs_mm=[8,16],output_screw_heads_recessed_mm=.2,physical_stiffness_verified=False),motor_to_clamp_mm=gap,z_controller_bottom_margin_mm=lay['z_controller_lowest_z_mm']-lay['base_clamp_top_z'],corner_gusset_mm=[26,28,28],corner_bolt='M4x25 through 45 degree gusset, flat recessed head seat',source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','leadscrew_actuator.py','check_z_mount.py','rotary_base/core.py','rotary_base/parameters.json',str(pathlib.Path(args.config).resolve().relative_to(root))]})
 (out/'z-mount-validation.json').write_text(json.dumps(r,indent=2));(out/'mounting-patterns.json').write_text(json.dumps(records,indent=2));print('Single-face mounting and aligned carrier passed',p['z_width'],flush=True)

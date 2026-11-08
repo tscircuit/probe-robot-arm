@@ -5,7 +5,7 @@ from model import build,layout,cyl,overlap
 root=pathlib.Path(__file__).resolve().parent
 p=json.loads((root/'parameters.json').read_text());lay=layout(p);parts,_=build(p,lay);by={a['name']:a for a in parts};rows=[];contacts=[]
 for axis,meta in [('Z',lay['z_actuator']),('R',lay['r_actuator'])]:
- data,_=linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth']);local={a['name']:a for a in data}
+ data,_=linear.build(meta['stroke'],meta['width'],meta['motor'],meta['depth'],meta.get('extension_mm',0));local={a['name']:a for a in data}
  screw=local['Printed 20 mm lead screw with integral shaft clamp']['shape'];carriage=local['Hollow triangular carriage']['shape']
  for travel in sorted(set([0,1,2,3,4,20,meta['stroke']/2,meta['stroke']])):
   v=overlap(screw.rotate((0,0,42),(1,0,42),-travel*360/8),carriage.translate((travel,0,0)))

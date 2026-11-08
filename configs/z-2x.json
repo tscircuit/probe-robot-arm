@@ -24,5 +24,7 @@
   "radial_motor_depth": 34,
   "radial_inverted": false,
   "z_rack_deck_clearance": 2,
-  "z_width": 2
+  "z_width": 2,
+  "radial_setback_mm": 140,
+  "z_controller_clearance_mm": 10
 }

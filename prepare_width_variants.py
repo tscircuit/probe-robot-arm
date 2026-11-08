@@ -5,6 +5,7 @@ dist=root/'site/dist'
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def checked(out,name,key='passed'):
  p=out/name;r=json.loads(p.read_text());assert r[key],name
+ assert p.stat().st_mtime>=max((root/'model.py').stat().st_mtime,(root/'leadscrew_actuator.py').stat().st_mtime),('Stale CAD report',p)
  for n,h in r.get('source_sha256',{}).items():assert digest(root/n)==h,('stale',n)
  return r
 bench=root/'output/armature-base-test-v4'

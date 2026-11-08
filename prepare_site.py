@@ -7,6 +7,7 @@ assert report.get('geometry_checks_passed'), 'CAD checks must pass before packag
 assert report_path.stat().st_mtime >= (root/'model.py').stat().st_mtime, 'Regenerate checks for the current source'
 platform_report=json.loads((root/'output/platform-validation.json').read_text())
 assert platform_report['passed'], 'Parked platform checks must pass'
+assert (root/'output/platform-validation.json').stat().st_mtime>=max((root/'model.py').stat().st_mtime,(root/'leadscrew_actuator.py').stat().st_mtime),'Regenerate platform checks for this actuator geometry'
 for stem in ['single-arm','four-arm-platform']:
  assert (root/'output'/(stem+'.step')).stat().st_mtime >= (root/'parameters.json').stat().st_mtime, 'Regenerate CAD for these parameters'
 dist=root/'site/dist';(dist/'vendor').mkdir(parents=True,exist_ok=True)
@@ -22,6 +23,8 @@ for name,digest in explosion_report['source_sha256'].items():
  assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest, 'Stale explosion check: '+name
 thread_report=json.loads((root/'output/leadscrew-thread-validation.json').read_text());assert thread_report['passed']
 for name,digest in thread_report['source_sha256'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,'Stale lead screw check: '+name
+balance_report=json.loads((root/'output/balance-validation.json').read_text());assert balance_report['passed']
+for name,digest in balance_report['source_sha256'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,'Stale balance check: '+name
 mount_report=json.loads((root/'output/z-mount-validation.json').read_text())
 assert mount_report['passed'], 'Z mount checks must pass'
 for name,digest in mount_report['source_sha256'].items():
@@ -66,7 +69,7 @@ for stem in ['single-arm','four-arm-platform']:
   z.write(root/'output'/(stem+'.step'),stem+'.step')
   z.write(root/'README.md','README.md')
 with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
- for name in ['model.py','leadscrew_actuator.py','check_leadscrew.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_width_variants.py','test_width_variants.mjs','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_part_visibility.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
+ for name in ['model.py','leadscrew_actuator.py','check_leadscrew.py','check_balance.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_width_variants.py','test_width_variants.mjs','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_part_visibility.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
   z.write(root/name,name)
  for name in ['.qa/package.json','.qa/package-lock.json','site/dist/index.html','site/dist/app.js','site/dist/style.css','site/dist/part-downloads.js']:z.write(root/name,name)
  for directory in ['configs','upstream','rotary_base','base_test_kit_v4','scripts','site/dist/vendor','output/prototype-parts']:
@@ -82,11 +85,12 @@ with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compressleve
  z.write(root/'output/z-mount-validation.json','z-mount-validation.json')
  z.write(root/'output/base-drive-validation.json','base-drive-validation.json')
  z.write(root/'output/leadscrew-thread-validation.json','leadscrew-thread-validation.json')
+ z.write(root/'output/balance-validation.json','balance-validation.json')
  z.write(root/'output/mounting-patterns.json','mounting-patterns.json')
  z.write(root/'output/base-cutouts-validation.json','base-cutouts-validation.json')
  z.write(root/'output/deck-cutouts-validation.json','deck-cutouts-validation.json')
 shutil.copyfile(root/'output/validation.json',download/'validation.json')
-for name in ['mounting-patterns.json','leadscrew-thread-validation.json']:shutil.copyfile(root/'output'/name,download/name)
+for name in ['mounting-patterns.json','leadscrew-thread-validation.json','balance-validation.json']:shutil.copyfile(root/'output'/name,download/name)
 shutil.copyfile(root/'output/platform-validation.json',download/'platform-validation.json')
 shutil.copyfile(root/'output/arm-explosion-validation.json',download/'arm-explosion-validation.json')
 shutil.copyfile(root/'output/z-mount-validation.json',download/'z-mount-validation.json')
