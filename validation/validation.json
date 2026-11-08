@@ -1,55 +1,56 @@
 {
   "status": "prototype",
   "solid_validity": true,
-  "part_count": 259,
+  "part_count": 191,
   "layout": {
     "base_motor_x": 60.0,
     "base_gear_ratio": 6.0,
     "mounts": [
       [
-        250.0,
+        350.0,
         0,
         180
       ],
       [
         0,
-        250.0,
+        350.0,
         -90
       ],
       [
-        -250.0,
+        -350.0,
         0,
         0
       ],
       [
         0,
-        -250.0,
+        -350.0,
         90
       ]
     ],
-    "rmin": 195,
-    "rmax": 315,
+    "rmin": 295,
+    "rmax": 415,
     "radial_stroke": 120,
-    "required_stroke": 114.138126514911,
-    "h_origin": 0,
-    "horizontal_pad": 200.5,
-    "zpad": 232.9,
-    "board_top": 194.8,
-    "tip_radius": 255.0,
-    "probe_extension": 54.5,
-    "horizontal_origin_y": 4,
-    "horizontal_z": 275.8,
-    "probe_mount_z": 254.8,
-    "radial_mount_face_z": 250.9,
-    "z_drive_y": 25.5,
-    "z_pitch_radius": 18.0,
-    "r_drive_y": 0.0,
-    "r_pitch_radius": 14.0,
-    "actuator_enclosure": "pass-through",
-    "rack_source_revision": 24,
-    "minimum_z_origin": 145.4,
-    "z_case_bottom": 77.4,
-    "z_rack_lowest": 60.400000000000006,
+    "required_stroke": 113.11288741492746,
+    "h_origin": 17.0,
+    "horizontal_pad": 295.0,
+    "zpad": 283.4,
+    "board_top": 244.39999999999998,
+    "tip_radius": 355.0,
+    "probe_extension": 43.0,
+    "horizontal_origin_y": 0,
+    "horizontal_z": 367.4,
+    "probe_mount_z": 304.4,
+    "radial_mount_face_z": 299.4,
+    "z_drive_y": 0,
+    "r_drive_y": 0,
+    "z_drive_x": 0,
+    "r_drive_z": 325.4,
+    "lead_mm": 8,
+    "actuator_enclosure": "printed-leadscrew",
+    "rack_source_revision": 16,
+    "minimum_z_origin": 108.4,
+    "z_case_bottom": 72.4,
+    "z_rack_lowest": 118.4,
     "deck_top_z": 54.2,
     "base_clamp_top_z": 58.4,
     "z_deck_mounts": [
@@ -80,168 +81,1177 @@
     ],
     "base_revision": "shared-rounded-blocks",
     "z_actuator": {
-      "CASE_LEFT": -68.0,
-      "CASE_RIGHT": 57.0,
-      "CASE_LENGTH": 125.0,
-      "CASE_YMIN": -26.9,
-      "CASE_YMAX": 63.9,
-      "CASE_BOTTOM": -52.0,
-      "CASE_TOP": 24.9,
-      "CASE_MOUNTS": [
+      "stroke": 40,
+      "width": 4,
+      "motor": "nema17",
+      "depth": 48,
+      "lead": 8,
+      "axis_z": 42,
+      "end": 155.0,
+      "stations": [
+        63.0,
+        137.0
+      ],
+      "output_holes": [
         [
-          -60.5,
-          -42.0
+          -15.5,
+          26.5
         ],
         [
-          -60.5,
-          -4.0
+          -15.5,
+          57.5
         ],
         [
-          49.5,
-          -42.0
+          15.5,
+          26.5
         ],
         [
-          49.5,
-          -4.0
+          15.5,
+          57.5
+        ],
+        [
+          -78.5,
+          26.5
+        ],
+        [
+          -78.5,
+          57.5
+        ],
+        [
+          78.5,
+          26.5
+        ],
+        [
+          78.5,
+          57.5
         ]
       ],
-      "CASE_CORNERS": [
+      "base": [
         [
-          -60.5,
-          -19.4
+          -3,
+          -97.0
         ],
         [
-          -60.5,
-          56.4
+          -3,
+          97.0
         ],
         [
-          49.5,
-          -19.4
+          149.0,
+          -97.0
         ],
         [
-          49.5,
-          56.4
+          149.0,
+          97.0
         ]
       ],
-      "OUTPUT_MOUNTS": [
+      "lid": [
         [
-          83.0,
-          24.0
+          36,
+          -90.0
         ],
         [
-          83.0,
-          33.0
+          36,
+          90.0
         ],
         [
-          92.0,
-          24.0
+          96.0,
+          -90.0
         ],
         [
-          92.0,
-          33.0
+          96.0,
+          90.0
         ]
       ],
-      "OUTPUT_PAD_Y": 28.5,
-      "OUTPUT_PAD_TOP": 21.0,
-      "OUTPUT_PAD_SIZE": 18.0,
-      "left": -65.0,
-      "right": 78.5,
-      "REAR_OPENING_YZ": [
-        15.0,
-        41,
-        -10,
-        22
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          58.0,
+          44
+        ],
+        [
+          58.0,
+          56
+        ],
+        [
+          132.0,
+          44
+        ],
+        [
+          132.0,
+          56
+        ]
       ],
-      "MOTOR_Y": 0.0,
-      "RP": 18.0,
-      "MOTOR_SIZE": 42.0,
-      "MOTOR_PITCH": 31.0,
-      "MOTOR_DEPTH": 48.0,
-      "N": 18,
-      "output_mount": "through"
+      "body_width": 206.0,
+      "thread_joints": [
+        {
+          "host": "Printed 20 mm lead screw with integral shaft clamp",
+          "bolt": "M3x10 shaft clamp bolt",
+          "diameter": 3,
+          "length": 6,
+          "center": [
+            17,
+            5,
+            41.5
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 1",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            12,
+            -87.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 2",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            12,
+            87.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 3",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            65.0,
+            -98.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 4",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            65.0,
+            98.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 5",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            139.0,
+            -98.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 6",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            139.0,
+            98.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        }
+      ],
+      "attachment_pilots": [
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            22,
+            -103.0,
+            12
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            22,
+            103.0,
+            12
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            -103.0,
+            12
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            103.0,
+            12
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            58.0,
+            -103.0,
+            44
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            58.0,
+            103.0,
+            44
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            58.0,
+            -103.0,
+            56
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            58.0,
+            103.0,
+            56
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            132.0,
+            -103.0,
+            44
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            132.0,
+            103.0,
+            44
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            132.0,
+            -103.0,
+            56
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            132.0,
+            103.0,
+            56
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            -90.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            90.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            96.0,
+            -90.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            96.0,
+            90.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        }
+      ],
+      "output_pilots": [
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            -15.5,
+            26.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            -15.5,
+            57.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            15.5,
+            26.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            15.5,
+            57.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            -78.5,
+            26.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            -78.5,
+            57.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            78.5,
+            26.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            155.0,
+            78.5,
+            57.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        }
+      ],
+      "source_sha256": "e82f03d03ea5887895fc692d80632adf3bdf191af4da034dd5174618f01f3e61",
+      "thread_bands": [
+        [
+          36.0,
+          48.0
+        ],
+        [
+          96.0,
+          108.0
+        ]
+      ],
+      "screw_end": 152.0,
+      "CASE_TOP": 26
     },
     "r_actuator": {
-      "CASE_LEFT": -68.0,
-      "CASE_RIGHT": 130,
-      "CASE_LENGTH": 198.0,
-      "CASE_YMIN": -20.9,
-      "CASE_YMAX": 63.9,
-      "CASE_BOTTOM": -38.0,
-      "CASE_TOP": 24.9,
-      "CASE_MOUNTS": [
+      "stroke": 120,
+      "width": 1,
+      "motor": "nema14",
+      "depth": 34,
+      "lead": 8,
+      "axis_z": 42,
+      "end": 235.0,
+      "stations": [
+        143.0,
+        217.0
+      ],
+      "output_holes": [
         [
-          -60.5,
-          -28.0
+          -15.5,
+          26.5
         ],
         [
-          -60.5,
-          -4.0
+          -15.5,
+          57.5
         ],
         [
-          122.5,
-          -28.0
+          15.5,
+          26.5
         ],
         [
-          122.5,
-          -4.0
+          15.5,
+          57.5
         ]
       ],
-      "CASE_CORNERS": [
+      "base": [
         [
-          -60.5,
-          -13.399999999999999
+          -3,
+          -34.0
         ],
         [
-          -60.5,
-          56.4
+          -3,
+          34.0
         ],
         [
-          122.5,
-          -13.399999999999999
+          229.0,
+          -34.0
         ],
         [
-          122.5,
-          56.4
+          229.0,
+          34.0
         ]
       ],
-      "OUTPUT_MOUNTS": [
+      "lid": [
         [
-          196.0,
-          24.0
+          36,
+          -27.0
         ],
         [
-          196.0,
-          33.0
+          36,
+          27.0
         ],
         [
-          205.0,
-          24.0
+          176.0,
+          -27.0
         ],
         [
-          205.0,
-          33.0
+          176.0,
+          27.0
         ]
       ],
-      "OUTPUT_PAD_Y": 28.5,
-      "OUTPUT_PAD_TOP": 21.0,
-      "OUTPUT_PAD_SIZE": 18.0,
-      "left": -105.0,
-      "right": 191.5,
-      "REAR_OPENING_YZ": [
-        15.0,
-        41,
-        -10,
-        22
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          138.0,
+          44
+        ],
+        [
+          138.0,
+          56
+        ],
+        [
+          212.0,
+          44
+        ],
+        [
+          212.0,
+          56
+        ]
       ],
-      "MOTOR_Y": 4.0,
-      "RP": 14.0,
-      "MOTOR_SIZE": 35.2,
-      "MOTOR_PITCH": 26.0,
-      "MOTOR_DEPTH": 34.0,
-      "N": 14,
-      "output_mount": "inserts"
+      "body_width": 80.0,
+      "thread_joints": [
+        {
+          "host": "Printed 20 mm lead screw with integral shaft clamp",
+          "bolt": "M3x10 shaft clamp bolt",
+          "diameter": 3,
+          "length": 6,
+          "center": [
+            17,
+            5,
+            41.5
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 1",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            12,
+            -24.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 2",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            12,
+            24.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 3",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            145.0,
+            -35.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 4",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            145.0,
+            35.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 5",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            219.0,
+            -35.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "bolt": "M3x12 button-head lid bolt 6",
+          "diameter": 3,
+          "length": 12,
+          "center": [
+            219.0,
+            35.0,
+            64.0
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "start": 0
+        }
+      ],
+      "attachment_pilots": [
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            22,
+            -40.0,
+            12
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            22,
+            40.0,
+            12
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            -40.0,
+            12
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            40.0,
+            12
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            138.0,
+            -40.0,
+            44
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            138.0,
+            40.0,
+            44
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            138.0,
+            -40.0,
+            56
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            138.0,
+            40.0,
+            56
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            212.0,
+            -40.0,
+            44
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            212.0,
+            40.0,
+            44
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            212.0,
+            -40.0,
+            56
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "host": "Adjustable six-bearing base",
+          "kind": "side",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            212.0,
+            40.0,
+            56
+          ],
+          "axis": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            -27.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            36,
+            27.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            176.0,
+            -27.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "host": "Structural mounting lid",
+          "kind": "lid",
+          "diameter": 5,
+          "length": 9,
+          "center": [
+            176.0,
+            27.0,
+            68
+          ],
+          "axis": [
+            0,
+            0,
+            -1
+          ]
+        }
+      ],
+      "output_pilots": [
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            235.0,
+            -15.5,
+            26.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            235.0,
+            -15.5,
+            57.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            235.0,
+            15.5,
+            26.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        },
+        {
+          "diameter": 3,
+          "length": 8,
+          "center": [
+            235.0,
+            15.5,
+            57.5
+          ],
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "start": 0
+        }
+      ],
+      "source_sha256": "e82f03d03ea5887895fc692d80632adf3bdf191af4da034dd5174618f01f3e61",
+      "thread_bands": [
+        [
+          36.0,
+          48.0
+        ],
+        [
+          96.0,
+          108.0
+        ]
+      ],
+      "screw_end": 232.0
     },
-    "yaw_required": 14.036243467926479
+    "yaw_required": 9.462322208025617
   },
   "collisions": [],
   "nominal_base_mesh": [
@@ -347,7 +1357,7 @@
   ],
   "limits": [
     "Geometry prototype. No physical accuracy, stiffness, fatigue, holding torque or contact force certification.",
-    "R24 pass-through rack and housing, 120 mm custom stroke within upstream limits; stiffness remains untested.",
+    "Printed leadscrew: 4x Z, 1x radial with custom 120 mm stroke and NEMA14 mount. Inferred T8 width patterns require checking against future variants.",
     "Shared rotary base includes retainers, direct motor mounting and four single blocks with integral tilted axles. Hardware envelopes are references; homing remains unfinished.",
     "Simultaneous four-tip cluster checks are in platform-validation.json; they are sampled geometric checks, not physical accuracy tests.",
     "Sampled collision checks are not a continuous swept-volume proof."
@@ -363,17 +1373,17 @@
     "Internal_72T_ring": 1,
     "Compliant_12T_pinion": 1,
     "Z_support": 1,
-    "Z_03_Involute_pinion_18T": 1,
-    "Z_04_Beveled_compliant_rack": 1,
-    "Z_01_Integral_spring_chassis": 1,
-    "Z_05_Mounting_enclosure_tray": 1,
-    "Z_06_Removable_enclosure_cover": 1,
+    "Z_Hollow_triangular_carriage": 1,
+    "Z_Printed_20_mm_lead_screw_with_integral_shaft_clamp": 1,
+    "Z_Adjustable_six-bearing_base": 1,
+    "Z_Shared_lower_bearing_carrier": 1,
+    "Z_Structural_mounting_lid": 1,
     "Z_to_radial_carrier": 1,
-    "R_03_Involute_pinion_14T": 1,
-    "R_04_Beveled_compliant_rack": 1,
-    "R_01_Integral_spring_chassis": 1,
-    "R_05_Mounting_enclosure_tray": 1,
-    "R_06_Removable_enclosure_cover": 1,
+    "R_Hollow_triangular_carriage": 1,
+    "R_Printed_20_mm_lead_screw_with_integral_shaft_clamp": 1,
+    "R_Adjustable_six-bearing_base": 1,
+    "R_Shared_lower_bearing_carrier": 1,
+    "R_Structural_mounting_lid": 1,
     "Triangular_probe_outrigger": 1
   },
   "unchanged_gear_mesh_reused": true,

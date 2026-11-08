@@ -28,7 +28,7 @@ async function showAll(){await blank();await action('show-all');}
 try{
  await page.goto('http://127.0.0.1:4054/');await page.waitForFunction(()=>window.probeViewer,{timeout:120000});
  if(await page.evaluate(()=>window.probeViewer.state.playing))await page.locator('#play').click();
- const initial=await visible(),part='R_05_Mounting_enclosure_tray';
+ const initial=await visible(),part='R_Adjustable_six-bearing_base';
  await clickPart(part);await action('isolate');assert.deepEqual(await visible(),[part]);
  await page.locator('#play').click();await page.waitForTimeout(300);await page.locator('#play').click();assert.deepEqual(await visible(),[part]);
  await blank();await page.getByRole('menuitemcheckbox',{name:'Show hidden edges'}).click();assert.deepEqual(await visible(),[part]);

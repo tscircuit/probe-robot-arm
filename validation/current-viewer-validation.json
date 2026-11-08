@@ -1,10 +1,10 @@
 {
   "passed": true,
   "checks": [
-    "R24 pass-through enclosures load",
-    "54 explosion boundaries/midpoints match the CAD path",
+    "4x Z and 1x radial printed-leadscrew assemblies load",
+    "34 explosion boundaries/midpoints match the CAD path",
     "NEMA17 Z and inverted NEMA14 radial",
-    "12T base at 6:1 about 60 mm pivot, 18T Z and flipped 14T radial drive rotations",
+    "12T base at 6:1 about 60 mm pivot, 8 mm lead screw rotations about Z and radial axes",
     "four upward bottom-mount fasteners",
     "CAD loads",
     "axes animate",

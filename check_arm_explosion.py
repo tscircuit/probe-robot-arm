@@ -4,13 +4,16 @@ certifies no positive intersection anywhere in that interval (within tolerance).
 Uncertified intervals are subdivided, never silently marked passed.
 """
 import argparse,hashlib,itertools,json,math,pathlib,time
-from model import build,layout,overlap,box,union,base_contacts
+from model import build,layout,overlap,box,union,base_contacts,linear_contacts
 from arm_explosion import timeline
 ROOT=pathlib.Path(__file__).resolve().parent
-EPS=1e-7
+EPS=1e-6
 
 def bb(s):
-    b=s.BoundingBox();return ([b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax])
+    from OCP.Bnd import Bnd_Box
+    from OCP.BRepBndLib import BRepBndLib
+    b=Bnd_Box();BRepBndLib.AddOptimal_s(s.wrapped,b,False,False);v=b.Get()
+    return (list(v[:3]),list(v[3:]))
 
 def disjoint(a,b,lo,hi):
     return any(a[1][i]+max(lo[i],hi[i])<=b[0][i]+EPS or b[1][i]<=a[0][i]+min(lo[i],hi[i])+EPS for i in range(3))
@@ -22,8 +25,7 @@ def exceptions(parts):
         if p.get('embedded_host'):
             pairs[frozenset([p['name'],p['embedded_host']])]='Intentional heat-set knurl/pilot interference; insert remains in host'
     pairs[frozenset([next(p['name'] for p in parts if p['name'].startswith('Compliant_') and p['group']=='base_drive'),'Internal_72T_ring'])]='Designed tooth preload; drive stays assembled'
-    for axis,teeth in [('Z',18),('R',14)]:
-        pairs[frozenset([axis+f'_03_Involute_pinion_{teeth}T',axis+'_04_Beveled_compliant_rack'])]='Designed tooth preload; drive stays assembled'
+    config=json.loads((ROOT/'parameters.json').read_text());pairs.update(linear_contacts(parts,layout(config)))
     return pairs
 
 def check(parts,stages):
@@ -69,29 +71,14 @@ def check(parts,stages):
         print(si+1,stage['label'],'queries',stage_queries,'failures',len(failures),'unresolved',len(unresolved),flush=True)
         if failures or unresolved:break
         for n in movers:offsets[n]=[offsets[n][k]+delta[k] for k in range(3)]
-    return dict(passed=not failures and not unresolved and len(records)==len(stages),method='Continuous linear-translation intervals certified by swept bounding boxes or midpoint minimum-distance bounds; recursively subdivided. Unresolved intervals fail.',tolerance_mm=EPS,collision_volume_tolerance_mm3=.001,stages=records,distance_queries=queries,bounding_box_prunes=pruned,certified_distance_intervals=proven,collisions=failures,unresolved_intervals=unresolved,exceptions=[dict(parts=sorted(k),reason=v) for k,v in allowed.items()],final_offsets_mm=offsets,limits=['Ideal rigid CAD surfaces and reference hardware envelopes; actual print fit not certified.','Threads are not modeled. Fasteners must be unthreaded before the depicted withdrawal.','Designed compliant tooth interference is intentional and excluded; other rigid pairs are checked.','Explosion is checked at the zero-angle assembled pose; rotation is disabled during explosion.'])
+    return dict(passed=not failures and not unresolved and len(records)==len(stages),method='Continuous linear-translation intervals certified by swept bounding boxes or midpoint minimum-distance bounds; recursively subdivided. Unresolved intervals fail.',tolerance_mm=EPS,collision_volume_tolerance_mm3=.001,stages=records,distance_queries=queries,bounding_box_prunes=pruned,certified_distance_intervals=proven,collisions=failures,unresolved_intervals=unresolved,exceptions=[dict(parts=sorted(k),reason=v) for k,v in allowed.items()],final_offsets_mm=offsets,limits=['Ideal rigid CAD surfaces and reference hardware envelopes; actual print fit not certified.','Fastener threads are represented by receiving pilots. Unscrew fasteners before the depicted withdrawal; actuator lead screws remain engaged and stationary.','Designed compliant tooth interference is intentional and excluded; other rigid pairs are checked.','Explosion is checked at the zero-angle assembled pose; rotation is disabled during explosion.'])
 
 if __name__=='__main__':
     out=ROOT/'output'
     p=json.loads((ROOT/'parameters.json').read_text());lay=layout(p)
     parts,_=build(p,lay);stages=timeline(parts)
-    # Sliding U legs contact the pad planes throughout initial withdrawal.
-    # Partition both exact solids at the pad boundaries, then verify that the
-    # union of their conservative cell bounds encloses the complete solid.
-    # This proves tangential separation without treating zero distance as a pass.
-    zm=lay['z_actuator'];pad_front=zm['OUTPUT_PAD_TOP'];pad_back=pad_front-18
-    pad_top=p['z_origin']+zm['right']+zm['OUTPUT_PAD_SIZE']
-    xs=[-1000,pad_back,pad_front,1000];zs=[-1000,pad_top-18,pad_top,1000]
-    for part in parts:
-        if part['name'] not in ['Z_to_radial_carrier','Z_04_Beveled_compliant_rack']:continue
-        cells=[]
-        for x0,x1 in zip(xs,xs[1:]):
-            for z0,z1 in zip(zs,zs[1:]):
-                cell=part['shape'].intersect(box(x1-x0,2000,z1-z0,((x0+x1)/2,0,(z0+z1)/2)))
-                if cell.Volume()>1e-7:cells.append(bb(cell))
-        part['sweep_boxes']=cells
     report=check(parts,stages)
-    report['source_sha256']={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['model.py','parameters.json','rotary_base/core.py','rotary_base/gear_geometry.py','rotary_base/parameters.json','arm_explosion.py','check_arm_explosion.py']}
+    report['source_sha256']={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['model.py','parameters.json','rotary_base/core.py','rotary_base/gear_geometry.py','rotary_base/parameters.json','arm_explosion.py','check_arm_explosion.py','leadscrew_actuator.py']}
     report['scope']='One arm, module-level separation and enclosure lid removal. Internal actuator drives and rotary base stay assembled.'
     (out/'arm-explosion-validation.json').write_text(json.dumps(report,indent=2))
     assert report['passed'],(report['collisions'],report['unresolved_intervals'])

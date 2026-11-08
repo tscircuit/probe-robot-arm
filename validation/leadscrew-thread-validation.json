@@ -1,0 +1,305 @@
+{
+  "passed": true,
+  "samples": [
+    {
+      "axis": "Z",
+      "travel_mm": 0,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "Z",
+      "travel_mm": 1,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "Z",
+      "travel_mm": 2,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "Z",
+      "travel_mm": 3,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "Z",
+      "travel_mm": 4,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "Z",
+      "travel_mm": 20,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "Z",
+      "travel_mm": 40,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 0,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 1,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 2,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 3,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 4,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 20,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 60.0,
+      "thread_overlap_mm3": 0.0
+    },
+    {
+      "axis": "R",
+      "travel_mm": 120,
+      "thread_overlap_mm3": 0.0
+    }
+  ],
+  "contacts": [
+    {
+      "axis": "Z",
+      "host": "Printed 20 mm lead screw with integral shaft clamp",
+      "bolt": "M3x10 shaft clamp bolt",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "Z",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 1",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "Z",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 2",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "Z",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 3",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "Z",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 4",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "Z",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 5",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "Z",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 6",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "R",
+      "host": "Printed 20 mm lead screw with integral shaft clamp",
+      "bolt": "M3x10 shaft clamp bolt",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "R",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 1",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "R",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 2",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "R",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 3",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "R",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 4",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "R",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 5",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "axis": "R",
+      "host": "Adjustable six-bearing base",
+      "bolt": "M3x12 button-head lid bolt 6",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_top_mount_screw_0",
+      "host": "Z_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_top_mount_screw_1",
+      "host": "Z_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_top_mount_screw_2",
+      "host": "Z_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_top_mount_screw_3",
+      "host": "Z_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_enclosure_mount_screw_0",
+      "host": "Z_Adjustable_six-bearing_base",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_enclosure_mount_screw_1",
+      "host": "Z_Adjustable_six-bearing_base",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_enclosure_mount_screw_2",
+      "host": "Z_Adjustable_six-bearing_base",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_enclosure_mount_screw_3",
+      "host": "Z_Adjustable_six-bearing_base",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_enclosure_mount_screw_4",
+      "host": "Z_Adjustable_six-bearing_base",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_enclosure_mount_screw_5",
+      "host": "Z_Adjustable_six-bearing_base",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_0",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_1",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_2",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_3",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_4",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_5",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_6",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Z_output_mount_screw_7",
+      "host": "Z_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "R_enclosure_mount_screw_0",
+      "host": "R_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "R_enclosure_mount_screw_1",
+      "host": "R_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "R_enclosure_mount_screw_2",
+      "host": "R_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "R_enclosure_mount_screw_3",
+      "host": "R_Structural_mounting_lid",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Probe_output_mount_screw_0",
+      "host": "R_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Probe_output_mount_screw_1",
+      "host": "R_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Probe_output_mount_screw_2",
+      "host": "R_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    },
+    {
+      "bolt": "Probe_output_mount_screw_3",
+      "host": "R_Hollow_triangular_carriage",
+      "outside_pilot_mm3": 0
+    }
+  ],
+  "lead_mm": 8,
+  "full_thread_and_bearing_engagement": true,
+  "source_sha256": {
+    "model.py": "b2b5c1f05c1494d7fad98a8f924826b33adbb93a2e791abcb8fa0814cfbc0c36",
+    "parameters.json": "af4e10c598972195604ac480039f9a092c6c458f072e5a2ae5c85e02edd69365",
+    "leadscrew_actuator.py": "477f6f1c4198cf5981944910420f2a56c6c10151658cee367245e3da6a60ce3c",
+    "check_leadscrew.py": "ce9a438ed35f50d281d76b5ed9687459016892fd882ede73a552191c4876d394",
+    "upstream/leadscrew-r16/experiments/t8-leadscrew/model.py": "e82f03d03ea5887895fc692d80632adf3bdf191af4da034dd5174618f01f3e61"
+  }
+}

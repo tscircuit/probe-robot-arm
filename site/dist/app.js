@@ -40,8 +40,8 @@ function transformModule(mod,theta,z,r,e){
     const p=mesh.userData,g=p.group;
     mesh.position.set(0,0,0);mesh.quaternion.identity();
     if(g==='base_drive')around(mesh,new THREE.Vector3(config.base_motor_x,0,0),zAxis,theta*Math.PI/180*config.base_gear_ratio);
-    if(g==='z_drive')around(mesh,new THREE.Vector3(0,config.z_drive_y,config.z_origin),xAxis,-z/config.z_pitch_radius);
-    if(g==='r_drive')around(mesh,new THREE.Vector3(config.h_origin,config.r_drive_y,config.horizontal_z),zAxis,r/config.r_pitch_radius);
+    if(g==='z_drive')around(mesh,new THREE.Vector3(0,0,config.z_origin),zAxis,-z*2*Math.PI/config.lead_mm);
+    if(g==='r_drive')around(mesh,new THREE.Vector3(config.h_origin,0,config.r_drive_z),xAxis,-r*2*Math.PI/config.lead_mm);
     if(g==='r_rack')mesh.position.x+=r;
     if(['z_rack','r_rack','r_drive'].includes(g))mesh.position.z+=z;
     if(e){const v=explosionVector(p,e);mesh.position.add(new THREE.Vector3(...v));}

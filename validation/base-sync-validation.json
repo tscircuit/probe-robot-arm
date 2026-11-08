@@ -394,16 +394,16 @@
   "motor_face_z_mm": 0,
   "ring_bottom_z_mm": 28,
   "deck_top_z_mm": 54.2,
-  "z_origin_mm": 145.4,
-  "z_lowest_mm": 60.400000000000006,
+  "z_origin_mm": 108.4,
+  "z_lowest_mm": 118.4,
   "clamp_top_mm": 58.4,
   "fixture_differences": [
     "Bench stand versus main platform and its bolts",
     "Main Z-cradle inserts and actuators attach to the shared deck"
   ],
   "source_sha256": {
-    "model.py": "94389abae65f1b19a137baf8f465fa5e1009645f18637dbf011e3f166fc93908",
-    "parameters.json": "2f4c3afcc65f20cd4781d5467a3894b05647803871eee69397a6ac2681820316",
+    "model.py": "b2b5c1f05c1494d7fad98a8f924826b33adbb93a2e791abcb8fa0814cfbc0c36",
+    "parameters.json": "af4e10c598972195604ac480039f9a092c6c458f072e5a2ae5c85e02edd69365",
     "rotary_base/core.py": "b5d895e0a9117a1daa81efbaa9f1311b7efd302076699a8db316590564fdaa89",
     "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
     "rotary_base/parameters.json": "99050f6bb7efe3fd3d52989578bb5d208bdee8c40c7a3d6e0e305b1aab00a921",

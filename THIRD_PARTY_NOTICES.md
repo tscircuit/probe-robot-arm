@@ -4,3 +4,5 @@
 - `upstream/compliant-spur-gear/` contains the original gear sources and MIT license. The shared Python rotary gear geometry adapts the open-tip tooth profile from revision 3, `37682731f360b1b327a91f8713c9e67c464a8b32`, in seveibar/compliant-spur-gear.
 - Three.js and OrbitControls in `site/dist/vendor/` and `base_test_kit_v4/vendor/` are version 0.180.0, under the included MIT license. The offline viewer bundle contains these libraries.
 - CadQuery and development dependencies retain their respective licenses and are installed separately.
+
+Printed-leadscrew and T8 actuator experiments are pinned from the FLEX Site v61 source commit `417da079fe5da0ac1bed3edbbaef6dc2782e65f4`, associated with tscircuit/rack-actuator (MIT). See `upstream/leadscrew-r16/PROVENANCE.json` and `LICENSE`. The integration adapter lengthens the radial stage and supplies full-depth NEMA17/NEMA14 motor configurations; T8 widened mounting patterns are inferred locally.

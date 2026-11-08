@@ -1,137 +1,1132 @@
 {
   "passed": true,
-  "z_origin_mm": 145.4,
-  "previous_origin_mm": 180,
-  "lowered_mm": 34.599999999999994,
-  "case_bottom_above_deck_mm": 23.200000000000003,
-  "full_retraction_rack_to_deck_mm": 6.199999999999989,
-  "lower_height_rejected": true,
-  "mount_faces": [
-    "enclosure top: 4 x M3x10",
-    "enclosure side: 4 x M3x10"
-  ],
-  "flange_mounts": [
+  "patterns": [
     {
-      "x": -42,
-      "y": -54,
-      "bolt": "M4x16",
-      "flange_thickness_mm": 10,
-      "insert_thread_engagement_mm": 5.7,
-      "pilot_backing_mm": 3.3,
-      "driver_diameter_mm": 9,
-      "driver_access_length_mm": 150
+      "axis": "Z",
+      "width": 2,
+      "variant": "printed",
+      "inferred": false,
+      "base": [
+        [
+          -3,
+          -55
+        ],
+        [
+          -3,
+          55
+        ],
+        [
+          149,
+          -55
+        ],
+        [
+          149,
+          55
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -48
+        ],
+        [
+          36,
+          48
+        ],
+        [
+          96.0,
+          -48
+        ],
+        [
+          96.0,
+          48
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          58,
+          44
+        ],
+        [
+          58,
+          56
+        ],
+        [
+          132,
+          44
+        ],
+        [
+          132,
+          56
+        ]
+      ],
+      "width_mm": 122,
+      "end": 155,
+      "stroke": 40,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            96.0,
+            -48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            96.0,
+            48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            -55
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            55
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            149,
+            -55
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            149,
+            55
+          ],
+          "bore_mm": 5.5
+        }
+      ]
     },
     {
-      "x": -8,
-      "y": -54,
-      "bolt": "M4x16",
-      "flange_thickness_mm": 10,
-      "insert_thread_engagement_mm": 5.7,
-      "pilot_backing_mm": 3.3,
-      "driver_diameter_mm": 9,
-      "driver_access_length_mm": 150
+      "axis": "Z",
+      "width": 2,
+      "variant": "t8",
+      "inferred": true,
+      "base": [
+        [
+          -3,
+          -55
+        ],
+        [
+          -3,
+          55
+        ],
+        [
+          115,
+          -55
+        ],
+        [
+          115,
+          55
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -48
+        ],
+        [
+          36,
+          48
+        ],
+        [
+          79.0,
+          -48
+        ],
+        [
+          79.0,
+          48
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          58,
+          44
+        ],
+        [
+          58,
+          56
+        ],
+        [
+          98,
+          44
+        ],
+        [
+          98,
+          56
+        ]
+      ],
+      "width_mm": 122,
+      "end": 121,
+      "stroke": 40,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            79.0,
+            -48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            79.0,
+            48
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            -55
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            55
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            115,
+            -55
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            115,
+            55
+          ],
+          "bore_mm": 5.5
+        }
+      ]
     },
     {
-      "x": 24,
-      "y": -54,
-      "bolt": "M4x16",
-      "flange_thickness_mm": 10,
-      "insert_thread_engagement_mm": 5.7,
-      "pilot_backing_mm": 3.3,
-      "driver_diameter_mm": 9,
-      "driver_access_length_mm": 150
+      "axis": "Z",
+      "width": 4,
+      "variant": "printed",
+      "inferred": false,
+      "base": [
+        [
+          -3,
+          -97
+        ],
+        [
+          -3,
+          97
+        ],
+        [
+          149,
+          -97
+        ],
+        [
+          149,
+          97
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -90
+        ],
+        [
+          36,
+          90
+        ],
+        [
+          96.0,
+          -90
+        ],
+        [
+          96.0,
+          90
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          58,
+          44
+        ],
+        [
+          58,
+          56
+        ],
+        [
+          132,
+          44
+        ],
+        [
+          132,
+          56
+        ]
+      ],
+      "width_mm": 206,
+      "end": 155,
+      "stroke": 40,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            96.0,
+            -90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            96.0,
+            90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            -97
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            97
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            149,
+            -97
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            149,
+            97
+          ],
+          "bore_mm": 5.5
+        }
+      ]
     },
     {
-      "x": 42,
-      "y": -28,
-      "bolt": "M4x16",
-      "flange_thickness_mm": 10,
-      "insert_thread_engagement_mm": 5.7,
-      "pilot_backing_mm": 3.3,
-      "driver_diameter_mm": 9,
-      "driver_access_length_mm": 150
+      "axis": "Z",
+      "width": 4,
+      "variant": "t8",
+      "inferred": true,
+      "base": [
+        [
+          -3,
+          -97
+        ],
+        [
+          -3,
+          97
+        ],
+        [
+          115,
+          -97
+        ],
+        [
+          115,
+          97
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -90
+        ],
+        [
+          36,
+          90
+        ],
+        [
+          79.0,
+          -90
+        ],
+        [
+          79.0,
+          90
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          58,
+          44
+        ],
+        [
+          58,
+          56
+        ],
+        [
+          98,
+          44
+        ],
+        [
+          98,
+          56
+        ]
+      ],
+      "width_mm": 206,
+      "end": 121,
+      "stroke": 40,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            79.0,
+            -90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            79.0,
+            90
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            -97
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            -3,
+            97
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            115,
+            -97
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "base",
+          "center_local_mm": [
+            115,
+            97
+          ],
+          "bore_mm": 5.5
+        }
+      ]
     },
     {
-      "x": 42,
-      "y": 8,
-      "bolt": "M4x16",
-      "flange_thickness_mm": 10,
-      "insert_thread_engagement_mm": 5.7,
-      "pilot_backing_mm": 3.3,
-      "driver_diameter_mm": 9,
-      "driver_access_length_mm": 150
+      "axis": "R",
+      "width": 1,
+      "variant": "printed",
+      "inferred": false,
+      "base": [
+        [
+          -3,
+          -34
+        ],
+        [
+          -3,
+          34
+        ],
+        [
+          149,
+          -34
+        ],
+        [
+          149,
+          34
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -27
+        ],
+        [
+          36,
+          27
+        ],
+        [
+          96.0,
+          -27
+        ],
+        [
+          96.0,
+          27
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          58,
+          44
+        ],
+        [
+          58,
+          56
+        ],
+        [
+          132,
+          44
+        ],
+        [
+          132,
+          56
+        ]
+      ],
+      "width_mm": 80,
+      "end": 155,
+      "stroke": 40,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            96.0,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            96.0,
+            27
+          ],
+          "bore_mm": 5.5
+        }
+      ]
     },
     {
-      "x": 42,
-      "y": 44,
-      "bolt": "M4x16",
-      "flange_thickness_mm": 10,
-      "insert_thread_engagement_mm": 5.7,
-      "pilot_backing_mm": 3.3,
-      "driver_diameter_mm": 9,
-      "driver_access_length_mm": 150
+      "axis": "R",
+      "width": 1,
+      "variant": "t8",
+      "inferred": false,
+      "base": [
+        [
+          -3,
+          -34
+        ],
+        [
+          -3,
+          34
+        ],
+        [
+          115,
+          -34
+        ],
+        [
+          115,
+          34
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -27
+        ],
+        [
+          36,
+          27
+        ],
+        [
+          79.0,
+          -27
+        ],
+        [
+          79.0,
+          27
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          58,
+          44
+        ],
+        [
+          58,
+          56
+        ],
+        [
+          98,
+          44
+        ],
+        [
+          98,
+          56
+        ]
+      ],
+      "width_mm": 80,
+      "end": 121,
+      "stroke": 40,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            79.0,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            79.0,
+            27
+          ],
+          "bore_mm": 5.5
+        }
+      ]
+    },
+    {
+      "axis": "R",
+      "width": 1,
+      "variant": "printed",
+      "inferred": false,
+      "base": [
+        [
+          -3,
+          -34
+        ],
+        [
+          -3,
+          34
+        ],
+        [
+          229,
+          -34
+        ],
+        [
+          229,
+          34
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -27
+        ],
+        [
+          36,
+          27
+        ],
+        [
+          176.0,
+          -27
+        ],
+        [
+          176.0,
+          27
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          138,
+          44
+        ],
+        [
+          138,
+          56
+        ],
+        [
+          212,
+          44
+        ],
+        [
+          212,
+          56
+        ]
+      ],
+      "width_mm": 80,
+      "end": 235,
+      "stroke": 120,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            176.0,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            176.0,
+            27
+          ],
+          "bore_mm": 5.5
+        }
+      ]
+    },
+    {
+      "axis": "R",
+      "width": 1,
+      "variant": "t8",
+      "inferred": true,
+      "base": [
+        [
+          -3,
+          -34
+        ],
+        [
+          -3,
+          34
+        ],
+        [
+          195,
+          -34
+        ],
+        [
+          195,
+          34
+        ]
+      ],
+      "lid": [
+        [
+          36,
+          -27
+        ],
+        [
+          36,
+          27
+        ],
+        [
+          159.0,
+          -27
+        ],
+        [
+          159.0,
+          27
+        ]
+      ],
+      "side": [
+        [
+          22,
+          12
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          138,
+          44
+        ],
+        [
+          138,
+          56
+        ],
+        [
+          178,
+          44
+        ],
+        [
+          178,
+          56
+        ]
+      ],
+      "width_mm": 80,
+      "end": 201,
+      "stroke": 120,
+      "checked_holes": [
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            36,
+            27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            159.0,
+            -27
+          ],
+          "bore_mm": 5.5
+        },
+        {
+          "face": "lid",
+          "center_local_mm": [
+            159.0,
+            27
+          ],
+          "bore_mm": 5.5
+        }
+      ]
     }
   ],
-  "deck_insert_reference": {
-    "thread": "M4",
-    "outer_diameter_mm": 6,
-    "length_mm": 6,
-    "pilot_diameter_mm": 5.6,
-    "recess_mm": 0.3
+  "output_plate_bores": 12,
+  "active_output_bolts": 8,
+  "active_z_mounts": {
+    "lid": 4,
+    "side": 6
   },
-  "limits": [
-    "Minimum height clears both the shared deck and the top of the M6 centre clamp by the configured nominal clearance.",
-    "Insert knurl/pilot interference is intentional. Physical press fit, pullout strength and cradle stiffness need testing."
+  "radial_bottom_mounts": 4,
+  "lid_m5_length_mm": 14,
+  "side_m5_length_mm": 16,
+  "m5_entry_mm": 8,
+  "blind_pilot_depth_mm": 9,
+  "motor_to_centre_clamp_mm": 1.999999999999993,
+  "corner_connected": true,
+  "printed_solids": 1,
+  "thread_contacts": [
+    {
+      "screw": "Z_top_mount_screw_0",
+      "host": "Z_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.232779551555646
+    },
+    {
+      "screw": "Z_top_mount_screw_1",
+      "host": "Z_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.232779551576807
+    },
+    {
+      "screw": "Z_top_mount_screw_2",
+      "host": "Z_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.232779138871424
+    },
+    {
+      "screw": "Z_top_mount_screw_3",
+      "host": "Z_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.232779551588716
+    },
+    {
+      "screw": "Z_enclosure_mount_screw_0",
+      "host": "Z_Adjustable_six-bearing_base",
+      "pilot_engagement_overlap_mm3": 4.232778724794106
+    },
+    {
+      "screw": "Z_enclosure_mount_screw_1",
+      "host": "Z_Adjustable_six-bearing_base",
+      "pilot_engagement_overlap_mm3": 4.23277829859717
+    },
+    {
+      "screw": "Z_enclosure_mount_screw_2",
+      "host": "Z_Adjustable_six-bearing_base",
+      "pilot_engagement_overlap_mm3": 4.23277872500104
+    },
+    {
+      "screw": "Z_enclosure_mount_screw_3",
+      "host": "Z_Adjustable_six-bearing_base",
+      "pilot_engagement_overlap_mm3": 4.232778724922935
+    },
+    {
+      "screw": "Z_enclosure_mount_screw_4",
+      "host": "Z_Adjustable_six-bearing_base",
+      "pilot_engagement_overlap_mm3": 4.23277830079983
+    },
+    {
+      "screw": "Z_enclosure_mount_screw_5",
+      "host": "Z_Adjustable_six-bearing_base",
+      "pilot_engagement_overlap_mm3": 4.232778300473016
+    },
+    {
+      "screw": "Z_output_mount_screw_0",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816746857625
+    },
+    {
+      "screw": "Z_output_mount_screw_1",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816753830394
+    },
+    {
+      "screw": "Z_output_mount_screw_2",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816295558815
+    },
+    {
+      "screw": "Z_output_mount_screw_3",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816295336407
+    },
+    {
+      "screw": "Z_output_mount_screw_4",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926817205147948
+    },
+    {
+      "screw": "Z_output_mount_screw_5",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816295415754
+    },
+    {
+      "screw": "Z_output_mount_screw_6",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816753653937
+    },
+    {
+      "screw": "Z_output_mount_screw_7",
+      "host": "Z_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.192681674691745
+    },
+    {
+      "screw": "R_enclosure_mount_screw_0",
+      "host": "R_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.232779060970127
+    },
+    {
+      "screw": "R_enclosure_mount_screw_1",
+      "host": "R_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.232778648083788
+    },
+    {
+      "screw": "R_enclosure_mount_screw_2",
+      "host": "R_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.23277906098175
+    },
+    {
+      "screw": "R_enclosure_mount_screw_3",
+      "host": "R_Structural_mounting_lid",
+      "pilot_engagement_overlap_mm3": 4.232779103521156
+    },
+    {
+      "screw": "Probe_output_mount_screw_0",
+      "host": "R_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816746862674
+    },
+    {
+      "screw": "Probe_output_mount_screw_1",
+      "host": "R_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816754161755
+    },
+    {
+      "screw": "Probe_output_mount_screw_2",
+      "host": "R_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816295158955
+    },
+    {
+      "screw": "Probe_output_mount_screw_3",
+      "host": "R_Hollow_triangular_carriage",
+      "pilot_engagement_overlap_mm3": 1.1926816295408915
+    }
+  ],
+  "notes": [
+    "T8 2x/4x holes inferred from published 1x T8 longitudinal pattern and 21 mm widening per multiplier step.",
+    "Radial adapter includes stock 40 mm and lengthened 120 mm patterns for both screw families.",
+    "Same hole pattern does not establish stroke, load, screw fit or drive compatibility."
   ],
   "source_sha256": {
-    "model.py": "94389abae65f1b19a137baf8f465fa5e1009645f18637dbf011e3f166fc93908",
-    "parameters.json": "2f4c3afcc65f20cd4781d5467a3894b05647803871eee69397a6ac2681820316",
+    "model.py": "b2b5c1f05c1494d7fad98a8f924826b33adbb93a2e791abcb8fa0814cfbc0c36",
+    "parameters.json": "af4e10c598972195604ac480039f9a092c6c458f072e5a2ae5c85e02edd69365",
+    "leadscrew_actuator.py": "477f6f1c4198cf5981944910420f2a56c6c10151658cee367245e3da6a60ce3c",
+    "check_z_mount.py": "c7001e8c1f88b27e93c4f1c6dba1e79d8067027c971c3de2b22c4d19fdee9a1a",
     "rotary_base/core.py": "b5d895e0a9117a1daa81efbaa9f1311b7efd302076699a8db316590564fdaa89",
-    "rotary_base/gear_geometry.py": "a981d350672992501ac4e7b0bfa2318da66ad6e1aea0bbe09481ed8bc2efa022",
     "rotary_base/parameters.json": "99050f6bb7efe3fd3d52989578bb5d208bdee8c40c7a3d6e0e305b1aab00a921"
-  },
-  "corner_connection": {
-    "passed": true,
-    "face_thickness_mm": 6,
-    "height_mm": 148.2,
-    "former_gap_mm": 1.5,
-    "wall_overlap_mm": 6,
-    "sections_above_flange": [
-      {
-        "height_mm": 74.2,
-        "connected_solid_count": 1
-      },
-      {
-        "height_mm": 133.3,
-        "connected_solid_count": 1
-      },
-      {
-        "height_mm": 199.4,
-        "connected_solid_count": 1
-      }
-    ],
-    "print_solid_count": 1,
-    "top_mount_is_solid_face": true,
-    "face_width_mm": 96.8,
-    "top_face_hole_count": 4
-  },
-  "z_output_carrier": {
-    "passed": true,
-    "shape": "one-piece U over pad top",
-    "output_insert_count": 0,
-    "bolt_count": 4,
-    "bolt": "M3x35",
-    "nuts": 4,
-    "washers": 8,
-    "carrier_contact_points": 8,
-    "carrier_leg_mm": 6,
-    "pad_thickness_mm": 18,
-    "through_bore_mm": 3.4,
-    "bolt_pattern_mm": [
-      9,
-      9
-    ],
-    "thread_beyond_nut_mm": 1.6,
-    "minimum_carrier_height_above_cradle_mm": 1.5
   }
 }

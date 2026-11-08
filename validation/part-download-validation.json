@@ -5,7 +5,7 @@
   "checks": [
     "right-click selects actual visible meshes",
     "STL bytes match original print files",
-    "current cradle, deck, U carrier and through-bolt rack downloads",
+    "current cradle, deck, wide carrier and screw-driven carriage downloads",
     "explosion-independent downloads",
     "reference binary STL",
     "platform parts selectable",

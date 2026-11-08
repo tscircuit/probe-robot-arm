@@ -1,0 +1,970 @@
+[
+  {
+    "axis": "Z",
+    "width": 2,
+    "variant": "printed",
+    "inferred": false,
+    "base": [
+      [
+        -3,
+        -55
+      ],
+      [
+        -3,
+        55
+      ],
+      [
+        149,
+        -55
+      ],
+      [
+        149,
+        55
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -48
+      ],
+      [
+        36,
+        48
+      ],
+      [
+        96.0,
+        -48
+      ],
+      [
+        96.0,
+        48
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        58,
+        44
+      ],
+      [
+        58,
+        56
+      ],
+      [
+        132,
+        44
+      ],
+      [
+        132,
+        56
+      ]
+    ],
+    "width_mm": 122,
+    "end": 155,
+    "stroke": 40,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          96.0,
+          -48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          96.0,
+          48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          -55
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          55
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          149,
+          -55
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          149,
+          55
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  },
+  {
+    "axis": "Z",
+    "width": 2,
+    "variant": "t8",
+    "inferred": true,
+    "base": [
+      [
+        -3,
+        -55
+      ],
+      [
+        -3,
+        55
+      ],
+      [
+        115,
+        -55
+      ],
+      [
+        115,
+        55
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -48
+      ],
+      [
+        36,
+        48
+      ],
+      [
+        79.0,
+        -48
+      ],
+      [
+        79.0,
+        48
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        58,
+        44
+      ],
+      [
+        58,
+        56
+      ],
+      [
+        98,
+        44
+      ],
+      [
+        98,
+        56
+      ]
+    ],
+    "width_mm": 122,
+    "end": 121,
+    "stroke": 40,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          79.0,
+          -48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          79.0,
+          48
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          -55
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          55
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          115,
+          -55
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          115,
+          55
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  },
+  {
+    "axis": "Z",
+    "width": 4,
+    "variant": "printed",
+    "inferred": false,
+    "base": [
+      [
+        -3,
+        -97
+      ],
+      [
+        -3,
+        97
+      ],
+      [
+        149,
+        -97
+      ],
+      [
+        149,
+        97
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -90
+      ],
+      [
+        36,
+        90
+      ],
+      [
+        96.0,
+        -90
+      ],
+      [
+        96.0,
+        90
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        58,
+        44
+      ],
+      [
+        58,
+        56
+      ],
+      [
+        132,
+        44
+      ],
+      [
+        132,
+        56
+      ]
+    ],
+    "width_mm": 206,
+    "end": 155,
+    "stroke": 40,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          96.0,
+          -90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          96.0,
+          90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          -97
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          97
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          149,
+          -97
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          149,
+          97
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  },
+  {
+    "axis": "Z",
+    "width": 4,
+    "variant": "t8",
+    "inferred": true,
+    "base": [
+      [
+        -3,
+        -97
+      ],
+      [
+        -3,
+        97
+      ],
+      [
+        115,
+        -97
+      ],
+      [
+        115,
+        97
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -90
+      ],
+      [
+        36,
+        90
+      ],
+      [
+        79.0,
+        -90
+      ],
+      [
+        79.0,
+        90
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        58,
+        44
+      ],
+      [
+        58,
+        56
+      ],
+      [
+        98,
+        44
+      ],
+      [
+        98,
+        56
+      ]
+    ],
+    "width_mm": 206,
+    "end": 121,
+    "stroke": 40,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          79.0,
+          -90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          79.0,
+          90
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          -97
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          -3,
+          97
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          115,
+          -97
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "base",
+        "center_local_mm": [
+          115,
+          97
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  },
+  {
+    "axis": "R",
+    "width": 1,
+    "variant": "printed",
+    "inferred": false,
+    "base": [
+      [
+        -3,
+        -34
+      ],
+      [
+        -3,
+        34
+      ],
+      [
+        149,
+        -34
+      ],
+      [
+        149,
+        34
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -27
+      ],
+      [
+        36,
+        27
+      ],
+      [
+        96.0,
+        -27
+      ],
+      [
+        96.0,
+        27
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        58,
+        44
+      ],
+      [
+        58,
+        56
+      ],
+      [
+        132,
+        44
+      ],
+      [
+        132,
+        56
+      ]
+    ],
+    "width_mm": 80,
+    "end": 155,
+    "stroke": 40,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          96.0,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          96.0,
+          27
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  },
+  {
+    "axis": "R",
+    "width": 1,
+    "variant": "t8",
+    "inferred": false,
+    "base": [
+      [
+        -3,
+        -34
+      ],
+      [
+        -3,
+        34
+      ],
+      [
+        115,
+        -34
+      ],
+      [
+        115,
+        34
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -27
+      ],
+      [
+        36,
+        27
+      ],
+      [
+        79.0,
+        -27
+      ],
+      [
+        79.0,
+        27
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        58,
+        44
+      ],
+      [
+        58,
+        56
+      ],
+      [
+        98,
+        44
+      ],
+      [
+        98,
+        56
+      ]
+    ],
+    "width_mm": 80,
+    "end": 121,
+    "stroke": 40,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          79.0,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          79.0,
+          27
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  },
+  {
+    "axis": "R",
+    "width": 1,
+    "variant": "printed",
+    "inferred": false,
+    "base": [
+      [
+        -3,
+        -34
+      ],
+      [
+        -3,
+        34
+      ],
+      [
+        229,
+        -34
+      ],
+      [
+        229,
+        34
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -27
+      ],
+      [
+        36,
+        27
+      ],
+      [
+        176.0,
+        -27
+      ],
+      [
+        176.0,
+        27
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        138,
+        44
+      ],
+      [
+        138,
+        56
+      ],
+      [
+        212,
+        44
+      ],
+      [
+        212,
+        56
+      ]
+    ],
+    "width_mm": 80,
+    "end": 235,
+    "stroke": 120,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          176.0,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          176.0,
+          27
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  },
+  {
+    "axis": "R",
+    "width": 1,
+    "variant": "t8",
+    "inferred": true,
+    "base": [
+      [
+        -3,
+        -34
+      ],
+      [
+        -3,
+        34
+      ],
+      [
+        195,
+        -34
+      ],
+      [
+        195,
+        34
+      ]
+    ],
+    "lid": [
+      [
+        36,
+        -27
+      ],
+      [
+        36,
+        27
+      ],
+      [
+        159.0,
+        -27
+      ],
+      [
+        159.0,
+        27
+      ]
+    ],
+    "side": [
+      [
+        22,
+        12
+      ],
+      [
+        36,
+        12
+      ],
+      [
+        138,
+        44
+      ],
+      [
+        138,
+        56
+      ],
+      [
+        178,
+        44
+      ],
+      [
+        178,
+        56
+      ]
+    ],
+    "width_mm": 80,
+    "end": 201,
+    "stroke": 120,
+    "checked_holes": [
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          36,
+          27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          159.0,
+          -27
+        ],
+        "bore_mm": 5.5
+      },
+      {
+        "face": "lid",
+        "center_local_mm": [
+          159.0,
+          27
+        ],
+        "bore_mm": 5.5
+      }
+    ]
+  }
+]

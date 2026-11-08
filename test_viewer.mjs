@@ -25,22 +25,22 @@ try{
    assert.ok(p.quaternion.every((v,a)=>Math.abs(v-(a===3?1:0))<1e-10));
   }
  }
- assert.equal(await page.evaluate(()=>window.probeViewer.config.actuator_enclosure),'pass-through');
- assert.equal(await page.evaluate(()=>window.probeViewer.modules[0].meshes.filter(m=>m.userData.name.endsWith('05_Mounting_enclosure_tray')).length),2);
+ assert.equal(await page.evaluate(()=>window.probeViewer.config.actuator_enclosure),'printed-leadscrew');
+ assert.equal(await page.evaluate(()=>window.probeViewer.modules[0].meshes.filter(m=>m.userData.name.endsWith('Structural_mounting_lid')).length),2);
  await page.screenshot({path:'output/viewer-exploded.png'});
  await slide('explode',0);assert.equal(await page.locator('#play').isDisabled(),false);
  for(const [id,value,key,expected] of [['theta',20,'theta',20],['z',40,'z',20],['r',120,'r',60]]){await slide(id,value);assert.equal((await page.evaluate(()=>window.probeViewer.state.values))[key],expected);}
  const geometryPose=await page.evaluate(()=>{const m=window.probeViewer.modules[0],probe=m.meshes.find(x=>x.userData.name==='Spring_probe_reference');return {theta:m.rotor.rotation.z,r:probe.position.x,z:probe.position.z};});
  assert.ok(Math.abs(geometryPose.theta-20*Math.PI/180)<1e-9);assert.equal(geometryPose.r,60);assert.equal(geometryPose.z,20);
- const drives=await page.evaluate(()=>{const m=window.probeViewer.modules[0].meshes;return {z:m.find(p=>p.userData.name==='Z_03_Involute_pinion_18T').quaternion.toArray(),r:m.find(p=>p.userData.name==='R_03_Involute_pinion_14T').quaternion.toArray(),config:window.probeViewer.config,motorNames:m.filter(p=>/NEMA.*reference$/.test(p.userData.name)).map(p=>p.userData.name)};});
- for(const [q,expected] of [[drives.z,[Math.sin(-20/18/2),0,0,Math.cos(-20/18/2)]],[drives.r,[0,0,Math.sin(60/14/2),Math.cos(60/14/2)]]])assert.ok(q.every((v,i)=>Math.abs(v-expected[i])<1e-8));
- assert.equal(drives.config.z_motor,'nema17');assert.equal(drives.config.radial_motor,'nema14');assert.equal(drives.config.radial_inverted,true);assert.ok(drives.motorNames.includes('Z_NEMA17_reference'));assert.ok(drives.motorNames.includes('R_NEMA14_reference'));assert.equal(drives.config.r_drive_y,0);
+ const drives=await page.evaluate(()=>{const m=window.probeViewer.modules[0].meshes;return {z:m.find(p=>p.userData.name==='Z_Printed_20_mm_lead_screw_with_integral_shaft_clamp').quaternion.toArray(),r:m.find(p=>p.userData.name==='R_Printed_20_mm_lead_screw_with_integral_shaft_clamp').quaternion.toArray(),config:window.probeViewer.config,motorNames:m.filter(p=>/NEMA.*reference$/.test(p.userData.name)).map(p=>p.userData.name)};});
+ for(const [q,expected] of [[drives.z,[0,0,Math.sin(-20*Math.PI/8),Math.cos(-20*Math.PI/8)]],[drives.r,[Math.sin(-60*Math.PI/8),0,0,Math.cos(-60*Math.PI/8)]]])assert.ok(q.every((v,i)=>Math.abs(v-expected[i])<1e-8));
+ assert.equal(drives.config.z_motor,'nema17');assert.equal(drives.config.radial_motor,'nema14');assert.equal(drives.config.radial_inverted,true);assert.ok(drives.motorNames.includes('Z_NEMA17_full-depth_reference'));assert.ok(drives.motorNames.includes('R_NEMA14_full-depth_reference'));assert.equal(drives.config.r_drive_y,0);
  const baseDrive=await page.evaluate(()=>{const v=window.probeViewer,m=v.modules[0].meshes.find(p=>p.userData.name==='Compliant_12T_pinion');return {q:m.quaternion.toArray(),position:m.position.toArray(),ratio:v.config.base_gear_ratio,pivot:v.config.base_motor_x};});
  assert.equal(baseDrive.ratio,6);assert.equal(baseDrive.pivot,60);
  const ba=20*Math.PI/180*6;assert.ok(baseDrive.q.every((v,i)=>Math.abs(v-[0,0,Math.sin(ba/2),Math.cos(ba/2)][i])<1e-8));
  assert.ok(Math.abs(baseDrive.position[0]-(60-60*Math.cos(ba)))<1e-8);assert.ok(Math.abs(baseDrive.position[1]+60*Math.sin(ba))<1e-8);
  const radialMount=await page.evaluate(()=>{const c=window.probeViewer.config,m=window.probeViewer.modules[0].meshes;return m.filter(p=>p.userData.name.startsWith('R_enclosure_mount_screw')).map(p=>{p.geometry.computeBoundingBox();return {zmin:p.geometry.boundingBox.min.z,zmax:p.geometry.boundingBox.max.z,face:c.radial_mount_face_z};});});
- assert.equal(radialMount.length,4);for(const p of radialMount){assert.ok(Math.abs(p.zmin-(p.face-9))<.001);assert.ok(Math.abs(p.zmax-(p.face+4))<.001);}
+ assert.equal(radialMount.length,4);for(const p of radialMount){assert.ok(Math.abs(p.zmin-(p.face-11))<.001);assert.ok(Math.abs(p.zmax-(p.face+8))<.001);}
 
  await page.locator('#four').click();assert.equal((await page.evaluate(()=>window.probeViewer.state)).four,true);
  const cluster=await page.evaluate(()=>({tips:window.probeViewer.tipPositions,z:window.probeViewer.config.board_top}));
@@ -55,5 +55,5 @@ try{
  await slide('explode',50);assert.equal((await page.evaluate(()=>window.probeViewer.state)).four,false,'Explosion isolates a single arm');await slide('explode',0);
  await page.locator('summary').click();await page.setViewportSize({width:375,height:812});await page.locator('#single').click();await page.waitForTimeout(300);await page.screenshot({path:'output/viewer-mobile.png',fullPage:true});
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'No horizontal mobile overflow');
- assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,checks:['R24 pass-through enclosures load',(pathData.length*2)+' explosion boundaries/midpoints match the CAD path','NEMA17 Z and inverted NEMA14 radial','12T base at 6:1 about 60 mm pivot, 18T Z and flipped 14T radial drive rotations','four upward bottom-mount fasteners','CAD loads','axes animate','explode pauses motion','sliders update actual geometry','four tips contact a 2 mm square','four probes retract and translate together','tip close-up','downloads respond','mobile has no horizontal overflow','no browser errors']},null,2));
+ assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,checks:['4x Z and 1x radial printed-leadscrew assemblies load',(pathData.length*2)+' explosion boundaries/midpoints match the CAD path','NEMA17 Z and inverted NEMA14 radial','12T base at 6:1 about 60 mm pivot, 8 mm lead screw rotations about Z and radial axes','four upward bottom-mount fasteners','CAD loads','axes animate','explode pauses motion','sliders update actual geometry','four tips contact a 2 mm square','four probes retract and translate together','tip close-up','downloads respond','mobile has no horizontal overflow','no browser errors']},null,2));
 }finally{await browser.close();server.close();await fs.rm(process.env.TMPDIR,{recursive:true,force:true});}

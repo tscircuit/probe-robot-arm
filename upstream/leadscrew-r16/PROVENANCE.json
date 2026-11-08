@@ -1,0 +1,7 @@
+{
+  "site_version": 61,
+  "site_source_commit": "417da079fe5da0ac1bed3edbbaef6dc2782e65f4",
+  "source_url": "https://flex17-compliant-linear-actuator.seveibar.chatgpt.site/experiments/printed-leadscrew/?width=1",
+  "github_repository": "https://github.com/tscircuit/rack-actuator",
+  "note": "Pinned published Site source; leadscrew experiments not yet present in GitHub main at import time."
+}

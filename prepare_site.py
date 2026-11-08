@@ -20,6 +20,8 @@ assert explosion_report['passed'], 'Module explosion checks must pass'
 import hashlib
 for name,digest in explosion_report['source_sha256'].items():
  assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest, 'Stale explosion check: '+name
+thread_report=json.loads((root/'output/leadscrew-thread-validation.json').read_text());assert thread_report['passed']
+for name,digest in thread_report['source_sha256'].items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,'Stale lead screw check: '+name
 mount_report=json.loads((root/'output/z-mount-validation.json').read_text())
 assert mount_report['passed'], 'Z mount checks must pass'
 for name,digest in mount_report['source_sha256'].items():
@@ -64,7 +66,7 @@ for stem in ['single-arm','four-arm-platform']:
   z.write(root/'output'/(stem+'.step'),stem+'.step')
   z.write(root/'README.md','README.md')
 with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
- for name in ['model.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_part_visibility.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
+ for name in ['model.py','leadscrew_actuator.py','check_leadscrew.py','check_platform.py','arm_explosion.py','check_arm_explosion.py','check_z_mount.py','check_base_drive.py','check_base_sync.py','check_flat_base.py','check_base_cutouts.py','check_deck_cutouts.py','parameters.json','requirements.txt','requirements-dev.txt','README.md','THIRD_PARTY_NOTICES.md','prepare_site.py','prepare_base_v4.py','verify_main_prints.py','viewer_part_downloads.js','test_viewer.mjs','test_base_v4_viewer.mjs','test_part_downloads.mjs','test_part_visibility.mjs','test_hidden_edges.mjs','test_mouse_controls.mjs']:
   z.write(root/name,name)
  for name in ['.qa/package.json','.qa/package-lock.json','site/dist/index.html','site/dist/app.js','site/dist/style.css','site/dist/part-downloads.js']:z.write(root/name,name)
  for directory in ['upstream','rotary_base','base_test_kit_v4','scripts','site/dist/vendor','output/prototype-parts']:
@@ -79,9 +81,12 @@ with zipfile.ZipFile(download/'source.zip','w',zipfile.ZIP_DEFLATED,compressleve
  z.write(root/'output/arm-explosion-path.json','arm-explosion-path.json')
  z.write(root/'output/z-mount-validation.json','z-mount-validation.json')
  z.write(root/'output/base-drive-validation.json','base-drive-validation.json')
+ z.write(root/'output/leadscrew-thread-validation.json','leadscrew-thread-validation.json')
+ z.write(root/'output/mounting-patterns.json','mounting-patterns.json')
  z.write(root/'output/base-cutouts-validation.json','base-cutouts-validation.json')
  z.write(root/'output/deck-cutouts-validation.json','deck-cutouts-validation.json')
 shutil.copyfile(root/'output/validation.json',download/'validation.json')
+for name in ['mounting-patterns.json','leadscrew-thread-validation.json']:shutil.copyfile(root/'output'/name,download/name)
 shutil.copyfile(root/'output/platform-validation.json',download/'platform-validation.json')
 shutil.copyfile(root/'output/arm-explosion-validation.json',download/'arm-explosion-validation.json')
 shutil.copyfile(root/'output/z-mount-validation.json',download/'z-mount-validation.json')
@@ -94,6 +99,9 @@ shutil.copyfile(root/'output/base-sync-validation.json',download/'base-sync-vali
 shutil.copyfile(root/'output/flat-base-validation.json',download/'flat-base-validation.json')
 shutil.copyfile(root/'output/base-cutouts-validation.json',download/'base-cutouts-validation.json')
 shutil.copyfile(root/'output/deck-cutouts-validation.json',download/'deck-cutouts-validation.json')
+with zipfile.ZipFile(download/'actuator-mounts.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+ for name in ['Z_support','Z_to_radial_carrier','Triangular_probe_outrigger']:z.write(root/'output/prototype-parts'/(name+'.stl'),name+'.stl')
+ z.write(root/'output/mounting-patterns.json','mounting-patterns.json');z.write(root/'README.md','README.md')
 for p in dist.rglob('*'):
  if p.is_file() and p.stat().st_size>24*1024*1024:raise ValueError(f'Asset exceeds hosting limit: {p}')
 print('Packaged:',{p.name:p.stat().st_size for p in download.iterdir()})
