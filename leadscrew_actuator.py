@@ -1,38 +1,31 @@
-"""Adapt pinned Site v61 actuator CAD for arm stroke and full-depth motors."""
+"""Adapt pinned upstream revision 24 actuator CAD for arm stroke and full-depth motors."""
 import hashlib,json,pathlib,sys,math
 import cadquery as cq
 ROOT=pathlib.Path(__file__).resolve().parent
-SOURCE=ROOT/'upstream/leadscrew-r16/experiments/t8-leadscrew/model.py'
+SOURCE=ROOT/'upstream/leadscrew-grid31/experiments/t8-leadscrew/model.py'
+def grid_y(width):return [31*(j-({1:2,2:4,4:6}[width]-1)/2) for j in range({1:2,2:4,4:6}[width])]
 def patterns(width=1,stroke=40,variant='printed',extension=0):
- extra=stroke-40;end=(155 if variant=='printed' else 121)+extra+extension;stations=[63+extra,end-18];w=21*(width-1)
- return dict(width=width,variant=variant,extension_mm=extension,inferred=variant=='t8' and (width!=1 or stroke!=40 or extension!=0),
-  base=[(x,y) for x in [-3,end-6] for y in [-34-w,34+w]],
-  lid=[(x,y) for x in [36,sum(stations)/2-4] for y in [-27-w,27+w]],
-  side=[(22,12),(36,12)]+[(x-5,z) for x in stations for z in [44,56]],
-  width_mm=80+2*w,end=end)
+ xs=[10.5+31*j for j in range(5)];ys=grid_y(width)
+ return dict(width=width,variant=variant,inferred=False,pitch_mm=[31,31],thread='M3 heat-set insert',base=[(x,y) for x in xs for y in ys],lid=[(x,y) for x in xs for y in ys],side=[],width_mm=80+42*(width-1),output_width_mm={1:42,2:104,4:168}[width],output_holes=[(y,42+z) for y in ys for z in [-15.5,15.5]])
 def build(stroke=40,width=1,motor='nema17',depth=48,extension=0):
- assert extension>=0 and stroke>=40 and motor in ['nema14','nema17']
+ assert extension==0 and stroke in [40,120] and motor in ['nema14','nema17']
  original=SOURCE.read_text();source=original.split('def explosion_offset(')[0]
- travel_extra=stroke-40;extra=travel_extra+extension
- source=source.replace('STROKE=40.;','STROKE='+str(float(stroke))+';').replace('EXIT_X=155. if PRINTED else 121.;',f'EXIT_X={155.+extra} if PRINTED else {121.+extra};').replace('STATIONS=[63.,EXIT_X-18]',f'STATIONS=[{63.+travel_extra},EXIT_X-18]').replace('ROD_END=152. if PRINTED else 96.',f'ROD_END={152.+extra} if PRINTED else {96.+extra}')
- source=source.replace('2.5,1,122)',f'2.5,1,{122+extra})').replace('xcyl(8,122,30)',f'xcyl(8,{122+extra},30)').replace('xcyl(10.1,122,30)',f'xcyl(10.1,{122+extra},30)')
- # Female bands stay at X=36..108: retain the validated short native cutter.
- # Extending its helical Boolean beyond those bands can lose the groove on long sweeps.
  half,pitch=(17.6,26) if motor=='nema14' else (21,31)
  source=source.replace('motor_holes=[(y,SCREW_Z+z) for y in [-15.5,15.5] for z in [-15.5,15.5]]',f'motor_holes=[(y,SCREW_Z+z) for y in [{-pitch/2},{pitch/2}] for z in [{-pitch/2},{pitch/2}]]')
+ source=source.replace('NEMA17 5 mm',motor.upper()+' 5 mm')
  source=source.replace('motor=rect(-40,0,-21,21,SCREW_Z-21,SCREW_Z+21)',f'motor=rect(-{depth},0,-{half},{half},SCREW_Z-{half},SCREW_Z+{half})').replace("'NEMA17 42x42x40 reference'",repr(motor.upper()+' full-depth reference'))
- key=hashlib.sha256((source+str(width)).encode()).hexdigest()[:20];cache=ROOT/'cache'/('leadscrew-'+key)
+ key=hashlib.sha256((source+str((width,stroke))).encode()).hexdigest()[:20];cache=ROOT/'cache'/('leadscrew-'+key)
  if (cache/'parts.json').exists():
   data=json.loads((cache/'parts.json').read_text());meta=json.loads((cache/'metadata.json').read_text())
   for i,a in enumerate(data):
    a['shape']=cq.Shape.importBrep(str(cache/f'{i}.brep'))
    if a.get('hasFreeShape'):a['freeShape']=cq.Shape.importBrep(str(cache/f'{i}-print.brep'))
   return data,meta
- cache.mkdir(parents=True,exist_ok=True);argv=sys.argv;sys.argv=['model.py','--variant','printed','--width',str(width),'--width-build-root',str(cache)]
+ cache.mkdir(parents=True,exist_ok=True);argv=sys.argv;sys.argv=['model.py','--variant','printed','--travel',str(stroke),'--width',str(width),'--width-build-root',str(cache)]
  ns={'__name__':'arm_actuator','__file__':str(SOURCE)}
  try:exec(compile(source,str(SOURCE),'exec'),ns)
  finally:sys.argv=argv
- data=ns['parts'];meta=dict(extension_mm=extension,stroke=stroke,width=width,motor=motor,depth=depth,lead=8,axis_z=42,end=ns['EXIT_X'],stations=ns['STATIONS'],output_holes=ns['output_holes'],base=ns['BASE_MOUNT_HOLES'],lid=ns['LID_MOUNTS'],side=ns['SIDE_MOUNTS'],body_width=2*ns['HALF_WIDTH'],thread_joints=ns['THREAD_JOINTS'],attachment_pilots=ns['ATTACH_PILOTS'],output_pilots=ns['OUTPUT_PILOTS'],source_sha256=hashlib.sha256(original.encode()).hexdigest(),thread_bands=ns['THREAD_BANDS'],screw_end=ns['ROD_END'])
+ data=ns['parts'];meta=dict(extension_mm=extension,stroke=stroke,width=width,motor=motor,depth=depth,lead=8,axis_z=42,end=ns['EXIT_X'],stations=ns['STATIONS'],output_holes=ns['output_holes'],base=ns['BASE_MOUNT_HOLES'],lid=ns['LID_MOUNTS'],side=ns['SIDE_MOUNTS'],body_width=2*ns['HALF_WIDTH'],thread_joints=ns['THREAD_JOINTS'],attachment_pilots=ns['ATTACH_PILOTS'],output_pilots=ns['OUTPUT_PILOTS'],source_sha256=hashlib.sha256(original.encode()).hexdigest(),thread_bands=ns['THREAD_BANDS'],screw_end=ns['ROD_END'],grid_x=ns['GRID_X'],grid_y=ns['GRID_Y'],output_width=ns['OUTPUT_WIDTH'],mount_seats=ns['MOUNT_SEATS'],mount_insert=ns['MOUNT_INSERT'],base_fasteners=[(x,y) for x in [ns['GRID_X'][0],ns['GRID_X'][-1]] for y in [ns['GRID_Y'][0],ns['GRID_Y'][-1]]])
  serial=[]
  for i,a in enumerate(data):
   a['shape'].exportBrep(str(cache/f'{i}.brep'))

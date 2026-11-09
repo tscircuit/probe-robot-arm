@@ -1,12 +1,14 @@
-# Armature base — four angled press-fit rollers, v4.10
+# Armature base — four angled press-fit rollers, v4.11
 
 The main arm and this independent test fixture use the same rotary-base CAD. Four **625ZZ bearings** run on a continuous **45° outer track** on the 72T ring. Each bearing has **one integral block and printed axle**, tilted 45°. There are no roller bolts, nuts or separate spacers.
 
 ![Assembly and exploded view](ASSEMBLY_PREVIEW.png)
 
-## Symmetric brace deck (v4.10)
+## Open insert sockets and spread mounts (v4.11)
 
-Reprint **part 10 only** when updating from v4.9 for the main arm's two mirrored three-hole Z-support braces. The shared deck now has nine Z-support insert seats: the original six plus three at X=−42 mm, Y=−28/8/44 mm. Four rounded relief windows leave solid lands beneath both braces. The ring, bearings, spindle, fixed base and standalone stand retain their geometry. The main arm uses two M4×25 corner bolts and seven M4×16 bolts into these inserts; they are not required for independent rotary-base testing.
+Reprint **part 10 only** when updating the standalone fixture from v4.10. All nine Z-support insert sockets are Ø5.6 mm through-bores in 10 mm bosses, without a bottom. Insert length and the top insertion face are unchanged. The main arm's new symmetric mounting positions are (±42, −54), (0, 64), (±42, −28), (±58, 8) and (±42, 44) mm. Its middle brace holes spread outward and the center mount moves toward the front rim; reprint the matching Z support for the main arm.
+
+Twelve smaller rounded windows leave full support beneath the new flange ribs and insert lands, a 10 mm rim, 28 mm-radius hub and six 10 mm-wide primary spokes. Deck CAD volume is 104,982 mm³, 16.2% below the unrelieved design and 2.4% below v4.10. Physical stiffness and slicer filament savings are unverified. Main-arm hardware remains two M4×25 corner screws and seven M4×16 screws; Z-support inserts are optional for standalone rotary testing. The ring, bearings, spindle, fixed base and stand keep their geometry.
 
 ## Central spindle relief slots (v4.9)
 
@@ -59,7 +61,7 @@ All STL files use millimetres. Import at 100% scale. The largest part is the 200
 | 07 | Inner-race top washer | 1 |
 | 08 | Housing with two Ø32.2 bearing seats | 1 |
 | 09 | Lower outer-race retainer | 1 |
-| 10 | Shared deck with four rounded windows and nine Z-support insert seats | 1 |
+| 10 | Shared deck with twelve rounded windows and nine open Z-support insert seats | 1 |
 | 11 | 72T ring, integral spacers and continuous outer bevel | 1 |
 | 13 | Open-tip compliant 12T pinion | 1 |
 

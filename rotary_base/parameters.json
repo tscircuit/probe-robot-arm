@@ -30,11 +30,11 @@
       -54
     ],
     [
-      -8,
-      -54
+      0,
+      64
     ],
     [
-      24,
+      42,
       -54
     ],
     [
@@ -42,7 +42,7 @@
       -28
     ],
     [
-      42,
+      58,
       8
     ],
     [
@@ -54,7 +54,7 @@
       -28
     ],
     [
-      -42,
+      -58,
       8
     ],
     [
@@ -75,9 +75,10 @@
   "deck_cutouts": true,
   "deck_cutout_rim_mm": 10,
   "deck_cutout_hub_radius_mm": 28,
-  "deck_cutout_spoke_width_mm": 14,
-  "deck_cutout_corner_radius_mm": 3,
+  "deck_cutout_spoke_width_mm": 10,
+  "deck_cutout_corner_radius_mm": 2,
   "roller_track_overlap_mm": 0.4,
   "spindle_slot_width_mm": 0.5,
-  "spindle_slot_root_mm": 0.5
+  "spindle_slot_root_mm": 0.5,
+  "deck_cutout_secondary_spoke_width_mm": 0
 }

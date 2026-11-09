@@ -27,5 +27,5 @@ for a in parts:
   y,z=lay['r_actuator']['output_holes'][i];end=hx+lay['r_actuator']['end']+lay['radial_stroke']/2;mask=cyl(1.7,8,(end-8,y,hz+z),(1,0,0))
  extra=a['shape'].intersect(by[a['thread_host']]['shape']).cut(mask).Volume();assert extra<1e-6,(name,extra)
  contacts.append(dict(bolt=name,host=a['thread_host'],outside_pilot_mm3=max(0,extra)))
-r=dict(passed=True,samples=rows,contacts=contacts,lead_mm=8,full_thread_and_bearing_engagement=True,source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','parameters.json','leadscrew_actuator.py','direct_mount.py','check_leadscrew.py','upstream/leadscrew-r16/experiments/t8-leadscrew/model.py']})
+r=dict(passed=True,samples=rows,contacts=contacts,lead_mm=8,full_thread_and_bearing_engagement=True,source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ['model.py','parameters.json','leadscrew_actuator.py','direct_mount.py','check_leadscrew.py','upstream/leadscrew-grid31/experiments/t8-leadscrew/model.py']})
 (root/'output/leadscrew-thread-validation.json').write_text(json.dumps(r,indent=2));print('Adapted threads and bounded pilot contacts passed',flush=True)

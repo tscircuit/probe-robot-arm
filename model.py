@@ -1,6 +1,6 @@
 """Modular theta/Z/r flying probe CAD. Units mm. Prototype, not load rated.
 
-The two stages adapt pinned printed-leadscrew Site v61 geometry.
+The two stages adapt pinned printed-leadscrew revision 24 geometry.
 Run: .venv/bin/python model.py --config parameters.json --out output
 """
 from __future__ import annotations
@@ -60,7 +60,7 @@ def layout(p):
     return dict(base_motor_x=base_drive_center(p),base_gear_ratio=p['ring_teeth']/p['pinion_teeth'],mounts=[(w/2+edge,0,180),(0,d/2+edge,-90),(-w/2-edge,0,0),(0,-d/2-edge,90)],
       rmin=rmin,rmax=rmin+stroke,radial_stroke=stroke,required_stroke=needed,h_origin=hx,horizontal_pad=pad-hx,zpad=zp,board_top=hz+21-p['probe_drop']-20,tip_radius=tip,probe_extension=tip-pad,
       horizontal_origin_y=0,horizontal_z=hz,probe_mount_z=hz+21,radial_mount_face_z=face,z_drive_y=0,r_drive_y=0,z_drive_x=0,r_drive_z=hz+42,lead_mm=8,
-      actuator_enclosure='printed-leadscrew',rack_source_revision=16,minimum_z_origin=minimum,z_case_bottom=zo-zm['end'],z_rack_lowest=zp-20,deck_top_z=dt,base_clamp_top_z=clamp,z_deck_mounts=p['z_deck_mounts'],
+      actuator_enclosure='printed-leadscrew',rack_source_revision=24,minimum_z_origin=minimum,z_case_bottom=zo-zm['end'],z_rack_lowest=zp-20,deck_top_z=dt,base_clamp_top_z=clamp,z_deck_mounts=p['z_deck_mounts'],
       radial_motor_center_x_mm=-p['radial_setback_mm'],z_inverted=True,z_drive_rotation_sign=-1,z_controller_lowest_z_mm=zo+p['z_motor_depth'],base_revision='shared-rounded-blocks',z_actuator=zm,r_actuator=rm,yaw_required=math.degrees(math.atan2(max(w,d)/2,edge)))
 
 def actuator_mount_patterns(axis,lay):
@@ -160,23 +160,23 @@ def build(p, lay):
         add(f'Z_cradle_deck_screw_{i}',screw,'theta','#a5b5c1',reference=True)
     # One mounting plane against the actuator's underside/base; no lid or side arms.
     zo=p['z_origin'];zm=lay['z_actuator'];rm=lay['r_actuator'];top=zo+9;wide=103
-    side_foot=box(114,23.6,10,(0,-50.2,dt+5));feet=[box(26,104,10,(x,2,dt+5)) for x in [-39,39]]
-    flanges=side_foot.fuse(*feet).intersect(cyl(80,10,(0,0,dt)))
+    flanges=rotary_base.core.support_footprint(p,dt,10)
     # All outer lands share Y=-62: lay this face on the bed. Reinforcement
     # projects inward only, retaining the actuator mounting datum at Y=-42.
     height=top-dt-10;mid=(top+dt+10)/2
     back=box(206,10,height,(0,-57,mid))
     ribs=[box(14,10,height,(x,-47,mid)) for x in [-96,96]]
-    ribs += [box(206,10,12,(0,-47,zo+z)) for z in [3,-115,-149]]
+    ribs += [box(206,10,12,(0,-47,zo+z)) for z in [-x for x in zm['grid_x']]]
     ribs += [box(206,10,14,(0,-47,dt+17))]
-    ribs += [box(26,10,zo-143-dt-10,(x,-47,(zo-143+dt+10)/2)) for x in [-39,39]] # Solid backing for the entire corner root.
+    ribs += [box(26,10,zo-129-dt-10,(x,-47,(zo-129+dt+10)/2)) for x in [-39,39]] # Solid backing for the entire corner root.
     # 28 mm x 28 mm internal 45-degree chamfer reinforces the loaded corner.
     corner=cq.Workplane('YZ',origin=(26,0,0)).polyline([(-42,dt+10),(-14,dt+10),(-42,dt+38)]).close().extrude(26).val()
     corners=[corner,corner.mirror('YZ')];support=union([flanges,back,*corners,*ribs])
     # Rounded through-windows leave broad edge rails and every mounting row.
     # The lower right opening stays clear of the solid corner reinforcement.
-    windows=[(-89,89,zo-103,zo-9),(-89,-64,dt+24,zo-161),
-             (-14,14,dt+24,zo-161),(64,89,dt+24,zo-161),(-89,89,zo-137,zo-127)]
+    windows=[(-89,-64,dt+24,zo-161),(-14,14,dt+24,zo-161),(64,89,dt+24,zo-161)]
+    rows=sorted(zo-x for x in zm['grid_x'])
+    windows += [(-89,89,lo+6,hi-6) for lo,hi in zip(rows,rows[1:])]
     for x0,x1,z0,z1 in windows:
         cutter=cq.Workplane('XY').box(x1-x0,24,z1-z0).edges('|Y').fillet(4).translate(((x0+x1)/2,-52,(z0+z1)/2)).val()
         support=support.cut(cutter)
@@ -184,14 +184,14 @@ def build(p, lay):
     # Keep flange screw heads and their initial withdrawal corridors open.
     for i,(x,y) in enumerate(upright_mounts):support=support.cut(cyl(4.1,60,(x,y,dt+(19 if i in [3,6] else 10))))
     # Rear bolts exit through the flat back wall after 40 mm withdrawal.
-    for x,y in upright_mounts[:3]:
+    for x,y in [upright_mounts[i] for i in [0,2]]:
         access=cq.Workplane('XY').box(8.2,12,26).edges('|Y').fillet(2).translate((x,-58,dt+45)).val()
         support=support.cut(access)
     patterns=actuator_mount_patterns('Z',lay)
     for x,y in set(tuple(q) for pat in patterns for q in pat['base']):
-        support=support.cut(cyl(2.75,24,(-y,-65,zo-x),(0,1,0)),cyl(5.4,13,(-y,-65,zo-x),(0,1,0)))
+        support=support.cut(cyl(1.7,24,(-y,-65,zo-x),(0,1,0)),cyl(3.3,5,(-y,-63,zo-x),(0,1,0)))
     add('Z_support',support.clean(),'theta','#6d849c',True)
-    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [side_foot,*feet,back,*corners,*ribs]]]
+    parts[-1]['sweep_boxes']=[[[b.xmin,b.ymin,b.zmin],[b.xmax,b.ymax,b.zmax]] for b in [q.BoundingBox() for q in [flanges,back,*corners,*ribs]]]
     def add_actuator(axis):
         meta=zm if axis=='Z' else rm
         data=direct_mount.parts(axis,meta,lay['h_origin'])
@@ -213,15 +213,13 @@ def build(p, lay):
         controller_part(f'Controller_spacer_{i}',annulus(3,1.65,p['controller_spacer'],pcb_top).translate((x,y,0)),'#ddd1aa')
     controller_part('Controller_component_KEEPOUT',box(42.3,42.32,p['controller_component_height'],(0,0,pcb_bottom-p['controller_component_height']/2)),'#70b598',True)
     controller_part('USB_cable_KEEPOUT',box(42.3,30,14,(0,36.16,pcb_bottom-5)),'#70b598',True)
-    for i,(x,y) in enumerate(zm['base']):
-        screw=cyl(2.45,30,(-y,-62,zo-x),(0,1,0)).fuse(cyl(4.25,5,(-y,-32,zo-x),(0,1,0)))
+    for i,(x,y) in enumerate(zm['base_fasteners']):
+        # Recessed head faces outward; 16 mm support + 4 mm insert engagement.
+        screw=cyl(1.45,20,(-y,-58,zo-x),(0,1,0)).fuse(cyl(2.75,3,(-y,-61,zo-x),(0,1,0)))
         add(f'Z_base_mount_screw_{i}',screw,'theta','#a5b5c1',reference=True)
-        washer=cyl(5,2,(-y,-54,zo-x),(0,1,0)).cut(cyl(2.65,2,(-y,-54,zo-x),(0,1,0)))
-        add(f'Z_base_mount_washer_{i}',washer,'theta','#a5b5c1',reference=True)
-        nut=rotary_base.core.hexagon(8,4,0,0,0).cut(cyl(2.5,4)).rotate((0,0,0),(1,0,0),-90).translate((-y,-58,zo-x))
-        add(f'Z_base_mount_nut_{i}',nut,'theta','#a5b5c1',reference=True)
     hx=lay['h_origin'];hz=lay['horizontal_z'];zp=lay['zpad'];end=rm['end']
-    for i,(y,z) in enumerate(zm['output_holes']):
+    for i in direct_mount.output_indices(zm):
+        y,z=zm['output_holes'][i]
         x=-y;y=z-42
         screw=cyl(1.45,12,(x,y,zp-7.2)).fuse(cyl(2.75,3,(x,y,zp+4.8)))
         add(f'Z_output_mount_screw_{i}',screw,'z_rack','#a5b5c1',reference=True)
@@ -297,7 +295,7 @@ def validate(parts,p,lay,nominal):
     report={"status":"prototype", "solid_validity":all(a["shape"].isValid() for a in parts),
             "part_count":len(parts),"layout":lay,"collisions":[],"nominal_base_mesh":[],"travel_samples":[],
             "limits":["Geometry prototype. No physical accuracy, stiffness, fatigue, holding torque or contact force certification.",
-                      "Printed leadscrew: selectable Z width, upright 1x radial with custom 120 mm stroke and NEMA14 mount. Inferred T8 width patterns require checking against future variants.",
+                      "Printed leadscrew: selectable Z width and native 120 mm upright 1x radial with NEMA14 mount. Published 31 mm output/base/lid grid shared with the T8 variants; physical fit remains untested.",
                       "Shared rotary base includes retainers, direct motor mounting and four single blocks with integral tilted axles. Hardware envelopes are references; homing remains unfinished.",
                       "Simultaneous four-tip cluster checks are in platform-validation.json; they are sampled geometric checks, not physical accuracy tests.",
                       "Sampled collision checks are not a continuous swept-volume proof."]}

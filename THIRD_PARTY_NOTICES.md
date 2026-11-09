@@ -6,3 +6,5 @@
 - CadQuery and development dependencies retain their respective licenses and are installed separately.
 
 Printed-leadscrew and T8 actuator experiments are pinned from the FLEX Site v61 source commit `417da079fe5da0ac1bed3edbbaef6dc2782e65f4`, associated with tscircuit/rack-actuator (MIT). See `upstream/leadscrew-r16/PROVENANCE.json` and `LICENSE`. The integration adapter lengthens the radial stage and supplies full-depth NEMA17/NEMA14 motor configurations; T8 widened mounting patterns are inferred locally.
+
+The active actuator source is rack-actuator revision 24, commit cc86a8e20de12db4f5eda797278d3ff07537a772, retained in upstream/leadscrew-grid31 with its original license. The arm applies full-depth motors, a NEMA14 radial motor, direct threaded lid attachment and matching support locally.

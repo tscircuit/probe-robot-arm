@@ -115,18 +115,40 @@ def base_relief_cutters(p):
     for sign in [-1,1]:outlines.append([(49,sign*29),(85,sign*29),(85,sign*65)])
     return [cq.Workplane('XY').polyline(pts).close().extrude(p['base_plate_thickness_mm']+2).edges('|Z').fillet(p['base_cutout_corner_radius_mm']).translate((0,0,-1)).val() for pts in outlines]
 
+def support_footprint(p,z,height,margin=0):
+    """Shared flange envelope: two staggered braces and a central front tie."""
+    def link(a,b):
+        dx,dy=b[0]-a[0],b[1]-a[1];length=math.hypot(dx,dy)
+        bar=box(length,18+2*margin,height,((a[0]+b[0])/2,(a[1]+b[1])/2,z+height/2))
+        return bar.rotate(((a[0]+b[0])/2,(a[1]+b[1])/2,0),((a[0]+b[0])/2,(a[1]+b[1])/2,1),math.degrees(math.atan2(dy,dx)))
+    shapes=[box(114+2*margin,23.6+2*margin,height,(0,-50.2,z+height/2))]
+    for sign,ids in [(1,[3,4,5]),(-1,[6,7,8])]:
+        shapes.append(box(26+2*margin,28+2*margin,height,(sign*39,-28,z+height/2)))
+        points=[(sign*39,-42)]+[p['z_deck_mounts'][i] for i in ids]+[p['z_deck_mounts'][1]]
+        shapes += [link(a,b) for a,b in zip(points,points[1:])]
+        shapes += [cyl(9+margin,height,(x,y,z)) for x,y in points]
+    return union(shapes).intersect(cyl(80+margin,height,(0,0,z)))
+
 def deck_relief_cutters(p):
-    # Leave the bearing hub, a continuous outer rim and six radial load paths.
+    # Primary spokes connect the hub to all six ring fasteners. Narrower
+    # intermediate ribs split the free areas into smaller rounded windows.
     windows=annulus(82-p['deck_cutout_rim_mm'],p['deck_cutout_hub_radius_mm'],12,47.2)
     for angle in [30,90,150]:
         windows=windows.cut(box(180,p['deck_cutout_spoke_width_mm'],14,(0,0,53.2)).rotate((0,0,0),(0,0,1),angle))
-    # Full cradle flange footprints plus 3 mm; reinforce the hub/front-flange junction.
-    windows=windows.cut(box(120,29.6,14,(0,-50.2,53.2)),
-                        *[box(33.1,110,14,(x,2,53.2)) for x in [-38.45,38.45]],
-                        *[box(20,60,14,(x,0,53.2)) for x in [-17,17]]).clean()
-    # Omit small residual pockets; keep only useful through-windows.
-    return [cq.Workplane('XY').newObject([s]).edges('|Z').fillet(p['deck_cutout_corner_radius_mm']).val()
-            for s in windows.Solids() if s.Volume()/12>=300]
+    for angle in ([0,60,120] if p['deck_cutout_secondary_spoke_width_mm'] else []):
+        windows=windows.cut(box(180,p['deck_cutout_secondary_spoke_width_mm'],14,(0,0,53.2)).rotate((0,0,0),(0,0,1),angle))
+    windows=windows.cut(support_footprint(p,46.2,14,margin=2)).clean()
+    rounded=[]
+    for s in windows.Solids():
+        if s.Volume()/12<80:continue
+        bottom=min((f for f in s.Faces() if f.geomType()=='PLANE' and abs(f.normalAt().z)>.99),key=lambda f:f.Center().z)
+        radius=p['deck_cutout_corner_radius_mm']
+        for inset in bottom.outerWire().offset2D(-radius,'arc'):
+            for wire in inset.offset2D(radius,'arc'):
+                cutter=cq.Solid.extrudeLinear(wire,[],V(0,0,12))
+                assert cutter.isValid() and cutter.cut(s).Volume()<1e-5
+                rounded.append(cutter)
+    return rounded
 
 def build(p):
     assert 32<=p['bearing_seat_diameter']<=32.4
@@ -181,7 +203,7 @@ def build(p):
     deck=annulus(82,p['outer_race_abutment_diameter']/2,6,52.2)
     for x,y in p['z_deck_mounts']:
         deck=deck.fuse(cyl(7,10,(x,y,48.2)))
-        deck=deck.cut(cyl(2.8,6.8,(x,y,51.5))).cut(cyl(3.1,.5,(x,y,57.9)))
+        deck=deck.cut(cyl(2.8,12,(x,y,47.2))).cut(cyl(3.1,.5,(x,y,57.9)))
     deck=holes(deck,rotor_bolts()+ring_bolts,1.7,47,13)
     for x,y in rotor_bolts():deck=deck.cut(hexagon(5.8,2.5,x,y,55.8))
     if p.get('deck_cutouts',False):deck=deck.cut(*deck_relief_cutters(p)).clean()
