@@ -42,18 +42,20 @@ def main():
             if motion=='r_rack':s=s.translate((r,0,0))
             if motion in ['z_rack','r_rack','r_drive']:s=s.translate((0,0,z))
             shapes[a['name']]=s
-        count=0
+        count=0;bounds={n:s.BoundingBox() for n,s in shapes.items()}
         for a,b in itertools.combinations(parts,2):
             na,nb=a['name'],b['name']
             if frozenset([na,nb]) in allowed:continue
             if a.get('motion') and b.get('motion'):continue
+            ba,bb=bounds[na],bounds[nb]
+            if any(getattr(ba,k+'max')<=getattr(bb,k+'min')+1e-6 or getattr(bb,k+'max')<=getattr(ba,k+'min')+1e-6 for k in 'xyz'):continue
             key=(na,nb,z if any(q.get('motion') in ['z_rack','r_rack','r_drive','z_drive'] for q in [a,b]) else 0,r if any(q.get('motion') in ['r_rack','r_drive'] for q in [a,b]) else 0)
             if key not in pair_cache:pair_cache[key]=overlap(shapes[na],shapes[nb]);checks+=1
             vol=pair_cache[key]
             if vol>.01:failures.append(dict(z=z,r=r,a=na,b=nb,overlap_mm3=vol));count+=1;print('Collision',na,nb,vol,flush=True)
         print('Travel',z,r,'collisions',count,flush=True)
         if failures:break
-    report=dict(passed=not failures,gear_samples=gear,collision_pair_checks=checks,collisions=failures,full_step_deg=1.8/info['ratio'],sixteenth_step_deg=1.8/(16*info['ratio']),nominal_tip_increment_at_250_mm=250*math.radians(1.8/(16*info['ratio'])),physical_vibration_verified=False,physical_accuracy_verified=False,exceptions=[dict(parts=sorted(k),reason=v) for k,v in allowed.items()],source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/check.py','rigid_base/parameters.json','model.py','rotary_base/core.py','rotary_base/parameters.json','direct_mount.py','leadscrew_actuator.py']})
+    report=dict(passed=not failures,gear_samples=gear,collision_pair_checks=checks,collisions=failures,full_step_deg=1.8/info['ratio'],sixteenth_step_deg=1.8/(16*info['ratio']),nominal_tip_increment_at_250_mm=250*math.radians(1.8/(16*info['ratio'])),physical_vibration_verified=False,physical_accuracy_verified=False,exceptions=[dict(parts=sorted(k),reason=v) for k,v in allowed.items()],source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/printed_braces.py','rigid_base/check.py','rigid_base/parameters.json','model.py','rotary_base/core.py','rotary_base/parameters.json','direct_mount.py','leadscrew_actuator.py']})
     (out/'validation.json').write_text(json.dumps(report,indent=2));assert report['passed'],failures
     s=by['Boxed_Z_support']['shape'];assert abs(s.BoundingBox().ymin+84)<1e-5 and len(s.Solids())==1
     for x,y in p['support_mounts_mm']:

@@ -19,9 +19,9 @@ An independent prototype of the existing flying-probe arm. This variant keeps th
 
 The ring retains a continuous 45° outer running track and flat-seated M3 button heads. The blocks retain one integral axle each. The variant uses zero nominal roller/track interference instead of the original 0.4 mm preload: actual fit and smooth rotation must be established on the printed hardware.
 
-The Z support has two spaced faces, side webs, grid ties, deep lower braces and two 28 mm corner gussets. Nine heat-set insert holes are open through the deck. The mirrored three-hole side braces spread to X=±90 mm, with the front centre mount at Y=88 mm. Small rounded deck windows preserve the support footprint. The fixed plate is solid to prioritize stiffness in this test.
+The Z support now uses two detachable printed rear trusses. Each triangular plate has a middle crosspiece, three tower mounting points and two deck mounting points. The highest attachment is 304.5 mm above the deck. The rear deck extensions include shallow locating pockets for matching keys on the brace feet, and a crossmember joins the extensions. Two thin underside webs stiffen each extension, leaving the fasteners accessible between them. One of the tower’s large faces is removed; the remaining side webs and lower ribs are reduced. The existing 28 mm corner gussets remain. The combined support, deck and rear braces use 1.3% less solid CAD volume than the previous boxed-support variant; this is geometric volume, not a slicer weight estimate. Nine heat-set insert holes are open through the deck. The mirrored three-hole side braces spread to X=±90 mm, with the front centre mount at Y=88 mm. Small rounded deck windows preserve the support footprint. The fixed plate is solid to prioritize stiffness in this test.
 
-The 4× inverted Z and 1× upright radial actuator geometry, direct threaded radial lid, 31 mm grids, full-depth motors and upper Z controller clearance come from the current main arm. They move up only 2 mm with the thicker deck. This experiment does not yet define a new four-arm platform or certify inter-arm clearance for the larger base.
+The 4× inverted Z and 1× upright radial actuator geometry, direct threaded radial lid, 31 mm grids, full-depth motors and upper Z controller clearance come from the current main arm. They move up only 2 mm with the thicker deck. The rear deck reaches Y=−200 mm (88 mm beyond the previous circular deck). This experiment does not yet define a new four-arm platform or certify inter-arm clearance for this larger swept envelope.
 
 ## Resolution and test expectations
 
@@ -39,9 +39,9 @@ Suggested comparison: use the same arm payload, current, microstepping and accel
 
 ## Printing and hardware
 
-Download **Print ZIP** for the 23 bed-oriented prototype STLs, manifest, parameters and validation reports. **STEP** contains the full assembly with reference hardware. Right-click any printed part for its actual print-oriented STL; hardware exports are reference envelopes.
+Download **Print ZIP** for the 25 bed-oriented prototype STLs, manifest, parameters and validation reports. **STEP** contains the full assembly with reference hardware. Right-click any printed part for its actual print-oriented STL; hardware exports are reference envelopes.
 
-New structural prints: `Rigid_fixed_base`, `Rigid_rotating_deck`, `Internal_192T_ring`, `Solid_12T_module1_pinion`, `Pinion_bearing_cap`, `Boxed_Z_support`, `Braced_test_stand`. Other actuator and central-cartridge parts are retained. The Z support prints on its flat outside face and needs approximately a 206 × 324 mm bed footprint. The fixed base and stand need 240 × 240 mm. Review local supports/bridging in your slicer, particularly integral tilted axles and internal frame recesses; mesh checks are not a slicer simulation.
+New structural prints: `Rigid_fixed_base`, `Rigid_rotating_deck`, `Internal_192T_ring`, `Solid_12T_module1_pinion`, `Pinion_bearing_cap`, `Boxed_Z_support`, `Braced_test_stand`, `Printed_rear_brace_left` and `Printed_rear_brace_right`. The historical `Boxed_Z_support` filename is retained, but its current geometry has one large face removed and uses the rear trusses. Other actuator and central-cartridge parts are retained. The Z support prints on its flat outside face and needs approximately a 206 × 324 mm bed footprint. The fixed base and stand need 240 × 240 mm. The revised deck needs about 224 × 312 mm; each brace prints on its broad face in about 319 × 106 mm, with 12 mm thickness. The brace load paths lie in the print plane. The tower, braces and deck extensions are all printed; the fastening bolts, nuts and washers are ordinary metal hardware. Review local supports/bridging in your slicer, particularly integral tilted axles and internal frame recesses; mesh checks are not a slicer simulation.
 
 Additional/revised base hardware:
 
@@ -53,6 +53,7 @@ Additional/revised base hardware:
 - Four M5×30 stand screws and four captive M5 nuts.
 - Nine M4 heat-set deck inserts; seven M4×16 and two M4×25 support screws (the longer pair pass through the corner gussets).
 - Four M3×40 Z-base mounting screws into the actuator's existing receiving inserts.
+- Brace attachments: eight M4×35 and two M4×60 screws, ten M4 nuts and ten M4 washers. The two longer screws pass through the middle crosspieces.
 - Retained central spindle/cartridge fasteners and full-depth NEMA17 with rear controller.
 
 Press fits and receiving pilots are nominal starting points, not guaranteed printer fits. The pinion's bore matches the existing D shaft; check the flat and shaft engagement before fitting the 688 bearing. Assemble motor and pinion on the base, install its support bearing and cap, fit the central cartridge, then the ring/deck and support. Mount the stand after checking access to underside fasteners. Torque, material choice and final print settings require physical trials.
@@ -67,6 +68,7 @@ python -m venv .venv
 .venv/bin/python -m rigid_base.model
 .venv/bin/python -m rigid_base.prepare_prints
 .venv/bin/python -m rigid_base.check
+.venv/bin/python -m rigid_base.check_braces
 .venv/bin/python -m rigid_base.check_rotation
 .venv/bin/python -m rigid_base.check_explosion
 .venv/bin/python -m rigid_base.package
@@ -78,6 +80,8 @@ The model is script-parametric. `parameters.json` specifies the gear pair and se
 
 Checks include 65 engagement samples across one ring-tooth pitch, nine Z/radial travel poses against changed parts, full-revolution base samples every 15°, fit-envelope checks, single watertight positive-volume STL shells, flat print contact, through insert bores, and continuously bounded service-explosion translations. Existing actuator-to-actuator travel/thread checks are reused because those parts move together unchanged. Rotation and gear engagement checks are sampled, not a continuous arbitrary-motion proof. Expected press fits, released threads, receiving pilots and nonphysical controller-envelope intersections are recorded explicitly.
 
-The exploded view lifts the arm/ring/deck/cartridge as one service module. Actuator internals stay assembled. It then separates the pinion/bearing/cap and motor. This is intentionally a module-level service view, not a full fastener-by-fastener assembly guide. Rotation is disabled and reset to zero during explosion.
+For this revision, reprint the support, rotating deck and both rear brace plates. Install the brace-to-tower nuts/washers before the actuator blocks access to the inside of the frame; the brace feet locate in the deck pockets before tightening their bolts. Keep the frame square while tightening. This is fixed triangulation, not a tensioned printed cable. Physical stiffness and vibration reduction still require a loaded test.
+
+The exploded view lifts the arm/ring/deck/cartridge and attached trusses as one service module. Actuator internals stay assembled. It then separates the pinion/bearing/cap and motor. This is intentionally a module-level service view, not a full fastener-by-fastener assembly guide. Rotation is disabled and reset to zero during explosion.
 
 References: [Oriental Motor — stepper fundamentals and microstepping](https://www.orientalmotor.com/stepper-motors/technology/stepper-motors-basics.html), [SDP/SI — metric gear geometry](https://www.sdp-si.com/resources/elements-of-metric-gear-technology/page3.php). Parent actuator source and provenance remain in the repository's main README.

@@ -1,0 +1,37 @@
+{
+  "source_commit": "a6a83e4",
+  "parts": [
+    {
+      "name": "Rigid_rotating_deck",
+      "file": "STL/Rigid_rotating_deck.stl",
+      "size_mm": [
+        224.05639557287856,
+        224.05639557287856,
+        12.029960241841776
+      ],
+      "volume_mm3": 253570.626148156,
+      "sha256": "701385bcb2324c4a6436b8477008c88c68ab12e4752d0c12bf44d02f261c423b",
+      "mesh_size_mm": [
+        224.0,
+        224.0,
+        12.0
+      ]
+    },
+    {
+      "name": "Boxed_Z_support",
+      "file": "STL/Boxed_Z_support.stl",
+      "size_mm": [
+        206.00000020000772,
+        324.02348369758136,
+        182.02583814010123
+      ],
+      "volume_mm3": 1337655.5700498167,
+      "sha256": "9219d4561f0379575c04b2a95a0f5366cbf2ba67b097ef5bdeba40cfb0e64543",
+      "mesh_size_mm": [
+        206.0,
+        324.0000114440918,
+        181.99999990000302
+      ]
+    }
+  ]
+}

@@ -52,5 +52,8 @@
       -68,
       60
     ]
-  ]
+  ],
+  "brace_half_spacing_mm": 60,
+  "brace_heel_y_mm": -190,
+  "brace_thickness_mm": 12
 }
