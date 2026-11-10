@@ -19,21 +19,17 @@ An independent prototype of the existing flying-probe arm. This variant keeps th
 
 The ring retains a continuous 45° outer running track and flat-seated M3 button heads. The blocks retain one integral axle each. The variant uses zero nominal roller/track interference instead of the original 0.4 mm preload: actual fit and smooth rotation must be established on the printed hardware.
 
-The Z support now uses two detachable printed rear trusses. Each triangular plate has a middle crosspiece, three tower mounting points and two deck mounting points. The highest attachment is 304.5 mm above the deck. The rear deck extensions include shallow locating pockets for matching keys on the brace feet, and a crossmember joins the extensions. Two thin underside webs stiffen each extension, leaving the fasteners accessible between them. The revised brace foot bolts are at Y=−120/−138 mm, with a 10 mm locating key centred at Y=−129 mm. One of the tower’s large faces is removed; the remaining side webs and lower ribs are reduced. The existing 28 mm corner gussets remain. The braced tower is retained; the hollow-backbone experiment has been removed. The enlarged deck, shorter rear trusses and widened bearing/motor locations are checked together. Nine heat-set insert holes are open through the deck. The lower mounting pattern spreads to X=±138 mm, with the front centre mount at Y=126 mm. Small rounded deck windows preserve the support footprint. The fixed plate is solid to prioritize stiffness in this test.
+The Z support retains its full-radius lower mount, now 6 mm thick instead of 10 mm. Nine M4 insert holes remain open through the rotating deck; the outer support bolts lie at a 138 mm radius. The ring stays 296 mm / 264T / 22:1. All four front/rear struts, their fasteners, locating keys and rear deck extensions are removed. The deck is circular again, 296 mm across. The original flat outer back face and the short integral corner gussets are retained.
 
-The 4× inverted Z and 1× upright radial actuator geometry, direct threaded radial lid, 31 mm grids, full-depth motors and upper Z controller clearance come from the current main arm. They move up only 2 mm with the thicker deck. The rear deck reaches Y=−180 mm, 32 mm beyond the new circular deck. Its rear extensions are shortened to fit the H2S. This experiment does not yet define a new four-arm platform or certify inter-arm clearance for this larger swept envelope.
+## Removable front Z frame
 
-## Full-radius lower mount and front/rear bracing
+One U-shaped printed `Front_Z_frame` wraps around the actuator housing and attaches to both sides of `Boxed_Z_support`. Four Ø4.4 mm through holes on each side use M4×25 screws, washers and nuts. The side mounting lands are integral with the rear support. The front frame's inner span is 216.4 mm, wider than the 206 mm actuator housing, so the open rear can pass over the Z housing before the radial module is attached. There is a 0.2 mm gap at each mounting interface before tightening.
 
-The Z support now has an integral perimeter flange reaching the full 148 mm ring radius, with the outer deck bolts at 138 mm radius. The original flat back face is retained. Five deck mounting positions move outward; the nine M4 insert bores remain open through the deck. The support footprint is preserved in the deck cutouts, and access wells remain around the ring screws.
+Four large front windows, two large windows per side, and slots between the mounting lands remove approximately 63% of the solid U-shell volume. A diagonal front web and horizontal/vertical ribs remain. The front panel sits 22 mm ahead of the fixed Z housing and the side ports clear the radial housing throughout Z travel. This creates a deeper connected frame around the actuators without the former deck-to-tower struts. Physical stiffness, joint slip and print creep still need a loaded test.
 
-Two added front braces form a left/right pair at X=±46.5 mm. Each attaches to the fixed Z actuator **lid**, using its existing 31 mm grid at Z=360.7, 329.7 and 298.7 mm. Their asymmetric triangular openings and sloped lower edges pass around the full radial-stage travel envelope. Their keyed feet attach through the enlarged support flange and deck at Y=98 and 130 mm. The original mirrored rear pair stays at X=±60 mm; the differing lateral positions follow the front insert grid and rear mounting clearance. There are four braces total, not an identical reversible front/rear part.
+**Reprint `Boxed_Z_support` and `Rigid_rotating_deck`, and print `Front_Z_frame`.** The larger ring, fixed base, stand, pinion and actuator prints remain compatible. Replace the seven ordinary support screws with M4×12; retain the two M4×25 corner screws. Remove all old front and rear struts and their hardware. Fit eight M4 nuts and washers inside the support's side lands, fit the front frame over the Z housing before attaching the radial module, then install eight M4×25 side screws. The radial housing passes through the side ports in service, so detach the radial module before removing the complete front frame. Keep the frame square while tightening. The actuator lid's original screws remain in place; the frame does not use the lid inserts.
 
-Additional hardware: six M3×20 socket-head screws (17 mm brace thickness, 3 mm insert entry), four M4×40 socket-head screws, four M4 washers and four M4 nuts. The six front-lid locations require the existing 4 mm long M3 mounting inserts (ruthex RX-M3Sx4.0 or the specified equivalent); install them if those previously unused grid holes are empty. Keep the lid’s six original fixing screws installed. Front strut load is transferred through the fixed lid and housing; physical stiffness and insert retention still need testing.
-
-**Reprint the Z support and rotating deck, and print both new front braces.** The ring, fixed base, stand, rear braces and actuator prints remain compatible. Install the widened support, retain the rear braces, then seat the front feet in their keys and attach their three lid screws per side. Fit the four foot nuts/washers under the deck before final tightening. Keep the module square while tightening the paired braces.
-
-Both front braces print flat on their broad faces. The enlarged support still prints on its flat back: its approximately 296 × 324 mm footprint needs a 90° bed rotation on the H2S, and the larger foot may need localized bridging supports selected in the slicer. All supplied STLs are bed aligned, but mesh/envelope checks are not a slicing simulation.
+The 4× inverted Z and 1× upright radial actuator geometry, direct radial lid mount, 31 mm grids, full-depth motors and upper Z controller clearance remain unchanged. They sit 2 mm higher than the original main assembly because of the thicker experimental deck. This experiment does not yet define a new four-arm platform or certify inter-arm clearance for the larger base.
 
 ## Resolution and test expectations
 
@@ -51,9 +47,9 @@ Suggested comparison: use the same arm payload, current, microstepping and accel
 
 ## Printing and hardware
 
-Download **Print ZIP** for the 27 bed-oriented prototype STLs, manifest, parameters and validation reports. **STEP** contains the full assembly with reference hardware. Right-click any printed part for its actual print-oriented STL; hardware exports are reference envelopes.
+Download **Print ZIP** for the 24 bed-oriented prototype STLs, manifest, parameters and validation reports. **STEP** contains the full assembly with reference hardware. Right-click any printed part for its actual print-oriented STL; hardware exports are reference envelopes.
 
-New structural prints: `Rigid_fixed_base`, `Rigid_rotating_deck`, `Internal_264T_ring`, `Solid_12T_module1_pinion`, `Pinion_bearing_cap`, `Boxed_Z_support`, `Braced_test_stand`, `Printed_rear_brace_left` and `Printed_rear_brace_right`, `Printed_front_brace_left` and `Printed_front_brace_right`. The historical `Boxed_Z_support` filename is retained, but its current geometry has one large face removed and uses the rear trusses. Other actuator and central-cartridge parts are retained. The Z support prints on its flat outside face and needs approximately a 296 × 324 mm bed footprint. The fixed base and stand need 312 × 312 mm. The revised deck needs about 296 × 328 mm; each brace prints on its broad face in about 321 × 86 mm, with 12 mm thickness. The brace load paths lie in the print plane. The tower, braces and deck extensions are all printed; the fastening bolts, nuts and washers are ordinary metal hardware. Review local supports/bridging in your slicer, particularly integral tilted axles and internal frame recesses; mesh checks are not a slicer simulation.
+Structural prints: `Rigid_fixed_base`, `Rigid_rotating_deck`, `Internal_264T_ring`, `Solid_12T_module1_pinion`, `Pinion_bearing_cap`, `Boxed_Z_support`, `Braced_test_stand` and `Front_Z_frame`. Other actuator and central-cartridge parts are retained. The rear support prints on its flat outside face in approximately 296 × 324 mm; the front frame prints on its flat front face in approximately 224.4 × 314 mm, with a 122 mm height. Rotate the long footprint 90° on the H2S bed. The fixed base and stand are 312 mm square; the deck is 296 mm across. Review local supports and bridging in your slicer, especially the front frame's side-window bridges, the large lower flange and tilted axles. Supplied STLs are bed aligned; mesh checks do not replace slicing.
 
 Additional/revised base hardware:
 
@@ -63,9 +59,9 @@ Additional/revised base hardware:
 - Six M3×40 flat-seated button-head ring screws, six M3 washers and nuts.
 - Four M3×20 motor-face screws; three M3×8 bearing-cap screws; one M3×4 pinion set screw.
 - Four M5×30 stand screws and four captive M5 nuts.
-- Nine M4 heat-set deck inserts; seven M4×16 and two M4×25 support screws (the longer pair pass through the corner gussets).
+- Nine M4 heat-set deck inserts; seven M4×12 and two M4×25 support screws (the longer pair pass through the corner gussets).
 - Four M3×40 Z-base mounting screws into the actuator's existing receiving inserts.
-- Brace attachments: eight M4×35 and two M4×60 screws, ten M4 nuts and ten M4 washers. The two longer screws pass through the middle crosspieces.
+- Front frame: eight M4×25 screws, eight M4 nuts and eight M4 washers.
 - Retained central spindle/cartridge fasteners and full-depth NEMA17 with rear controller.
 
 Press fits and receiving pilots are nominal starting points, not guaranteed printer fits. The pinion's bore matches the existing D shaft; check the flat and shaft engagement before fitting the 688 bearing. Assemble motor and pinion on the base, install its support bearing and cap, fit the central cartridge, then the ring/deck and support. Mount the stand after checking access to underside fasteners. Torque, material choice and final print settings require physical trials.
@@ -80,8 +76,7 @@ python -m venv .venv
 .venv/bin/python -m rigid_base.model
 .venv/bin/python -m rigid_base.prepare_prints
 .venv/bin/python -m rigid_base.check
-.venv/bin/python -m rigid_base.check_braces
-.venv/bin/python -m rigid_base.check_front_braces
+.venv/bin/python -m rigid_base.check_front_frame
 .venv/bin/python -m rigid_base.check_rotation
 .venv/bin/python -m rigid_base.check_explosion
 .venv/bin/python -m rigid_base.package
@@ -90,7 +85,7 @@ python -m venv .venv
 
 The packaging command losslessly gzips viewer meshes and shares byte-identical radial print files between Z width pages to remain within hosting size limits. It does not simplify the CAD or print geometry.
 
-The 296 mm ring, 312 mm square base/stand and 296 × 328 mm deck fit the H2S nominal 340 × 320 × 340 mm volume with 4 mm bed margin on every side. Rotate the deck and long tower/brace prints 90° on the bed where needed. Every actual STL is checked against this envelope; this does not replace slicing.
+The 296 mm ring, 312 mm square base/stand and 296 mm circular deck fit the H2S nominal 340 × 320 × 340 mm volume with 4 mm bed margin on every side. Rotate the deck and long tower/frame prints 90° on the bed where needed. Every actual STL is checked against this envelope; this does not replace slicing.
 
 Compared with the previous 224 mm / 16:1 experiment, the ring is 32.1% larger in diameter, reduction rises 37.5%, and the commanded angular increment falls 27.3%. A larger ring also increases rotating inertia; physical vibration reduction is not assumed.
 
@@ -98,8 +93,8 @@ The model is script-parametric. `parameters.json` specifies the gear pair and se
 
 Checks include 65 engagement samples across one ring-tooth pitch, nine Z/radial travel poses against changed parts, full-revolution base samples every 15°, fit-envelope checks, single watertight positive-volume STL shells, flat print contact, through insert bores, and continuously bounded service-explosion translations. Existing actuator-to-actuator travel/thread checks are reused because those parts move together unchanged. Rotation and gear engagement checks are sampled, not a continuous arbitrary-motion proof. Expected press fits, released threads, receiving pilots and nonphysical controller-envelope intersections are recorded explicitly.
 
-When upgrading from the older 224 mm ring experiment, reprint the 264T ring, fixed base, rotating deck, stand, pinion bearing cap and both rear brace plates. Use the current support STL, whose ring-screw clearance cuts follow the new bolt circle. The 12T pinion, actuator parts, motors and central bearing cartridge are retained. The motor moves from X=90 mm to X=126 mm; ring screws move to a 140 mm radius and stand legs to a 262 mm pitch. Install the brace-to-tower nuts/washers before the actuator blocks access to the inside of the frame; the brace feet locate in the deck pockets before tightening their bolts. Keep the frame square while tightening. This is fixed triangulation, not a tensioned printed cable. Physical stiffness and vibration reduction still require a loaded test.
+When upgrading from the older 224 mm ring experiment, also reprint the 264T ring, fixed base, stand and pinion bearing cap. The 12T pinion, actuator parts, motors and central bearing cartridge are retained. The motor moves from X=90 mm to X=126 mm; ring screws move to a 140 mm radius and stand legs to a 262 mm pitch. Physical stiffness and vibration reduction require a loaded test.
 
-The exploded view lifts the arm/ring/deck/cartridge and attached trusses as one service module. Actuator internals stay assembled. It then separates the pinion/bearing/cap and motor. This is intentionally a module-level service view, not a full fastener-by-fastener assembly guide. Rotation is disabled and reset to zero during explosion.
+The exploded view lifts the arm/ring/deck/cartridge and attached front frame as one service module. Actuator internals stay assembled. It then separates the pinion/bearing/cap and motor. This is intentionally a module-level service view, not a full fastener-by-fastener assembly guide. Rotation is disabled and reset to zero during explosion.
 
 References: [Oriental Motor — stepper fundamentals and microstepping](https://www.orientalmotor.com/stepper-motors/technology/stepper-motors-basics.html), [SDP/SI — metric gear geometry](https://www.sdp-si.com/resources/elements-of-metric-gear-technology/page3.php). Parent actuator source and provenance remain in the repository's main README.

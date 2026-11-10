@@ -4,7 +4,7 @@ from .model import ROOT
 
 def main():
     out=ROOT/'output/rigid-base';dest=ROOT/'site/dist/downloads/rigid-base';dest.mkdir(parents=True,exist_ok=True)
-    reports=['validation.json','print-validation.json','explosion-validation.json','brace-validation.json','front-brace-validation.json']
+    reports=['validation.json','print-validation.json','explosion-validation.json','frame-validation.json']
     for name in reports:
         report=json.loads((out/name).read_text());assert report['passed'],name
         for src,digest in report['source_sha256'].items():assert hashlib.sha256((ROOT/src).read_bytes()).hexdigest()==digest,('stale check',name,src)
@@ -14,6 +14,8 @@ def main():
     for directory in [out/'STL',dest/'STL']:
         for path in directory.glob('*.stl'):
             if path.name not in current:path.unlink()
+    for name in ['brace-validation.json','front-brace-validation.json']:
+        (dest/name).unlink(missing_ok=True)
     shutil.copytree(out/'STL',dest/'STL',dirs_exist_ok=True)
     for name in ['mesh.json','explosion.json','config.json','print-manifest.json']+reports:shutil.copyfile(out/name,dest/name)
     for name in ['README.md','parameters.json']:shutil.copyfile(ROOT/'rigid_base'/name,out/name)

@@ -53,15 +53,5 @@
       91
     ]
   ],
-  "brace_half_spacing_mm": 60,
-  "brace_heel_y_mm": -170,
-  "brace_thickness_mm": 12,
-  "brace_foot_ys_mm": [
-    -120,
-    -138
-  ],
-  "brace_key_y_mm": -129,
-  "brace_deck_rear_mm": 180,
-  "brace_web_inner_y_mm": -144,
-  "brace_key_length_mm": 10
+  "support_foot_thickness_mm": 6
 }
