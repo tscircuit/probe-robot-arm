@@ -72,6 +72,8 @@ python -m venv .venv
 .venv/bin/python -m rigid_base.package
 ```
 
+The packaging command losslessly gzips viewer meshes and shares byte-identical radial print files between Z width pages to remain within hosting size limits. It does not simplify the CAD or print geometry.
+
 The model is script-parametric. `parameters.json` specifies the gear pair and selected interface dimensions for this particular design; changing the gear envelope, heights or mount layout requires updating the mating support geometry and rerunning every check. It is not an automatically constrained gearbox configurator. CAD caches are keyed to geometry-source and parameter hashes.
 
 Checks include 65 engagement samples across one ring-tooth pitch, nine Z/radial travel poses against changed parts, full-revolution base samples every 15°, fit-envelope checks, single watertight positive-volume STL shells, flat print contact, through insert bores, and continuously bounded service-explosion translations. Existing actuator-to-actuator travel/thread checks are reused because those parts move together unchanged. Rotation and gear engagement checks are sampled, not a continuous arbitrary-motion proof. Expected press fits, released threads, receiving pilots and nonphysical controller-envelope intersections are recorded explicitly.

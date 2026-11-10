@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {loadCadJSON} from './cad-json.js';
 import {OrbitControls} from 'three/addons/OrbitControls.js';
 import {installPartDownloads} from './part-downloads.js';
 const $=id=>document.getElementById(id), viewport=$('viewport');
@@ -21,7 +22,7 @@ $('play').onclick=()=>{playing=!playing;start=performance.now();$('play').textCo
 $('explode').oninput=()=>{pause();if(+$('explode').value)$('angle').value=0;pose();};$('angle').oninput=()=>{pause();pose();};$('assembled').onclick=()=>{pause();$('explode').value=$('angle').value=0;pose();fit();};$('fit').onclick=fit;
 for(const id of ['arm','hardware','keepouts'])$(id).onchange=()=>{menu?.refreshVisibility();if(id==='arm')fit();};
 try{
- [data,stages,cfg]=await Promise.all(['mesh.json','explosion.json','config.json'].map(async name=>{const r=await fetch('downloads/rigid-base/'+name);if(!r.ok)throw Error(name+': '+r.status);return r.json();}));pinion.position.x=cfg.center_mm;
+ [data,stages,cfg]=await Promise.all(['mesh.json','explosion.json','config.json'].map(name=>loadCadJSON('downloads/rigid-base/'+name,name==='mesh.json')));pinion.position.x=cfg.center_mm;
  for(const p of data){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p.vertices.flat(),3));g.setIndex(p.triangles.flat());g.computeVertexNormals();const mat=new THREE.MeshStandardMaterial({color:p.color,roughness:.68,metalness:p.reference?.25:.06,transparent:p.keepout,opacity:p.keepout?.18:1,depthWrite:!p.keepout});const m=new THREE.Mesh(g,mat);m.name=p.name;m.userData=p;(p.group==='rotor'?rotor:p.group==='pinion'?pinion:scene).add(m);meshes.push(m);}
  menu=installPartDownloads({THREE,canvas:renderer.domElement,camera,scene,getMeshes:()=>meshes,getPart:m=>({name:m.name,printed:m.userData.printed,keepout:m.userData.keepout,url:m.userData.printed?'downloads/rigid-base/STL/'+m.name+'.stl':undefined}),isEnabled:visible,onShowAll:()=>{for(const id of ['arm','hardware','keepouts'])$(id).checked=true;}});
  pose();resize();fit();$('loading').remove();window.rigidViewer={meshes,rotor,pinion,camera,controls,menu,stages,pose,fit,renderer};

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {loadCadJSON,sharedRadialParts} from './cad-json.js';
 import { OrbitControls } from 'three/addons/OrbitControls.js';
 import {installPartDownloads} from './part-downloads.js';
 
@@ -23,7 +24,7 @@ let config, explosionPath, ready=false, four=false, exploding=0, playing=!matchM
 let values={theta:0,z:0,r:0};
 const referenceGroup=new THREE.Group();scene.add(referenceGroup);referenceGroup.visible=false;
 const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
-const viewMenu=installPartDownloads({THREE,canvas:renderer.domElement,camera,scene,getMeshes:()=>pickables,getPart:mesh=>({name:mesh.userData.name,printed:mesh.userData.printed,keepout:mesh.userData.keepout,url:mesh.userData.printed?downloadPrefix+'parts/'+encodeURIComponent(mesh.userData.name)+'.stl':null}),onSelect:()=>{playing=false;setPlay();},onShowAll:()=>requestAnimationFrame(fit)});
+const viewMenu=installPartDownloads({THREE,canvas:renderer.domElement,camera,scene,getMeshes:()=>pickables,getPart:mesh=>({name:mesh.userData.name,printed:mesh.userData.printed,keepout:mesh.userData.keepout,url:mesh.userData.printed?(sharedRadialParts.has(mesh.userData.name)?'downloads/parts/':downloadPrefix+'parts/')+encodeURIComponent(mesh.userData.name)+'.stl':null}),onSelect:()=>{playing=false;setPlay();},onShowAll:()=>requestAnimationFrame(fit)});
 function explosionVector(p,e){
   const v=[0,0,0],t=e*explosionPath.length;
   for(let i=0;i<explosionPath.length;i++){
@@ -122,9 +123,7 @@ renderer.domElement.addEventListener('pointermove',event=>{
 });
 renderer.domElement.addEventListener('pointerleave',()=>{$('part-name').textContent='';});
 try{
-  const responses=await Promise.all([fetch(assetPrefix+'arm-mesh.json'),fetch(assetPrefix+'parameters-resolved.json'),fetch(assetPrefix+'platform-mesh.json'),fetch(assetPrefix+'arm-explosion-path.json')]);
-  if(responses.some(r=>!r.ok))throw Error('Assembly files unavailable');
-  const [data,p,platform,path]=await Promise.all(responses.map(r=>r.json()));config=p;explosionPath=path;
+  const [data,p,platform,path]=await Promise.all([loadCadJSON(assetPrefix+'arm-mesh.json',true),loadCadJSON(assetPrefix+'parameters-resolved.json'),loadCadJSON(assetPrefix+'platform-mesh.json'),loadCadJSON(assetPrefix+'arm-explosion-path.json')]);config=p;explosionPath=path;
   $('r').max=config.radial_stroke;
   const geometries=data.map(p=>{const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p.vertices.flat(),3));g.setIndex(p.triangles.flat());g.computeVertexNormals();return g;});
   const materials=data.map(p=>new THREE.MeshStandardMaterial({color:p.color,roughness:.52,metalness:/shaft|625ZZ|6002|axle|washer|nut|probe/i.test(p.name)?.55:.08,transparent:!!p.keepout,opacity:p.keepout?.18:1,depthWrite:!p.keepout}));

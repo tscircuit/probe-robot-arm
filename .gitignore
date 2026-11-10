@@ -11,3 +11,5 @@ site/dist/*.json
 site/dist/base-test.html
 site/dist/downloads/
 base_test_kit_v4/viewer.bundle.js
+site/dist/*.json.gz
+site/dist/variants/

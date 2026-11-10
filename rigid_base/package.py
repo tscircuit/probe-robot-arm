@@ -19,5 +19,7 @@ def main():
     with zipfile.ZipFile(dest/'rigid-arm-step.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:z.write(out/'rigid-arm.step','rigid-arm.step');z.write(out/'README.md','README.md')
     for name,ext in [('viewer.html','html'),('viewer.js','js'),('viewer.css','css')]:shutil.copyfile(ROOT/'rigid_base'/name,ROOT/f'site/dist/rigid-base.{ext}')
     assert max(p.stat().st_size for p in dest.rglob('*') if p.is_file())<24*1024*1024
+    from compress_site_assets import main as compress_assets
+    compress_assets()
     print('Packaged checked variant:',dest)
 if __name__=='__main__':main()
