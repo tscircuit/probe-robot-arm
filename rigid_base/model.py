@@ -7,7 +7,7 @@ import argparse, hashlib, itertools, json, math, pathlib
 import cadquery as cq
 import model as arm
 import rotary_base
-from . import printed_braces
+from . import printed_braces,front_braces
 from rotary_base import core
 from rotary_base.gear_geometry import box,cyl,annulus,union,holes,polar,inv,overlap
 V=cq.Vector
@@ -17,14 +17,17 @@ def parameters():return json.loads((ROOT/'rigid_base/parameters.json').read_text
 def linked_foot(p,z,height,margin=0):
     shapes=[box(180+2*margin,20+2*margin,height,(0,-74,z+height/2))]
     for sign,ids in [(1,[3,4,5]),(-1,[6,7,8])]:
-        pts=[(sign*72,-70)]+[p['support_mounts_mm'][i] for i in ids]+[(0,88)]
+        pts=[(sign*72,-70)]+[p['support_mounts_mm'][i] for i in ids]+[p['support_mounts_mm'][1]]
         for a,b in zip(pts,pts[1:]):
             center=((a[0]+b[0])/2,(a[1]+b[1])/2,z+height/2)
             bar=box(math.dist(a,b),20+2*margin,height,center)
             shapes.append(bar.rotate((center[0],center[1],0),(center[0],center[1],1),math.degrees(math.atan2(b[1]-a[1],b[0]-a[0]))))
         shapes += [cyl(10+margin,height,(x,y,z)) for x,y in pts]
     shapes += [box(160+2*margin,28+2*margin,height,(0,-50,z+height/2))]
-    return union(shapes).intersect(cyl(110+margin,height,(0,0,z))).intersect(box(300,300,height,(0,66+margin,z+height/2)))
+    # Continuous perimeter ties the widened pads together at the ring's full radius.
+    shapes += [annulus(p['deck_radius_mm']+margin,p['deck_radius_mm']-20-margin,height,z)]
+    shapes += [box(20+2*margin,48+2*margin,height,(x,114,z+height/2)) for x in [-46.5,46.5]]
+    return union(shapes).intersect(cyl(p['deck_radius_mm']+margin,height,(0,0,z))).intersect(box(400,400,height,(0,116+margin,z+height/2)))
 
 def profiles(p):
     m=p['module_mm'];n=p['pinion_teeth'];nr=p['ring_teeth'];pa=math.radians(p['pressure_angle_deg'])
@@ -87,11 +90,11 @@ def support(p,lay):
         s=s.cut(cyl(5.5,50,(x,y,dt-1)))
     for x in printed_braces.layout(p,lay)['xs']:
         for z in printed_braces.layout(p,lay)['levels']:s=s.cut(cyl(2.2,8,(x,-85,z),(0,1,0)))
-    return s.clean()
+    return front_braces.support_finish(s,p,lay)
 
 def build(p=None):
     p=p or parameters()
-    key=hashlib.sha256(json.dumps(p,sort_keys=True).encode()+b''.join((ROOT/n).read_bytes() for n in ['rigid_base/model.py','rigid_base/printed_braces.py','model.py','direct_mount.py','leadscrew_actuator.py','rotary_base/core.py','rotary_base/gear_geometry.py','rotary_base/parameters.json','parameters.json','upstream/leadscrew-grid31/experiments/t8-leadscrew/model.py'])).hexdigest()[:20]
+    key=hashlib.sha256(json.dumps(p,sort_keys=True).encode()+b''.join((ROOT/n).read_bytes() for n in ['rigid_base/model.py','rigid_base/printed_braces.py','rigid_base/front_braces.py','model.py','direct_mount.py','leadscrew_actuator.py','rotary_base/core.py','rotary_base/gear_geometry.py','rotary_base/parameters.json','parameters.json','upstream/leadscrew-grid31/experiments/t8-leadscrew/model.py'])).hexdigest()[:20]
     cache=ROOT/'cache'/('rigid-'+key)
     if (cache/'complete').exists():
         parts=json.loads((cache/'parts.json').read_text());info=json.loads((cache/'info.json').read_text())
@@ -174,7 +177,7 @@ def build(p=None):
         face=min((f for f in s.Faces() if f.geomType()=='PLANE' and abs(f.normalAt().z)>.99),key=lambda f:f.Center().z)
         for wire in face.outerWire().offset2D(-2,'arc'):
             for rounded in wire.offset2D(2,'arc'):deck=deck.cut(cq.Solid.extrudeLinear(rounded,[],V(0,0,10)))
-    deck=printed_braces.deck_extension(deck,p,lay)
+    deck=front_braces.deck_finish(printed_braces.deck_extension(deck,p,lay),p,lay)
     add('Rigid_rotating_deck',deck,'rotor',True,flip=True)
     for i,(x,y) in enumerate(bolts):
         head=cq.Workplane('XY').circle(2.85).extrude(1.65).edges('<Z').fillet(.65).translate((x,y,22.35)).val()
@@ -183,6 +186,8 @@ def build(p=None):
         add(f'M3_ring_nut_{i}',core.hexagon(5.5,2.4,x,y,dt+.5).cut(cyl(1.5,4,(x,y,dt))),'rotor',reference=True)
     add('Boxed_Z_support',support(p,lay),'rotor',True,'#6d849c',context=True)
     for side,x in zip(['left','right'],printed_braces.layout(p,lay)['xs']):add('Printed_rear_brace_'+side,printed_braces.brace(p,lay,x),'rotor',True,'#829982',context=True)
+    for side,x in zip(['left','right'],front_braces.layout(p,lay)['xs']):add('Printed_front_brace_'+side,front_braces.brace(p,lay,x),'rotor',True,'#829982',context=True)
+    for name,shape in front_braces.hardware(p,lay):add(name,shape,'rotor',reference=True,context=True)
     for name,shape in printed_braces.hardware(p,lay):add(name,shape,'rotor',reference=True,context=True)
     for i,(x,y) in enumerate(p['support_mounts_mm']):
         add(f'M4_deck_insert_{i}',annulus(3,2,6,dt-6.3).translate((x,y,0)),'rotor',reference=True)
@@ -213,7 +218,7 @@ def export(parts,info,out):
         if a['printed']:
             ps=native.get(a['source_name'],a.get('freeShape',s))
             if a['name']=='Boxed_Z_support':ps=ps.rotate((0,0,0),(1,0,0),90)
-            elif a['name'].startswith('Printed_rear_brace_'):ps=ps.rotate((0,0,0),(0,1,0),90)
+            elif a['name'].startswith(('Printed_rear_brace_','Printed_front_brace_')):ps=ps.rotate((0,0,0),(0,1,0),90)
             elif a['flip']:ps=ps.rotate((0,0,0),(1,0,0),180)
             b=ps.BoundingBox();ps=ps.translate((0,0,-b.zmin));file=stl/(a['name']+'.stl')
             cq.exporters.export(ps,str(file),tolerance=.025,angularTolerance=.09)

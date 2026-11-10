@@ -30,7 +30,7 @@ def main():
     p=parameters();r=p['ring_bolt_radius_mm']
     screw_orbit=annulus(r+2.85,r-2.85,1.65,22.35).fuse(annulus(r+1.45,r-1.45,40,24))
     nut_orbit=annulus(r+3.5,r-3.5,2.9,56.2)
-    deck_orbit=annulus(220,14.6,8,48.2).fuse(annulus(105,57,12,44.2),annulus(220,p['ring_outer_radius_mm']+3,14,34.2))
+    deck_orbit=annulus(220,14.6,8,48.2).fuse(annulus(p['deck_radius_mm']-2,57,12,44.2),annulus(220,p['ring_outer_radius_mm']+3,14,34.2))
     orbit_checks={}
     for a in parts:
         env=screw_orbit if a['name'].startswith('M3x40_ring_') else nut_orbit if a['name'].startswith(('M3_ring_nut_','M3_ring_washer_')) else deck_orbit if a['name']=='Rigid_rotating_deck' else None
@@ -78,6 +78,6 @@ def main():
         row['fits_H2S_with_4mm_bed_margin']=(z<=340+1e-5 and ((x+8<=340+1e-5 and y+8<=320+1e-5) or (y+8<=340+1e-5 and x+8<=320+1e-5)))
         assert row['fits_H2S_with_4mm_bed_margin'],row
         meshrows.append(row)
-    report=dict(passed=True,rotation_samples=rows,continuous_ring_envelope_checks=envelope_checks,collision_pair_checks=checks,roller_axle_fit=roller_fit,pinion_journal_fit=dict(diameter_mm=8.05,bearing_bore_mm=8,overlap_mm3=shell.Volume()),physical_fit_verified=False,prints=meshrows,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/printed_braces.py','rigid_base/check_rotation.py','rigid_base/prepare_prints.py','rigid_base/parameters.json','rigid_base/envelopes.py']})
+    report=dict(passed=True,rotation_samples=rows,continuous_ring_envelope_checks=envelope_checks,collision_pair_checks=checks,roller_axle_fit=roller_fit,pinion_journal_fit=dict(diameter_mm=8.05,bearing_bore_mm=8,overlap_mm3=shell.Volume()),physical_fit_verified=False,prints=meshrows,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/printed_braces.py','rigid_base/front_braces.py','rigid_base/check_rotation.py','rigid_base/prepare_prints.py','rigid_base/parameters.json','rigid_base/envelopes.py']})
     (out/'print-validation.json').write_text(json.dumps(report,indent=2));print('Rotation and print checks passed',flush=True)
 if __name__=='__main__':main()

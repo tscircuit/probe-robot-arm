@@ -1,31 +1,21 @@
 {
-  "source_commit": "d5e1dd7",
-  "description": "224 mm / 16:1 rear-braced assembly before ring enlargement",
+  "source_commit": "c7e4786",
+  "description": "296 mm / 22:1 assembly before the full-radius shoe and front braces",
   "parts": [
     {
       "name": "Rigid_rotating_deck",
       "file": "STL/Rigid_rotating_deck.stl",
       "size_mm": [
-        224.0080239429103,
-        312.0007178157443,
-        22.02813833986208
+        296.0629380085037,
+        328.03757531409883,
+        22.036857698355053
       ],
-      "volume_mm3": 321488.2794488548,
-      "sha256": "078bc3ede78d0c56192ce3c2b3def2de515d3374869eb86b44767b6b29df56cc",
+      "volume_mm3": 372791.1555063231,
+      "sha256": "3677ed3501e1b84dd9ffbce34d1827c65a3a5654f703586be40c74fa21f71059",
       "mesh_size_mm": [
-        223.95175170898438,
-        311.97186279296875,
-        21.999999999999993
-      ],
-      "cad_verified_planar_mesh_repairs": [
-        {
-          "area_mm2": 160.65002059936526,
-          "area_outside_cad_skin_mm2": 2.6413556542153785e-12
-        },
-        {
-          "area_mm2": 168.75,
-          "area_outside_cad_skin_mm2": 0.0
-        }
+        295.9892272949219,
+        328.0,
+        22.0
       ]
     },
     {
@@ -34,29 +24,29 @@
       "size_mm": [
         206.00000020000772,
         324.02348369758136,
-        182.02583814010129
+        182.02583814010126
       ],
-      "volume_mm3": 941218.4629545121,
-      "sha256": "43e6191ee168f860e657194faf74baa16cb95f14ffe117da423399e2653b08f9",
+      "volume_mm3": 942965.4906658136,
+      "sha256": "7fd62aad746bf360fd65fb34723c3ba7792c8f1f7da7d6559e21db2defcfeee4",
       "mesh_size_mm": [
         206.0,
         324.0000114440918,
-        181.99999999999807
+        181.99999999999824
       ]
     },
     {
       "name": "Printed_rear_brace_left",
       "file": "STL/Printed_rear_brace_left.stl",
       "size_mm": [
-        320.50020161204645,
-        106.00055408312697,
-        12.003083011236203
+        320.5002016120465,
+        86.00055408312691,
+        12.0030830112362
       ],
-      "volume_mm3": 153560.70192294448,
-      "sha256": "24b45859ca34742303c0d2441c70f476115a0763fb247fc4b4555e70ee281aee",
+      "volume_mm3": 144192.8152669093,
+      "sha256": "af98ef400d7c09ee612a92a3d31d04816435dbc9eefae6d42f354fbaf34c0c41",
       "mesh_size_mm": [
         320.5000114440918,
-        106.0,
+        86.0,
         11.999999899999999
       ]
     },
@@ -65,14 +55,14 @@
       "file": "STL/Printed_rear_brace_right.stl",
       "size_mm": [
         320.50020161204645,
-        106.00055408312697,
-        12.003083011236205
+        86.00055408312691,
+        12.003083011236178
       ],
-      "volume_mm3": 153560.70192294446,
-      "sha256": "8a71298f47f8b2d54b85566a98b756199f280babf104c6dab6a90c3648bce8bf",
+      "volume_mm3": 144192.81526690928,
+      "sha256": "5a4c86d813bdfd9af431724d75e0cb2305014cc9fa61e40a5d66d62b029bc17a",
       "mesh_size_mm": [
         320.5000114440918,
-        106.0,
+        86.0,
         11.99999990000002
       ]
     }

@@ -4,7 +4,7 @@ from .model import ROOT
 
 def main():
     out=ROOT/'output/rigid-base';dest=ROOT/'site/dist/downloads/rigid-base';dest.mkdir(parents=True,exist_ok=True)
-    reports=['validation.json','print-validation.json','explosion-validation.json','brace-validation.json']
+    reports=['validation.json','print-validation.json','explosion-validation.json','brace-validation.json','front-brace-validation.json']
     for name in reports:
         report=json.loads((out/name).read_text());assert report['passed'],name
         for src,digest in report['source_sha256'].items():assert hashlib.sha256((ROOT/src).read_bytes()).hexdigest()==digest,('stale check',name,src)

@@ -4,7 +4,7 @@ Parametric theta / Z / radial arm with four modules covering a **100 × 100 mm P
 
 ## Rigid base experiment
 
-A separate [Rigid base tab](https://modular-flying-probe-arm.seveibar.chatgpt.site/rigid-base.html) retains the internal-gear drive with a **module-1 264T/12T gear pair (22:1)**, 296 mm ring, supported pinion journal, thicker base/deck, wider support mounts and two printed rear trusses connecting the upper Z support to keyed deck extensions. The existing main assembly and standalone base remain unchanged. This is a single-arm mechanical prototype; physical vibration, backlash and accuracy have not been measured. The fixed base and stand are 312 mm square; the rear extensions are shortened so all 25 prints fit the H2S dimensional envelope. The hollow-backbone experiment has been removed. See [design, hardware, rebuild instructions and validation scope](rigid_base/README.md).
+A separate [Rigid base tab](https://modular-flying-probe-arm.seveibar.chatgpt.site/rigid-base.html) retains the internal-gear drive with a **module-1 264T/12T gear pair (22:1)**, 296 mm ring, supported pinion journal, thicker base/deck, wider support mounts and two printed rear trusses plus two front braces attached to the Z actuator lid. The lower Z-support flange reaches the full 148 mm ring radius. The existing main assembly and standalone base remain unchanged. This is a single-arm mechanical prototype; physical vibration, backlash and accuracy have not been measured. The fixed base and stand are 312 mm square; the rear extensions are shortened so all 27 prints fit the H2S dimensional envelope. The hollow-backbone experiment has been removed. See [design, hardware, rebuild instructions and validation scope](rigid_base/README.md).
 
 ## Printed-leadscrew actuators
 
