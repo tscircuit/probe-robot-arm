@@ -6,7 +6,7 @@ const p=await browser.newPage({viewport:{width:1400,height:1000},deviceScaleFact
 async function slide(id,n){await p.locator('#'+id).evaluate((e,v)=>{e.value=v;e.dispatchEvent(new Event('input'));},String(n));}
 try{
  await p.goto('http://127.0.0.1:4063/rigid-base.html');await p.waitForFunction(()=>window.rigidViewer,{timeout:120000});
- assert.equal(await p.locator('.page-nav a').count(),3);assert.equal(await p.locator('[aria-current=page]').innerText(),'Rigid base');checks.push('Three page links and active variant');
+ assert.equal(await p.locator('.page-nav a').count(),4);assert.equal(await p.locator('[aria-current=page]').innerText(),'Rigid base');checks.push('Four page links and active variant');
  await slide('angle',15);let angles=await p.evaluate(()=>[rigidViewer.rotor.rotation.z,rigidViewer.pinion.rotation.z]);assert.ok(Math.abs(angles[1]/angles[0]-16)<1e-10);checks.push('16:1 angular transform with fixed pinion centre');
  await p.locator('#play').click();await p.waitForTimeout(400);const a=await p.locator('#angle').inputValue();await p.waitForTimeout(400);assert.notEqual(await p.locator('#angle').inputValue(),a);await p.locator('#play').click();checks.push('Base rotation animation');
  const stages=JSON.parse(await fs.readFile('output/rigid-base/explosion.json','utf8'));
