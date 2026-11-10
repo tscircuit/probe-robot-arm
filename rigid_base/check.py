@@ -12,7 +12,7 @@ def contacts(parts,info):
     for angle in [45,135,225,315]:add('Rigid_fixed_base',f'625ZZ_support_roller_{angle}','5.1 mm integral axle / 5 mm bearing press fit')
     add('Solid_12T_module1_pinion','688ZZ_pinion_bearing','8.05 mm printed journal / 8 mm bore press fit')
     add('Solid_12T_module1_pinion','M3x4_pinion_set_screw','M3 receiving pilot')
-    add('Solid_12T_module1_pinion','Internal_192T_ring','Separately checked over one complete pitch in exact extruded polygon geometry')
+    add('Solid_12T_module1_pinion','Internal_264T_ring','Separately checked over one complete pitch in exact extruded polygon geometry')
     add('Controller_component_KEEPOUT','USB_cable_KEEPOUT','Overlapping nonphysical controller envelopes')
     for i in range(9):add('Rigid_rotating_deck',f'M4_deck_insert_{i}','Heat-set insert displaces its undersize printed pilot')
     for i in range(3):add('Rigid_fixed_base',f'M3x8_pinion_cap_{i}','M3 tapped receiving pilot')
@@ -21,7 +21,7 @@ def contacts(parts,info):
 def main():
     p=parameters();out=ROOT/'output/rigid-base';out.mkdir(exist_ok=True);parts,info=build(p);by={a['name']:a for a in parts}
     pin,inner=profiles(p);pin=Polygon(pin);inside=Polygon(inner);assert pin.is_valid and inside.is_valid
-    ring=Point(0,0).buffer(106,quad_segs=512).difference(inside);gear=[]
+    ring=Point(0,0).buffer(p['ring_outer_radius_mm']-6,quad_segs=512).difference(inside);gear=[]
     for i in range(65):
         angle=360/p['ring_teeth']*i/64
         q=translate(rotate(pin,angle*info['ratio'],origin=(0,0)),xoff=info['center_mm'])

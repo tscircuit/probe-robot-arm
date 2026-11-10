@@ -4,7 +4,7 @@ from rotary_base.gear_geometry import box,cyl,union,annulus
 from rotary_base import core
 
 def layout(p,lay):
-    return dict(xs=[-p['brace_half_spacing_mm'],p['brace_half_spacing_mm']],bottom=p['deck_top_mm'],back=-84,heel=p['brace_heel_y_mm'],top=lay['z_origin']-10.5+14,levels=[p['deck_top_mm']+24,lay['z_origin']-134.5,lay['z_origin']-10.5],foot_ys=[-130,-156],thickness=p['brace_thickness_mm'])
+    return dict(xs=[-p['brace_half_spacing_mm'],p['brace_half_spacing_mm']],bottom=p['deck_top_mm'],back=-84,heel=p['brace_heel_y_mm'],top=lay['z_origin']-10.5+14,levels=[p['deck_top_mm']+24,lay['z_origin']-134.5,lay['z_origin']-10.5],foot_ys=p['brace_foot_ys_mm'],key_y=p['brace_key_y_mm'],key_length=p['brace_key_length_mm'],rear=p['brace_deck_rear_mm'],web_inner=p['brace_web_inner_y_mm'],thickness=p['brace_thickness_mm'])
 
 def brace(p,lay,x):
     q=layout(p,lay);z=q['bottom'];t=q['thickness'];h=q['top']-z
@@ -18,7 +18,7 @@ def brace(p,lay,x):
         s=s.cut(cut)
     s=s.fuse(triangle.intersect(box(t+2,220,16,(x,-160,q['levels'][1]))))
     s=s.fuse(cyl(5.5,24,(x,-132,q['levels'][1]),(0,1,0)))
-    key=cq.Workplane('XY').box(t,18,2).edges('|Z').fillet(.8).translate((x,-143,z-1)).val();s=s.fuse(key)
+    key=cq.Workplane('XY').box(t,q['key_length'],2).edges('|Z').fillet(.8).translate((x,q['key_y'],z-1)).val();s=s.fuse(key)
     for i,level in enumerate(q['levels']):
         seat=-132 if i==1 else -108
         s=s.cut(cyl(2.2,-83-seat+1,(x,seat-1,level),(0,1,0)),cyl(4,8,(x,seat-8,level),(0,1,0)))
@@ -28,14 +28,14 @@ def brace(p,lay,x):
 def deck_extension(deck,p,lay):
     q=layout(p,lay);z=q['bottom']
     for x in q['xs']:
-        rail=cq.Workplane('XY').box(24,140,8).edges('|Z').fillet(3).translate((x,-130,z-4)).val()
+        rail=cq.Workplane('XY').box(24,q['rear']-60,8).edges('|Z').fillet(3).translate((x,(-q['rear']-60)/2,z-4)).val()
         deck=deck.fuse(rail)
         # Two thin webs make the outrigger deeper without a solid thick beam.
         # Keep both webs outside the ring and beside the foot fasteners.
-        for dx in [-8,8]:deck=deck.fuse(box(2.5,96,14,(x+dx,-152,z-15)))
-    deck=deck.fuse(cq.Workplane('XY').box(2*p['brace_half_spacing_mm']+24,20,8).edges('|Z').fillet(3).translate((0,-190,z-4)).val())
+        for dx in [-8,8]:deck=deck.fuse(box(2.5,q['rear']+q['web_inner'],14,(x+dx,(-q['rear']+q['web_inner'])/2,z-15)))
+    deck=deck.fuse(cq.Workplane('XY').box(2*p['brace_half_spacing_mm']+24,20,8).edges('|Z').fillet(3).translate((0,10-q['rear'],z-4)).val())
     for x in q['xs']:
-        slot=cq.Workplane('XY').box(q['thickness']+.4,18.4,2.3).edges('|Z').fillet(1).translate((x,-143,z-1.05)).val()
+        slot=cq.Workplane('XY').box(q['thickness']+.4,q['key_length']+.4,2.3).edges('|Z').fillet(1).translate((x,q['key_y'],z-1.05)).val()
         deck=deck.cut(slot)
         for y in q['foot_ys']:deck=deck.cut(cyl(2.2,10,(x,y,z-9)))
     # The new rear rails must retain all original open insert sockets.

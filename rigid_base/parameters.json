@@ -1,18 +1,18 @@
 {
-  "ring_teeth": 192,
+  "ring_teeth": 264,
   "pinion_teeth": 12,
   "module_mm": 1.0,
   "pressure_angle_deg": 25,
   "pitch_backlash_mm": 0.04,
   "gear_face_mm": 12,
   "gear_bottom_mm": 24,
-  "ring_outer_radius_mm": 112,
-  "ring_bolt_radius_mm": 104,
-  "deck_radius_mm": 112,
+  "ring_outer_radius_mm": 148,
+  "ring_bolt_radius_mm": 140,
+  "deck_radius_mm": 148,
   "deck_top_mm": 56.2,
-  "base_size_mm": 240,
+  "base_size_mm": 312,
   "base_thickness_mm": 15,
-  "stand_leg_pitch_mm": 190,
+  "stand_leg_pitch_mm": 262,
   "roller_track_overlap_mm": 0,
   "support_back_y_mm": -84,
   "support_mounts_mm": [
@@ -54,6 +54,14 @@
     ]
   ],
   "brace_half_spacing_mm": 60,
-  "brace_heel_y_mm": -190,
-  "brace_thickness_mm": 12
+  "brace_heel_y_mm": -170,
+  "brace_thickness_mm": 12,
+  "brace_foot_ys_mm": [
+    -120,
+    -138
+  ],
+  "brace_key_y_mm": -129,
+  "brace_deck_rear_mm": 180,
+  "brace_web_inner_y_mm": -144,
+  "brace_key_length_mm": 10
 }

@@ -10,6 +10,10 @@ def main():
         for src,digest in report['source_sha256'].items():assert hashlib.sha256((ROOT/src).read_bytes()).hexdigest()==digest,('stale check',name,src)
     for row in json.loads((out/'print-manifest.json').read_text()):assert hashlib.sha256((out/row['file']).read_bytes()).hexdigest()==row['sha256'],row['name']
     for row in json.loads((out/'print-validation.json').read_text())['prints']:assert hashlib.sha256((out/'STL'/(row['part']+'.stl')).read_bytes()).hexdigest()==row['sha256'],row['part']
+    current={row['name']+'.stl' for row in json.loads((out/'print-manifest.json').read_text())}
+    for directory in [out/'STL',dest/'STL']:
+        for path in directory.glob('*.stl'):
+            if path.name not in current:path.unlink()
     shutil.copytree(out/'STL',dest/'STL',dirs_exist_ok=True)
     for name in ['mesh.json','explosion.json','config.json','print-manifest.json']+reports:shutil.copyfile(out/name,dest/name)
     for name in ['README.md','parameters.json']:shutil.copyfile(ROOT/'rigid_base'/name,out/name)

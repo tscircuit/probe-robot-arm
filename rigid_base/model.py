@@ -52,7 +52,8 @@ def gears(p):
     pinion=tooth.fuse(hub).cut(bore,cyl(1.25,8,(center,-7,15),(0,1,0))).clean()
     cavity=cq.Workplane('XY').polyline(inside).close().extrude(h+2).val().translate((0,0,z-1))
     ring=cyl(p['ring_outer_radius_mm']-6,h,(0,0,z)).cut(cavity)
-    rim=cq.Solid.makeCone(106,112,6,V(0,0,28),V(0,0,1)).fuse(cyl(112,6,(0,0,34))).cut(cyl(105.5,14,(0,0,27)))
+    ro=p['ring_outer_radius_mm'];body=ro-6
+    rim=cq.Solid.makeCone(body,ro,6,V(0,0,28),V(0,0,1)).fuse(cyl(ro,6,(0,0,34))).cut(cyl(body-.5,14,(0,0,27)))
     bolts=[polar(p['ring_bolt_radius_mm'],math.radians(30+60*i)) for i in range(6)]
     ring=union([ring,rim]+[annulus(4.5,1.7,12.2,36).translate((x,y,0)) for x,y in bolts])
     ring=holes(ring,bolts,1.7,23,27)
@@ -97,6 +98,7 @@ def build(p=None):
         for i,a in enumerate(parts):a['shape']=cq.Shape.importBrep(str(cache/f'{i}.brep'))
         return parts,info
     ap=json.loads((ROOT/'parameters.json').read_text());oldlay=arm.layout(ap);old,_=arm.build(ap,oldlay)
+    ro=p['ring_outer_radius_mm'];body=ro-6;tip=p['module_mm']*(p['ring_teeth']/2-1)
     center=p['module_mm']*(p['ring_teeth']-p['pinion_teeth'])/2;dt=p['deck_top_mm'];dz=dt-oldlay['deck_top_z'];lay=dict(oldlay,z_origin=ap['z_origin']+dz)
     parts=[]
     def add(name,s,group='fixed',printed=False,color='#71879a',reference=False,keepout=False,flip=False,context=False,source_name=None,free=None):
@@ -115,10 +117,10 @@ def build(p=None):
             add(a['name'],a['shape'].translate((0,0,dz)),'rotor',a['printed'],a['color'],a['reference'],a['keepout'],context=True,source_name=a['name'])
             parts[-1]['motion']=a['group']
     # Stiffer 15 mm fixed plate, widened bearing circle and corner-braced test stand.
-    feet=list(itertools.product([-95,95],repeat=2));motor_holes=[(center+x,y) for x in [-15.5,15.5] for y in [-15.5,15.5]]
-    plate=core.plate(240,240,15,0).cut(cyl(11.4,17,(center,0,-1)),cyl(25,13,(0,0,4)),cyl(3.3,17,(0,0,-1)))
+    feet=list(itertools.product([-p['stand_leg_pitch_mm']/2,p['stand_leg_pitch_mm']/2],repeat=2));motor_holes=[(center+x,y) for x in [-15.5,15.5] for y in [-15.5,15.5]]
+    plate=core.plate(p['base_size_mm'],p['base_size_mm'],15,0).cut(cyl(11.4,17,(center,0,-1)),cyl(25,13,(0,0,4)),cyl(3.3,17,(0,0,-1)))
     plate=holes(plate,feet,2.7,-1,17);plate=holes(plate,motor_holes+[(-12,0),(12,0)],1.7,-1,17)
-    rp=rotary_base.parameters()|dict(ring_outer_radius_mm=112,base_plate_thickness_mm=15,roller_track_overlap_mm=0)
+    rp=rotary_base.parameters()|dict(ring_outer_radius_mm=ro,base_plate_thickness_mm=15,roller_track_overlap_mm=0)
     for angle in rp['roller_angles_deg']:
         b=core.roller_block(rp,angle)
         # Broaden the root behind the existing single integral axle.
@@ -132,7 +134,7 @@ def build(p=None):
     capholes=[(center+11*math.cos(math.radians(a)),11*math.sin(math.radians(a))) for a in [135,180,225]]
     tower=holes(tower,capholes,1.3,14,10)
     # Continuous rotational clearance under the ring body, including enlarged block roots.
-    swept=cyl(106.3,4.3,(0,0,23.7)).fuse(cq.Solid.makeCone(106.3,112.3,6,V(0,0,28),V(0,0,1)),cyl(112.3,6.3,(0,0,34))).cut(cyl(94.7,18,(0,0,23)))
+    swept=cyl(body+.3,4.3,(0,0,23.7)).fuse(cq.Solid.makeCone(body+.3,ro+.3,6,V(0,0,28),V(0,0,1)),cyl(ro+.3,6.3,(0,0,34))).cut(cyl(tip-.3,18,(0,0,23)))
     head_sweep=annulus(p['ring_bolt_radius_mm']+3.2,p['ring_bolt_radius_mm']-3.2,2.3,22.05)
     # Radial tool bore permits tightening/removing the pinion set screw.
     access=cyl(1.8,11,(center,-16,15),(0,1,0))
@@ -144,7 +146,7 @@ def build(p=None):
     add('688ZZ_pinion_bearing',annulus(8,4,5,17).translate((center,0,0)),reference=True,color='#c1c9d0')
     for i,(x,y) in enumerate(capholes):add(f'M3x8_pinion_cap_{i}',cyl(1.45,8,(x,y,15.5)).fuse(cyl(2.75,3,(x,y,23.5))),reference=True)
     for i,(x,y) in enumerate(motor_holes):add(f'M3x20_motor_face_{i}',cyl(1.45,20,(x,y,-5)).fuse(cyl(2.75,3,(x,y,15))),reference=True)
-    stand=core.plate(240,240,8,-88)
+    stand=core.plate(p['base_size_mm'],p['base_size_mm'],8,-88)
     for x,y in feet:
         leg=cyl(14,80,(x,y,-80)).cut(cyl(2.7,21,(x,y,-20)),core.hexagon(8.4,4.4,x,y,-10.4).fuse(box(16,8.4,4.4,(x+8,y,-8.2))))
         stand=stand.fuse(leg)
@@ -158,15 +160,15 @@ def build(p=None):
         add(f'M5x30_stand_{i}',cyl(2.45,30,(x,y,-15)).fuse(cyl(4.25,5,(x,y,15))),reference=True)
         add(f'M5_stand_nut_{i}',core.hexagon(8,4,x,y,-10.2).cut(cyl(2.5,5,(x,y,-10.5))),reference=True)
     pinion,ring,bolts=gears(p);add('Solid_12T_module1_pinion',pinion,'pinion',True,'#e6ad48',flip=True)
-    add('Internal_192T_ring',ring,'rotor',True,'#d5a345')
+    add(f"Internal_{p['ring_teeth']}T_ring",ring,'rotor',True,'#d5a345')
     add('M3x4_pinion_set_screw',cyl(1.5,4,(center,-6,15),(0,1,0)),'pinion',reference=True)
     deck=annulus(p['deck_radius_mm'],14.6,8,48.2)
     for x,y in p['support_mounts_mm']:deck=deck.fuse(cyl(7,12,(x,y,44.2))).cut(cyl(2.8,14,(x,y,43.2)))
     deck=holes(deck,core.rotor_bolts()+bolts,1.7,43,15)
     for x,y in core.rotor_bolts():deck=deck.cut(core.hexagon(5.8,2.5,x,y,53.8))
     # Small relief windows retain the complete support footprint and wide spokes.
-    cutters=annulus(98,30,10,47.2).cut(linked_foot(p,47.2,10,2))
-    for angle in [30,90,150]:cutters=cutters.cut(box(240,20,12,(0,0,52.2)).rotate((0,0,0),(0,0,1),angle))
+    cutters=annulus(p['deck_radius_mm']-14,30,10,47.2).cut(linked_foot(p,47.2,10,2))
+    for angle in [30,90,150]:cutters=cutters.cut(box(2*p['deck_radius_mm']+20,20,12,(0,0,52.2)).rotate((0,0,0),(0,0,1),angle))
     for s in cutters.Solids():
         if s.Volume()/10<=100:continue
         face=min((f for f in s.Faces() if f.geomType()=='PLANE' and abs(f.normalAt().z)>.99),key=lambda f:f.Center().z)
@@ -203,7 +205,7 @@ def export(parts,info,out):
         meta=info['arm_layout'][key]
         for a in arm.direct_mount.parts(axis,meta,info['arm_layout']['h_origin']):
             if a['printed']:native[axis+'_'+a['name'].replace(' ','_')]=arm.linear.home_shape(a,meta,printing=True)
-    assy=cq.Assembly(name='Rigid_16_to_1_arm_variant')
+    assy=cq.Assembly(name=f"Rigid_{info['ratio']:g}_to_1_arm_variant")
     for a in parts:
         s=a['shape'];assy.add(s,name=a['name'],color=cq.Color(a['color']))
         vertices,triangles=s.tessellate(.18,.2)

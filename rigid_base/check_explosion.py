@@ -12,7 +12,7 @@ def bounds(s):
 def disjoint(a,b,lo,hi):
     return any(a[1][i]+max(lo[i],hi[i])<=b[0][i]+EPS or b[1][i]<=a[0][i]+min(lo[i],hi[i])+EPS for i in range(3))
 def bevel_proof(a,b,delta,offsets,shapes,info):
-    if a!='Internal_192T_ring' or not b.startswith('625ZZ_support_roller_'):return False
+    if a!='Internal_264T_ring' or not b.startswith('625ZZ_support_roller_'):return False
     if delta[0] or delta[1] or delta[2]<=0:return False
     if any(abs(v)>EPS for n in [a,b] for v in offsets[n]):return False
     from OCP.Bnd import Bnd_Box
@@ -24,8 +24,9 @@ def bevel_proof(a,b,delta,offsets,shapes,info):
     # The low ring body lies radially inside the roller. Only the outer
     # bevel and higher standoffs need the tangent-plane withdrawal bound.
     wheel=shapes[b].rotate((0,0,0),(0,0,1),-angle)
-    assert wheel.BoundingBox().xmin>106.001
-    outer=shapes[a].cut(cyl(106,100,(0,0,0)))
+    body=parameters()['ring_outer_radius_mm']-6
+    assert wheel.BoundingBox().xmin>body+.001
+    outer=shapes[a].cut(cyl(body,100,(0,0,0)))
     r,w=bb(outer),bb(shapes[b]);assert r[2]>=8-EPS and w[5]<=8+EPS,(r,w)
     return True
 
@@ -44,7 +45,7 @@ def main():
         for a in sorted(movers):
             for b in sorted(shapes.keys()-movers):
                 if frozenset([a,b]) in allowed:continue
-                if a=='Internal_192T_ring' and b=='Rigid_fixed_base' and delta==[0,0,100]:continue
+                if a=='Internal_264T_ring' and b=='Rigid_fixed_base' and delta==[0,0,100]:continue
                 if bevel_proof(a,b,delta,offsets,shapes,info):bevels.append([si,a,b]);continue
                 rel=[offsets[a][k]-offsets[b][k] for k in range(3)];end=[rel[k]+delta[k] for k in range(3)]
                 if disjoint(bb[a],bb[b],rel,end):pruned+=1;continue
