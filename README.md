@@ -2,6 +2,10 @@
 
 Parametric theta / Z / radial arm with four modules covering a **100 × 100 mm PCB** and a **2 × 2 mm simultaneous probe cluster**. [Interactive assembly and downloads](https://modular-flying-probe-arm.seveibar.chatgpt.site) · [Source](https://github.com/tscircuit/probe-robot-arm).
 
+## Rigid base experiment
+
+A separate [Rigid base tab](https://modular-flying-probe-arm.seveibar.chatgpt.site/rigid-base.html) retains the internal-gear drive with a **module-1 192T/12T gear pair (16:1)**, 224 mm ring, supported pinion journal, thicker base/deck, wider support mounts and a deeper boxed Z support. The existing main assembly and standalone base remain unchanged. This is a single-arm mechanical prototype; physical vibration, backlash and accuracy have not been measured. See [design, hardware, rebuild instructions and validation scope](rigid_base/README.md).
+
 ## Printed-leadscrew actuators
 
 The actuator geometry is pinned to [rack-actuator revision 24](https://github.com/tscircuit/rack-actuator/commit/cc86a8e20de12db4f5eda797278d3ff07537a772), source commit `cc86a8e20de12db4f5eda797278d3ff07537a772`. The unchanged upstream source lives in `upstream/leadscrew-grid31`; the arm adapters are `leadscrew_actuator.py` and `direct_mount.py`. This incorporates the current 31 mm mounting grid, short M3 mounting inserts, retained bearing axles and nut-clamped printed screws.

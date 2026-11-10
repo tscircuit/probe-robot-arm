@@ -1,0 +1,56 @@
+{
+  "ring_teeth": 192,
+  "pinion_teeth": 12,
+  "module_mm": 1.0,
+  "pressure_angle_deg": 25,
+  "pitch_backlash_mm": 0.04,
+  "gear_face_mm": 12,
+  "gear_bottom_mm": 24,
+  "ring_outer_radius_mm": 112,
+  "ring_bolt_radius_mm": 104,
+  "deck_radius_mm": 112,
+  "deck_top_mm": 56.2,
+  "base_size_mm": 240,
+  "base_thickness_mm": 15,
+  "stand_leg_pitch_mm": 190,
+  "roller_track_overlap_mm": 0,
+  "support_back_y_mm": -84,
+  "support_mounts_mm": [
+    [
+      -60,
+      -72
+    ],
+    [
+      0,
+      88
+    ],
+    [
+      60,
+      -72
+    ],
+    [
+      78,
+      -44
+    ],
+    [
+      90,
+      8
+    ],
+    [
+      68,
+      60
+    ],
+    [
+      -78,
+      -44
+    ],
+    [
+      -90,
+      8
+    ],
+    [
+      -68,
+      60
+    ]
+  ]
+}
