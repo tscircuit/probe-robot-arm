@@ -15,6 +15,7 @@ def contacts(parts,info):
     add('Solid_12T_module1_pinion','Internal_264T_ring','Separately checked over one complete pitch in exact extruded polygon geometry')
     add('Controller_component_KEEPOUT','USB_cable_KEEPOUT','Overlapping nonphysical controller envelopes')
     for i in range(9):add('Rigid_rotating_deck',f'M4_deck_insert_{i}','Heat-set insert displaces its undersize printed pilot')
+    add('Rigid_rotating_deck','M4_rear_strut_deck_insert','Heat-set insert displaces its undersize printed pilot')
     for i in range(3):add('Rigid_fixed_base',f'M3x8_pinion_cap_{i}','M3 tapped receiving pilot')
     return allowed
 

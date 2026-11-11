@@ -6,7 +6,8 @@ def main():
     out=ROOT/'output/rigid-base';web=ROOT/'site/dist';dest=web/'downloads/rigid-base'
     manifest=json.loads((out/'print-manifest.json').read_text());names={r['name'] for r in manifest}
     assert len(names)==26 and 'Internal_264T_ring' in names and 'Internal_192T_ring' not in names
-    assert {'Front_frame_strut_left','Front_frame_strut_right'}<=names
+    assert {'Center_front_strut','Center_rear_strut'}<=names
+    assert not any(n.startswith('Front_frame_strut_') for n in names)
     assert 'Front_Z_frame' in names and not any(n.startswith(('Printed_front_brace','Printed_rear_brace')) for n in names)
     assert names=={a['name'] for a in json.loads((out/'mesh.json').read_text()) if a['printed']}
     assert {p.stem for p in (dest/'STL').glob('*.stl')}==names

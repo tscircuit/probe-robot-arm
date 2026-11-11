@@ -3,7 +3,7 @@
 The production arm and original standalone fixture are deliberately not modified.
 Run from the repository root: python -m rigid_base.model
 """
-import argparse, hashlib, itertools, json, math, pathlib
+import argparse, colorsys, hashlib, itertools, json, math, pathlib
 import cadquery as cq
 import model as arm
 import rotary_base
@@ -87,7 +87,7 @@ def support(p,lay):
     for i in range(6):
         x,y=polar(p['ring_bolt_radius_mm'],math.radians(30+60*i))
         s=s.cut(cyl(5.5,50,(x,y,dt-1)))
-    return front_frame.support_finish(s,p,lay)
+    return frame_struts.support_finish(front_frame.support_finish(s,p,lay),p,lay)
 
 def build(p=None):
     p=p or parameters()
@@ -174,6 +174,7 @@ def build(p=None):
         face=min((f for f in s.Faces() if f.geomType()=='PLANE' and abs(f.normalAt().z)>.99),key=lambda f:f.Center().z)
         for wire in face.outerWire().offset2D(-2,'arc'):
             for rounded in wire.offset2D(2,'arc'):deck=deck.cut(cq.Solid.extrudeLinear(rounded,[],V(0,0,10)))
+    deck=frame_struts.deck_finish(deck,p)
     add('Rigid_rotating_deck',deck,'rotor',True,flip=True)
     for i,(x,y) in enumerate(bolts):
         head=cq.Workplane('XY').circle(2.85).extrude(1.65).edges('<Z').fillet(.65).translate((x,y,22.35)).val()
@@ -182,16 +183,30 @@ def build(p=None):
         add(f'M3_ring_nut_{i}',core.hexagon(5.5,2.4,x,y,dt+.5).cut(cyl(1.5,4,(x,y,dt))),'rotor',reference=True)
     add('Boxed_Z_support',support(p,lay),'rotor',True,'#6d849c',context=True)
     add('Front_Z_frame',frame_struts.frame_finish(front_frame.frame(p,lay),p,lay),'rotor',True,'#829982',context=True)
-    for side,x in zip(['left','right'],frame_struts.layout(p,lay)['xs']):add('Front_frame_strut_'+side,frame_struts.strut(p,lay,x),'rotor',True,'#829982',context=True)
+    for side in ['front','rear']:add('Center_'+side+'_strut',frame_struts.strut(p,lay,side),'rotor',True,context=True)
     for name,shape in frame_struts.hardware(p,lay):add(name,shape,'rotor',reference=True,context=True)
     for name,shape in front_frame.hardware(p,lay):add(name,shape,'rotor',reference=True,context=True)
     for i,(x,y) in enumerate(p['support_mounts_mm']):
         add(f'M4_deck_insert_{i}',annulus(3,2,6,dt-6.3).translate((x,y,0)),'rotor',reference=True)
-        seat=19 if i in [3,6] else p['support_foot_thickness_mm']+(8 if i in [5,8] else 0)
+        seat=19 if i in [3,6] else p['support_foot_thickness_mm']+(8 if i==1 else 0)
         add(f'Z_support_deck_screw_{i}',cyl(1.95,seat+6,(x,y,dt-6)).fuse(cyl(3.5,4,(x,y,dt+seat))),'rotor',reference=True,context=True)
     for i,(x,y) in enumerate(lay['z_actuator']['base_fasteners']):
         s=cyl(1.45,40,(-y,-78,lay['z_origin']-x),(0,1,0)).fuse(cyl(2.75,3,(-y,-81,lay['z_origin']-x),(0,1,0)))
         add(f'M3x40_Z_base_mount_{i}',s,'rotor',reference=True,context=True)
+    # Distinguish every printed part in the viewer and colored STEP assembly.
+    palette={'Center_front_strut':'#e99039','Center_rear_strut':'#9365c5',
+             'Front_Z_frame':'#73aa87','Boxed_Z_support':'#577eae',
+             'Rigid_rotating_deck':'#4eaaa5','Rigid_fixed_base':'#748393',
+             'Internal_264T_ring':'#e0b448','Braced_test_stand':'#465b71'}
+    used=set(palette.values())
+    for a in parts:
+        if not a['printed']:continue
+        if a['name'] in palette:a['color']=palette[a['name']];continue
+        hue=int(hashlib.sha256(a['name'].encode()).hexdigest()[:8],16)/2**32
+        color='#'+''.join(f'{round(v*255):02x}' for v in colorsys.hls_to_rgb(hue,.61,.47))
+        while color in used:
+            hue=(hue+.07)%1;color='#'+''.join(f'{round(v*255):02x}' for v in colorsys.hls_to_rgb(hue,.61,.47))
+        a['color']=color;used.add(color)
     info=dict(center_mm=center,ratio=p['ring_teeth']/p['pinion_teeth'],arm_z_shift_mm=dz,arm_parameters=ap,arm_layout=oldlay,roller_parameters=rp,linear_contacts=[dict(parts=sorted(k),reason=v) for k,v in arm.linear_contacts(old,oldlay).items()])
     cache.mkdir(parents=True,exist_ok=True)
     for i,a in enumerate(parts):a['shape'].exportBrep(str(cache/f'{i}.brep'))
@@ -214,7 +229,7 @@ def export(parts,info,out):
         if a['printed']:
             ps=native.get(a['source_name'],a.get('freeShape',s))
             if a['name']=='Boxed_Z_support':ps=ps.rotate((0,0,0),(1,0,0),90)
-            elif a['name'].startswith('Front_frame_strut_'):ps=ps.rotate((0,0,0),(0,1,0),90)
+            elif a['name'] in ['Center_front_strut','Center_rear_strut']:ps=ps.rotate((0,0,0),(0,1,0),90)
             elif a['name']=='Front_Z_frame':ps=ps.rotate((0,0,0),(1,0,0),-90)
             elif a['flip']:ps=ps.rotate((0,0,0),(1,0,0),180)
             b=ps.BoundingBox();ps=ps.translate((0,0,-b.zmin));file=stl/(a['name']+'.stl')

@@ -1,40 +1,52 @@
-"""Flat-printing triangular front-frame struts sharing the outer support bolts."""
+"""Centered front and rear struts, printed flat on their broad sides."""
 import cadquery as cq
-from rotary_base.gear_geometry import box,cyl,annulus,union
+from rotary_base.gear_geometry import box,cyl,annulus
 from rotary_base import core
 
 def layout(p,lay):
-    return dict(xs=[-103,103],levels=[260,350],front_y=52.2,
-                foot_bottom=p['deck_top_mm']+p['support_foot_thickness_mm'],
-                foot_thickness=8,foot_y=91,top=lay['z_origin']+2.8)
+    return {
+        'front':dict(sign=1,face=52.2,levels=[260,350],head=82.2,
+                     bottom=p['deck_top_mm']+p['support_foot_thickness_mm'],
+                     chord=114,top=lay['z_origin']+2.8,wall=4),
+        'rear':dict(sign=-1,face=84.2,levels=[lay['z_origin']-134.5,lay['z_origin']-10.5],head=110.2,
+                    bottom=p['deck_top_mm'],chord=118,top=lay['z_origin']+2.8,wall=6)}
 
-def strut(p,lay,x):
-    q=layout(p,lay);bottom=q['foot_bottom'];top=q['top'];fy=q['front_y']
-    # A perforated triangular plate: vertical attachment rail, sloping outer
-    # chord, and bottom tie. All material stays within one 12 mm extrusion.
-    profile=[(fy,bottom),(100,bottom),(100,bottom+8),(88,bottom+8),(62.2,top),(fy,top)]
-    s=cq.Workplane('YZ',origin=(x-6,0,0)).polyline(profile).close().extrude(12).val()
-    window=cq.Workplane('YZ',origin=(x-7,0,0)).polyline([(62.2,bottom+20),(77,bottom+20),(62.2,top-112)]).close().extrude(14).val()
-    s=s.cut(window)
+def orient(s,q):return s if q['sign']==1 else s.mirror('XZ')
+
+def strut(p,lay,side):
+    q=layout(p,lay)[side];b=q['bottom'];t=q['top'];f=q['face'];c=q['chord']
+    profile=[(f,b),(134,b),(134,b+8),(c,b+8),(f+10,t),(f,t)]
+    s=cq.Workplane('YZ',origin=(-6,0,0)).polyline(profile).close().extrude(12).val()
+    opening=[(f+8,b+20),(c-10,b+20),(f+8,t-90)]
+    s=s.cut(cq.Workplane('YZ',origin=(-7,0,0)).polyline(opening).close().extrude(14).val())
     for z in q['levels']:
-        s=s.fuse(box(12,16,20,(x,60.2,z)))
-        s=s.cut(cyl(2.2,65,(x,47,z),(0,1,0)),cyl(4.1,45,(x,68.2,z),(0,1,0)))
-    # Existing M4 deck insert reused. Clear the diagonal above the bolt seat.
-    s=s.cut(cyl(2.2,10,(x,91,bottom-1)),cyl(4.1,340,(x,91,bottom+8)))
-    return s.clean()
+        s=s.fuse(box(12,q['head']-f,20,(0,(q['head']+f)/2,z)))
+        s=s.cut(cyl(2.2,100,(0,f-5,z),(0,1,0)),cyl(4.1,60,(0,q['head'],z),(0,1,0)))
+    s=s.cut(cyl(2.2,10,(0,126,b-1)),cyl(4.1,340,(0,126,b+8)))
+    return orient(s.clean(),q)
 
 def frame_finish(s,p,lay):
-    q=layout(p,lay)
-    for x in q['xs']:
-        for z in q['levels']:s=s.cut(cyl(2.2,8,(x,46,z),(0,1,0)))
+    for z in layout(p,lay)['front']['levels']:s=s.cut(cyl(2.2,8,(0,46,z),(0,1,0)))
     return s.clean()
 
+def support_finish(s,p,lay):
+    for z in layout(p,lay)['rear']['levels']:s=s.cut(cyl(2.2,8,(0,-85,z),(0,1,0)))
+    return s.clean()
+
+def deck_finish(s,p):
+    # The rear center spoke is already solid; retain a fully open insert bore.
+    return s.cut(cyl(2.8,10,(0,-126,p['deck_top_mm']-9))).clean()
+
 def hardware(p,lay):
-    q=layout(p,lay);out=[]
-    for side,x in zip(['left','right'],q['xs']):
+    out=[]
+    for side,q in layout(p,lay).items():
+        inside=q['face']-.2-q['wall']
         for i,z in enumerate(q['levels']):
-            bolt=cyl(1.95,25,(x,43.2,z),(0,1,0)).fuse(cyl(3.5,4,(x,68.2,z),(0,1,0)))
-            washer=annulus(4.5,2.1,.8,0).rotate((0,0,0),(1,0,0),-90).translate((x,47.2,z))
-            nut=core.hexagon(7,3.2,0,0,0).cut(cyl(2,3.2,(0,0,0))).rotate((0,0,0),(1,0,0),-90).translate((x,44,z))
-            for n,s in [('M4x25_frame_strut',bolt),('M4_frame_strut_washer',washer),('M4_frame_strut_nut',nut)]:out.append((f'{n}_{side}_{i}',s))
+            bolt=cyl(1.95,40,(0,q['head']-40,z),(0,1,0)).fuse(cyl(3.5,4,(0,q['head'],z),(0,1,0)))
+            washer=annulus(4.5,2.1,.8,0).rotate((0,0,0),(1,0,0),-90).translate((0,inside-.8,z))
+            nut=core.hexagon(7,3.2,0,0,0).cut(cyl(2,3.2,(0,0,0))).rotate((0,0,0),(1,0,0),-90).translate((0,inside-4,z))
+            for n,s in [('M4x40_center_strut',bolt),('M4_center_strut_washer',washer),('M4_center_strut_nut',nut)]:out.append((f'{n}_{side}_{i}',orient(s,q)))
+    dt=p['deck_top_mm']
+    out.append(('M4_rear_strut_deck_insert',annulus(3,2,6,dt-6.3).translate((0,-126,0))))
+    out.append(('M4x16_rear_strut_foot',cyl(1.95,16,(0,-126,dt-8)).fuse(cyl(3.5,4,(0,-126,dt+8)))))
     return out
