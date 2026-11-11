@@ -34,8 +34,8 @@ def frame(p,lay):
 
 def support_finish(s,p,lay):
     q=layout(p,lay)
-    for x in [-105,105]:
-        for z in q['levels']:s=s.fuse(box(6,22,20,(x,-59,z)))
+    for x in [-102,102]:
+        for z in q['levels']:s=s.fuse(box(12,22,20,(x,-59,z)))
     for z in q['levels']:s=s.cut(cyl(2.2,240,(-120,q['mount_y'],z),(1,0,0)))
     return s.clean()
 

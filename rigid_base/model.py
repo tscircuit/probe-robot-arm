@@ -63,13 +63,16 @@ def gears(p):
 
 def support(p,lay):
     dt=p['deck_top_mm'];foot=p['support_foot_thickness_mm'];zo=lay['z_origin'];top=zo+9;height=top-dt-foot;mid=(top+dt+foot)/2
-    solids=[linked_foot(p,dt,foot),box(206,6,height,(0,-81,mid))]
-    solids += [box(6,42,height,(x,-63,mid)) for x in [-99,99]]
-    solids += [box(206,10,12,(0,-47,zo-x)) for x in lay['z_actuator']['grid_x']]
-    solids += [box(206,42,8,(0,-63,z)) for z in [dt+foot+4,top-4]]
-    solids += [box(12,42,zo-129-dt-foot,(x,-63,(zo-129+dt+foot)/2)) for x in [-76,76]]
-    for x in lay['z_actuator']['grid_x']:
-        for y in lay['z_actuator']['grid_y']:solids.append(cyl(5,42,(-y,-84,zo-x),(0,1,0)))
+    wall=p['support_wall_mm'];land=p['support_mount_land_mm']
+    solids=[linked_foot(p,dt,foot),box(206,wall,height,(0,-84+wall/2,mid))]
+    solids += [box(wall,42,height,(x,-63,mid)) for x in [-102+wall/2,102-wall/2]]
+    solids += [box(206,land,12,(0,-42-land/2,zo-x)) for x in lay['z_actuator']['grid_x']]
+    solids += [box(206,42,wall,(0,-63,z)) for z in [dt+foot+wall/2,top-wall/2]]
+    solids += [box(6,42,zo-129-dt-foot,(x,-63,(zo-129+dt+foot)/2)) for x in [-76,76]]
+    # Retain full screw-head seats at the two gusset roots only.
+    solids += [box(12,42,19-foot,(x,-63,dt+(19+foot)/2)) for x in [-76,76]]
+    # Short rectangular lands only where rear-strut nuts bear; no internal tubes.
+    solids += [box(12,land,12,(0,-84+land/2,z)) for z in frame_struts.layout(p,lay)['rear']['levels']]
     for x in [-80,80]:
         solids.append(cq.Workplane('YZ',origin=(x-10,0,0)).polyline([(-42,dt+foot),(-14,dt+foot),(-42,dt+foot+28)]).close().extrude(20).val())
     s=union(solids)
@@ -80,7 +83,7 @@ def support(p,lay):
         s=s.cut(cq.Workplane('XY').box(x1-x0,46,z1-z0).edges('|Y').fillet(4).translate(((x0+x1)/2,-63,(z0+z1)/2)).val())
     for x in lay['z_actuator']['grid_x']:
         for y in lay['z_actuator']['grid_y']:
-            s=s.cut(cyl(1.7,44,(-y,-85,zo-x),(0,1,0)),cyl(3.3,7,(-y,-85,zo-x),(0,1,0)))
+            s=s.cut(cyl(1.7,44,(-y,-85,zo-x),(0,1,0)),cyl(3.3,43-land,(-y,-85,zo-x),(0,1,0)))
     for i,(x,y) in enumerate(p['support_mounts_mm']):
         s=s.cut(cyl(2.2,42,(x,y,dt-1)),cyl(4.1,60,(x,y,dt+(19 if i in [3,6] else foot))))
     # Tool and nut clearance around the ring bolts, outside the support pads.
@@ -88,6 +91,21 @@ def support(p,lay):
         x,y=polar(p['ring_bolt_radius_mm'],math.radians(p['ring_bolt_phase_deg']+60*i))
         s=s.cut(cyl(5.5,50,(x,y,dt-1)))
     return frame_struts.support_finish(front_frame.support_finish(s,p,lay),p,lay)
+
+def fixed_base_cutouts(p,center):
+    """Rounded through windows, bounded by a rim, hub, diagonal webs and motor pad."""
+    h=p['base_thickness_mm']+2;z=-1
+    size=p['base_size_mm']-2*p['base_rim_mm']
+    cut=box(size,size,h,(0,0,z+h/2)).cut(cyl(34,h,(0,0,z)))
+    for angle in [45,135]:
+        cut=cut.cut(box(460,p['base_web_mm'],h,(0,0,z+h/2)).rotate((0,0,0),(0,0,1),angle))
+    cut=cut.cut(box(64,64,h,(center,0,z+h/2)),box(center,28,h,(center/2,0,z+h/2)))
+    out=[];r=p['base_cutout_radius_mm']
+    for s in cut.Solids():
+        face=min((f for f in s.Faces() if f.geomType()=='PLANE' and abs(f.normalAt().z)>.99),key=lambda f:f.Center().z)
+        for wire in face.outerWire().offset2D(-r,'arc'):
+            for rounded in wire.offset2D(r,'arc'):out.append(cq.Solid.extrudeLinear(rounded,[],V(0,0,h)))
+    return out
 
 def build(p=None):
     p=p or parameters()
@@ -120,6 +138,7 @@ def build(p=None):
     feet=list(itertools.product([-p['stand_leg_pitch_mm']/2,p['stand_leg_pitch_mm']/2],repeat=2));motor_holes=[(center+x,y) for x in [-15.5,15.5] for y in [-15.5,15.5]]
     plate=core.plate(p['base_size_mm'],p['base_size_mm'],15,0).cut(cyl(11.4,17,(center,0,-1)),cyl(25,13,(0,0,4)),cyl(3.3,17,(0,0,-1)))
     plate=holes(plate,feet,2.7,-1,17);plate=holes(plate,motor_holes+[(-12,0),(12,0)],1.7,-1,17)
+    plate=plate.cut(*fixed_base_cutouts(p,center))
     rp=rotary_base.parameters()|dict(ring_outer_radius_mm=ro,base_plate_thickness_mm=15,roller_track_overlap_mm=0)
     for angle in rp['roller_angles_deg']:
         b=core.roller_block(rp,angle)
@@ -191,8 +210,8 @@ def build(p=None):
         seat=19 if i in [3,6] else p['support_foot_thickness_mm']+(8 if i==1 else 0)
         add(f'Z_support_deck_screw_{i}',cyl(1.95,seat+6,(x,y,dt-6)).fuse(cyl(3.5,4,(x,y,dt+seat))),'rotor',reference=True,context=True)
     for i,(x,y) in enumerate(lay['z_actuator']['base_fasteners']):
-        s=cyl(1.45,40,(-y,-78,lay['z_origin']-x),(0,1,0)).fuse(cyl(2.75,3,(-y,-81,lay['z_origin']-x),(0,1,0)))
-        add(f'M3x40_Z_base_mount_{i}',s,'rotor',reference=True,context=True)
+        s=cyl(1.45,10,(-y,-48,lay['z_origin']-x),(0,1,0)).fuse(cyl(2.75,3,(-y,-51,lay['z_origin']-x),(0,1,0)))
+        add(f'M3x10_Z_base_mount_{i}',s,'rotor',reference=True,context=True)
     # Treat the upstream actuator assemblies as single-color modules.
     palette={'Center_front_strut':'#e99039','Center_rear_strut':'#9365c5',
              'Front_Z_frame':'#73aa87','Boxed_Z_support':'#577eae',

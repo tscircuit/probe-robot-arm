@@ -12,7 +12,7 @@ An independent prototype of the existing flying-probe arm. This variant keeps th
 | Ring outside diameter | 176 mm | 296 mm |
 | Fixed plate | 190 × 190 × 11 mm | 312 × 312 × 15 mm |
 | Rotating deck thickness | 6 mm | 8 mm |
-| Z support depth at actuator | 20 mm | 42 mm |
+| Z support envelope / walls | 20 mm depth | 42 mm envelope; 4 mm walls, 6 mm mounting rails |
 | Main bearing cartridge | Two 6002 | Same two 6002 |
 | Peripheral bearings | Four tilted 625ZZ | Four tilted 625ZZ, broader block roots |
 | Pinion support | Motor shaft | Additional 688ZZ bearing near teeth |
@@ -20,6 +20,12 @@ An independent prototype of the existing flying-probe arm. This variant keeps th
 The ring retains a continuous 45° outer running track and flat-seated M3 button heads. The blocks retain one integral axle each. The variant uses zero nominal roller/track interference instead of the original 0.4 mm preload: actual fit and smooth rotation must be established on the printed hardware.
 
 The Z support retains its full-radius lower mount, now 6 mm thick instead of 10 mm. Nine M4 insert holes remain open through the rotating deck; the outer support bolts lie at a 138 mm radius. The ring stays 296 mm / 264T / 22:1. The earlier front/rear brace pairs, locating keys and rear deck extensions remain removed. One centered front strut connects the front frame to the support flange; a centered rear strut connects the back of the Z support directly to the rotating deck. The deck is circular again, 296 mm across. The original flat outer back face and the short integral corner gussets are retained.
+
+## Thin support and relieved fixed base
+
+The support uses 4 mm back/side/top/bottom walls, 6 mm actuator mounting rails and 6 mm lower vertical webs. Its outer envelope and all mating hole positions stay unchanged. The internal cylindrical standoffs are removed. Four M3×10 screws seat directly on the short mounting rails and engage the actuator's existing inserts by the same 4 mm as before; no additional inserts are required in the support. Rear access holes remain open for a driver. Flat rectangular lands retain material under the side-frame washers and rear-strut nuts; the two gusset roots retain wider screw seats. The existing 6 mm base flange is retained.
+
+Five large through windows lighten the fixed base. Their corners have a 6 mm radius; a 16 mm perimeter rim, 28 mm diagonal webs, a central 34 mm-radius bearing/spindle land, and a solid 64 × 64 mm motor pad preserve the mounting paths. All stand, roller, motor and spindle interfaces are retained. The bottom remains flat for printing. Compared with the preceding revision, modeled solid volume falls from 973,046 to 655,664 mm³ for the Z support (32.6%) and from 1,441,347 to 662,244 mm³ for the fixed base (54.1%). Slicer filament savings will depend on walls and infill. Material savings do not establish stiffness; test the assembled front frame and both center struts under load.
 
 ## Removable front Z frame
 
@@ -39,7 +45,7 @@ The six ring/deck fastening positions are re-indexed by 30°, from 30° + 60° i
 
 The existing 264T ring can be reused by rotating it −30° under the revised deck. This equals exactly 22 tooth pitches, so the existing pinion phase remains valid. The ring's running track, diameter and tooth geometry are unchanged.
 
-**Reprint the Z support, rotating deck and both center struts.** The front frame's two center attachment holes are unchanged, so its current print can be reused. Remove both previous side struts. Retain the larger ring, fixed base, stand and actuator prints. Install the rear strut's nuts/washers inside the Z support before the actuator limits access. Assemble the front frame before the radial module, then attach the front strut and replace the shared front base screw. Tighten the front and rear struts with the tower square. The support's flat back print face is retained; no rear bosses are added.
+**For this lightweight revision, reprint the Z support and fixed base only.** Retain the current front frame, deck, both center struts, larger ring, stand and actuator prints. Replace the four M3×40 Z-base screws with M3×10 screws. Install the rear strut's nuts/washers inside the Z support before the actuator limits access. Assemble the front frame before the radial module, then attach the front strut and replace the shared front base screw. Tighten the front and rear struts with the tower square. The support's flat back print face is retained; no rear bosses are added.
 
 The complete Z and radial actuator modules share one blue-gray color in the viewer and STEP assembly. Custom printed arm parts retain distinct colors. The front strut is orange, rear strut purple, front frame green, Z support blue and rotating deck teal. Hardware within the actuator modules shares their color; other reference hardware retains conventional metal colors. Controller keepout envelopes retain their translucent display. Colors do not specify print material. Physical stiffness, joint slip and print creep still need a loaded test.
 
@@ -55,7 +61,7 @@ For a 1.8° stepper:
 
 These are **command increments, not accuracy or repeatability**. Microsteps do not guarantee equally spaced physical moves under load. The solid pinion replaces the original compliant tooth segments and has 0.04 mm nominal tangential pitch clearance; this clearance alone corresponds to approximately 0.076 mm of tangential tip lost motion at 250 mm reach if fully taken up on reversal. Printing error, bearing clearance, shaft fit, gear runout and structural flex can dominate this number. No measured vibration reduction, strength, fatigue life or probing accuracy is claimed.
 
-More teeth improve reduction because the ring/pinion tooth-count ratio rises; shrinking both gears' teeth while preserving their tooth-count ratio would not improve resolution. The solid teeth and supported hub target mesh stiffness, while the thicker plates and deeper support target frame flex. There are no soft pads in the probe's structural load path: added compliance can allow positional deflection. Acceleration/current tuning remains necessary after the mechanical test.
+More teeth improve reduction because the ring/pinion tooth-count ratio rises; shrinking both gears' teeth while preserving their tooth-count ratio would not improve resolution. The solid teeth and supported hub target mesh stiffness, while the ribbed base and attached front frame/center struts target frame flex. There are no soft pads in the probe's structural load path: added compliance can allow positional deflection. Acceleration/current tuning remains necessary after the mechanical test.
 
 Suggested comparison: use the same arm payload, current, microstepping and acceleration on both bases. Measure forward/reverse tip motion and settling with a dial indicator at a known reach. Check the ring through a full revolution by hand before powered testing; record tight spots and backlash before increasing speed. Start with the ring and pinion prints as a fit trial, then print the larger structure.
 
@@ -74,7 +80,7 @@ Additional/revised base hardware:
 - Four M3×20 motor-face screws; three M3×8 bearing-cap screws; one M3×4 pinion set screw.
 - Four M5×30 stand screws and four captive M5 nuts.
 - Nine M4 support/deck inserts plus one M4 rear-strut deck insert; six M4×12, one M4×20 and two M4×25 support screws (the longer pair pass through the corner gussets).
-- Four M3×40 Z-base mounting screws into the actuator's existing receiving inserts.
+- Four M3×10 Z-base mounting screws into the actuator's existing receiving inserts.
 - Front frame side mounts: eight M4×25 screws, eight M4 nuts and eight M4 washers.
 - Center strut attachments: four M4×50 screws, four M4 nuts and four M4 washers; one M4×16 rear foot screw. The shared M4×20 front base screw is included above.
 - Retained central spindle/cartridge fasteners and full-depth NEMA17 with rear controller.

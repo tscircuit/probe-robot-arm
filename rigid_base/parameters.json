@@ -55,5 +55,10 @@
   ],
   "support_foot_thickness_mm": 6,
   "ring_bolt_phase_deg": 0,
-  "strut_bolt_radius_mm": 138
+  "strut_bolt_radius_mm": 138,
+  "support_wall_mm": 4,
+  "support_mount_land_mm": 6,
+  "base_rim_mm": 16,
+  "base_web_mm": 28,
+  "base_cutout_radius_mm": 6
 }
