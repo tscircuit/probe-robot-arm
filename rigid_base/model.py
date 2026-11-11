@@ -75,10 +75,12 @@ def support(p,lay):
     solids += [box(12,land,12,(0,-84+land/2,z)) for z in frame_struts.layout(p,lay)['rear']['levels']]
     for x in [-80,80]:
         solids.append(cq.Workplane('YZ',origin=(x-10,0,0)).polyline([(-42,dt+foot),(-14,dt+foot),(-42,dt+foot+28)]).close().extrude(20).val())
-    s=union(solids)
+    grid_bottom=zo-145
+    # The grid is one solid 6 mm plate, not a pair of skins or a deep ladder.
+    lower=union(solids).intersect(box(400,400,grid_bottom-dt,(0,0,(grid_bottom+dt)/2)))
+    s=lower.fuse(box(206,land,top-grid_bottom,(0,-42-land/2,(top+grid_bottom)/2)))
     rows=sorted(zo-x for x in lay['z_actuator']['grid_x'])
     windows=[(-64,-46,dt+32,zo-161),(-30,30,dt+32,zo-161),(46,64,dt+32,zo-161)]
-    windows += [(-89,89,lo+6,hi-6) for lo,hi in zip(rows,rows[1:])]
     for x0,x1,z0,z1 in windows:
         s=s.cut(cq.Workplane('XY').box(x1-x0,46,z1-z0).edges('|Y').fillet(4).translate(((x0+x1)/2,-63,(z0+z1)/2)).val())
     for x in lay['z_actuator']['grid_x']:
@@ -166,6 +168,15 @@ def build(p=None):
     for i,(x,y) in enumerate(capholes):add(f'M3x8_pinion_cap_{i}',cyl(1.45,8,(x,y,15.5)).fuse(cyl(2.75,3,(x,y,23.5))),reference=True)
     for i,(x,y) in enumerate(motor_holes):add(f'M3x20_motor_face_{i}',cyl(1.45,20,(x,y,-5)).fuse(cyl(2.75,3,(x,y,15))),reference=True)
     stand=core.plate(p['base_size_mm'],p['base_size_mm'],8,-88)
+    # Rounded windows preserve the full perimeter, diagonal leg paths and gussets.
+    stand_windows=box(272,272,10,(0,0,-84))
+    for angle in [45,135]:stand_windows=stand_windows.cut(box(460,28,12,(0,0,-84)).rotate((0,0,0),(0,0,1),angle))
+    for x,y in feet:
+        stand_windows=stand_windows.cut(box(65,30,12,(x+(-17.5 if x>0 else 17.5),y,-84)),box(30,65,12,(x,y+(-17.5 if y>0 else 17.5),-84)))
+    for piece in stand_windows.Solids():
+        face=min((f for f in piece.Faces() if f.geomType()=='PLANE' and abs(f.normalAt().z)>.99),key=lambda f:f.Center().z)
+        for wire in face.outerWire().offset2D(-6,'arc'):
+            for rounded in wire.offset2D(6,'arc'):stand=stand.cut(cq.Solid.extrudeLinear(rounded,[],V(0,0,10)))
     for x,y in feet:
         leg=cyl(14,80,(x,y,-80)).cut(cyl(2.7,21,(x,y,-20)),core.hexagon(8.4,4.4,x,y,-10.4).fuse(box(16,8.4,4.4,(x+8,y,-8.2))))
         stand=stand.fuse(leg)
@@ -217,11 +228,11 @@ def build(p=None):
              'Front_Z_frame':'#73aa87','Boxed_Z_support':'#577eae',
              'Rigid_rotating_deck':'#4eaaa5','Rigid_fixed_base':'#748393',
              'Internal_264T_ring':'#e0b448','Braced_test_stand':'#465b71'}
-    actuator_color='#819dab'
-    used=set(palette.values())|{actuator_color}
+    actuator_colors={'Z_':'#819dab','R_':'#c98272'}
+    used=set(palette.values())|set(actuator_colors.values())
     for a in parts:
         if (a.get('source_name') or '').startswith(('Z_','R_')) and not a['keepout']:
-            a['color']=actuator_color;continue
+            a['color']=actuator_colors[a['source_name'][:2]];continue
         if not a['printed']:continue
         if a['name'] in palette:a['color']=palette[a['name']];continue
         hue=int(hashlib.sha256(a['name'].encode()).hexdigest()[:8],16)/2**32

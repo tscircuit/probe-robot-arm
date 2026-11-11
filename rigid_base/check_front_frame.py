@@ -33,7 +33,21 @@ def main():
     assert not any(a['name'].startswith('Front_frame_strut_') for a in parts)
     prints=[a for a in parts if a['printed']];custom=[a for a in prints if not (a.get('source_name') or '').startswith(('Z_','R_'))];actuators=[a for a in parts if (a.get('source_name') or '').startswith(('Z_','R_')) and not a['keepout']]
     assert len({a['color'] for a in custom})==len(custom)
-    assert len({a['color'] for a in actuators})==1 and actuators[0]['color'] not in {a['color'] for a in custom}
+    actuator_colors={axis:{a['color'] for a in actuators if a['source_name'].startswith(axis+'_')} for axis in ['Z','R']}
+    assert all(len(c)==1 for c in actuator_colors.values()) and actuator_colors['Z']!=actuator_colors['R']
+    assert not set.union(*actuator_colors.values())&{a['color'] for a in custom}
+    # Grid center is a single solid sheet: no rear wall, tubes or ladder windows.
+    grid_bottom=lay['z_origin']-145;top=lay['z_origin']+9
+    grid=support.intersect(box(180,100,top-grid_bottom,(0,-70,(top+grid_bottom)/2)))
+    gb=grid.BoundingBox();assert abs(gb.ymin+48)<1e-5 and abs(gb.ymax+42)<1e-5
+    expected=box(180,6,top-grid_bottom,(0,-45,(top+grid_bottom)/2))
+    for z in [lay['z_origin']-x for x in [10.5,41.5,72.5,103.5,134.5]]:
+        for x in [-77.5,-46.5,-15.5,15.5,46.5,77.5]:expected=expected.cut(cyl(1.7,8,(x,-49,z),(0,1,0)))
+    for z in [lay['z_origin']-134.5,lay['z_origin']-10.5]:expected=expected.cut(cyl(2.8,8,(0,-49,z),(0,1,0)))
+    assert expected.cut(grid).Volume()<1e-5 and grid.cut(expected).Volume()<1e-5
+    for x in [-118.2,118.2]:
+        assert annulus(5,2.8,.1,p['deck_top_mm']+5.9).translate((x,40,0)).cut(support).Volume()<1e-6
+        assert annulus(3.5,2.2,.1,p['deck_top_mm']+11.9).translate((x,40,0)).cut(frame).Volume()<1e-6
     for side,q in sq.items():
         st=by['Center_'+side+'_strut']['shape'];assert st.isValid() and len(st.Solids())==1
         assert st.cut(limit).Volume()<1e-5 and overlap(st,support)<1e-6 and overlap(st,frame)<1e-6 and overlap(st,deck)<1e-6
@@ -67,6 +81,13 @@ def main():
         assert overlap(cyl(3.2,37,(x,-85,z),(0,1,0)),support)<1e-6
         mount_checks.append(a['name'])
     assert len(mount_checks)==4
+    stand=by['Braced_test_stand']['shape']
+    for x,y in [(0,90),(0,-90),(90,0),(-90,0)]:assert overlap(cyl(10,10,(x,y,-89)),stand)<1e-6
+    for x in [-131,131]:
+        for y in [-131,131]:
+            assert cyl(14,.1,(x,y,-80.1)).cut(stand).Volume()<1e-6
+            for w,d,cx,cy in [(35,12,x+(-17.5 if x>0 else 17.5),y),(12,35,x,y+(-17.5 if y>0 else 17.5))]:
+                assert box(w,d,.1,(cx,cy,-80.05)).cut(stand).Volume()<1e-6
     # Exact solids are outside conservative swept bounding boxes. Linear axes
     # translate by their full travel; screw/clamp rotation uses corner-radius bounds.
     checks=[];new=[a for a in parts if 'front_frame' in a['name'] or 'center_strut' in a['name'] or a['name'] in ['Boxed_Z_support','Front_Z_frame','Center_front_strut','Center_rear_strut']]
@@ -87,7 +108,7 @@ def main():
             if any(hi[k]<=getattr(ob,axis+'min') or lo[k]>=getattr(ob,axis+'max') for k,axis in enumerate('xyz')):continue
             v=overlap(env,other['shape']);assert v<1e-6,(a['name'],other['name'],v)
             checks.append(dict(moving_part=a['name'],structure=other['name'],swept_box_overlap_mm3=v))
-    report=dict(passed=True,support_outer_radius_mm=148,base_flange_thickness_mm=p['support_foot_thickness_mm'],front_frame_count=1,strut_count=2,strut_edge_radius_mm=p['deck_radius_mm'],ring_index_change_deg=p['ring_bolt_phase_deg']-30,distinct_custom_print_colors=len(custom),shared_actuator_color=actuators[0]['color'],strut_mounts=strut_checks,cutout_volume_reduction_fraction=removed,side_holes=holes,support_bolt_seats=seats,continuous_axis_envelope_checks=checks,physical_stiffness_verified=False,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/parameters.json','rigid_base/front_frame.py','rigid_base/frame_struts.py','rigid_base/check_front_frame.py']})
-    report.update(support_wall_mm=p['support_wall_mm'],support_mount_land_mm=p['support_mount_land_mm'],internal_cylinders_removed=True,short_actuator_mount_screws=mount_checks,fixed_base_cutout_count=len(cutouts),fixed_base_cutout_corner_radius_mm=p['base_cutout_radius_mm'],fixed_base_volume_mm3=base.Volume(),z_support_volume_mm3=support.Volume())
+    report=dict(passed=True,support_outer_radius_mm=148,base_flange_thickness_mm=p['support_foot_thickness_mm'],grid_plate_depth_mm=6,grid_plate_solid_except_mounting_holes=True,front_bottom_flange_count=2,front_frame_count=1,strut_count=2,strut_edge_radius_mm=p['deck_radius_mm'],ring_index_change_deg=p['ring_bolt_phase_deg']-30,distinct_custom_print_colors=len(custom),actuator_colors={a:next(iter(c)) for a,c in actuator_colors.items()},strut_mounts=strut_checks,cutout_volume_reduction_fraction=removed,side_holes=holes,support_bolt_seats=seats,continuous_axis_envelope_checks=checks,physical_stiffness_verified=False,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/parameters.json','rigid_base/front_frame.py','rigid_base/frame_struts.py','rigid_base/check_front_frame.py']})
+    report.update(support_wall_mm=p['support_wall_mm'],support_mount_land_mm=p['support_mount_land_mm'],internal_cylinders_removed=True,short_actuator_mount_screws=mount_checks,fixed_base_cutout_count=len(cutouts),stand_cutout_count=4,stand_leg_and_gusset_seats_supported=True,stand_volume_mm3=stand.Volume(),fixed_base_cutout_corner_radius_mm=p['base_cutout_radius_mm'],fixed_base_volume_mm3=base.Volume(),z_support_volume_mm3=support.Volume())
     (ROOT/'output/rigid-base/frame-validation.json').write_text(json.dumps(report,indent=2));print('Front frame, centered front/rear struts, thin support, five base cutouts, bolt seats and continuous axis envelopes passed; cutout fraction',removed,flush=True)
 if __name__=='__main__':main()

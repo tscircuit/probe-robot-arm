@@ -10,12 +10,12 @@ def main():
     assert not any(n.startswith('Front_frame_strut_') for n in names)
     assert 'Front_Z_frame' in names and not any(n.startswith(('Printed_front_brace','Printed_rear_brace')) for n in names)
     assert names=={a['name'] for a in json.loads((out/'mesh.json').read_text()) if a['printed']}
-    assert {p.stem for p in (dest/'STL').glob('*.stl')}==names
+    assert {p.name.removesuffix('.stl.gz') for p in (dest/'STL').glob('*.stl.gz')}==names
     with zipfile.ZipFile(dest/'print-kit.zip') as z:
         assert z.testzip() is None
         assert {pathlib.Path(n).stem for n in z.namelist() if n.endswith('.stl')}==names
         for row in manifest:
-            data=z.read(row['file']);assert data==(dest/row['file']).read_bytes()==(out/row['file']).read_bytes()
+            data=z.read(row['file']);assert data==gzip.decompress(pathlib.Path(str(dest/row['file'])+'.gz').read_bytes())==(out/row['file']).read_bytes()
             assert hashlib.sha256(data).hexdigest()==row['sha256']
         for n in ['parameters.json','validation.json','print-validation.json','explosion-validation.json','frame-validation.json']:assert z.read(n)==(out/n).read_bytes()
     with zipfile.ZipFile(dest/'rigid-arm-step.zip') as z:assert z.testzip() is None and z.read('rigid-arm.step')==(out/'rigid-arm.step').read_bytes()

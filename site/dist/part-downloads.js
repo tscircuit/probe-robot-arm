@@ -60,10 +60,13 @@ export function installPartDownloads({THREE,canvas,camera,scene,getMeshes,getPar
     menu.hidden=false;menu.style.left='0px';menu.style.top='0px';
     const box=menu.getBoundingClientRect();menu.style.left=Math.max(10,Math.min(e.clientX,innerWidth-box.width-10))+'px';menu.style.top=Math.max(10,Math.min(e.clientY,innerHeight-box.height-10))+'px';(selection?button:edgeButton).focus({preventScroll:true});
   });
-  button.onclick=()=>{
+  button.onclick=async()=>{
     if(!selection)return;const {mesh,name,url,filename,printed,keepout}=selection;
     const a=document.createElement('a');let objectURL;
-    a.href=url||(objectURL=URL.createObjectURL(new Blob([binarySTL(THREE,mesh.geometry,name)],{type:'model/stl'})));
+    if(url?.endsWith('.gz')){
+      try{const response=await fetch(url);if(!response.ok)throw Error('Download failed');const data=await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();a.href=objectURL=URL.createObjectURL(new Blob([data],{type:'model/stl'}));}
+      catch(error){button.textContent='Download failed — retry';console.error(error);return;}
+    }else a.href=url||(objectURL=URL.createObjectURL(new Blob([binarySTL(THREE,mesh.geometry,name)],{type:'model/stl'})));
     a.download=filename||name.replace(/[^a-zA-Z0-9_.-]/g,'_')+(url||printed?'':keepout?'_clearance':'_reference')+'.stl';
     document.body.append(a);a.click();a.remove();if(objectURL)setTimeout(()=>URL.revokeObjectURL(objectURL),30000);close();canvas.focus({preventScroll:true});
   };

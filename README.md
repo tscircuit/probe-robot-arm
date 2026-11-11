@@ -94,3 +94,7 @@ The adapter caches exact BREP geometry using source and configuration hashes. Up
 Validation covers ideal CAD geometry and reference hardware. Printed screw friction, wear, backlash, axial motor loading, stiffness, creep, homing and probing accuracy still require physical testing. Microstepping is commanded resolution, not measured positioning accuracy. At 200 steps/revolution and 1/16 microstepping, the 8 mm-lead linear axes command 0.0025 mm per microstep.
 
 The unchanged 6:1 base drive commands 0.01875° per 1/16 microstep. At the 245 mm board-center reach, that corresponds to about 0.080 mm tangential tip motion (about 0.101 mm at the 310 mm reach limit). The linear screw resolution does not remove this rotary-axis limitation.
+
+## Rigid Base 2
+
+The [Rigid Base 2 experiment](https://modular-flying-probe-arm.seveibar.chatgpt.site/rigid-base2.html) replaces the braced tower with a full-radius perforated cylindrical support while retaining the thin 6 mm grid mounting face. See [its build and printing guide](rigid_base2/README.md). The [braced variant](rigid_base/README.md) remains available, with bottom frame flanges, a solid thin grid plate, different actuator colors and a relieved stand.

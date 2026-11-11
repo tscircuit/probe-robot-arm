@@ -30,6 +30,9 @@ def frame(p,lay):
             cut=cq.Workplane('XY').box(8,10,high-low-28).edges('|X').fillet(4).translate((x,-60,(low+high)/2)).val()
             s=s.cut(cut)
     for z in q['levels']:s=s.cut(cyl(2.2,240,(-120,q['mount_y'],z),(1,0,0)))
+    for x in [-118.2,118.2]:
+        s=s.fuse(box(24,24,6,(x,40,p['deck_top_mm']+9)))
+        s=s.cut(cyl(2.2,8,(x,40,p['deck_top_mm']+5)))
     return s.clean()
 
 def support_finish(s,p,lay):
@@ -37,10 +40,15 @@ def support_finish(s,p,lay):
     for x in [-102,102]:
         for z in q['levels']:s=s.fuse(box(12,22,20,(x,-59,z)))
     for z in q['levels']:s=s.cut(cyl(2.2,240,(-120,q['mount_y'],z),(1,0,0)))
+    for x in [-118.2,118.2]:s=s.cut(cyl(2.8,8,(x,40,p['deck_top_mm']-1)))
     return s.clean()
 
 def hardware(p,lay):
     q=layout(p,lay);out=[]
+    for i,x in enumerate([-118.2,118.2]):
+        z=p['deck_top_mm']
+        out.append((f'M4_front_frame_foot_insert_{i}',annulus(3,2,5,z+.8).translate((x,40,0))))
+        out.append((f'M4x12_front_frame_foot_{i}',cyl(1.95,12,(x,40,z)).fuse(cyl(3.5,4,(x,40,z+12)))))
     for side in ['left','right']:
         for i,z in enumerate(q['levels']):
             bolt=cyl(1.95,25,(87.2,-60,z),(1,0,0)).fuse(cyl(3.5,4,(112.2,-60,z),(1,0,0)))

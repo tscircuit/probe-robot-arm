@@ -8,7 +8,7 @@ def layout(p,lay):
         'front':dict(sign=1,face=52.2,levels=[260,350],head=88.2,
                      bottom=p['deck_top_mm']+p['support_foot_thickness_mm'],
                      chord=126,top=lay['z_origin']+2.8,wall=4),
-        'rear':dict(sign=-1,face=84.2,levels=[lay['z_origin']-134.5,lay['z_origin']-10.5],head=116.2,
+        'rear':dict(sign=-1,face=48.2,levels=[lay['z_origin']-134.5,lay['z_origin']-10.5],head=92.2,
                     bottom=p['deck_top_mm'],chord=130,top=lay['z_origin']+2.8,wall=6)}
 
 def orient(s,q):return s if q['sign']==1 else s.mirror('XZ')
@@ -16,9 +16,11 @@ def orient(s,q):return s if q['sign']==1 else s.mirror('XZ')
 def strut(p,lay,side):
     q=layout(p,lay)[side];b=q['bottom'];t=q['top'];f=q['face'];c=q['chord']
     profile=[(f,b),(p['deck_radius_mm'],b),(p['deck_radius_mm'],b+8),(c,b+8),(f+10,t),(f,t)]
+    if side=='rear':profile=[(84.2,b),(p['deck_radius_mm'],b),(p['deck_radius_mm'],b+8),(c,b+8),(f+10,t),(f,t),(f,lay['z_origin']-144.8),(84.2,lay['z_origin']-144.8)]
     s=cq.Workplane('YZ',origin=(-6,0,0)).polyline(profile).close().extrude(12).val()
-    opening=[(f+8,b+20),(c-10,b+20),(f+8,t-90)]
+    opening=[(f+8,b+20),(c-10,b+20),(f+8,t-90)] if side=='front' else [(92.2,b+20),(c-10,b+20),(92.2,200)]
     s=s.cut(cq.Workplane('YZ',origin=(-7,0,0)).polyline(opening).close().extrude(14).val())
+    if side=='rear':s=s.cut(cq.Workplane('YZ',origin=(-7,0,0)).polyline([(56.2,254),(78,254),(56.2,t-26)]).close().extrude(14).val())
     for z in q['levels']:
         s=s.fuse(box(12,q['head']-f,20,(0,(q['head']+f)/2,z)))
         s=s.cut(cyl(2.2,100,(0,f-5,z),(0,1,0)),cyl(4.1,60,(0,q['head'],z),(0,1,0)))
@@ -30,7 +32,7 @@ def frame_finish(s,p,lay):
     return s.clean()
 
 def support_finish(s,p,lay):
-    for z in layout(p,lay)['rear']['levels']:s=s.cut(cyl(2.2,8,(0,-85,z),(0,1,0)))
+    for z in layout(p,lay)['rear']['levels']:s=s.cut(cyl(2.8,8,(0,-49,z),(0,1,0)))
     return s.clean()
 
 def deck_finish(s,p):
@@ -45,7 +47,10 @@ def hardware(p,lay):
             bolt=cyl(1.95,50,(0,q['head']-50,z),(0,1,0)).fuse(cyl(3.5,4,(0,q['head'],z),(0,1,0)))
             washer=annulus(4.5,2.1,.8,0).rotate((0,0,0),(1,0,0),-90).translate((0,inside-.8,z))
             nut=core.hexagon(7,3.2,0,0,0).cut(cyl(2,3.2,(0,0,0))).rotate((0,0,0),(1,0,0),-90).translate((0,inside-4,z))
-            for n,s in [('M4x50_center_strut',bolt),('M4_center_strut_washer',washer),('M4_center_strut_nut',nut)]:out.append((f'{n}_{side}_{i}',orient(s,q)))
+            items=[('M4x50_center_strut',bolt)]
+            if side=='front':items += [('M4_center_strut_washer',washer),('M4_center_strut_nut',nut)]
+            else:items += [('M4_center_strut_insert',annulus(3,2,5,0).rotate((0,0,0),(1,0,0),-90).translate((0,42.9,z)))]
+            for n,s in items:out.append((f'{n}_{side}_{i}',orient(s,q)))
     dt=p['deck_top_mm']
     out.append(('M4_rear_strut_deck_insert',annulus(3,2,6,dt-6.3).translate((0,-p['strut_bolt_radius_mm'],0))))
     out.append(('M4x16_rear_strut_foot',cyl(1.95,16,(0,-p['strut_bolt_radius_mm'],dt-8)).fuse(cyl(3.5,4,(0,-p['strut_bolt_radius_mm'],dt+8)))))

@@ -21,6 +21,8 @@ def main():
             shared.append(dict(previous_path=str(duplicate.relative_to(root)),served_path=str(common.relative_to(root)),sha256=digest))
     report=dict(passed=True,compression='Lossless gzip; decoded bytes retain original hashes',meshes=rows,shared_radial_prints=shared)
     (root/'downloads/asset-compression-validation.json').write_text(json.dumps(report,indent=2))
+    for path in (root/'downloads/rigid-base/STL').glob('*.stl'):
+        data=path.read_bytes();packed=path.with_suffix('.stl.gz');packed.write_bytes(gzip.compress(data,compresslevel=9,mtime=0));assert gzip.decompress(packed.read_bytes())==data;path.unlink()
     size=sum(p.stat().st_size for p in root.rglob('*') if p.is_file());assert size<255*1024*1024,size
     print('Static assets:',round(size/1048576,2),'MiB; geometry and prints preserved')
 if __name__=='__main__':main()

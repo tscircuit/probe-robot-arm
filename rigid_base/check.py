@@ -16,6 +16,10 @@ def contacts(parts,info):
     add('Controller_component_KEEPOUT','USB_cable_KEEPOUT','Overlapping nonphysical controller envelopes')
     for i in range(9):add('Rigid_rotating_deck',f'M4_deck_insert_{i}','Heat-set insert displaces its undersize printed pilot')
     add('Rigid_rotating_deck','M4_rear_strut_deck_insert','Heat-set insert displaces its undersize printed pilot')
+    add('Rigid_rotating_deck','M4_cage_rear_deck_insert','Heat-set insert displaces its undersize printed pilot')
+    for i in range(2):
+        add('Boxed_Z_support',f'M4_front_frame_foot_insert_{i}','Heat-set insert displaces its undersize printed pilot')
+        add('Boxed_Z_support',f'M4_center_strut_insert_rear_{i}','Heat-set insert displaces its undersize printed pilot')
     for i in range(3):add('Rigid_fixed_base',f'M3x8_pinion_cap_{i}','M3 tapped receiving pilot')
     return allowed
 
@@ -58,7 +62,7 @@ def main():
         if failures:break
     report=dict(passed=not failures,gear_samples=gear,collision_pair_checks=checks,collisions=failures,full_step_deg=1.8/info['ratio'],sixteenth_step_deg=1.8/(16*info['ratio']),nominal_tip_increment_at_250_mm=250*math.radians(1.8/(16*info['ratio'])),physical_vibration_verified=False,physical_accuracy_verified=False,exceptions=[dict(parts=sorted(k),reason=v) for k,v in allowed.items()],source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/front_frame.py','rigid_base/frame_struts.py','rigid_base/check.py','rigid_base/parameters.json','model.py','rotary_base/core.py','rotary_base/parameters.json','direct_mount.py','leadscrew_actuator.py']})
     (out/'validation.json').write_text(json.dumps(report,indent=2));assert report['passed'],failures
-    s=by['Boxed_Z_support']['shape'];assert abs(s.BoundingBox().ymin+84)<1e-5 and len(s.Solids())==1
+    s=by['Boxed_Z_support' if 'Boxed_Z_support' in by else 'Cylindrical_Z_support']['shape'];assert abs(s.BoundingBox().ymin+(84 if 'Boxed_Z_support' in by else 148))<1e-5 and len(s.Solids())==1
     for x,y in p['support_mounts_mm']:
         assert [-x,y] in p['support_mounts_mm']
         assert overlap(cyl(2.79,14,(x,y,43.2)),by['Rigid_rotating_deck']['shape'])<1e-6
