@@ -56,7 +56,7 @@ def gears(p):
     ring=cyl(p['ring_outer_radius_mm']-6,h,(0,0,z)).cut(cavity)
     ro=p['ring_outer_radius_mm'];body=ro-6
     rim=cq.Solid.makeCone(body,ro,6,V(0,0,28),V(0,0,1)).fuse(cyl(ro,6,(0,0,34))).cut(cyl(body-.5,14,(0,0,27)))
-    bolts=[polar(p['ring_bolt_radius_mm'],math.radians(30+60*i)) for i in range(6)]
+    bolts=[polar(p['ring_bolt_radius_mm'],math.radians(p['ring_bolt_phase_deg']+60*i)) for i in range(6)]
     ring=union([ring,rim]+[annulus(4.5,1.7,12.2,36).translate((x,y,0)) for x,y in bolts])
     ring=holes(ring,bolts,1.7,23,27)
     return pinion,ring,bolts
@@ -85,7 +85,7 @@ def support(p,lay):
         s=s.cut(cyl(2.2,42,(x,y,dt-1)),cyl(4.1,60,(x,y,dt+(19 if i in [3,6] else foot))))
     # Tool and nut clearance around the ring bolts, outside the support pads.
     for i in range(6):
-        x,y=polar(p['ring_bolt_radius_mm'],math.radians(30+60*i))
+        x,y=polar(p['ring_bolt_radius_mm'],math.radians(p['ring_bolt_phase_deg']+60*i))
         s=s.cut(cyl(5.5,50,(x,y,dt-1)))
     return frame_struts.support_finish(front_frame.support_finish(s,p,lay),p,lay)
 
@@ -168,7 +168,7 @@ def build(p=None):
     for x,y in core.rotor_bolts():deck=deck.cut(core.hexagon(5.8,2.5,x,y,53.8))
     # Small relief windows retain the complete support footprint and wide spokes.
     cutters=annulus(p['deck_radius_mm']-14,30,10,47.2).cut(linked_foot(p,47.2,10,2))
-    for angle in [30,90,150]:cutters=cutters.cut(box(2*p['deck_radius_mm']+20,20,12,(0,0,52.2)).rotate((0,0,0),(0,0,1),angle))
+    for angle in [p['ring_bolt_phase_deg']+a for a in [0,60,120]]+[90]:cutters=cutters.cut(box(2*p['deck_radius_mm']+20,20,12,(0,0,52.2)).rotate((0,0,0),(0,0,1),angle))
     for s in cutters.Solids():
         if s.Volume()/10<=100:continue
         face=min((f for f in s.Faces() if f.geomType()=='PLANE' and abs(f.normalAt().z)>.99),key=lambda f:f.Center().z)
@@ -193,13 +193,16 @@ def build(p=None):
     for i,(x,y) in enumerate(lay['z_actuator']['base_fasteners']):
         s=cyl(1.45,40,(-y,-78,lay['z_origin']-x),(0,1,0)).fuse(cyl(2.75,3,(-y,-81,lay['z_origin']-x),(0,1,0)))
         add(f'M3x40_Z_base_mount_{i}',s,'rotor',reference=True,context=True)
-    # Distinguish every printed part in the viewer and colored STEP assembly.
+    # Treat the upstream actuator assemblies as single-color modules.
     palette={'Center_front_strut':'#e99039','Center_rear_strut':'#9365c5',
              'Front_Z_frame':'#73aa87','Boxed_Z_support':'#577eae',
              'Rigid_rotating_deck':'#4eaaa5','Rigid_fixed_base':'#748393',
              'Internal_264T_ring':'#e0b448','Braced_test_stand':'#465b71'}
-    used=set(palette.values())
+    actuator_color='#819dab'
+    used=set(palette.values())|{actuator_color}
     for a in parts:
+        if (a.get('source_name') or '').startswith(('Z_','R_')) and not a['keepout']:
+            a['color']=actuator_color;continue
         if not a['printed']:continue
         if a['name'] in palette:a['color']=palette[a['name']];continue
         hue=int(hashlib.sha256(a['name'].encode()).hexdigest()[:8],16)/2**32

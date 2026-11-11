@@ -28,13 +28,17 @@ def main():
             if sign<0:seat=seat.mirror('YZ')
             assert seat.cut(frame).Volume()<1e-6
             holes.append(dict(side=side,z_mm=z,diameter_mm=4.4,bolt='M4x25'))
+    assert abs((30-p['ring_bolt_phase_deg'])*p['ring_teeth']/360-round((30-p['ring_bolt_phase_deg'])*p['ring_teeth']/360))<1e-9
     strut_checks=[];sq=frame_struts.layout(p,lay)
     assert not any(a['name'].startswith('Front_frame_strut_') for a in parts)
-    prints=[a for a in parts if a['printed']];assert len({a['color'] for a in prints})==len(prints)
+    prints=[a for a in parts if a['printed']];custom=[a for a in prints if not (a.get('source_name') or '').startswith(('Z_','R_'))];actuators=[a for a in parts if (a.get('source_name') or '').startswith(('Z_','R_')) and not a['keepout']]
+    assert len({a['color'] for a in custom})==len(custom)
+    assert len({a['color'] for a in actuators})==1 and actuators[0]['color'] not in {a['color'] for a in custom}
     for side,q in sq.items():
         st=by['Center_'+side+'_strut']['shape'];assert st.isValid() and len(st.Solids())==1
         assert st.cut(limit).Volume()<1e-5 and overlap(st,support)<1e-6 and overlap(st,frame)<1e-6 and overlap(st,deck)<1e-6
-        base=q['bottom'];y=q['sign']*126;head=base+8;mount=support if side=='front' else deck
+        bb=st.BoundingBox();assert abs((bb.ymax if side=='front' else -bb.ymin)-p['deck_radius_mm'])<1e-4
+        base=q['bottom'];y=q['sign']*p['strut_bolt_radius_mm'];head=base+8;mount=support if side=='front' else deck
         assert annulus(5,2.8,.1,base-.1).translate((0,y,0)).cut(mount).Volume()<1e-6
         assert annulus(3.5,2.2,.1,head-.1).translate((0,y,0)).cut(st).Volume()<1e-6
         bore=cyl(2.19,24,(0,y,p['deck_top_mm']-9))
@@ -45,8 +49,8 @@ def main():
             assert overlap(bore,wall)<1e-6 and overlap(bore,st)<1e-6
             seat=annulus(3.5,2.2,.1,0).rotate((0,0,0),(1,0,0),-90).translate((0,q['head']-.1,z))
             assert frame_struts.orient(seat,q).cut(st).Volume()<1e-6
-        strut_checks.append(dict(side=side,base_mount_mm=[0,y],base_bolt='M4x20' if side=='front' else 'M4x16',wall_bolts='2 x M4x40',valid_solid=True))
-    assert overlap(cyl(2.79,10,(0,-126,p['deck_top_mm']-9)),deck)<1e-6
+        strut_checks.append(dict(side=side,base_mount_mm=[0,y],base_bolt='M4x20' if side=='front' else 'M4x16',wall_bolts='2 x M4x50',valid_solid=True))
+    assert overlap(cyl(2.79,10,(0,-p['strut_bolt_radius_mm'],p['deck_top_mm']-9)),deck)<1e-6
     # Exact solids are outside conservative swept bounding boxes. Linear axes
     # translate by their full travel; screw/clamp rotation uses corner-radius bounds.
     checks=[];new=[a for a in parts if 'front_frame' in a['name'] or 'center_strut' in a['name'] or a['name'] in ['Boxed_Z_support','Front_Z_frame','Center_front_strut','Center_rear_strut']]
@@ -67,6 +71,6 @@ def main():
             if any(hi[k]<=getattr(ob,axis+'min') or lo[k]>=getattr(ob,axis+'max') for k,axis in enumerate('xyz')):continue
             v=overlap(env,other['shape']);assert v<1e-6,(a['name'],other['name'],v)
             checks.append(dict(moving_part=a['name'],structure=other['name'],swept_box_overlap_mm3=v))
-    report=dict(passed=True,support_outer_radius_mm=148,base_flange_thickness_mm=p['support_foot_thickness_mm'],front_frame_count=1,strut_count=2,distinct_print_colors=len(prints),strut_mounts=strut_checks,cutout_volume_reduction_fraction=removed,side_holes=holes,support_bolt_seats=seats,continuous_axis_envelope_checks=checks,physical_stiffness_verified=False,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/parameters.json','rigid_base/front_frame.py','rigid_base/frame_struts.py','rigid_base/check_front_frame.py']})
+    report=dict(passed=True,support_outer_radius_mm=148,base_flange_thickness_mm=p['support_foot_thickness_mm'],front_frame_count=1,strut_count=2,strut_edge_radius_mm=p['deck_radius_mm'],ring_index_change_deg=p['ring_bolt_phase_deg']-30,distinct_custom_print_colors=len(custom),shared_actuator_color=actuators[0]['color'],strut_mounts=strut_checks,cutout_volume_reduction_fraction=removed,side_holes=holes,support_bolt_seats=seats,continuous_axis_envelope_checks=checks,physical_stiffness_verified=False,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/parameters.json','rigid_base/front_frame.py','rigid_base/frame_struts.py','rigid_base/check_front_frame.py']})
     (ROOT/'output/rigid-base/frame-validation.json').write_text(json.dumps(report,indent=2));print('Front frame, centered front/rear struts, side mounts, bolt seats and continuous axis envelopes passed; cutout fraction',removed,flush=True)
 if __name__=='__main__':main()
