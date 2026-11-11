@@ -1,0 +1,648 @@
+{
+  "source_commit": "f7c03c859ec1cf84ef1fcf304f602ff863913db1",
+  "solid_volume_mm3": 1312484.592886193,
+  "finite_element_runs": {
+    "6": {
+      "label": "after",
+      "mesh_size_mm": 6.0,
+      "nodes": 21985,
+      "tetrahedra": 62491,
+      "effective_E_MPa": 1000,
+      "poisson_ratio": 0.35,
+      "fixed_nodes": 165,
+      "boundary": "All DOFs fixed on bottom-face nodes within 8 mm of each of ten bolt centres. Rigid deck, no contact or bolt slip.",
+      "patches": [
+        {
+          "x": -77.5,
+          "z": 236.7,
+          "area_mm2": 174.71589782444647,
+          "nodes": 24
+        },
+        {
+          "x": 77.5,
+          "z": 236.7,
+          "area_mm2": 165.28046330368292,
+          "nodes": 22
+        },
+        {
+          "x": -77.5,
+          "z": 360.7,
+          "area_mm2": 155.44751547174795,
+          "nodes": 23
+        },
+        {
+          "x": 77.5,
+          "z": 360.7,
+          "area_mm2": 177.10390196122398,
+          "nodes": 26
+        }
+      ],
+      "cases": [
+        {
+          "case": "radial_10N",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.15088990797090773,
+              0.05828433194146161,
+              0.007746661676267397
+            ],
+            [
+              0.1509002325720384,
+              -0.057116635184760234,
+              -0.008873449226717997
+            ],
+            [
+              0.1662370590821384,
+              0.05948335488665203,
+              0.008215019026585448
+            ],
+            [
+              0.16624930829791187,
+              -0.05828794604314478,
+              -0.009447961850344064
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.17674986805782042,
+          "maximum_displacement_mm": 0.18798727826929068,
+          "strain_energy_Nmm": 0.7928456349033403,
+          "peak_von_mises_MPa": 0.49990219382654283,
+          "element_p95_von_mises_MPa": 0.07127949682514247,
+          "linear_residual": 9.238498024797252e-09,
+          "cg_iterations": 116,
+          "load_force_N": [
+            10.000000000000002,
+            0.0,
+            0.0
+          ],
+          "reaction_force_N": [
+            -10.00000000073435,
+            -9.411353918409304e-10,
+            1.0208596190608432e-09
+          ]
+        },
+        {
+          "case": "normal_10N",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.0012679978220241713,
+              0.1040407169404956,
+              -0.009567305233010871
+            ],
+            [
+              -3.973264767345244e-05,
+              0.10400651215513974,
+              -0.00957152385278817
+            ],
+            [
+              0.0017871034898113503,
+              0.15236617261548766,
+              -0.009789991093392788
+            ],
+            [
+              -0.0006522629979659019,
+              0.15305139692646266,
+              -0.009753580355480518
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.15336325465348913,
+          "maximum_displacement_mm": 0.16819128693577134,
+          "strain_energy_Nmm": 0.6418309982956676,
+          "peak_von_mises_MPa": 0.36663888725560906,
+          "element_p95_von_mises_MPa": 0.06554948888525056,
+          "linear_residual": 9.051258260148156e-09,
+          "cg_iterations": 116,
+          "load_force_N": [
+            0.0,
+            10.000000000000002,
+            0.0
+          ],
+          "reaction_force_N": [
+            -4.0354503072492776e-10,
+            -10.000000002012975,
+            7.134136614794784e-10
+          ]
+        },
+        {
+          "case": "payload_20N_150mm",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.01929644611639229,
+              0.01178873074361187,
+              0.00695800279278722
+            ],
+            [
+              0.019725149040595344,
+              0.013263612382176928,
+              -0.029160177614667344
+            ],
+            [
+              0.04901273057482423,
+              0.026715786196456495,
+              0.008338902828372314
+            ],
+            [
+              0.04939387732221408,
+              0.025472057285776378,
+              -0.03364477920756407
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.06496577550693552,
+          "maximum_displacement_mm": 0.07328083008373666,
+          "strain_energy_Nmm": 0.49668236563198775,
+          "peak_von_mises_MPa": 0.3769034439067391,
+          "element_p95_von_mises_MPa": 0.055907305427180636,
+          "linear_residual": 9.689519188085818e-09,
+          "cg_iterations": 104,
+          "load_force_N": [
+            0.0,
+            0.0,
+            -20.0
+          ],
+          "reaction_force_N": [
+            3.879712905108246e-09,
+            9.659081590118745e-10,
+            20.00000000526429
+          ]
+        },
+        {
+          "case": "yaw_1Nm",
+          "mount_patch_mean_displacements_mm": [
+            [
+              -0.07443358208891948,
+              -0.07887161022035201,
+              0.0005027550716741903
+            ],
+            [
+              -0.07443814559679149,
+              0.0785451825326603,
+              -9.960916310173894e-05
+            ],
+            [
+              -0.07599396623640808,
+              -0.09211808405768783,
+              0.00014809372707671117
+            ],
+            [
+              -0.0760017487003509,
+              0.09328453698638575,
+              0.00025621975079186544
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.12032595852448612,
+          "maximum_displacement_mm": 0.149676715138598,
+          "strain_energy_Nmm": 0.5529345383819411,
+          "peak_von_mises_MPa": 0.33145735612560523,
+          "element_p95_von_mises_MPa": 0.06120451821241327,
+          "linear_residual": 8.87160724145236e-09,
+          "cg_iterations": 114,
+          "load_force_N": [
+            0.0,
+            6.106226635438361e-16,
+            0.0
+          ],
+          "reaction_force_N": [
+            -8.257058474459011e-10,
+            6.909949556987982e-10,
+            2.6981528122860254e-10
+          ]
+        }
+      ],
+      "elapsed_s": 21.972973585128784,
+      "step_sha256": "c1f0d56755897aad4283f47e69331af811e8df21e7689233ae1dde2cc4442f6b",
+      "limits": [
+        "Homogeneous isotropic linear material at assumed E=1 GPa; not measured filament or infill properties.",
+        "Linear tetrahedra require mesh-sensitivity assessment; peak stress at sharp edges/constraints is not a design allowable.",
+        "No plasticity, creep, layer delamination, screw/insert compliance, vibration modes or fatigue.",
+        "Loads are stated design comparisons, not measured machine loads."
+      ]
+    },
+    "4": {
+      "label": "after",
+      "mesh_size_mm": 4.0,
+      "nodes": 45231,
+      "tetrahedra": 134331,
+      "effective_E_MPa": 1000,
+      "poisson_ratio": 0.35,
+      "fixed_nodes": 301,
+      "boundary": "All DOFs fixed on bottom-face nodes within 8 mm of each of ten bolt centres. Rigid deck, no contact or bolt slip.",
+      "patches": [
+        {
+          "x": -77.5,
+          "z": 236.7,
+          "area_mm2": 166.756502027921,
+          "nodes": 32
+        },
+        {
+          "x": 77.5,
+          "z": 236.7,
+          "area_mm2": 164.3845984344681,
+          "nodes": 33
+        },
+        {
+          "x": -77.5,
+          "z": 360.7,
+          "area_mm2": 162.1756396812386,
+          "nodes": 34
+        },
+        {
+          "x": 77.5,
+          "z": 360.7,
+          "area_mm2": 169.1043148234237,
+          "nodes": 35
+        }
+      ],
+      "cases": [
+        {
+          "case": "radial_10N",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.17322102688601212,
+              0.06905279171779755,
+              0.008122849718936417
+            ],
+            [
+              0.17324056407280108,
+              -0.06820641580876091,
+              -0.00814249083278637
+            ],
+            [
+              0.18827058215747758,
+              0.07066604935763045,
+              0.008616141979758877
+            ],
+            [
+              0.1882772586402575,
+              -0.07021713458047817,
+              -0.00871294782973261
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.20128025372685204,
+          "maximum_displacement_mm": 0.21401286484036044,
+          "strain_energy_Nmm": 0.9037617896982595,
+          "peak_von_mises_MPa": 0.5835134726328707,
+          "element_p95_von_mises_MPa": 0.06937240125498514,
+          "linear_residual": 8.354098214420069e-09,
+          "cg_iterations": 103,
+          "load_force_N": [
+            9.999999999999998,
+            0.0,
+            0.0
+          ],
+          "reaction_force_N": [
+            -9.999999999641405,
+            1.1342945194225962e-09,
+            -1.3335313964191187e-09
+          ]
+        },
+        {
+          "case": "normal_10N",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.0010266426656646158,
+              0.11054285317619804,
+              -0.009894567873856
+            ],
+            [
+              -0.00033258504849816175,
+              0.11038633329748128,
+              -0.009871478256661924
+            ],
+            [
+              0.0016539144370499484,
+              0.1625277774730365,
+              -0.010155484561993963
+            ],
+            [
+              -0.0010526813819220302,
+              0.16238179076649037,
+              -0.010093796948364906
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.16285314780494373,
+          "maximum_displacement_mm": 0.17870025205638893,
+          "strain_energy_Nmm": 0.6822984433896822,
+          "peak_von_mises_MPa": 0.4365363848079097,
+          "element_p95_von_mises_MPa": 0.06457345954444582,
+          "linear_residual": 8.941221085363806e-09,
+          "cg_iterations": 103,
+          "load_force_N": [
+            0.0,
+            9.999999999999998,
+            0.0
+          ],
+          "reaction_force_N": [
+            1.1218426188008834e-10,
+            -10.000000001042066,
+            6.750874026462128e-10
+          ]
+        },
+        {
+          "case": "payload_20N_150mm",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.01752299934903587,
+              0.012014794506876437,
+              0.00721975961453476
+            ],
+            [
+              0.01800337951586881,
+              0.013782314319890354,
+              -0.028903985079857024
+            ],
+            [
+              0.04719740008723827,
+              0.026932364349070113,
+              0.008679308550123823
+            ],
+            [
+              0.047552071320783304,
+              0.02697301219090048,
+              -0.033475232137915305
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.0641040875470094,
+          "maximum_displacement_mm": 0.07253688422847787,
+          "strain_energy_Nmm": 0.49496626964469753,
+          "peak_von_mises_MPa": 0.4064335821335012,
+          "element_p95_von_mises_MPa": 0.050329565032226686,
+          "linear_residual": 8.605406703144662e-09,
+          "cg_iterations": 95,
+          "load_force_N": [
+            0.0,
+            0.0,
+            -20.0
+          ],
+          "reaction_force_N": [
+            -6.1707435272673195e-09,
+            1.4059281516765054e-10,
+            20.000000000526107
+          ]
+        },
+        {
+          "case": "yaw_1Nm",
+          "mount_patch_mean_displacements_mm": [
+            [
+              -0.08890894116849603,
+              -0.09008743886141829,
+              0.0003592852376140852
+            ],
+            [
+              -0.08888282417772683,
+              0.0895304557165399,
+              -0.00034573549722394426
+            ],
+            [
+              -0.09055708850404375,
+              -0.10553620087995152,
+              -2.1278309398046234e-05
+            ],
+            [
+              -0.09054455448329839,
+              0.1057028529417047,
+              5.605249922322653e-05
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.1391812221834444,
+          "maximum_displacement_mm": 0.17143477409253613,
+          "strain_energy_Nmm": 0.6304144329027589,
+          "peak_von_mises_MPa": 0.4080862311940166,
+          "element_p95_von_mises_MPa": 0.06360888513824436,
+          "linear_residual": 9.920018251095757e-09,
+          "cg_iterations": 102,
+          "load_force_N": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reaction_force_N": [
+            -4.4388076547718924e-10,
+            -9.071321194209503e-10,
+            6.462439472443293e-10
+          ]
+        }
+      ],
+      "elapsed_s": 41.68116593360901,
+      "step_sha256": "c1f0d56755897aad4283f47e69331af811e8df21e7689233ae1dde2cc4442f6b",
+      "limits": [
+        "Homogeneous isotropic linear material at assumed E=1 GPa; not measured filament or infill properties.",
+        "Linear tetrahedra require mesh-sensitivity assessment; peak stress at sharp edges/constraints is not a design allowable.",
+        "No plasticity, creep, layer delamination, screw/insert compliance, vibration modes or fatigue.",
+        "Loads are stated design comparisons, not measured machine loads."
+      ]
+    },
+    "3": {
+      "label": "after",
+      "mesh_size_mm": 3.0,
+      "nodes": 84701,
+      "tetrahedra": 282371,
+      "effective_E_MPa": 1000,
+      "poisson_ratio": 0.35,
+      "fixed_nodes": 443,
+      "boundary": "All DOFs fixed on bottom-face nodes within 8 mm of each of ten bolt centres. Rigid deck, no contact or bolt slip.",
+      "patches": [
+        {
+          "x": -77.5,
+          "z": 236.7,
+          "area_mm2": 173.24720422905435,
+          "nodes": 52
+        },
+        {
+          "x": 77.5,
+          "z": 236.7,
+          "area_mm2": 165.04492513945368,
+          "nodes": 50
+        },
+        {
+          "x": -77.5,
+          "z": 360.7,
+          "area_mm2": 164.6042418872698,
+          "nodes": 49
+        },
+        {
+          "x": 77.5,
+          "z": 360.7,
+          "area_mm2": 165.32071580059238,
+          "nodes": 51
+        }
+      ],
+      "cases": [
+        {
+          "case": "radial_10N",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.22287420473865557,
+              0.08914149460263217,
+              0.009927201720081866
+            ],
+            [
+              0.2228955767177991,
+              -0.08948025295322427,
+              -0.009726908408337492
+            ],
+            [
+              0.2404901019658458,
+              0.09140408798254933,
+              0.010346415885191435
+            ],
+            [
+              0.24050583168450085,
+              -0.09179924305246745,
+              -0.010123903186007449
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.2576288988350862,
+          "maximum_displacement_mm": 0.2755161121653747,
+          "strain_energy_Nmm": 1.1584571438827485,
+          "peak_von_mises_MPa": 0.7553046145161547,
+          "element_p95_von_mises_MPa": 0.07614936522589405,
+          "linear_residual": 9.094891451804735e-09,
+          "cg_iterations": 165,
+          "load_force_N": [
+            10.0,
+            0.0,
+            0.0
+          ],
+          "reaction_force_N": [
+            -10.000000000211871,
+            4.866963672356395e-10,
+            1.299088614459265e-09
+          ]
+        },
+        {
+          "case": "normal_10N",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.0010468633616593644,
+              0.1220040627495252,
+              -0.01075365708845434
+            ],
+            [
+              -0.001490431715358899,
+              0.12205318981021385,
+              -0.010833299139842992
+            ],
+            [
+              0.002098264306427972,
+              0.1795269059357807,
+              -0.011000441253583458
+            ],
+            [
+              -0.0023886094025656187,
+              0.17937506862574304,
+              -0.011076085427212851
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.17987585267552678,
+          "maximum_displacement_mm": 0.2038558490521532,
+          "strain_energy_Nmm": 0.7536990339019308,
+          "peak_von_mises_MPa": 0.4760883918858715,
+          "element_p95_von_mises_MPa": 0.06456397645893945,
+          "linear_residual": 9.683169190569963e-09,
+          "cg_iterations": 165,
+          "load_force_N": [
+            0.0,
+            10.0,
+            0.0
+          ],
+          "reaction_force_N": [
+            2.7458685325498777e-10,
+            -10.000000000703237,
+            4.787079621593193e-10
+          ]
+        },
+        {
+          "case": "payload_20N_150mm",
+          "mount_patch_mean_displacements_mm": [
+            [
+              0.022540813860670507,
+              0.014872213015294245,
+              0.007801247569877085
+            ],
+            [
+              0.02306489606306617,
+              0.013855781521455475,
+              -0.031015136092796852
+            ],
+            [
+              0.05433261216375238,
+              0.031103320737542222,
+              0.009380278981781745
+            ],
+            [
+              0.05453643701185425,
+              0.028096758583523423,
+              -0.035639264873588254
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.07094933407424289,
+          "maximum_displacement_mm": 0.08043388291609779,
+          "strain_energy_Nmm": 0.5293398998338606,
+          "peak_von_mises_MPa": 0.6630299686834351,
+          "element_p95_von_mises_MPa": 0.0559455266207063,
+          "linear_residual": 9.636283713675164e-09,
+          "cg_iterations": 152,
+          "load_force_N": [
+            0.0,
+            0.0,
+            -20.000000000000004
+          ],
+          "reaction_force_N": [
+            4.73835665149025e-10,
+            -4.5086042364805845e-10,
+            20.000000000216342
+          ]
+        },
+        {
+          "case": "yaw_1Nm",
+          "mount_patch_mean_displacements_mm": [
+            [
+              -0.11534031349812165,
+              -0.10766372453003166,
+              -0.00024719641291478584
+            ],
+            [
+              -0.11533559962950919,
+              0.10773826887072711,
+              0.00012345190678998732
+            ],
+            [
+              -0.11810905776338443,
+              -0.12627756429259374,
+              -0.0006072431704544608
+            ],
+            [
+              -0.11808609829383852,
+              0.1260704905522844,
+              0.0004884286060130209
+            ]
+          ],
+          "largest_mount_displacement_mm": 0.17290500719670523,
+          "maximum_displacement_mm": 0.2141174794966089,
+          "strain_energy_Nmm": 0.7544355616850814,
+          "peak_von_mises_MPa": 0.5194307771145188,
+          "element_p95_von_mises_MPa": 0.06812018860451952,
+          "linear_residual": 8.750514644137007e-09,
+          "cg_iterations": 161,
+          "load_force_N": [
+            0.0,
+            7.112366251504909e-16,
+            0.0
+          ],
+          "reaction_force_N": [
+            3.2662147986251e-10,
+            6.686676420897264e-10,
+            -1.685702966103264e-10
+          ]
+        }
+      ],
+      "elapsed_s": 112.90773248672485,
+      "step_sha256": "c1f0d56755897aad4283f47e69331af811e8df21e7689233ae1dde2cc4442f6b",
+      "limits": [
+        "Homogeneous isotropic linear material at assumed E=1 GPa; not measured filament or infill properties.",
+        "Linear tetrahedra require mesh-sensitivity assessment; peak stress at sharp edges/constraints is not a design allowable.",
+        "No plasticity, creep, layer delamination, screw/insert compliance, vibration modes or fatigue.",
+        "Loads are stated design comparisons, not measured machine loads."
+      ]
+    }
+  }
+}

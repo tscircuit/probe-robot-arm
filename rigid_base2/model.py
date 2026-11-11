@@ -33,6 +33,15 @@ def cage(p,lay):
             web=web.cut(cq.Workplane('YZ',origin=(-4,0,0)).polyline([(-82,lo),(-12,lo),(-12,hi-35),(-47,hi),(-82,hi-35)]).close().extrude(8).val())
         uprights.append(place(web).intersect(cyl(148,top-bottom,(0,0,bottom))))
         foot=foot.fuse(place(box(16,102,6,(0,-49,dt+3))).intersect(cyl(148,6,(0,0,dt))))
+    # Transverse rear diaphragm transfers lateral shear between both rear webs
+    # and the cylindrical wall. Peaked apertures keep the upright print open.
+    rear=box(220,6,top-bottom,(0,-104,(top+bottom)/2))
+    for x in [-46,46]:
+        for lo,hi in [(82,204),(244,360)]:
+            cut=cq.Workplane('XZ',origin=(x,-100,0)).polyline([(-31,lo),(31,lo),(31,hi-31),(0,hi),(-31,hi-31)]).close().extrude(8).val()
+            rear=rear.cut(cut)
+    uprights.append(rear.intersect(cyl(148,top-bottom,(0,0,bottom))))
+    foot=foot.fuse(box(220,16,6,(0,-104,dt+3)).intersect(cyl(148,6,(0,0,dt))))
     s=union([s,foot,plate]+uprights)
     for a in lay['z_actuator']['grid_x']:
         for b in lay['z_actuator']['grid_y']:s=s.cut(cyl(1.7,8,(-b,-49,lay['z_origin']-a),(0,1,0)))

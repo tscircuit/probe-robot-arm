@@ -22,6 +22,13 @@ def cage_check():
         # These conservative gauges certify continuous, broad junctions.
         assert box(4,.2,154,(sign*62,-48.1,(top+grid_bottom)/2)).cut(s).Volume()<1e-5
         assert box(4,.2,top-62.2,(sign*38,-139.5,(top+62.2)/2)).cut(s).Volume()<1e-5
+        # The rear cross-panel meets the cage at broad full-height roots and
+        # crosses each diagonal web at its bottom, middle and top solid bands.
+        assert box(2,2,top-62.2,(sign*102,-104,(top+62.2)/2)).cut(s).Volume()<1e-5
+        root_wall=annulus(147.8,143.2,top-62.2,62.2).intersect(box(8,10,top-62.2,(sign*102,-104,(top+62.2)/2)))
+        assert root_wall.Volume()>10000 and root_wall.cut(s).Volume()<1e-5
+        for z in [70,220,372]:
+            assert box(3,3,6,(sign*(62-56*24/92),-104,z)).cut(s).Volume()<1e-5
         for y in [-48,48]:assert overlap(box(6,8,100,(sign*140,y,150)),s)<1e-6
     checks=[]
     for a in parts:
@@ -30,7 +37,8 @@ def cage_check():
         env=box(*(hi[i]-lo[i] for i in range(3)),tuple((hi[i]+lo[i])/2 for i in range(3)))
         v=overlap(s,env);assert v<1e-6,(a['name'],v);checks.append(a['name'])
     r=dict(passed=True,cage_radius_mm=148,grid_depth_mm=6,external_struts=0,rear_shear_web_count=2,grid_junction_certified_area_each_mm2=4*154,rear_junction_certified_area_each_mm2=4*(top-62.2),former_port_slivers_removed=True,full_linear_sweep_checks=checks,physical_stiffness_verified=False,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base2/model.py','rigid_base2/check.py']})
-    (ROOT/'output/rigid-base2/cage-validation.json').write_text(json.dumps(r,indent=2));print('Cage radius, foot seats, no struts and continuous linear sweeps passed',flush=True)
+    r.update(rear_cross_panel_thickness_mm=6,rear_cross_panel_cage_junctions=2,rear_cross_panel_web_junctions=6)
+    (ROOT/'output/rigid-base2/cage-validation.json').write_text(json.dumps(r,indent=2));print('Cage radius, foot seats, broad rear-panel junctions, no struts and continuous linear sweeps passed',flush=True)
 if __name__=='__main__':
     name=sys.argv[1] if len(sys.argv)>1 else 'collision'
     if name=='cage':cage_check()
