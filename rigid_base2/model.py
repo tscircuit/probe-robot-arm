@@ -6,21 +6,33 @@ from rigid_base.model import ROOT,parameters,profiles,box,cyl,annulus,union,hole
 def cage(p,lay):
     dt=p['deck_top_mm'];bottom=dt+6;top=lay['z_origin']+9;grid_bottom=lay['z_origin']-145
     s=annulus(148,143,top-bottom,bottom)
-    for angle in range(0,360,30):
-        pts=[polar(r,math.radians(a)) for r,a in [(130,angle-11),(165,angle-11),(165,angle+11),(130,angle+11)]]
-        for lo,hi in [(76,210),(230,364)]:
-            cut=cq.Workplane('XY').polyline(pts).close().extrude(hi-lo).edges('|Z').fillet(3).val().translate((0,0,lo))
-            s=s.cut(cut)
-    s=s.fuse(annulus(148,136,6,224),annulus(148,136,6,top-6))
-    # Wide side ports clear the radial housing and motor through all Z travel.
-    for x in [-150,150]:s=s.cut(box(110,96,144,(x,0,158)))
+    def peaked_window(radial_start,depth,half_width,lo,hi,angle):
+        w=half_width
+        cut=cq.Workplane('YZ',origin=(radial_start,0,0)).polyline([(-w,lo),(w,lo),(w,hi-w),(0,hi),(-w,hi-w)]).close().extrude(depth).val()
+        return cut.rotate((0,0,0),(0,0,1),angle)
+    # Seven mm radial flange growth over seven mm rise: a 45-degree underside.
+    for z in [224,top-6]:
+        ramp=cyl(148,7,(0,0,z-7)).cut(cq.Solid.makeCone(143,136,7,V(0,0,z-7),V(0,0,1)))
+        s=s.fuse(annulus(148,136,6,z),ramp)
+    # Omit the four columns formerly clipped to slivers by the radial ports.
+    for angle in [60,90,120,240,270,300]:
+        for lo,hi in [(76,210),(230,364)]:s=s.cut(peaked_window(120,50,27,lo,hi,angle))
+    for angle in [0,180]:s=s.cut(peaked_window(95,75,90,76,364,angle))
     foot=parent.linked_foot(p,dt,6).fuse(annulus(148,132,6,dt),box(206,20,6,(0,-45,dt+3)))
-    plate=box(296,6,top-grid_bottom,(0,-45,(top+grid_bottom)/2)).intersect(cyl(148,top-grid_bottom,(0,0,grid_bottom)))
+    plate=box(206,6,top-grid_bottom,(0,-45,(top+grid_bottom)/2))
     uprights=[box(12,6,grid_bottom-bottom,(x,-45,(bottom+grid_bottom)/2)) for x in [-96,96]]
-    # A 45-degree arch supports the thin grid's first layers while leaving a
-    # large opening below it; this is integral to the mounting face.
     for sign in [-1,1]:
         uprights.append(cq.Workplane('XZ',origin=(0,-42,0)).polyline([(0,grid_bottom),(sign*102,grid_bottom-102),(sign*102,grid_bottom)]).close().extrude(6).val())
+    # Broad full-height shear webs join the grid directly to the rear columns.
+    # Windows leave 12 mm flanges and 45-degree roofs, without a floating shelf.
+    for sign in [-1,1]:
+        angle=-sign*math.degrees(math.atan2(24,92))
+        def place(part):return part.rotate((0,0,0),(0,0,1),angle).translate((sign*62,-48,0))
+        web=box(6,102,top-bottom,(0,-49,(top+bottom)/2))
+        for lo,hi in [(82,204),(244,360)]:
+            web=web.cut(cq.Workplane('YZ',origin=(-4,0,0)).polyline([(-82,lo),(-12,lo),(-12,hi-35),(-47,hi),(-82,hi-35)]).close().extrude(8).val())
+        uprights.append(place(web).intersect(cyl(148,top-bottom,(0,0,bottom))))
+        foot=foot.fuse(place(box(16,102,6,(0,-49,dt+3))).intersect(cyl(148,6,(0,0,dt))))
     s=union([s,foot,plate]+uprights)
     for a in lay['z_actuator']['grid_x']:
         for b in lay['z_actuator']['grid_y']:s=s.cut(cyl(1.7,8,(-b,-49,lay['z_origin']-a),(0,1,0)))

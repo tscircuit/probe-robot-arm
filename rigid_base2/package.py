@@ -4,7 +4,7 @@ from .model import ROOT
 
 def main():
     out=ROOT/'output/rigid-base2';dest=ROOT/'site/dist/downloads/rigid-base2';dest.mkdir(parents=True,exist_ok=True)
-    reports=['validation.json','print-validation.json','explosion-validation.json','cage-validation.json']
+    reports=['validation.json','print-validation.json','explosion-validation.json','cage-validation.json','analysis-validation.json']
     for name in reports:
         report=json.loads((out/name).read_text());assert report['passed'],name
         for src,digest in report['source_sha256'].items():assert hashlib.sha256((ROOT/src).read_bytes()).hexdigest()==digest,('stale',name,src)
@@ -20,10 +20,13 @@ def main():
     config=json.loads((out/'config.json').read_text())|dict(variant='Rigid Base 2',print_urls=urls)
     (dest/'config.json').write_text(json.dumps(config,indent=2))
     for name in ['explosion.json','print-manifest.json']+reports:shutil.copyfile(out/name,dest/name)
+    (dest/'analysis').mkdir(exist_ok=True)
+    for name in ['report.html','comparison.png','displacement.png']:shutil.copyfile(out/'analysis'/name,dest/'analysis'/name)
     with zipfile.ZipFile(dest/'print-kit.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for r in manifest:z.write(out/r['file'],r['file'])
         z.write(ROOT/'rigid_base2/README.md','README.md');z.write(ROOT/'rigid_base/parameters.json','parameters.json')
         for name in ['print-manifest.json']+reports:z.write(out/name,name)
+        for name in ['report.html','comparison.png','displacement.png']:z.write(out/'analysis'/name,'analysis/'+name)
     with zipfile.ZipFile(dest/'rigid-arm-step.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:z.write(out/'rigid-arm.step','rigid-arm.step');z.write(ROOT/'rigid_base2/README.md','README.md')
     web=ROOT/'site/dist';shutil.copyfile(ROOT/'rigid_base2/viewer.html',web/'rigid-base2.html');shutil.copyfile(ROOT/'rigid_base/viewer.css',web/'rigid-base2.css')
     js=(ROOT/'rigid_base/viewer.js').read_text().replace("'downloads/rigid-base/", "'downloads/rigid-base2/")
