@@ -19,7 +19,7 @@ An independent prototype of the existing flying-probe arm. This variant keeps th
 
 The ring retains a continuous 45° outer running track and flat-seated M3 button heads. The blocks retain one integral axle each. The variant uses zero nominal roller/track interference instead of the original 0.4 mm preload: actual fit and smooth rotation must be established on the printed hardware.
 
-The Z support retains its full-radius lower mount, now 6 mm thick instead of 10 mm. Nine M4 insert holes remain open through the rotating deck; the outer support bolts lie at a 138 mm radius. The ring stays 296 mm / 264T / 22:1. All four front/rear struts, their fasteners, locating keys and rear deck extensions are removed. The deck is circular again, 296 mm across. The original flat outer back face and the short integral corner gussets are retained.
+The Z support retains its full-radius lower mount, now 6 mm thick instead of 10 mm. Nine M4 insert holes remain open through the rotating deck; the outer support bolts lie at a 138 mm radius. The ring stays 296 mm / 264T / 22:1. The earlier front/rear brace pairs, locating keys and rear deck extensions remain removed. Two new compact struts now connect the front frame directly to the existing outer base mounts. The deck is circular again, 296 mm across. The original flat outer back face and the short integral corner gussets are retained.
 
 ## Removable front Z frame
 
@@ -27,7 +27,15 @@ One U-shaped printed `Front_Z_frame` wraps around the actuator housing and attac
 
 Four large front windows, two large windows per side, and slots between the mounting lands remove approximately 63% of the solid U-shell volume. A diagonal front web and horizontal/vertical ribs remain. The front panel sits 22 mm ahead of the fixed Z housing and the side ports clear the radial housing throughout Z travel. This creates a deeper connected frame around the actuators without the former deck-to-tower struts. Physical stiffness, joint slip and print creep still need a loaded test.
 
-**Reprint `Boxed_Z_support` and `Rigid_rotating_deck`, and print `Front_Z_frame`.** The larger ring, fixed base, stand, pinion and actuator prints remain compatible. Replace the seven ordinary support screws with M4×12; retain the two M4×25 corner screws. Remove all old front and rear struts and their hardware. Fit eight M4 nuts and washers inside the support's side lands, fit the front frame over the Z housing before attaching the radial module, then install eight M4×25 side screws. The radial housing passes through the side ports in service, so detach the radial module before removing the complete front frame. Keep the frame square while tightening. The actuator lid's original screws remain in place; the frame does not use the lid inserts.
+## Front-frame base struts
+
+Two mirrored `Front_frame_strut_left/right` plates run from the upper front frame down to the widened Z-support flange. Their triangular profiles retain a large central opening and a lower tie. Each is 12 mm thick and prints flat on its broad side in a 311.8 × 47.8 mm footprint. The struts stay inside the 148 mm ring radius. They do not obstruct the front windows or the radial side ports.
+
+Each strut attaches to the frame at Z=260 and 350 mm with two M4×25 screws, washers and nuts. The frame has four new Ø4.4 mm holes. Each foot shares the existing support/deck mounting screw at (X,Y)=(±103,91) mm. Replace those two M4×12 screws with M4×20: the 8 mm strut foot sits on the existing 6 mm support flange and retains 6 mm insert engagement. The foot's counterbore clears the diagonal above the screw head.
+
+**Reprint `Front_Z_frame` and print both struts.** The current Z support, rotating deck, larger ring, fixed base, stand and actuator prints are unchanged. Fit the frame before attaching the radial module, install its eight side screws, then bolt on the two struts and replace the two shared base screws. Tighten the mirrored struts with the frame square. To remove the complete front frame, release the struts and detach the radial module first. Keep the actuator lid's original screws installed.
+
+Physical stiffness, joint slip and print creep still need testing. The extra load path now goes from the upper front frame into the wide support flange and its deck inserts.
 
 The 4× inverted Z and 1× upright radial actuator geometry, direct radial lid mount, 31 mm grids, full-depth motors and upper Z controller clearance remain unchanged. They sit 2 mm higher than the original main assembly because of the thicker experimental deck. This experiment does not yet define a new four-arm platform or certify inter-arm clearance for the larger base.
 
@@ -47,9 +55,9 @@ Suggested comparison: use the same arm payload, current, microstepping and accel
 
 ## Printing and hardware
 
-Download **Print ZIP** for the 24 bed-oriented prototype STLs, manifest, parameters and validation reports. **STEP** contains the full assembly with reference hardware. Right-click any printed part for its actual print-oriented STL; hardware exports are reference envelopes.
+Download **Print ZIP** for the 26 bed-oriented prototype STLs, manifest, parameters and validation reports. **STEP** contains the full assembly with reference hardware. Right-click any printed part for its actual print-oriented STL; hardware exports are reference envelopes.
 
-Structural prints: `Rigid_fixed_base`, `Rigid_rotating_deck`, `Internal_264T_ring`, `Solid_12T_module1_pinion`, `Pinion_bearing_cap`, `Boxed_Z_support`, `Braced_test_stand` and `Front_Z_frame`. Other actuator and central-cartridge parts are retained. The rear support prints on its flat outside face in approximately 296 × 324 mm; the front frame prints on its flat front face in approximately 224.4 × 314 mm, with a 122 mm height. Rotate the long footprint 90° on the H2S bed. The fixed base and stand are 312 mm square; the deck is 296 mm across. Review local supports and bridging in your slicer, especially the front frame's side-window bridges, the large lower flange and tilted axles. Supplied STLs are bed aligned; mesh checks do not replace slicing.
+Structural prints: `Rigid_fixed_base`, `Rigid_rotating_deck`, `Internal_264T_ring`, `Solid_12T_module1_pinion`, `Pinion_bearing_cap`, `Boxed_Z_support`, `Braced_test_stand`, `Front_Z_frame` and both `Front_frame_strut` parts. Other actuator and central-cartridge parts are retained. The rear support prints on its flat outside face in approximately 296 × 324 mm; the front frame prints on its flat front face in approximately 224.4 × 314 mm, with a 122 mm height. Rotate the long footprint 90° on the H2S bed. The fixed base and stand are 312 mm square; the deck is 296 mm across. Review local supports and bridging in your slicer, especially the front frame's side-window bridges, the large lower flange and tilted axles. Supplied STLs are bed aligned; mesh checks do not replace slicing.
 
 Additional/revised base hardware:
 
@@ -59,9 +67,10 @@ Additional/revised base hardware:
 - Six M3×40 flat-seated button-head ring screws, six M3 washers and nuts.
 - Four M3×20 motor-face screws; three M3×8 bearing-cap screws; one M3×4 pinion set screw.
 - Four M5×30 stand screws and four captive M5 nuts.
-- Nine M4 heat-set deck inserts; seven M4×12 and two M4×25 support screws (the longer pair pass through the corner gussets).
+- Nine M4 heat-set deck inserts; five M4×12, two M4×20 and two M4×25 support screws (the longer pair pass through the corner gussets).
 - Four M3×40 Z-base mounting screws into the actuator's existing receiving inserts.
-- Front frame: eight M4×25 screws, eight M4 nuts and eight M4 washers.
+- Front frame side mounts: eight M4×25 screws, eight M4 nuts and eight M4 washers.
+- New strut-to-frame attachments: four M4×25 screws, four M4 nuts and four M4 washers. The two shared M4×20 base screws are included above.
 - Retained central spindle/cartridge fasteners and full-depth NEMA17 with rear controller.
 
 Press fits and receiving pilots are nominal starting points, not guaranteed printer fits. The pinion's bore matches the existing D shaft; check the flat and shaft engagement before fitting the 688 bearing. Assemble motor and pinion on the base, install its support bearing and cap, fit the central cartridge, then the ring/deck and support. Mount the stand after checking access to underside fasteners. Torque, material choice and final print settings require physical trials.

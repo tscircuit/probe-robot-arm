@@ -2,6 +2,7 @@
 import hashlib,json,math
 from .model import ROOT,build,parameters,box,cyl,annulus,overlap
 from .front_frame import layout,blank
+from . import frame_struts
 
 def main():
     parts,info=build();p=parameters();by={a['name']:a for a in parts};lay=dict(z_origin=info['arm_parameters']['z_origin']+info['arm_z_shift_mm']);q=layout(p,lay)
@@ -27,9 +28,23 @@ def main():
             if sign<0:seat=seat.mirror('YZ')
             assert seat.cut(frame).Volume()<1e-6
             holes.append(dict(side=side,z_mm=z,diameter_mm=4.4,bolt='M4x25'))
+    strut_checks=[];sq=frame_struts.layout(p,lay)
+    for side,x in zip(['left','right'],sq['xs']):
+        st=by['Front_frame_strut_'+side]['shape'];assert st.isValid() and len(st.Solids())==1
+        assert st.cut(limit).Volume()<1e-5 and overlap(st,support)<1e-6 and overlap(st,frame)<1e-6
+        base=sq['foot_bottom'];head=base+sq['foot_thickness']
+        assert annulus(5,2.2,.1,base-.1).translate((x,91,0)).cut(support).Volume()<1e-6
+        assert annulus(3.5,2.2,.1,head-.1).translate((x,91,0)).cut(st).Volume()<1e-6
+        bore=cyl(2.19,22,(x,91,p['deck_top_mm']-7))
+        assert all(overlap(bore,obj)<1e-6 for obj in [support,st])
+        for z in sq['levels']:
+            bore=cyl(2.19,24,(x,46,z),(0,1,0));assert overlap(bore,frame)<1e-6 and overlap(bore,st)<1e-6
+            seat=annulus(3.5,2.2,.1,0).rotate((0,0,0),(1,0,0),-90).translate((x,68.1,z))
+            assert seat.cut(st).Volume()<1e-6
+        strut_checks.append(dict(side=side,base_mount_mm=[x,91],base_bolt='M4x20',frame_bolts='2 x M4x25',valid_solid=True))
     # Exact solids are outside conservative swept bounding boxes. Linear axes
     # translate by their full travel; screw/clamp rotation uses corner-radius bounds.
-    checks=[];new=[a for a in parts if 'front_frame' in a['name'] or a['name'] in ['Boxed_Z_support','Front_Z_frame']]
+    checks=[];new=[a for a in parts if 'front_frame' in a['name'] or 'frame_strut' in a['name'] or a['name'] in ['Boxed_Z_support','Front_Z_frame']]
     for a in parts:
         motion=a.get('motion')
         if motion not in ['z_rack','r_rack','z_drive','r_drive']:continue
@@ -47,6 +62,6 @@ def main():
             if any(hi[k]<=getattr(ob,axis+'min') or lo[k]>=getattr(ob,axis+'max') for k,axis in enumerate('xyz')):continue
             v=overlap(env,other['shape']);assert v<1e-6,(a['name'],other['name'],v)
             checks.append(dict(moving_part=a['name'],structure=other['name'],swept_box_overlap_mm3=v))
-    report=dict(passed=True,support_outer_radius_mm=148,base_flange_thickness_mm=p['support_foot_thickness_mm'],front_frame_count=1,brace_count=0,cutout_volume_reduction_fraction=removed,side_holes=holes,support_bolt_seats=seats,continuous_axis_envelope_checks=checks,physical_stiffness_verified=False,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/parameters.json','rigid_base/front_frame.py','rigid_base/check_front_frame.py']})
-    (ROOT/'output/rigid-base/frame-validation.json').write_text(json.dumps(report,indent=2));print('Front frame, eight side mounts, bolt seats and continuous axis envelopes passed; cutout fraction',removed,flush=True)
+    report=dict(passed=True,support_outer_radius_mm=148,base_flange_thickness_mm=p['support_foot_thickness_mm'],front_frame_count=1,strut_count=2,strut_mounts=strut_checks,cutout_volume_reduction_fraction=removed,side_holes=holes,support_bolt_seats=seats,continuous_axis_envelope_checks=checks,physical_stiffness_verified=False,source_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['rigid_base/model.py','rigid_base/parameters.json','rigid_base/front_frame.py','rigid_base/frame_struts.py','rigid_base/check_front_frame.py']})
+    (ROOT/'output/rigid-base/frame-validation.json').write_text(json.dumps(report,indent=2));print('Front frame, two base struts, side mounts, bolt seats and continuous axis envelopes passed; cutout fraction',removed,flush=True)
 if __name__=='__main__':main()

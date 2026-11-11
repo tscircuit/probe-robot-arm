@@ -7,7 +7,7 @@ import argparse, hashlib, itertools, json, math, pathlib
 import cadquery as cq
 import model as arm
 import rotary_base
-from . import front_frame
+from . import front_frame,frame_struts
 from rotary_base import core
 from rotary_base.gear_geometry import box,cyl,annulus,union,holes,polar,inv,overlap
 V=cq.Vector
@@ -91,7 +91,7 @@ def support(p,lay):
 
 def build(p=None):
     p=p or parameters()
-    key=hashlib.sha256(json.dumps(p,sort_keys=True).encode()+b''.join((ROOT/n).read_bytes() for n in ['rigid_base/model.py','rigid_base/front_frame.py','model.py','direct_mount.py','leadscrew_actuator.py','rotary_base/core.py','rotary_base/gear_geometry.py','rotary_base/parameters.json','parameters.json','upstream/leadscrew-grid31/experiments/t8-leadscrew/model.py'])).hexdigest()[:20]
+    key=hashlib.sha256(json.dumps(p,sort_keys=True).encode()+b''.join((ROOT/n).read_bytes() for n in ['rigid_base/model.py','rigid_base/front_frame.py','rigid_base/frame_struts.py','model.py','direct_mount.py','leadscrew_actuator.py','rotary_base/core.py','rotary_base/gear_geometry.py','rotary_base/parameters.json','parameters.json','upstream/leadscrew-grid31/experiments/t8-leadscrew/model.py'])).hexdigest()[:20]
     cache=ROOT/'cache'/('rigid-'+key)
     if (cache/'complete').exists():
         parts=json.loads((cache/'parts.json').read_text());info=json.loads((cache/'info.json').read_text())
@@ -181,11 +181,13 @@ def build(p=None):
         add(f'M3_ring_washer_{i}',annulus(3.5,1.6,.5,dt).translate((x,y,0)),'rotor',reference=True)
         add(f'M3_ring_nut_{i}',core.hexagon(5.5,2.4,x,y,dt+.5).cut(cyl(1.5,4,(x,y,dt))),'rotor',reference=True)
     add('Boxed_Z_support',support(p,lay),'rotor',True,'#6d849c',context=True)
-    add('Front_Z_frame',front_frame.frame(p,lay),'rotor',True,'#829982',context=True)
+    add('Front_Z_frame',frame_struts.frame_finish(front_frame.frame(p,lay),p,lay),'rotor',True,'#829982',context=True)
+    for side,x in zip(['left','right'],frame_struts.layout(p,lay)['xs']):add('Front_frame_strut_'+side,frame_struts.strut(p,lay,x),'rotor',True,'#829982',context=True)
+    for name,shape in frame_struts.hardware(p,lay):add(name,shape,'rotor',reference=True,context=True)
     for name,shape in front_frame.hardware(p,lay):add(name,shape,'rotor',reference=True,context=True)
     for i,(x,y) in enumerate(p['support_mounts_mm']):
         add(f'M4_deck_insert_{i}',annulus(3,2,6,dt-6.3).translate((x,y,0)),'rotor',reference=True)
-        seat=19 if i in [3,6] else p['support_foot_thickness_mm']
+        seat=19 if i in [3,6] else p['support_foot_thickness_mm']+(8 if i in [5,8] else 0)
         add(f'Z_support_deck_screw_{i}',cyl(1.95,seat+6,(x,y,dt-6)).fuse(cyl(3.5,4,(x,y,dt+seat))),'rotor',reference=True,context=True)
     for i,(x,y) in enumerate(lay['z_actuator']['base_fasteners']):
         s=cyl(1.45,40,(-y,-78,lay['z_origin']-x),(0,1,0)).fuse(cyl(2.75,3,(-y,-81,lay['z_origin']-x),(0,1,0)))
@@ -212,6 +214,7 @@ def export(parts,info,out):
         if a['printed']:
             ps=native.get(a['source_name'],a.get('freeShape',s))
             if a['name']=='Boxed_Z_support':ps=ps.rotate((0,0,0),(1,0,0),90)
+            elif a['name'].startswith('Front_frame_strut_'):ps=ps.rotate((0,0,0),(0,1,0),90)
             elif a['name']=='Front_Z_frame':ps=ps.rotate((0,0,0),(1,0,0),-90)
             elif a['flip']:ps=ps.rotate((0,0,0),(1,0,0),180)
             b=ps.BoundingBox();ps=ps.translate((0,0,-b.zmin));file=stl/(a['name']+'.stl')

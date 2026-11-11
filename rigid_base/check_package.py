@@ -5,7 +5,8 @@ ROOT=pathlib.Path(__file__).resolve().parent.parent
 def main():
     out=ROOT/'output/rigid-base';web=ROOT/'site/dist';dest=web/'downloads/rigid-base'
     manifest=json.loads((out/'print-manifest.json').read_text());names={r['name'] for r in manifest}
-    assert len(names)==24 and 'Internal_264T_ring' in names and 'Internal_192T_ring' not in names
+    assert len(names)==26 and 'Internal_264T_ring' in names and 'Internal_192T_ring' not in names
+    assert {'Front_frame_strut_left','Front_frame_strut_right'}<=names
     assert 'Front_Z_frame' in names and not any(n.startswith(('Printed_front_brace','Printed_rear_brace')) for n in names)
     assert names=={a['name'] for a in json.loads((out/'mesh.json').read_text()) if a['printed']}
     assert {p.stem for p in (dest/'STL').glob('*.stl')}==names
@@ -23,5 +24,5 @@ def main():
     for name in ['index.html','base-test.html','rigid-base.html']:assert 'hollow-base.html' not in (web/name).read_text()
     assert 'hollow-base' not in (web/'rigid-base.js').read_text()
     report=dict(passed=True,prints=len(names),ring_teeth=264,ratio=22,hollow_variant_removed=True,mesh_sha256=hashlib.sha256((out/'mesh.json').read_bytes()).hexdigest(),print_zip_sha256=hashlib.sha256((dest/'print-kit.zip').read_bytes()).hexdigest(),step_zip_sha256=hashlib.sha256((dest/'rigid-arm-step.zip').read_bytes()).hexdigest())
-    (out/'package-validation.json').write_text(json.dumps(report,indent=2));print('24 print files, ZIPs, shared viewer geometry and hollow variant removal passed')
+    (out/'package-validation.json').write_text(json.dumps(report,indent=2));print('26 print files, ZIPs, shared viewer geometry and hollow variant removal passed')
 if __name__=='__main__':main()
